@@ -10,6 +10,7 @@ FormLogin\FormLoginUser.class
 FormLogin\FormLoginUser$14.class
 FormLogin\FormLoginUser$8.class
 FormLogin\FormLoginUser$12.class
+Model\LoginController.class
 Model\HomePage.class
 SQLConnection\SQLConnector.class
 FormLogin\FormLoginUser$10.class

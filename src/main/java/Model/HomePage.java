@@ -7,7 +7,7 @@ public class HomePage extends javax.swing.JFrame {
     public HomePage() {
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("FOOTWEAR ");
+        setTitle("FOOTWEAR  ,  SHOP FOR YOU ");
     }
 
   
@@ -26,16 +26,16 @@ public class HomePage extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(572, 572, 572)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(572, Short.MAX_VALUE))
+                .addGap(621, 621, 621)
+                .addComponent(jLabel1)
+                .addContainerGap(679, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(26, 26, 26)
                 .addComponent(jLabel1)
-                .addContainerGap(586, Short.MAX_VALUE))
+                .addContainerGap(598, Short.MAX_VALUE))
         );
 
         pack();
