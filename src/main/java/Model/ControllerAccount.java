@@ -26,7 +26,7 @@ public class ControllerAccount {
         boolean check = false;
         try {
             if (name.isEmpty() | pass.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "INFORMATION CAN NOT BE EMPTY", "ERROR", JOptionPane.CANCEL_OPTION);
+               // JOptionPane.showMessageDialog(null, "INFORMATION CAN NOT BE EMPTY", "ERROR", JOptionPane.CANCEL_OPTION);
                 
             } else {
                 for (Account account : this.account) {
@@ -83,9 +83,9 @@ public class ControllerAccount {
             ps.close();
             conn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+          //  JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Unexpected error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        //    JOptionPane.showMessageDialog(null, "Unexpected error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
     public boolean DeleteAccount(String name){
@@ -107,7 +107,7 @@ public class ControllerAccount {
                 }
             }
         }catch(Exception e ){
-            JOptionPane.showMessageDialog(null,"ERROR: " + e.getMessage());
+          //  JOptionPane.showMessageDialog(null,"ERROR: " + e.getMessage());
         }
         return check ; 
     }

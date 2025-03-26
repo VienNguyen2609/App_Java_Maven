@@ -1,5 +1,6 @@
 FormLogin\FormLoginUser$16.class
 FormLogin\FormLoginUser$5.class
+FormLogin\NewJFrame$2.class
 Main\Running.class
 FormLogin\FormLoginUser$7.class
 FormLogin\FormLoginUser$2.class
@@ -10,10 +11,12 @@ FormLogin\FormLoginUser.class
 FormLogin\FormLoginUser$14.class
 FormLogin\FormLoginUser$8.class
 FormLogin\FormLoginUser$12.class
+FormLogin\NewJFrame$1.class
 Model\LoginController.class
 Model\HomePage.class
 SQLConnection\SQLConnector.class
 FormLogin\FormLoginUser$10.class
+Model\HomePage$2.class
 FormLogin\FormLoginUser$6.class
 FormLogin\FormLoginUser$1.class
 Model\TestHome.class
@@ -23,3 +26,4 @@ FormLogin\FormLoginUser$13.class
 FormLogin\FormLoginUser$9.class
 Model\ControllerAccount.class
 FormLogin\FormLoginUser$4.class
+FormLogin\NewJFrame.class

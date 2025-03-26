@@ -23,23 +23,25 @@ public class LoginController {
         }
         instance = new LoginController();
         isInitiallized = true;
+        
     }
+     
       
-     public void addPlaceHolderStyle(JTextField textField, Color WColor) {
+     public void addPlaceHolderStyle(JTextField textField, Color color) {
         Font font = textField.getFont();
         font = font.deriveFont(Font.ITALIC | Font.BOLD);
         textField.setFont(font);
-        textField.setForeground(WColor);
+        textField.setForeground(color);
     }
 
-    public void removePlaceHolderStyle(JTextField textField, Color WColor) {
+    public void removePlaceHolderStyle(JTextField textField, Color color) {
         Font font = textField.getFont();
         font = font.deriveFont(Font.ITALIC | Font.BOLD);
         textField.setFont(font);
-        textField.setForeground(WColor);
+        textField.setForeground(color);
     }
 
-    public static BufferedImage makeTransparent(BufferedImage img, float alpha ,JLabel a ) {
+    public static BufferedImage makeTransparent(BufferedImage img, float alpha ,JLabel label ) {
         int width = img.getWidth();
         int height = img.getHeight();
         BufferedImage transparentImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -47,9 +49,10 @@ public class LoginController {
         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
         g2d.drawImage(img, 0, 0, null);
         g2d.dispose();
-        a.setIcon(new ImageIcon(transparentImage));
+        label.setIcon(new ImageIcon(transparentImage));
         return transparentImage;
     }
+
     // bắt lổi tiếng việt 
 
     public static boolean containsVietnameseCharacters(String text) {

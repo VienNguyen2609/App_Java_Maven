@@ -5,6 +5,7 @@ import Model.LoginController;
 import Model.HomePage;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
+import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -20,14 +21,16 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class FormLoginUser extends javax.swing.JFrame {
 
-    // private Point fixedLocation;
-    public FormLoginUser() throws IOException {
+    public FormLoginUser()  {
         initComponents();
         setTitle("Login");
+        // icon window
+        String iconPath = "D:\\DownLoad\\IconFootWear\\LogoShop.png"; 
+        setIconImage(Toolkit.getDefaultToolkit().getImage(new File(iconPath).getAbsolutePath()));
         setLocationRelativeTo(null);
         LoginController.Init();
         setResizable(false);
-        this.Register.setLocation(300, 200);
+        this.RegisterBackGround.setLocation(300, 200);
         txtName.setOpaque(false);
         txtName.setBackground(null);
         txtName.setBorder(BorderFactory.createBevelBorder(0));
@@ -46,32 +49,31 @@ public class FormLoginUser extends javax.swing.JFrame {
         txtGmail.setOpaque(false);
         txtGmail.setBackground(null);
         txtGmail.setBorder(BorderFactory.createBevelBorder(0));
-        //bntLogin.setOpaque(false);
-        LoginController.instance.addPlaceHolderStyle(txtName, Color.WHITE);
-        LoginController.instance.addPlaceHolderStyle(txtPassword, Color.WHITE);
-        LoginController.instance.addPlaceHolderStyle(txtNameUser, Color.DARK_GRAY);
-        LoginController.instance.addPlaceHolderStyle(txtPassword1, Color.DARK_GRAY);
-        LoginController.instance.addPlaceHolderStyle(txtGmail, Color.DARK_GRAY);
-        //  Register.setVisible(false);
-        Register.setUndecorated(true);
-        //fixedLocation = getLocation(); 
-        BufferedImage image = ImageIO.read(new File("D:\\DownLoad\\IconFootWear\\BackGrounds.jpg"));
-        LoginController.instance.makeTransparent(image, 0.5f, LabelRegister);
+        RegisterBackGround.setUndecorated(true);
+        try {
+            BufferedImage();
+            BufferedImage1();
+        } catch (IOException ex) {
+            Logger.getLogger(FormLoginUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
         StraightLine.setVisible(false);
         StraightLine2.setVisible(false);
-        LabelNameUser.setVisible(false);
-        LabelPasswordUser.setVisible(false);
-        LabelNameRegister.setVisible(false);
-        //LoginPanel.setOpaque(false);       
-        BufferedImage imageLabelLogin = ImageIO.read(new File("D:\\DownLoad\\IconFootWear\\BackGroundLogin1.png"));
-        LoginController.instance.makeTransparent(imageLabelLogin, 0.4f, LoginLabel);
+       
     }
-
+   
+    public void BufferedImage() throws IOException{
+          BufferedImage image = ImageIO.read(new File("D:\\DownLoad\\IconFootWear\\BackGrounds.jpg"));
+          LoginController.instance.makeTransparent(image, 1f, LabelRegister);
+    }
+    public void BufferedImage1() throws IOException{
+          BufferedImage image = ImageIO.read(new File("D:\\DownLoad\\IconFootWear\\BackGroundLogin1.png"));
+          LoginController.instance.makeTransparent(image, 0.5f, LoginLabel);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Register = new javax.swing.JDialog();
+        RegisterBackGround = new javax.swing.JDialog();
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtGmail = new javax.swing.JTextField();
@@ -81,8 +83,10 @@ public class FormLoginUser extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        LabelNameRegister = new javax.swing.JLabel();
+        LabelPasswordRegister = new javax.swing.JLabel();
+        LabelGmail = new javax.swing.JLabel();
         CreateMessage = new javax.swing.JLabel();
+        LabelNameRegister = new javax.swing.JLabel();
         LabelRegister = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         bntLogin = new javax.swing.JButton();
@@ -102,10 +106,10 @@ public class FormLoginUser extends javax.swing.JFrame {
         LoginLabel = new javax.swing.JLabel();
         BackgroupFormCreate = new javax.swing.JLabel();
 
-        Register.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        Register.setModal(true);
-        Register.setSize(new java.awt.Dimension(340, 360));
-        Register.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        RegisterBackGround.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        RegisterBackGround.setModal(true);
+        RegisterBackGround.setSize(new java.awt.Dimension(340, 360));
+        RegisterBackGround.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton4.setBackground(new java.awt.Color(255, 204, 204));
         jButton4.setText("Cancel!");
@@ -114,48 +118,50 @@ public class FormLoginUser extends javax.swing.JFrame {
                 jButton4MouseClicked(evt);
             }
         });
-        Register.getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, -1, -1));
+        RegisterBackGround.getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Register");
-        Register.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 90, -1));
+        RegisterBackGround.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 90, -1));
 
         txtGmail.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        txtGmail.setText("EnterGmail.....");
-        txtGmail.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtGmailFocusGained(evt);
+        txtGmail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtGmailMouseClicked(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtGmailFocusLost(evt);
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtGmailMouseExited(evt);
             }
         });
-        Register.getContentPane().add(txtGmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 180, 30));
+        RegisterBackGround.getContentPane().add(txtGmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 180, 30));
 
         txtNameUser.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        txtNameUser.setText("EnterName....");
-        txtNameUser.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtNameUserFocusGained(evt);
+        txtNameUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtNameUserMouseClicked(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtNameUserFocusLost(evt);
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtNameUserMouseExited(evt);
             }
         });
-        Register.getContentPane().add(txtNameUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 180, 30));
+        txtNameUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameUserActionPerformed(evt);
+            }
+        });
+        RegisterBackGround.getContentPane().add(txtNameUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 180, 30));
 
         txtPassword1.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        txtPassword1.setText("EnterPassword...");
         txtPassword1.setEchoChar('\u0000');
-        txtPassword1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtPassword1FocusGained(evt);
+        txtPassword1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtPassword1MouseClicked(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPassword1FocusLost(evt);
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtPassword1MouseExited(evt);
             }
         });
-        Register.getContentPane().add(txtPassword1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 180, -1));
+        RegisterBackGround.getContentPane().add(txtPassword1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 180, -1));
 
         jButton3.setBackground(new java.awt.Color(255, 204, 204));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -165,27 +171,41 @@ public class FormLoginUser extends javax.swing.JFrame {
                 jButton3MouseClicked(evt);
             }
         });
-        Register.getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 200, -1));
+        RegisterBackGround.getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 200, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/AvatarLogin.png"))); // NOI18N
-        Register.getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 40, 30));
+        RegisterBackGround.getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 40, 30));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/LockLogin.png"))); // NOI18N
-        Register.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 30, -1));
+        RegisterBackGround.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/GmailIcon.png"))); // NOI18N
-        Register.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+        RegisterBackGround.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
 
-        LabelNameRegister.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        LabelNameRegister.setText("EnterName...");
-        Register.getContentPane().add(LabelNameRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
+        LabelPasswordRegister.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        LabelPasswordRegister.setForeground(new java.awt.Color(204, 204, 204));
+        LabelPasswordRegister.setText("EnterPassword");
+        RegisterBackGround.getContentPane().add(LabelPasswordRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, -1, -1));
+
+        LabelGmail.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        LabelGmail.setForeground(new java.awt.Color(204, 204, 204));
+        LabelGmail.setText("EnterGmail");
+        RegisterBackGround.getContentPane().add(LabelGmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
 
         CreateMessage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         CreateMessage.setForeground(new java.awt.Color(255, 0, 51));
-        Register.getContentPane().add(CreateMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 300, 20));
-        Register.getContentPane().add(LabelRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 360));
+        RegisterBackGround.getContentPane().add(CreateMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 300, 20));
+
+        LabelNameRegister.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        LabelNameRegister.setForeground(new java.awt.Color(204, 204, 204));
+        LabelNameRegister.setText("EnterName");
+        RegisterBackGround.getContentPane().add(LabelNameRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
+
+        LabelRegister.setBackground(new java.awt.Color(255, 204, 204));
+        RegisterBackGround.getContentPane().add(LabelRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 390));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -196,19 +216,14 @@ public class FormLoginUser extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtName.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        txtName.setText("EnterName.....");
+        txtName.setForeground(new java.awt.Color(255, 255, 255));
         txtName.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        txtName.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtNameFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtNameFocusLost(evt);
-            }
-        });
         txtName.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtNameMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtNameMouseExited(evt);
             }
         });
         txtName.addActionListener(new java.awt.event.ActionListener() {
@@ -274,16 +289,7 @@ public class FormLoginUser extends javax.swing.JFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 130, 230, -1));
 
         txtPassword.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        txtPassword.setText("EnterPass....");
-        txtPassword.setEchoChar('\u0000');
-        txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtPasswordFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPasswordFocusLost(evt);
-            }
-        });
+        txtPassword.setForeground(new java.awt.Color(255, 255, 255));
         txtPassword.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtPasswordMouseClicked(evt);
@@ -294,19 +300,19 @@ public class FormLoginUser extends javax.swing.JFrame {
         });
         getContentPane().add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 240, 210, 30));
 
-        StraightLine.setText("____________");
-        getContentPane().add(StraightLine, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 380, 120, 20));
+        StraightLine.setText("________________");
+        getContentPane().add(StraightLine, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 380, 110, 20));
 
-        StraightLine2.setText("________________");
+        StraightLine2.setText("___________________");
         getContentPane().add(StraightLine2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 290, 140, -1));
 
         LabelNameUser.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        LabelNameUser.setForeground(new java.awt.Color(255, 255, 255));
+        LabelNameUser.setForeground(new java.awt.Color(204, 204, 204));
         LabelNameUser.setText("UserName");
         getContentPane().add(LabelNameUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 160, 80, -1));
 
         LabelPasswordUser.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        LabelPasswordUser.setForeground(new java.awt.Color(255, 255, 255));
+        LabelPasswordUser.setForeground(new java.awt.Color(204, 204, 204));
         LabelPasswordUser.setText("UserPassword");
         getContentPane().add(LabelPasswordUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 220, 100, 20));
 
@@ -317,7 +323,7 @@ public class FormLoginUser extends javax.swing.JFrame {
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 180, -1, -1));
 
         LoginMessage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        LoginMessage.setForeground(new java.awt.Color(255, 51, 51));
+        LoginMessage.setForeground(new java.awt.Color(255, 102, 102));
         getContentPane().add(LoginMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 310, 270, 20));
 
         LoginLabel.setBackground(new java.awt.Color(255, 204, 204));
@@ -330,43 +336,9 @@ public class FormLoginUser extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusGained
-        if (txtName.getText().equals("EnterName.....")) {
-            txtName.setText(null);
-            txtName.requestFocus();
-            LoginController.instance.removePlaceHolderStyle(txtName, Color.WHITE);
-            //  LabelNameUser.setVisible(false);
-        }
-    }//GEN-LAST:event_txtNameFocusGained
-
-    private void txtNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusLost
-        if (txtName.getText().length() == 0) {
-            LoginController.instance.addPlaceHolderStyle(txtName, Color.WHITE);
-            txtName.setText("EnterName.....");
-            //  LabelNameUser.setVisible(false);
-        }
-    }//GEN-LAST:event_txtNameFocusLost
-
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         this.requestFocusInWindow();
     }//GEN-LAST:event_formWindowGainedFocus
-
-    private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
-        if (txtPassword.getText().equals("EnterPass....")) {
-            txtPassword.setText(null);
-            txtPassword.requestFocus();
-            //txtpass.setEchoChar();
-            LoginController.instance.removePlaceHolderStyle(txtPassword, Color.WHITE);
-        }
-    }//GEN-LAST:event_txtPasswordFocusGained
-
-    private void txtPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusLost
-        if (txtPassword.getText().length() == 0) {
-            LoginController.instance.addPlaceHolderStyle(txtPassword, Color.WHITE);
-            txtPassword.setText("EnterPass....");
-            txtPassword.setEchoChar('\u0000');
-        }
-    }//GEN-LAST:event_txtPasswordFocusLost
 
     private void CheckPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CheckPassMouseClicked
         if (CheckPass.isSelected()) {
@@ -374,40 +346,14 @@ public class FormLoginUser extends javax.swing.JFrame {
         } else {
             txtPassword.setEchoChar('*');
         }
-        if (txtPassword.getText().length() != 0) {
-            LabelPasswordUser.setVisible(true);
-        }
-        if (txtPassword.getText().equalsIgnoreCase("EnterPass....")) {
-            LabelPasswordUser.setVisible(false);
-        }
-        if (txtPassword.getText().length() == 0) {
-            LabelPasswordUser.setVisible(true);
-        }
 
     }//GEN-LAST:event_CheckPassMouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         //PanelCreate.setVisible(true);
-        Register.setVisible(true);
+        RegisterBackGround.setVisible(true);
 //      Register.setLocationRelativeTo(this);
-        Register.setLocation(300, 200);
-        if (txtName.getText().length() != 0) {
-            LabelNameUser.setVisible(true);
-        }
-        if (txtName.getText().equalsIgnoreCase("EnterName.....")) {
-            LabelNameUser.setVisible(false);
-        }
-        LabelNameUser.setVisible(false);
-        if (txtPassword.getText().length() != 0) {
-            LabelPasswordUser.setVisible(true);
-        }
-        if (txtPassword.getText().equalsIgnoreCase("EnterPass....")) {
-            LabelPasswordUser.setVisible(false);
-        }
-        if (txtPassword.getText().length() == 0) {
-            LabelPasswordUser.setVisible(true);
-        }
-        // setLocation(fixedLocation);
+        RegisterBackGround.setLocation(300, 200);
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
@@ -423,57 +369,6 @@ public class FormLoginUser extends javax.swing.JFrame {
         txtName.addActionListener(e -> txtPassword.requestFocus());
 
     }//GEN-LAST:event_txtNameActionPerformed
-
-    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        Register.setVisible(false);
-    }//GEN-LAST:event_jButton4MouseClicked
-
-    private void txtNameUserFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameUserFocusGained
-        if (txtNameUser.getText().equals("EnterName....")) {
-            txtNameUser.setText(null);
-            txtNameUser.requestFocus();
-            LoginController.instance.removePlaceHolderStyle(txtNameUser, Color.DARK_GRAY);
-        }
-    }//GEN-LAST:event_txtNameUserFocusGained
-
-    private void txtNameUserFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameUserFocusLost
-        if (txtNameUser.getText().length() == 0) {
-            LoginController.instance.addPlaceHolderStyle(txtNameUser, Color.DARK_GRAY);
-            txtNameUser.setText("EnterName....");
-        }
-    }//GEN-LAST:event_txtNameUserFocusLost
-
-    private void txtPassword1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPassword1FocusGained
-        if (txtPassword1.getText().equals("EnterPassword...")) {
-            txtPassword1.setText(null);
-            txtPassword1.requestFocus();
-            //txtpass.setEchoChar();
-            LoginController.instance.removePlaceHolderStyle(txtPassword1, Color.DARK_GRAY);
-        }
-    }//GEN-LAST:event_txtPassword1FocusGained
-
-    private void txtPassword1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPassword1FocusLost
-        if (txtPassword1.getText().length() == 0) {
-            LoginController.instance.addPlaceHolderStyle(txtPassword1, Color.DARK_GRAY);
-            txtPassword1.setText("EnterPassword...");
-            txtPassword1.setEchoChar('\u0000');
-        }
-    }//GEN-LAST:event_txtPassword1FocusLost
-
-    private void txtGmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGmailFocusGained
-        if (txtGmail.getText().equals("EnterGmail.....")) {
-            txtGmail.setText(null);
-            txtGmail.requestFocus();
-            LoginController.instance.removePlaceHolderStyle(txtGmail, Color.DARK_GRAY);
-        }
-    }//GEN-LAST:event_txtGmailFocusGained
-
-    private void txtGmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGmailFocusLost
-        if (txtGmail.getText().length() == 0) {
-            LoginController.instance.addPlaceHolderStyle(txtGmail, Color.DARK_GRAY);
-            txtGmail.setText("EnterGmail.....");
-        }
-    }//GEN-LAST:event_txtGmailFocusLost
 
     private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
         StraightLine.setVisible(true);
@@ -492,60 +387,26 @@ public class FormLoginUser extends javax.swing.JFrame {
     }//GEN-LAST:event_CheckPassMouseExited
 
     private void txtNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNameMouseClicked
-        LabelNameUser.setVisible(true);
-        if (txtPassword.getText().length() != 0) {
-            LabelPasswordUser.setVisible(true);
-        }
-        if (txtPassword.getText().equalsIgnoreCase("EnterPass....")) {
-            LabelPasswordUser.setVisible(false);
-        }
-        if (txtPassword.getText().length() == 0) {
-            LabelPasswordUser.setVisible(true);
-        }
+
+        LabelNameUser.setForeground(Color.white);
     }//GEN-LAST:event_txtNameMouseClicked
 
     private void txtPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasswordMouseClicked
-        //LabelPasswordUser.setVisible(true);
-        //LabelNameUser.setVisible(false);
-        if (txtName.getText().length() != 0) {
-            LabelNameUser.setVisible(true);
-        }
-        if (txtName.getText().equalsIgnoreCase("EnterName.....")) {
-            LabelNameUser.setVisible(false);
-        }
-        if (txtPassword.getText().length() != 0) {
-            LabelPasswordUser.setVisible(true);
-        }
-        if (txtPassword.getText().equalsIgnoreCase("EnterPass....")) {
-            LabelPasswordUser.setVisible(false);
-        }
-        if (txtPassword.getText().length() == 0) {
-            LabelPasswordUser.setVisible(true);
-        }
+
+        LabelPasswordUser.setForeground(Color.WHITE);
     }//GEN-LAST:event_txtPasswordMouseClicked
 
     private void txtPasswordMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasswordMouseExited
-        if (txtPassword.getText().length() != 0) {
-            LabelPasswordUser.setVisible(true);
-        }
-        if (txtPassword.getText().equalsIgnoreCase("EnterPass....")) {
-            LabelPasswordUser.setVisible(false);
-        }
+
         if (txtPassword.getText().length() == 0) {
-            LabelPasswordUser.setVisible(true);
+            LabelPasswordUser.setForeground(Color.lightGray);
+        } else {
+            LabelPasswordUser.setForeground(Color.WHITE);
         }
     }//GEN-LAST:event_txtPasswordMouseExited
 
     private void bntLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntLoginMouseClicked
-        if (txtPassword.getText().length() != 0) {
-            LabelPasswordUser.setVisible(true);
-        }
-        if (txtPassword.getText().equalsIgnoreCase("EnterPass....")) {
-            LabelPasswordUser.setVisible(false);
-        }
-        if (txtPassword.getText().length() == 0) {
-            LabelPasswordUser.setVisible(true);
-        }
+
         ControllerAccount.Init();
         ControllerAccount.instance.LoadAccount();
         try {
@@ -563,13 +424,16 @@ public class FormLoginUser extends javax.swing.JFrame {
                 new HomePage().setVisible(true);
                 this.dispose();
             } else {
-//                JOptionPane.showMessageDialog(this, "LOGIN FAILD!\n"
-//                        + "CHECK PASSWORD OR NAME");
+                LoginMessage.setText("error: NAME OR PASSWORD FALSE!");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Unexpected error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            
         }
     }//GEN-LAST:event_bntLoginMouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        RegisterBackGround.setVisible(false);
+    }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         ControllerAccount.Init();
@@ -601,22 +465,70 @@ public class FormLoginUser extends javax.swing.JFrame {
                 return;
             }
             if (ControllerAccount.instance.addAccount(name, pass, gmail)) {
-                Register.setVisible(false);
+                RegisterBackGround.setVisible(false);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+          //  JOptionPane.showMessageDialog(this, "error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton3MouseClicked
 
-    public static void main(String args[]) {
+    private void txtNameUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameUserActionPerformed
+        txtNameUser.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    txtPassword1.requestFocus();
+                    txtGmail.requestFocus();
 
+                }
+            }
+        });
+        txtNameUser.addActionListener(e -> txtPassword1.requestFocus());
+        txtPassword1.addActionListener(e -> txtGmail.requestFocus());
+    }//GEN-LAST:event_txtNameUserActionPerformed
+
+    private void txtNameMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNameMouseExited
+        if (txtName.getText().length() == 0) {
+            LabelNameUser.setForeground(Color.lightGray);
+        } else {
+            LabelNameUser.setForeground(Color.WHITE);
+        }
+    }//GEN-LAST:event_txtNameMouseExited
+
+    private void txtNameUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNameUserMouseClicked
+        LabelNameRegister.setForeground(Color.DARK_GRAY);
+    }//GEN-LAST:event_txtNameUserMouseClicked
+
+    private void txtNameUserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNameUserMouseExited
+        if (txtNameUser.getText().length() == 0) {
+            LabelNameRegister.setForeground(Color.lightGray);
+        }
+    }//GEN-LAST:event_txtNameUserMouseExited
+
+    private void txtPassword1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPassword1MouseClicked
+        LabelPasswordRegister.setForeground(Color.darkGray);
+    }//GEN-LAST:event_txtPassword1MouseClicked
+
+    private void txtPassword1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPassword1MouseExited
+        if (txtPassword1.getText().length() == 0) {
+            LabelPasswordRegister.setForeground(Color.lightGray);
+        }
+    }//GEN-LAST:event_txtPassword1MouseExited
+
+    private void txtGmailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtGmailMouseClicked
+        LabelGmail.setForeground(Color.DARK_GRAY);
+    }//GEN-LAST:event_txtGmailMouseClicked
+
+    private void txtGmailMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtGmailMouseExited
+        if (txtGmail.getText().length() == 0) {
+            LabelGmail.setForeground(Color.LIGHT_GRAY);
+        }
+    }//GEN-LAST:event_txtGmailMouseExited
+
+    public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new FormLoginUser().setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(FormLoginUser.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new FormLoginUser().setVisible(true);
             }
         });
     }
@@ -625,13 +537,15 @@ public class FormLoginUser extends javax.swing.JFrame {
     private javax.swing.JLabel BackgroupFormCreate;
     private javax.swing.JCheckBox CheckPass;
     private javax.swing.JLabel CreateMessage;
+    private javax.swing.JLabel LabelGmail;
     private javax.swing.JLabel LabelNameRegister;
     private javax.swing.JLabel LabelNameUser;
+    private javax.swing.JLabel LabelPasswordRegister;
     private javax.swing.JLabel LabelPasswordUser;
     private javax.swing.JLabel LabelRegister;
     private javax.swing.JLabel LoginLabel;
     private javax.swing.JLabel LoginMessage;
-    private javax.swing.JDialog Register;
+    private javax.swing.JDialog RegisterBackGround;
     private javax.swing.JLabel StraightLine;
     private javax.swing.JLabel StraightLine2;
     private javax.swing.JButton bntLogin;
