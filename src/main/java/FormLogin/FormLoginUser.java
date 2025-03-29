@@ -1,6 +1,6 @@
 package FormLogin;
 
-import Model.ControllerAccount;
+import Model.AccountController;
 import Model.LoginController;
 import Model.HomePage;
 import com.formdev.flatlaf.FlatDarkLaf;
@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
+
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -30,7 +30,7 @@ public class FormLoginUser extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         LoginController.Init();
         setResizable(false);
-        this.RegisterBackGround.setLocation(300, 200);
+        this.FormCreate.setLocation(300, 200);
         txtName.setOpaque(false);
         txtName.setBackground(null);
         txtName.setBorder(BorderFactory.createBevelBorder(0));
@@ -49,7 +49,7 @@ public class FormLoginUser extends javax.swing.JFrame {
         txtGmail.setOpaque(false);
         txtGmail.setBackground(null);
         txtGmail.setBorder(BorderFactory.createBevelBorder(0));
-        RegisterBackGround.setUndecorated(true);
+        FormCreate.setUndecorated(true);
         try {
             BufferedImage();
             BufferedImage1();
@@ -73,7 +73,7 @@ public class FormLoginUser extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        RegisterBackGround = new javax.swing.JDialog();
+        FormCreate = new javax.swing.JDialog();
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtGmail = new javax.swing.JTextField();
@@ -106,10 +106,10 @@ public class FormLoginUser extends javax.swing.JFrame {
         LoginLabel = new javax.swing.JLabel();
         BackgroupFormCreate = new javax.swing.JLabel();
 
-        RegisterBackGround.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        RegisterBackGround.setModal(true);
-        RegisterBackGround.setSize(new java.awt.Dimension(340, 360));
-        RegisterBackGround.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        FormCreate.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        FormCreate.setModal(true);
+        FormCreate.setSize(new java.awt.Dimension(340, 360));
+        FormCreate.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton4.setBackground(new java.awt.Color(255, 204, 204));
         jButton4.setText("Cancel!");
@@ -118,11 +118,11 @@ public class FormLoginUser extends javax.swing.JFrame {
                 jButton4MouseClicked(evt);
             }
         });
-        RegisterBackGround.getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, -1, -1));
+        FormCreate.getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Register");
-        RegisterBackGround.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 90, -1));
+        FormCreate.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 90, -1));
 
         txtGmail.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         txtGmail.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -133,7 +133,7 @@ public class FormLoginUser extends javax.swing.JFrame {
                 txtGmailMouseExited(evt);
             }
         });
-        RegisterBackGround.getContentPane().add(txtGmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 180, 30));
+        FormCreate.getContentPane().add(txtGmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 180, 30));
 
         txtNameUser.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         txtNameUser.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -149,7 +149,7 @@ public class FormLoginUser extends javax.swing.JFrame {
                 txtNameUserActionPerformed(evt);
             }
         });
-        RegisterBackGround.getContentPane().add(txtNameUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 180, 30));
+        FormCreate.getContentPane().add(txtNameUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 180, 30));
 
         txtPassword1.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         txtPassword1.setEchoChar('\u0000');
@@ -161,7 +161,7 @@ public class FormLoginUser extends javax.swing.JFrame {
                 txtPassword1MouseExited(evt);
             }
         });
-        RegisterBackGround.getContentPane().add(txtPassword1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 180, -1));
+        FormCreate.getContentPane().add(txtPassword1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 180, -1));
 
         jButton3.setBackground(new java.awt.Color(255, 204, 204));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -171,38 +171,38 @@ public class FormLoginUser extends javax.swing.JFrame {
                 jButton3MouseClicked(evt);
             }
         });
-        RegisterBackGround.getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 200, -1));
+        FormCreate.getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 200, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/AvatarLogin.png"))); // NOI18N
-        RegisterBackGround.getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 40, 30));
+        FormCreate.getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 40, 30));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/LockLogin.png"))); // NOI18N
-        RegisterBackGround.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+        FormCreate.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/GmailIcon.png"))); // NOI18N
-        RegisterBackGround.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+        FormCreate.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
 
         LabelPasswordRegister.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         LabelPasswordRegister.setForeground(new java.awt.Color(204, 204, 204));
         LabelPasswordRegister.setText("EnterPassword");
-        RegisterBackGround.getContentPane().add(LabelPasswordRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, -1, -1));
+        FormCreate.getContentPane().add(LabelPasswordRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, -1, -1));
 
         LabelGmail.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         LabelGmail.setForeground(new java.awt.Color(204, 204, 204));
         LabelGmail.setText("EnterGmail");
-        RegisterBackGround.getContentPane().add(LabelGmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
+        FormCreate.getContentPane().add(LabelGmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
 
         CreateMessage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         CreateMessage.setForeground(new java.awt.Color(255, 0, 51));
-        RegisterBackGround.getContentPane().add(CreateMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 300, 20));
+        FormCreate.getContentPane().add(CreateMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 300, 20));
 
         LabelNameRegister.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         LabelNameRegister.setForeground(new java.awt.Color(204, 204, 204));
         LabelNameRegister.setText("EnterName");
-        RegisterBackGround.getContentPane().add(LabelNameRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
+        FormCreate.getContentPane().add(LabelNameRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
 
         LabelRegister.setBackground(new java.awt.Color(255, 204, 204));
-        RegisterBackGround.getContentPane().add(LabelRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 390));
+        FormCreate.getContentPane().add(LabelRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 390));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
@@ -351,9 +351,9 @@ public class FormLoginUser extends javax.swing.JFrame {
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         //PanelCreate.setVisible(true);
-        RegisterBackGround.setVisible(true);
+        FormCreate.setVisible(true);
 //      Register.setLocationRelativeTo(this);
-        RegisterBackGround.setLocation(300, 200);
+        FormCreate.setLocation(300, 200);
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
@@ -388,12 +388,12 @@ public class FormLoginUser extends javax.swing.JFrame {
 
     private void txtNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNameMouseClicked
 
-        LabelNameUser.setForeground(Color.white);
+        LabelNameUser.setForeground(Color.GREEN);
     }//GEN-LAST:event_txtNameMouseClicked
 
     private void txtPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasswordMouseClicked
 
-        LabelPasswordUser.setForeground(Color.WHITE);
+        LabelPasswordUser.setForeground(Color.GREEN);
     }//GEN-LAST:event_txtPasswordMouseClicked
 
     private void txtPasswordMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasswordMouseExited
@@ -401,21 +401,21 @@ public class FormLoginUser extends javax.swing.JFrame {
         if (txtPassword.getText().length() == 0) {
             LabelPasswordUser.setForeground(Color.lightGray);
         } else {
-            LabelPasswordUser.setForeground(Color.WHITE);
+            LabelPasswordUser.setForeground(Color.GREEN);
         }
     }//GEN-LAST:event_txtPasswordMouseExited
 
     private void bntLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntLoginMouseClicked
 
-        ControllerAccount.Init();
-        ControllerAccount.instance.LoadAccount();
+        AccountController.Init();
+        AccountController.instance.LoadAccount();
         try {
             String name = this.txtName.getText().trim();
             String pass = this.txtPassword.getText().trim();
             if (name.equalsIgnoreCase("EnterName.....") || pass.equalsIgnoreCase("EnterPass....") || name.isEmpty() || pass.isEmpty()) {
                 LoginMessage.setText("error: INFORMATION CAN NOT EMPTY");
             }
-            if (ControllerAccount.instance.LoginUser(name, pass)) {
+            if (AccountController.instance.LoginUser(name, pass)) {
                 try {
                     UIManager.setLookAndFeel(new FlatDarkLaf());
                 } catch (UnsupportedLookAndFeelException e) {
@@ -432,12 +432,12 @@ public class FormLoginUser extends javax.swing.JFrame {
     }//GEN-LAST:event_bntLoginMouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        RegisterBackGround.setVisible(false);
+        FormCreate.setVisible(false);
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        ControllerAccount.Init();
-        ControllerAccount.instance.LoadAccount();
+        AccountController.Init();
+        AccountController.instance.LoadAccount();
         try {
             String name = this.txtNameUser.getText().trim();
             String pass = this.txtPassword1.getText().trim();
@@ -464,8 +464,8 @@ public class FormLoginUser extends javax.swing.JFrame {
                 CreateMessage.setText("error: LENGTH PASSWORD >= 7 AND NAME >=4");
                 return;
             }
-            if (ControllerAccount.instance.addAccount(name, pass, gmail)) {
-                RegisterBackGround.setVisible(false);
+            if (AccountController.instance.addAccount(name, pass, gmail)) {
+                FormCreate.setVisible(false);
             }
         } catch (Exception e) {
           //  JOptionPane.showMessageDialog(this, "error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -491,7 +491,7 @@ public class FormLoginUser extends javax.swing.JFrame {
         if (txtName.getText().length() == 0) {
             LabelNameUser.setForeground(Color.lightGray);
         } else {
-            LabelNameUser.setForeground(Color.WHITE);
+            LabelNameUser.setForeground(Color.GREEN);
         }
     }//GEN-LAST:event_txtNameMouseExited
 
@@ -537,6 +537,7 @@ public class FormLoginUser extends javax.swing.JFrame {
     private javax.swing.JLabel BackgroupFormCreate;
     private javax.swing.JCheckBox CheckPass;
     private javax.swing.JLabel CreateMessage;
+    private javax.swing.JDialog FormCreate;
     private javax.swing.JLabel LabelGmail;
     private javax.swing.JLabel LabelNameRegister;
     private javax.swing.JLabel LabelNameUser;
@@ -545,7 +546,6 @@ public class FormLoginUser extends javax.swing.JFrame {
     private javax.swing.JLabel LabelRegister;
     private javax.swing.JLabel LoginLabel;
     private javax.swing.JLabel LoginMessage;
-    private javax.swing.JDialog RegisterBackGround;
     private javax.swing.JLabel StraightLine;
     private javax.swing.JLabel StraightLine2;
     private javax.swing.JButton bntLogin;

@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-public class Running {
+public class Run {
 
     public static void main(String[] args) {
         runApp();
@@ -17,10 +17,10 @@ public class Running {
 
     public static void runApp() {
         try {
-                    UIManager.setLookAndFeel(new FlatLightLaf());
-                } catch (UnsupportedLookAndFeelException e) {
-                    Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, e);
-                }
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (UnsupportedLookAndFeelException e) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, e);
+        }
         new FormLoginUser().setVisible(true);
     }
 }

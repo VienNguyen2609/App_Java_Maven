@@ -1,47 +1,47 @@
 package Model;
 
 public class Account {
-    private int UserId;
-    private String UserName, UserPassWord, UserGmail;
+    private int userId;
+    private String userName, userPassword, userGmail;
     
     public Account(String name, String pass, String gmail) {
-        this.UserName = name;
-        this.UserPassWord = pass;
-        this.UserGmail = gmail;
+        this.userName = name;
+        this.userPassword = pass;
+        this.userGmail = gmail;
     }
 
     public int getUserId() {
-        return UserId;
+        return userId;
     }
 
     public void setUserId(int UserId) {
-        this.UserId = UserId;
+        this.userId = UserId;
     }
     
     public Account() {
     }
 
     public String getName() {
-        return UserName;
+        return userName;
     }
 
     public void setName(String name) {
-        this.UserName = name;
+        this.userName = name;
     }
 
     public String getPass() {
-        return UserPassWord;
+        return userPassword;
     }
 
     public void setPass(String pass) {
-        this.UserPassWord = pass;
+        this.userPassword = pass;
     }
 
     public String getGmail() {
-        return UserGmail;
+        return userGmail;
     }
 
     public void setGmail(String gmail) {
-        this.UserGmail = gmail;
+        this.userGmail = gmail;
     }
 }

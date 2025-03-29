@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 
-public class ControllerAccount {
+public class AccountController {
     ArrayList<Account> account = new ArrayList<>();
-    public static ControllerAccount instance;
+    public static AccountController instance;
     
     private static boolean isInitiallized = false;
     
@@ -18,7 +18,7 @@ public class ControllerAccount {
         if (isInitiallized == true) {
             return;
         }
-        instance = new ControllerAccount();
+        instance = new AccountController();
         isInitiallized = true;
     }
 
