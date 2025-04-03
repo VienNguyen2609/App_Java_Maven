@@ -1,8 +1,7 @@
 package Main;
 
-import FormLogin.FormLoginUser;
-import Model.HomePage;
-import com.formdev.flatlaf.FlatDarkLaf;
+import Forms.LoginUser;
+import Forms.HomePage;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +20,6 @@ public class Run {
         } catch (UnsupportedLookAndFeelException e) {
             Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, e);
         }
-        new FormLoginUser().setVisible(true);
+        new LoginUser().setVisible(true);
     }
 }
