@@ -11,6 +11,7 @@ Controller\AccountController.class
 Controller\RippleEffect.class
 Forms\LoginAdmin$1.class
 Model\Account.class
+Forms\RoundedBorder.class
 Forms\HomePage$2.class
 Forms\LoginUser$11.class
 Forms\LoginUser$1.class
