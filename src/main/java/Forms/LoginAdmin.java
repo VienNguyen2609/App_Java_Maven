@@ -4,7 +4,7 @@
  */
 package Forms;
 
-import Controller.HeaderButton;
+import Controllers.HeaderButton;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 

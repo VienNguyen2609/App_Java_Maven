@@ -44,4 +44,10 @@ public class Account {
     public void setGmail(String gmail) {
         this.userGmail = gmail;
     }
+
+    @Override
+    public String toString() {
+        return "Account{" + "userId=" + userId + ", userName=" + userName + ", userPassword=" + userPassword + ", userGmail=" + userGmail + '}';
+    }
+    
 }
