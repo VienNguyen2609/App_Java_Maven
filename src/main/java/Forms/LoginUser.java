@@ -97,21 +97,22 @@ public class LoginUser extends javax.swing.JFrame {
         CreateMessage = new javax.swing.JLabel();
         LabelNameCreate = new javax.swing.JLabel();
         LabelRegister = new javax.swing.JLabel();
-        bntLogin = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        CheckPass = new javax.swing.JCheckBox();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        StraightLine = new javax.swing.JLabel();
-        StraightLine2 = new javax.swing.JLabel();
-        LabelNameUser = new javax.swing.JLabel();
-        LabelPasswordUser = new javax.swing.JLabel();
-        LoginMessage = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtName = new Forms.Components.TextFieldController();
+        LabelNameUser = new javax.swing.JLabel();
         txtPassword = new Forms.Components.PasswordField();
+        jLabel6 = new javax.swing.JLabel();
+        LabelPasswordUser = new javax.swing.JLabel();
+        bntLogin = new javax.swing.JButton();
+        CheckPass = new javax.swing.JCheckBox();
+        StraightLine2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        StraightLine = new javax.swing.JLabel();
+        LoginMessage = new javax.swing.JLabel();
         LabelLogin = new javax.swing.JLabel();
         BackgroupFormCreate = new javax.swing.JLabel();
 
@@ -216,6 +217,49 @@ public class LoginUser extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_social.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 130));
+
+        jPanel1.setOpaque(false);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Login To Your Account");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 210, -1));
+
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("______________________________________________");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 240, 20));
+
+        txtName.setForeground(new java.awt.Color(255, 255, 255));
+        txtName.setToolTipText("");
+        txtName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtName.setOpaque(true);
+        txtName.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/AvatarLogin.png"))); // NOI18N
+        jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 220, -1));
+
+        LabelNameUser.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        LabelNameUser.setForeground(new java.awt.Color(255, 255, 255));
+        LabelNameUser.setText("UserName");
+        jPanel1.add(LabelNameUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 80, -1));
+
+        txtPassword.setForeground(new java.awt.Color(255, 255, 255));
+        txtPassword.setToolTipText("");
+        txtPassword.setEchoChar('*');
+        txtPassword.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtPassword.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/PassIcon.png"))); // NOI18N
+        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 220, -1));
+
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("______________________________________________");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 240, 20));
+
+        LabelPasswordUser.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        LabelPasswordUser.setForeground(new java.awt.Color(255, 255, 255));
+        LabelPasswordUser.setText("UserPassword");
+        jPanel1.add(LabelPasswordUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 100, -1));
+
         bntLogin.setBackground(new java.awt.Color(255, 204, 204));
         bntLogin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         bntLogin.setText("Login");
@@ -224,10 +268,7 @@ public class LoginUser extends javax.swing.JFrame {
                 bntLoginMouseClicked(evt);
             }
         });
-        getContentPane().add(bntLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 340, 180, -1));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_1174963c-634d-4bc2-8eda-afad0fa3d96b.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, -1, 70));
+        jPanel1.add(bntLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 180, -1));
 
         CheckPass.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         CheckPass.setForeground(new java.awt.Color(255, 255, 255));
@@ -243,12 +284,15 @@ public class LoginUser extends javax.swing.JFrame {
                 CheckPassMouseExited(evt);
             }
         });
-        getContentPane().add(CheckPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 310, -1, -1));
+        jPanel1.add(CheckPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, -1, -1));
+
+        StraightLine2.setText("___________________");
+        jPanel1.add(StraightLine2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 226, 140, 20));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Don't have an account ?");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 370, 170, 30));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 170, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 255, 204));
@@ -264,58 +308,20 @@ public class LoginUser extends javax.swing.JFrame {
                 jLabel4MouseExited(evt);
             }
         });
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 370, -1, 30));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Login To Your Account");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 130, 230, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, -1, 30));
 
         StraightLine.setText("________________");
-        getContentPane().add(StraightLine, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 380, 110, 20));
-
-        StraightLine2.setText("___________________");
-        getContentPane().add(StraightLine2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 320, 140, -1));
-
-        LabelNameUser.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        LabelNameUser.setForeground(new java.awt.Color(255, 255, 255));
-        LabelNameUser.setText("UserName");
-        getContentPane().add(LabelNameUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 160, 80, -1));
-
-        LabelPasswordUser.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        LabelPasswordUser.setForeground(new java.awt.Color(255, 255, 255));
-        LabelPasswordUser.setText("UserPassword");
-        getContentPane().add(LabelPasswordUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 230, 100, 20));
+        jPanel1.add(StraightLine, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, 110, 20));
 
         LoginMessage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LoginMessage.setForeground(new java.awt.Color(255, 102, 102));
-        getContentPane().add(LoginMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 290, 270, 20));
+        jPanel1.add(LoginMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 310, 20));
+        jPanel1.add(LabelLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 440));
 
-        jLabel6.setText("____________________________________________");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 260, 240, 30));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 370, 440));
 
-        jLabel7.setText("____________________________________________");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 196, 240, 20));
-
-        txtName.setForeground(new java.awt.Color(255, 255, 255));
-        txtName.setToolTipText("");
-        txtName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtName.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/HomeIcon.png"))); // NOI18N
-        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 180, 220, 30));
-
-        txtPassword.setForeground(new java.awt.Color(255, 255, 255));
-        txtPassword.setToolTipText("");
-        txtPassword.setEchoChar('*');
-        txtPassword.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtPassword.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/PassIcon.png"))); // NOI18N
-        getContentPane().add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 250, 210, 30));
-
-        LabelLogin.setBackground(new java.awt.Color(255, 204, 204));
-        LabelLogin.setName(""); // NOI18N
-        getContentPane().add(LabelLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 360, 450));
-
-        BackgroupFormCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_chika-fujiwara-3840x2160-16148.jpg"))); // NOI18N
-        getContentPane().add(BackgroupFormCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 535));
+        BackgroupFormCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/ChatGPT Image 20_09_49 10 thg 4, 2025.png"))); // NOI18N
+        getContentPane().add(BackgroupFormCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 610));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -489,6 +495,7 @@ public class LoginUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtGmail;
     private Forms.Components.TextFieldController txtName;
     private javax.swing.JTextField txtNameCreate;

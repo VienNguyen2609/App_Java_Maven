@@ -121,21 +121,11 @@ public class AccountController {
         return check;
     }
 
-    public void in() {
-        for (Account a : listAccount) {
-            System.out.println(a.toString());
-        }
-    }
+
 
     public ArrayList<Account> getDataAccount() {
         return listAccount;
     }
 
-    public static void main(String[] args) {
-        AccountController a = new AccountController();
-        a.LoadAccount();
-        String name = "admin", pass = "coànkdsfgsdg", gmail = "@gmail.com";
-        a.addAccount(name, pass, gmail);
-        a.in();
-    }
+   
 }

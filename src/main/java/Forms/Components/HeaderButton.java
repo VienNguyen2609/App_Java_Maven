@@ -10,8 +10,7 @@ import javafx.scene.layout.Background;
 
 public class HeaderButton extends JButton {
      
-    private Background color;
-    
+      
     private RippleEffect rippleEffect;
 
     public HeaderButton(String text) {
@@ -21,7 +20,6 @@ public class HeaderButton extends JButton {
     }
 
     public HeaderButton() {
-        this("Header");
         init();
     }
 

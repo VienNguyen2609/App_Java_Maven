@@ -59,12 +59,12 @@ public class LoginController {
 
     public void BufferedImage(JLabel label) throws IOException {
         BufferedImage image = ImageIO.read(new File("D:\\DownLoad\\IconFootWear\\BackGrounds.jpg"));
-        LoginController.instance.makeTransparent(image, 1f, label);
+        LoginController.instance.makeTransparent(image, 0.2f, label);
     }
 
     public void BufferedImage1(JLabel label) throws IOException {
         BufferedImage image = ImageIO.read(new File("D:\\DownLoad\\IconFootWear\\BackGroundLogin1.png"));
-        LoginController.instance.makeTransparent(image, 0.5f, label);
+        LoginController.instance.makeTransparent(image, 0.2f, label);
     }
 
     public void FocusPointer(JTextField textField, JLabel label, Color colorFirst, Color colorLast) {
