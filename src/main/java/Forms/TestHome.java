@@ -2,6 +2,7 @@
 package Forms;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -11,7 +12,7 @@ public class TestHome {
 
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel(new FlatDarkLaf() );
+            UIManager.setLookAndFeel(new FlatMacDarkLaf() );
         } catch (UnsupportedLookAndFeelException e) {
             Logger.getLogger(TestHome.class.getName()).log(Level.SEVERE, null, e);
         }

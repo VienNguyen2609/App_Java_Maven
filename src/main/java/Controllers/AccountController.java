@@ -2,13 +2,13 @@ package Controllers;
 
 import Model.Account;
 import SQLConnection.SQLConnector;
-import com.sun.source.tree.BreakTree;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AccountController {
 
@@ -45,31 +45,30 @@ public class AccountController {
         return check;
     }
 
-    public void addAccount(String name, String pass, String gmail) {
+    public boolean addAccount(String name, String pass, String gmail) {
+        boolean check = false;
         try {
-            LoadAccount();
-            if (this.listAccount.contains(name)) {
-                System.out.println("error:  ");
-                return;
-            } else {
-                SQLConnector.GetForName();
-                Connection conn = SQLConnector.GetConnection();
-                String sql = "insert into account values (?,?,?)";
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setString(1, name);
-                ps.setString(2, pass);
-                ps.setString(3, gmail);
-                int n = ps.executeUpdate();
-                if (n != 0) {
-                    Account _account = new Account(name, pass, gmail);
-                    this.listAccount.add(_account);
-                    return;
-                }
+            SQLConnector.GetForName();
+            Connection conn = SQLConnector.GetConnection();
+            String sql = "insert into account values (?,?,?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, pass);
+            ps.setString(3, gmail);
+            int n = ps.executeUpdate();
+            if (n != 0) {
+                Account _account = new Account(name, pass, gmail);
+                this.listAccount.add(_account);
+                check = true;
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+             // JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        return check;
     }
 
     public void LoadAccount() {

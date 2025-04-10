@@ -4,7 +4,7 @@
  */
 package Forms;
 
-import Controllers.HeaderButton;
+import Forms.Components.HeaderButton;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 
@@ -32,6 +32,7 @@ public class LoginAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

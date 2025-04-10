@@ -9,7 +9,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
 
-public class TextFieldController extends  JTextField{
+public class TextFieldController extends JTextField{
+    
     Icon prefixIcon;
     Icon suffixIcon;
 

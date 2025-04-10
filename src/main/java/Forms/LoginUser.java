@@ -2,6 +2,7 @@ package Forms;
 
 import Controllers.AccountController;
 import Controllers.LoginController;
+import Forms.Components.HeaderButton;
 import Forms.HomePage;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
@@ -74,7 +75,7 @@ public class LoginUser extends javax.swing.JFrame {
         LoginController.instance.FocusPointer(txtNameCreate, LabelNameCreate, Color.DARK_GRAY, Color.lightGray);
         LoginController.instance.FocusPointer(txtPasswordCreate, LabelPasswordCreate, Color.DARK_GRAY, Color.lightGray);
         LoginController.instance.FocusPointer(txtGmail, LabelGmail, Color.DARK_GRAY, Color.lightGray);
-
+       
     }
 
     @SuppressWarnings("unchecked")
@@ -383,38 +384,38 @@ public class LoginUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-//        AccountController.instance.LoadAccount();
-//        try {
-//            String name = this.txtNameCreate.getText().trim();
-//            String pass = this.txtPasswordCreate.getText().trim();
-//            String gmail = this.txtGmail.getText().trim();
-//            String inputText = name;
-//            if (name.equalsIgnoreCase("EnterName....") || pass.equalsIgnoreCase("EnterPassword...") || gmail.equalsIgnoreCase("EnterGmail.....")) {
-//                CreateMessage.setText("error: INFORMATION CAN NOT  BE EMPTY");
-//                return;
-//            } else if (name.equalsIgnoreCase("") || pass.equalsIgnoreCase("") || gmail.equalsIgnoreCase("")) {
-//                CreateMessage.setText("error:: INFORMATION CAN NOT  BE EMPTY");
-//                return;
-//            } else if (!gmail.contains("@gmail.com")) {
-//                CreateMessage.setText("error: GMAIL FALSE");
-//                return;
-//            } else if (LoginController.instance.containsVietnameseCharacters(inputText)) {
-//                CreateMessage.setText("error: USER NAME FALSE!");
-//                return;
-//            } else if (pass.length() < 7 || name.length() < 4) {
-//                CreateMessage.setText("error: LENGTH PASSWORD >= 7 AND NAME >=4");
-//                return;
-//            } else if (AccountController.instance.addAccount(name, pass, gmail)) {
-//                FormCreate.setVisible(false);
-//            }
-//            else{
-//                CreateMessage.setText("error: name is exist");
-//                return ;
-//            }
-//
-//        } catch (Exception e) {
-//            //  JOptionPane.showMessageDialog(this, "error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-//        }
+        AccountController.instance.LoadAccount();
+        try {
+            String name = this.txtNameCreate.getText().trim();
+            String pass = this.txtPasswordCreate.getText().trim();
+            String gmail = this.txtGmail.getText().trim();
+            String inputText = name;
+            if (name.equalsIgnoreCase("EnterName....") || pass.equalsIgnoreCase("EnterPassword...") || gmail.equalsIgnoreCase("EnterGmail.....")) {
+                CreateMessage.setText("error: INFORMATION CAN NOT  BE EMPTY");
+                return;
+            } else if (name.equalsIgnoreCase("") || pass.equalsIgnoreCase("") || gmail.equalsIgnoreCase("")) {
+                CreateMessage.setText("error:: INFORMATION CAN NOT  BE EMPTY");
+                return;
+            } else if (!gmail.contains("@gmail.com")) {
+                CreateMessage.setText("error: GMAIL FALSE");
+                return;
+            } else if (LoginController.instance.containsVietnameseCharacters(inputText)) {
+                CreateMessage.setText("error: USER NAME FALSE!");
+                return;
+            } else if (pass.length() < 7 || name.length() < 4) {
+                CreateMessage.setText("error: LENGTH PASSWORD >= 7 AND NAME >=4");
+                return;
+            } else if (AccountController.instance.addAccount(name, pass, gmail)) {
+                FormCreate.setVisible(false);
+            }
+            else{
+                CreateMessage.setText("error: name is exist");
+                return ;
+            }
+
+        } catch (Exception e) {
+            //  JOptionPane.showMessageDialog(this, "error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void txtNameCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameCreateActionPerformed
