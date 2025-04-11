@@ -19,6 +19,19 @@ public class TextFieldController extends JTextField {
     public void setPrefixIcon(Icon prefixIcon) {
         this.prefixIcon = prefixIcon;
         initBorder();
+
+    }
+   
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        applyDefaults();
+    }
+
+    private void applyDefaults() {
+        setOpaque(false);
+        setBackground(new java.awt.Color(0, 0, 0, 0)); 
+        
     }
 
     public Icon getSuffixIcon() {
@@ -31,6 +44,8 @@ public class TextFieldController extends JTextField {
     }
 
     public TextFieldController() {
+         super();
+        applyDefaults();
         setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
     }
 

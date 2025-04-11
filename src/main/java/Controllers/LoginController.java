@@ -1,5 +1,6 @@
 package Controllers;
 
+import Forms.CreateAccount;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
@@ -10,6 +11,8 @@ import java.awt.event.FocusListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -56,39 +59,62 @@ public class LoginController {
         label.setIcon(new ImageIcon(transparentImage));
         return transparentImage;
     }
-
-    public void BufferedImage(JLabel label) throws IOException {
-        BufferedImage image = ImageIO.read(new File("D:\\DownLoad\\IconFootWear\\BackGrounds.jpg"));
+    
+    
+    public void BufferedImage(String c ,JLabel label) throws IOException {
+        BufferedImage image = ImageIO.read(new File(c));
         LoginController.instance.makeTransparent(image, 0.2f, label);
     }
 
-    public void BufferedImage1(JLabel label) throws IOException {
-        BufferedImage image = ImageIO.read(new File("D:\\DownLoad\\IconFootWear\\BackGroundLogin1.png"));
-        LoginController.instance.makeTransparent(image, 0.2f, label);
-    }
-
-    public void FocusPointer(JTextField textField, JLabel label, Color colorFirst, Color colorLast) {
+   
+    public void FocusPointer(JTextField textField, JLabel label, JLabel label1, Color colorFirst, Color colorLast) {
 
         textField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                label.setForeground(colorFirst); // Đổi màu khi focus
+                label.setForeground(colorFirst);
+                openMenuBar(label1);
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 if (textField.getText().length() != 0) {
                     label.setForeground(colorFirst);
-                }
-                else{
+
+                } else {
                     label.setForeground(colorLast);
+
                 }
-                
+
             }
         });
     }
-    // bắt lổi tiếng việt
 
+    //animation label 
+    public void openMenuBar(JLabel label) {
+        int targetWidth = 260;
+        int height = 30;
+        // Tính điểm trung tâm ban đầu
+        int centerX = label.getX() + label.getWidth() / 2;
+        int centerY = label.getY();
+
+        new Thread(() -> {
+            for (int i = 0; i <= targetWidth / 2; i++) {
+                int newWidth = i * 2;
+                int newX = centerX - i;
+
+                label.setBounds(newX, centerY, newWidth, height);
+
+                try {
+                    Thread.sleep(2);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(CreateAccount.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }).start();
+    }
+
+    // bắt lổi tiếng việt
     public static boolean containsVietnameseCharacters(String text) {
         String vietnamesePattern = ".*[àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ].*";
         return text.matches(vietnamesePattern);
