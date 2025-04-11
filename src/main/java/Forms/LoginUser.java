@@ -2,6 +2,7 @@ package Forms;
 
 import Controllers.AccountController;
 import Controllers.LoginController;
+import Forms.Components.HeaderButton;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -18,10 +19,28 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class LoginUser extends javax.swing.JFrame {
 
     private Color color;
+    private String name , password , gmail ; 
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
     public LoginUser() {
         initComponents();
         setTitle("Login");
+        
         // icon window
         String iconPath = "D:\\DownLoad\\IconFootWear\\result_social.png";
         setIconImage(Toolkit.getDefaultToolkit().getImage(new File(iconPath).getAbsolutePath()));
@@ -51,7 +70,7 @@ public class LoginUser extends javax.swing.JFrame {
         StraightLine2.setVisible(false);
         LoginController.instance.FocusPointer(txtName, LabelNameUser, jLabel7, Color.GREEN, Color.WHITE);
         LoginController.instance.FocusPointer(txtPassword, LabelPasswordUser, jLabel6, Color.GREEN, Color.WHITE);
-
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -90,7 +109,7 @@ public class LoginUser extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_social.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/LogoShopImage.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 130));
 
         jPanel1.setOpaque(false);
@@ -109,7 +128,7 @@ public class LoginUser extends javax.swing.JFrame {
         txtName.setToolTipText("");
         txtName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtName.setOpaque(true);
-        txtName.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/AvatarLogin.png"))); // NOI18N
+        txtName.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/NameIcon.png"))); // NOI18N
         jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 220, -1));
 
         LabelNameUser.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
@@ -121,7 +140,7 @@ public class LoginUser extends javax.swing.JFrame {
         txtPassword.setToolTipText("");
         txtPassword.setEchoChar('*');
         txtPassword.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtPassword.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/PassIcon.png"))); // NOI18N
+        txtPassword.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/PasswordIcon.png"))); // NOI18N
         jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 220, -1));
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -180,15 +199,16 @@ public class LoginUser extends javax.swing.JFrame {
         LoginMessage.setForeground(new java.awt.Color(255, 102, 102));
         jPanel1.add(LoginMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 310, 20));
 
-        headerButton1.setBackground(new java.awt.Color(204, 255, 204));
+        headerButton1.setBackground(new java.awt.Color(255, 204, 51));
         headerButton1.setText("Sign In");
+        headerButton1.setToolTipText("");
         headerButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         headerButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 headerButton1MouseClicked(evt);
             }
         });
-        jPanel1.add(headerButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 260, -1));
+        jPanel1.add(headerButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 240, -1));
         jPanel1.add(LabelLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 370, 400));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 370, 410));
@@ -203,7 +223,7 @@ public class LoginUser extends javax.swing.JFrame {
         jLabel8.setText("WELCOME TO SHOP , LOGIN NOW  TO SHOPPING");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, -1, -1));
 
-        BackgroupFormCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/ChatGPT Image 20_09_49 10 thg 4, 2025.png"))); // NOI18N
+        BackgroupFormCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/BackgroundLogin.png"))); // NOI18N
         getContentPane().add(BackgroupFormCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 610));
 
         pack();
@@ -246,17 +266,17 @@ public class LoginUser extends javax.swing.JFrame {
     private void headerButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerButton1MouseClicked
         AccountController.instance.LoadAccount();
         try {
-            String name = this.txtName.getText().trim();
-            String pass = this.txtPassword.getText().trim();
-            if (name.length() == 0 || pass.length() == 0) {
+            name = this.txtName.getText().trim();
+            password = this.txtPassword.getText().trim();
+            if (name.length() == 0 || password.length() == 0) {
                 LoginMessage.setText("error: INFORMATION CAN NOT EMPTY");
-            } else if (AccountController.instance.LoginUser(name, pass)) {
+            } else if (AccountController.instance.LoginUser(name, password)) {
                 try {
                     UIManager.setLookAndFeel(new FlatDarkLaf());
                 } catch (UnsupportedLookAndFeelException e) {
                     Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, e);
                 }
-                new HomePage().setVisible(true);
+                new HomePage(name , password).setVisible(true);
                 this.dispose();
             } else {
                 LoginMessage.setText("error: NAME OR PASSWORD FALSE!");

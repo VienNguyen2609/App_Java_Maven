@@ -18,7 +18,7 @@ public class Run {
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (UnsupportedLookAndFeelException e) {
-            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, e);
         }
         new LoginUser().setVisible(true);
     }

@@ -5,7 +5,6 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.awt.TextField;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.image.BufferedImage;
@@ -41,6 +40,7 @@ public class LoginController {
         textField.setForeground(color);
     }
 
+    
     public void removePlaceHolderStyle(JTextField textField, Color color) {
         Font font = textField.getFont();
         font = font.deriveFont(Font.ITALIC | Font.BOLD);
@@ -48,6 +48,7 @@ public class LoginController {
         textField.setForeground(color);
     }
 
+    
     public static BufferedImage makeTransparent(BufferedImage img, float alpha, JLabel label) {
         int width = img.getWidth();
         int height = img.getHeight();
@@ -59,14 +60,14 @@ public class LoginController {
         label.setIcon(new ImageIcon(transparentImage));
         return transparentImage;
     }
+
     
-    
-    public void BufferedImage(String c ,JLabel label) throws IOException {
+    public void BufferedImage(String c, JLabel label) throws IOException {
         BufferedImage image = ImageIO.read(new File(c));
         LoginController.instance.makeTransparent(image, 0.2f, label);
     }
 
-   
+    
     public void FocusPointer(JTextField textField, JLabel label, JLabel label1, Color colorFirst, Color colorLast) {
 
         textField.addFocusListener(new FocusListener() {
@@ -90,6 +91,7 @@ public class LoginController {
         });
     }
 
+    
     //animation label 
     public void openMenuBar(JLabel label) {
         int targetWidth = 260;
@@ -114,6 +116,7 @@ public class LoginController {
         }).start();
     }
 
+    
     // bắt lổi tiếng việt
     public static boolean containsVietnameseCharacters(String text) {
         String vietnamesePattern = ".*[àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ].*";

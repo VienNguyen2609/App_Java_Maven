@@ -25,15 +25,17 @@ public class AccountController {
         isInitiallized = true;
     }
 
-    public boolean LoginUser(String name, String pass) {
+    public boolean LoginUser(String name, String pass ) {
         boolean check = false;
         try {
-            if (name.isEmpty() | pass.isEmpty()) {
-                // JOptionPane.showMessageDialog(null, "INFORMATION CAN NOT BE EMPTY", "ERROR", JOptionPane.CANCEL_OPTION);
-
+            if (name.isEmpty() || pass.isEmpty()) {
+                check = false;// JOptionPane.showMessageDialog(null, "INFORMATION CAN NOT BE EMPTY", "ERROR", JOptionPane.CANCEL_OPTION);
+            } else if (name.equalsIgnoreCase("admin")) {
+                check = false;
             } else {
                 for (Account account : this.listAccount) {
                     if (account.getName().equalsIgnoreCase(name) && (String.valueOf(account.getPass()).equalsIgnoreCase(pass))) {
+                        //gmail.equalsIgnoreCase(account.getGmail());
                         check = true;
                         break;
                     }
@@ -59,10 +61,11 @@ public class AccountController {
             if (n != 0) {
                 Account _account = new Account(name, pass, gmail);
                 this.listAccount.add(_account);
+                System.out.println("concac");
                 check = true;
             }
         } catch (SQLException e) {
-             // JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            // JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
@@ -121,11 +124,8 @@ public class AccountController {
         return check;
     }
 
-
-
     public ArrayList<Account> getDataAccount() {
         return listAccount;
     }
 
-   
 }

@@ -34,7 +34,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Image/result_social.png"/>
+          <Image iconType="3" name="/Image/LogoShopImage.png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -97,7 +97,7 @@
             </Property>
             <Property name="opaque" type="boolean" value="true"/>
             <Property name="prefixIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Image/AvatarLogin.png"/>
+              <Image iconType="3" name="/Image/NameIcon.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -133,7 +133,7 @@
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
             <Property name="prefixIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Image/PassIcon.png"/>
+              <Image iconType="3" name="/Image/PasswordIcon.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -267,9 +267,10 @@
         <Component class="Forms.Components.HeaderButton" name="headerButton1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="ff" red="cc" type="rgb"/>
+              <Color blue="33" green="cc" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Sign In"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="1"/>
             </Property>
@@ -279,7 +280,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="60" y="320" width="260" height="-1"/>
+              <AbsoluteConstraints x="70" y="320" width="240" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -327,7 +328,7 @@
     <Component class="javax.swing.JLabel" name="BackgroupFormCreate">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Image/ChatGPT Image 20_09_49 10 thg 4, 2025.png"/>
+          <Image iconType="3" name="/Image/BackgroundLogin.png"/>
         </Property>
       </Properties>
       <Constraints>

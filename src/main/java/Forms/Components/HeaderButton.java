@@ -10,6 +10,8 @@ import javafx.scene.layout.Background;
 
 public class HeaderButton extends JButton {
 
+    private Color backgroundColor = new Color(204, 255, 204); // Màu mặc định
+    
     private RippleEffect rippleEffect;
 
     public HeaderButton(String text) {
@@ -27,7 +29,8 @@ public class HeaderButton extends JButton {
         setContentAreaFilled(false);
         setCursor(new Cursor(Cursor.HAND_CURSOR));
         putClientProperty(FlatClientProperties.STYLE, "" + "font:bold +3");
-
+        setFocusPainted(false);
+       
     }
 
     @Override
@@ -37,13 +40,7 @@ public class HeaderButton extends JButton {
 
         // Vẽ nền với bo góc
         int arc = UIScale.scale(20);
-        Color bgColor = getModel().isPressed()
-                ? new Color(204, 255, 204)
-                : getModel().isRollover()
-                ? new Color(204, 255, 204)
-                : new Color(204, 255, 204);
-
-        g2.setColor(bgColor);
+        g2.setColor(backgroundColor);
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), arc, arc);
 
         // Vẽ hiệu ứng ripple
@@ -60,5 +57,14 @@ public class HeaderButton extends JButton {
         super.paint(g);
         int arc = UIScale.scale(20);
         rippleEffect.reder(g, new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), arc, arc));
+    }
+
+    public Color getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public void setBackgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
+        repaint(); // cập nhật lại giao diện khi đổi màu
     }
 }

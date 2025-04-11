@@ -1,36 +1,63 @@
 package Forms;
 
-import Forms.Components.HeaderButton;
 import Forms.Components.RoundedBorder;
 import Main.Run;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.SwingConstants;
 
 public class HomePage extends javax.swing.JFrame {
 
+    private File selectedFile;
+    private String name, password, gmail;
+
+    public String getName() {
+        return name;
+    }
+
     public HomePage() {
+
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public HomePage(String name, String password) {
+        this.name = name;
+        this.password = password;
         initComponents();
         setLocationRelativeTo(null);
         setTitle("FOOTWEAR  ,  SHOP FOR YOU ");
         String iconPath = "D:\\DownLoad\\IconFootWear\\result_social.png";
         setIconImage(Toolkit.getDefaultToolkit().getImage(new File(iconPath).getAbsolutePath()));
 
-         jLabel1.setText("<html>Our sales app is a powerful and user-friendly platform designed to help businesses manage their products, orders, and customers efficiently. With an intuitive interface and advanced features like real-time inventory tracking, secure payment integration, and automated order processing, our app makes selling easier than ever. Whether you're a small business or a large enterprise, our solution is tailored to boost your sales and streamline your operations.</html>");
-        // setSize(UIScale.scale(new Dimension(1320, 770) ));
-        Border();
-    
+        //jLabel1.setText("<html>Our sales app is a powerful and user-friendly platform designed to help businesses manage their products, orders, and customers efficiently. With an intuitive interface and advanced features like real-time inventory tracking, secure payment integration, and automated order processing, our app makes selling easier than ever. Whether you're a small business or a large enterprise, our solution is tailored to boost your sales and streamline your operations.</html>");
+        btnUploadAvatar.setBackgroundColor(Color.GREEN);
+        btnProfle.setBackgroundColor(Color.GRAY);
+        btnHomePage.setBackgroundColor(Color.GRAY);
+        btnLogOut.setBackgroundColor(Color.GRAY);
+        PanelProfile.setVisible(false);
+        PanelHomePage.setVisible(false);
+        btnEditProfile.setBackgroundColor(Color.GREEN);
+        LabelNameProfile.setText("Name: " + name);
+        LabelPasswordProfile.setText("Password: " + password);
+        LabelGmailProfile.setText("Gmail: " + gmail);
+
     }
-    public void Border(){
-         btnHomePage.setHorizontalAlignment(SwingConstants.CENTER);
-         jButton1.setBorder(new RoundedBorder(18));
-         jButton2.setBorder(new RoundedBorder(18));
-         jButton3.setBorder(new RoundedBorder(18));
-         btnHomePage.setBorder(new RoundedBorder(18));
-         btnLogOut.setBorder(new RoundedBorder(18));
-         
-    }
+
 //   public  void scaleImage(){
 //        ImageIcon icon = new ImageIcon(getClass().getResource("/Image/Slogan.jpeg"));
 //        Image img = icon.getImage();
@@ -47,15 +74,19 @@ public class HomePage extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         LabelLogo = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        btnHomePage = new javax.swing.JButton();
-        btnLogOut = new javax.swing.JButton();
-        headerButton2 = new Forms.Components.HeaderButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        PanelMenu = new javax.swing.JPanel();
+        btnProfle = new Forms.Components.HeaderButton();
+        btnHomePage = new Forms.Components.HeaderButton();
+        btnLogOut = new Forms.Components.HeaderButton();
+        PanelContents = new javax.swing.JPanel();
+        PanelHomePage = new javax.swing.JPanel();
+        PanelProfile = new javax.swing.JPanel();
+        LabelAvatar = new Forms.Components.ProfilePhoto();
+        btnUploadAvatar = new Forms.Components.HeaderButton();
+        LabelGmailProfile = new javax.swing.JLabel();
+        LabelNameProfile = new javax.swing.JLabel();
+        LabelPasswordProfile = new javax.swing.JLabel();
+        btnEditProfile = new Forms.Components.HeaderButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 600));
@@ -67,7 +98,7 @@ public class HomePage extends javax.swing.JFrame {
         jPanel4.setPreferredSize(new java.awt.Dimension(1293, 90));
         jPanel4.setLayout(new java.awt.GridBagLayout());
 
-        LabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_social.png"))); // NOI18N
+        LabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/LogoShopImage.png"))); // NOI18N
         LabelLogo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, new java.awt.Color(255, 0, 51)));
         LabelLogo.setMaximumSize(new java.awt.Dimension(150, 150));
         LabelLogo.setMinimumSize(new java.awt.Dimension(130, 130));
@@ -91,112 +122,135 @@ public class HomePage extends javax.swing.JFrame {
 
         jPanel1.add(jPanel4, java.awt.BorderLayout.PAGE_START);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, new java.awt.Color(255, 51, 51)));
-        jPanel5.setOpaque(false);
-        jPanel5.setPreferredSize(new java.awt.Dimension(135, 720));
-        jPanel5.setRequestFocusEnabled(false);
+        PanelMenu.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, new java.awt.Color(255, 51, 51)));
+        PanelMenu.setOpaque(false);
+        PanelMenu.setPreferredSize(new java.awt.Dimension(137, 720));
+        PanelMenu.setRequestFocusEnabled(false);
 
-        jButton1.setText("Bill");
-        jButton1.setBorder(null);
-
-        jButton2.setText("About");
-        jButton2.setBorder(null);
-
-        jButton3.setText("Your Profile");
-        jButton3.setBorder(null);
-
-        btnHomePage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnHomePage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_home.png"))); // NOI18N
-        btnHomePage.setText("Home");
-        btnHomePage.setBorder(null);
-        btnHomePage.setMaximumSize(new java.awt.Dimension(150, 42));
-        btnHomePage.setMinimumSize(new java.awt.Dimension(120, 42));
-        btnHomePage.setPreferredSize(new java.awt.Dimension(123, 42));
-        btnHomePage.setRequestFocusEnabled(false);
-        btnHomePage.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnHomePageMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnHomePageMouseExited(evt);
+        btnProfle.setForeground(new java.awt.Color(204, 255, 255));
+        btnProfle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_account.png"))); // NOI18N
+        btnProfle.setText("Profile");
+        btnProfle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProfleMouseClicked(evt);
             }
         });
 
-        btnLogOut.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnLogOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_logout.png"))); // NOI18N
+        btnHomePage.setForeground(new java.awt.Color(204, 255, 255));
+        btnHomePage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/homeIcon.png"))); // NOI18N
+        btnHomePage.setText("Home");
+        btnHomePage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHomePageMouseClicked(evt);
+            }
+        });
+        btnHomePage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomePageActionPerformed(evt);
+            }
+        });
+
+        btnLogOut.setForeground(new java.awt.Color(204, 255, 255));
+        btnLogOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/logoutIcon.png"))); // NOI18N
         btnLogOut.setText("Sign Out");
-        btnLogOut.setBorder(null);
-        btnLogOut.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnLogOut.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnLogOut.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLogOutMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnLogOutMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnLogOutMouseExited(evt);
-            }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout PanelMenuLayout = new javax.swing.GroupLayout(PanelMenu);
+        PanelMenu.setLayout(PanelMenuLayout);
+        PanelMenuLayout.setHorizontalGroup(
+            PanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelMenuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnHomePage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnLogOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(headerButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(PanelMenuLayout.createSequentialGroup()
+                        .addGroup(PanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnProfle, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnHomePage, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+        PanelMenuLayout.setVerticalGroup(
+            PanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMenuLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
                 .addComponent(btnHomePage, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(headerButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 415, Short.MAX_VALUE)
+                .addComponent(btnProfle, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(92, 92, 92)
+                .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel1.add(jPanel5, java.awt.BorderLayout.LINE_START);
+        jPanel1.add(PanelMenu, java.awt.BorderLayout.LINE_START);
 
-        jPanel2.setOpaque(false);
-        jPanel2.setPreferredSize(new java.awt.Dimension(1200, 634));
+        PanelContents.setOpaque(false);
+        PanelContents.setPreferredSize(new java.awt.Dimension(1200, 634));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(345, 345, 345)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(336, Short.MAX_VALUE))
+        javax.swing.GroupLayout PanelHomePageLayout = new javax.swing.GroupLayout(PanelHomePage);
+        PanelHomePage.setLayout(PanelHomePageLayout);
+        PanelHomePageLayout.setHorizontalGroup(
+            PanelHomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1167, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(230, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69))
+        PanelHomePageLayout.setVerticalGroup(
+            PanelHomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 628, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
+        PanelProfile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        LabelAvatar.setIcon(new javax.swing.ImageIcon("D:\\DownLoad\\bear.png")); // NOI18N
+        PanelProfile.add(LabelAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 170, 130));
+
+        btnUploadAvatar.setBackground(new java.awt.Color(153, 153, 255));
+        btnUploadAvatar.setForeground(new java.awt.Color(255, 255, 255));
+        btnUploadAvatar.setText("Upload Avatar");
+        btnUploadAvatar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUploadAvatarMouseClicked(evt);
+            }
+        });
+        PanelProfile.add(btnUploadAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, 150, -1));
+
+        LabelGmailProfile.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        LabelGmailProfile.setText("Gmail:");
+        PanelProfile.add(LabelGmailProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, 350, 30));
+
+        LabelNameProfile.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        LabelNameProfile.setText("Name:");
+        PanelProfile.add(LabelNameProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 310, 30));
+
+        LabelPasswordProfile.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        LabelPasswordProfile.setText("Password:");
+        PanelProfile.add(LabelPasswordProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 310, 30));
+
+        btnEditProfile.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditProfile.setText("Edit Profile");
+        PanelProfile.add(btnEditProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 410, 150, -1));
+
+        javax.swing.GroupLayout PanelContentsLayout = new javax.swing.GroupLayout(PanelContents);
+        PanelContents.setLayout(PanelContentsLayout);
+        PanelContentsLayout.setHorizontalGroup(
+            PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(PanelProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 1173, Short.MAX_VALUE)
+            .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelContentsLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(PanelHomePage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        PanelContentsLayout.setVerticalGroup(
+            PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(PanelProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
+            .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelContentsLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(PanelHomePage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
+        jPanel1.add(PanelContents, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -212,26 +266,34 @@ public class HomePage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnHomePageMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomePageMouseEntered
-        btnHomePage.setBackground(Color.DARK_GRAY);
-    }//GEN-LAST:event_btnHomePageMouseEntered
+    private void btnUploadAvatarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUploadAvatarMouseClicked
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            selectedFile = chooser.getSelectedFile();
+            ImageIcon icon = new ImageIcon(new ImageIcon(selectedFile.getAbsolutePath())
+                    .getImage().getScaledInstance(LabelAvatar.getWidth(), LabelAvatar.getHeight(), Image.SCALE_SMOOTH));
+            LabelAvatar.setIcon(icon);
+        }
+    }//GEN-LAST:event_btnUploadAvatarMouseClicked
 
-    private void btnHomePageMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomePageMouseExited
-        btnHomePage.setBackground(null);
-    }//GEN-LAST:event_btnHomePageMouseExited
+    private void btnProfleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProfleMouseClicked
+        PanelProfile.setVisible(true);
+    }//GEN-LAST:event_btnProfleMouseClicked
 
-    private void btnLogOutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogOutMouseEntered
-       btnLogOut.setBackground(Color.red);
-    }//GEN-LAST:event_btnLogOutMouseEntered
-
-    private void btnLogOutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogOutMouseExited
-        btnLogOut.setBackground(null);
-    }//GEN-LAST:event_btnLogOutMouseExited
+    private void btnHomePageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomePageMouseClicked
+        PanelProfile.setVisible(false);
+        PanelHomePage.setVisible(true);
+    }//GEN-LAST:event_btnHomePageMouseClicked
 
     private void btnLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogOutMouseClicked
-       Run.runApp(); 
-       dispose();
+        Run.runApp();
+        dispose();
     }//GEN-LAST:event_btnLogOutMouseClicked
+
+    private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHomePageActionPerformed
 
     public static void main(String args[]) {
 
@@ -245,18 +307,22 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private Forms.Components.ProfilePhoto LabelAvatar;
+    private javax.swing.JLabel LabelGmailProfile;
     private javax.swing.JLabel LabelLogo;
-    private javax.swing.JButton btnHomePage;
-    private javax.swing.JButton btnLogOut;
-    private Forms.Components.HeaderButton headerButton2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel LabelNameProfile;
+    private javax.swing.JLabel LabelPasswordProfile;
+    private javax.swing.JPanel PanelContents;
+    private javax.swing.JPanel PanelHomePage;
+    private javax.swing.JPanel PanelMenu;
+    private javax.swing.JPanel PanelProfile;
+    private Forms.Components.HeaderButton btnEditProfile;
+    private Forms.Components.HeaderButton btnHomePage;
+    private Forms.Components.HeaderButton btnLogOut;
+    private Forms.Components.HeaderButton btnProfle;
+    private Forms.Components.HeaderButton btnUploadAvatar;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 }

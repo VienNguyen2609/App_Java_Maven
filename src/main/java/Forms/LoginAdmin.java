@@ -20,6 +20,7 @@ public class LoginAdmin extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(new File(iconPath).getAbsolutePath()));
         setLocationRelativeTo(null);
         setResizable(false);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -42,7 +43,7 @@ public class LoginAdmin extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_social.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/LogoShopImage.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 110));
 
         jLabel7.setText("_______________________________________________");

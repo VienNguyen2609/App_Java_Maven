@@ -1,3 +1,4 @@
+Forms\HomePage$6.class
 Forms\TestHome.class
 Forms\LoginUser$2.class
 Forms\LoginUser.class
@@ -14,13 +15,17 @@ Forms\Components\RippleEffect$Effect.class
 Forms\HomePage$2.class
 Forms\Components\RippleEffect.class
 Forms\LoginUser$1.class
+Forms\HomePage$5.class
 Main\Run.class
 Forms\LoginUser$4.class
 Forms\HomePage$1.class
+Forms\AvatarUploader.class
 Forms\CreateAccount$3.class
 Controllers\LoginController.class
+Forms\Components\ProfilePhoto.class
 Forms\Components\PasswordField.class
 Forms\LoginAdmin$2.class
+Forms\HomePage$4.class
 SQLConnection\SQLConnector.class
 Forms\Components\TextFieldController.class
 Forms\LoginUser$5.class
