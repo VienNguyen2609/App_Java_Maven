@@ -1,6 +1,6 @@
 D:\FootWear\src\main\java\Controllers\AccountController.java
 D:\FootWear\src\main\java\Controllers\LoginController.java
-D:\FootWear\src\main\java\Forms\AvatarUploader.java
+D:\FootWear\src\main\java\Forms\AdminLogin.java
 D:\FootWear\src\main\java\Forms\Components\HeaderButton.java
 D:\FootWear\src\main\java\Forms\Components\PasswordField.java
 D:\FootWear\src\main\java\Forms\Components\ProfilePhoto.java
@@ -9,9 +9,8 @@ D:\FootWear\src\main\java\Forms\Components\RoundedBorder.java
 D:\FootWear\src\main\java\Forms\Components\TextFieldController.java
 D:\FootWear\src\main\java\Forms\CreateAccount.java
 D:\FootWear\src\main\java\Forms\HomePage.java
-D:\FootWear\src\main\java\Forms\LoginAdmin.java
-D:\FootWear\src\main\java\Forms\LoginUser.java
 D:\FootWear\src\main\java\Forms\TestHome.java
+D:\FootWear\src\main\java\Forms\UserLogin.java
 D:\FootWear\src\main\java\Main\Run.java
 D:\FootWear\src\main\java\Model\Account.java
 D:\FootWear\src\main\java\SQLConnection\SQLConnector.java

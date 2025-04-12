@@ -1,70 +1,104 @@
 package Forms;
 
-import Forms.Components.RoundedBorder;
+import Controllers.AccountController;
+import Controllers.LoginController;
 import Main.Run;
+import Model.Account;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.SwingConstants;
+import javax.swing.JOptionPane;
 
 public class HomePage extends javax.swing.JFrame {
 
     private File selectedFile;
-    private String name, password, gmail;
-
-    public String getName() {
-        return name;
-    }
+    private Icon icon;
+    private Account currentAccount;
 
     public HomePage() {
-
+        initForUser();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public HomePage(Account account) {
+        this.currentAccount = account;
+        initForUser(account);
     }
 
-    public String getPassword() {
-        return password;
-    }
+    private void initForUser(Account account) {
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public HomePage(String name, String password) {
-        this.name = name;
-        this.password = password;
         initComponents();
         setLocationRelativeTo(null);
         setTitle("FOOTWEAR  ,  SHOP FOR YOU ");
         String iconPath = "D:\\DownLoad\\IconFootWear\\result_social.png";
         setIconImage(Toolkit.getDefaultToolkit().getImage(new File(iconPath).getAbsolutePath()));
 
-        //jLabel1.setText("<html>Our sales app is a powerful and user-friendly platform designed to help businesses manage their products, orders, and customers efficiently. With an intuitive interface and advanced features like real-time inventory tracking, secure payment integration, and automated order processing, our app makes selling easier than ever. Whether you're a small business or a large enterprise, our solution is tailored to boost your sales and streamline your operations.</html>");
-        btnUploadAvatar.setBackgroundColor(Color.GREEN);
+        TextNameProfile.setText(account.getUserName());
+        TextPasswordProfile.setText(account.getUserPassword());
+        TextGmailProfile.setText(account.getUserGmail());
+        if (account.getAvatarUser() != null) {
+            ImageIcon icon = new ImageIcon(account.getAvatarUser());
+            Image img = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            LabelAvatar.setIcon(new ImageIcon(img));
+        }
+
+        editComponents();
+
+    }
+
+    private void initForUser() {
+
+        initComponents();
+        setLocationRelativeTo(null);
+        setTitle("FOOTWEAR  ,  SHOP FOR YOU ");
+        String iconPath = "D:\\DownLoad\\IconFootWear\\result_social.png";
+        setIconImage(Toolkit.getDefaultToolkit().getImage(new File(iconPath).getAbsolutePath()));
+
+        editComponents();
+
+    }
+
+    private void saveToDatabase(Account account) {
+
+        try (Connection con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=USERLOGIN;user=sa;password=26092005;encrypt= false;"); FileInputStream fis = new FileInputStream(selectedFile)) {
+
+            String sql = "UPDATE account SET AvatarUser = ? WHERE UserName = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(2, account.getUserName());
+            pst.setBinaryStream(1, fis, (int) selectedFile.length());
+
+            int rows = pst.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void editComponents() {
+
+        AccountController.Init();
+        LoginController.Init();
+        btnUploadAvatar.setBackgroundColor(Color.lightGray);
         btnProfle.setBackgroundColor(Color.GRAY);
         btnHomePage.setBackgroundColor(Color.GRAY);
         btnLogOut.setBackgroundColor(Color.GRAY);
         PanelProfile.setVisible(false);
         PanelHomePage.setVisible(false);
-        btnEditProfile.setBackgroundColor(Color.GREEN);
-        LabelNameProfile.setText("Name: " + name);
-        LabelPasswordProfile.setText("Password: " + password);
-        LabelGmailProfile.setText("Gmail: " + gmail);
-
+        btnEditProfile.setBackgroundColor(Color.lightGray);
+        btnCancelProfile.setBackgroundColor(Color.lightGray);
+        btnSaveEditProfile.setBackgroundColor(Color.lightGray);
+        btnSaveEditProfile.setVisible(false);
     }
 
-//   public  void scaleImage(){
-//        ImageIcon icon = new ImageIcon(getClass().getResource("/Image/Slogan.jpeg"));
-//        Image img = icon.getImage();
-//        Image imgScale = img.getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
-//        ImageIcon acalledIcon = new ImageIcon(imgScale );
-//        jLabel1.setIcon(acalledIcon);
-//    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -83,10 +117,20 @@ public class HomePage extends javax.swing.JFrame {
         PanelProfile = new javax.swing.JPanel();
         LabelAvatar = new Forms.Components.ProfilePhoto();
         btnUploadAvatar = new Forms.Components.HeaderButton();
-        LabelGmailProfile = new javax.swing.JLabel();
-        LabelNameProfile = new javax.swing.JLabel();
-        LabelPasswordProfile = new javax.swing.JLabel();
         btnEditProfile = new Forms.Components.HeaderButton();
+        jLabel1 = new javax.swing.JLabel();
+        TextNameProfile = new Forms.Components.TextFieldController();
+        TextGmailProfile = new Forms.Components.TextFieldController();
+        TextPasswordProfile = new Forms.Components.PasswordField();
+        btnSaveEditProfile = new Forms.Components.HeaderButton();
+        btnCancelProfile = new Forms.Components.HeaderButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        CheckPassword = new javax.swing.JCheckBox();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 600));
@@ -178,7 +222,7 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMenuLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(btnHomePage, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 415, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 395, Short.MAX_VALUE)
                 .addComponent(btnProfle, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92)
                 .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -197,12 +241,10 @@ public class HomePage extends javax.swing.JFrame {
         );
         PanelHomePageLayout.setVerticalGroup(
             PanelHomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 628, Short.MAX_VALUE)
+            .addGap(0, 608, Short.MAX_VALUE)
         );
 
         PanelProfile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        LabelAvatar.setIcon(new javax.swing.ImageIcon("D:\\DownLoad\\bear.png")); // NOI18N
         PanelProfile.add(LabelAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 170, 130));
 
         btnUploadAvatar.setBackground(new java.awt.Color(153, 153, 255));
@@ -215,21 +257,80 @@ public class HomePage extends javax.swing.JFrame {
         });
         PanelProfile.add(btnUploadAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, 150, -1));
 
-        LabelGmailProfile.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        LabelGmailProfile.setText("Gmail:");
-        PanelProfile.add(LabelGmailProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, 350, 30));
-
-        LabelNameProfile.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        LabelNameProfile.setText("Name:");
-        PanelProfile.add(LabelNameProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 310, 30));
-
-        LabelPasswordProfile.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        LabelPasswordProfile.setText("Password:");
-        PanelProfile.add(LabelPasswordProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 310, 30));
-
         btnEditProfile.setForeground(new java.awt.Color(255, 255, 255));
         btnEditProfile.setText("Edit Profile");
-        PanelProfile.add(btnEditProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 410, 150, -1));
+        btnEditProfile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditProfileMouseClicked(evt);
+            }
+        });
+        PanelProfile.add(btnEditProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 440, 150, -1));
+
+        jLabel1.setText("________________________________________________________________");
+        PanelProfile.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, 370, -1));
+
+        TextNameProfile.setEditable(false);
+        TextNameProfile.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        PanelProfile.add(TextNameProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, 260, -1));
+
+        TextGmailProfile.setEditable(false);
+        TextGmailProfile.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        PanelProfile.add(TextGmailProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 390, 270, -1));
+
+        TextPasswordProfile.setEditable(false);
+        TextPasswordProfile.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(0, 0, 0)));
+        TextPasswordProfile.setEchoChar('\u002A'
+        );
+        TextPasswordProfile.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        PanelProfile.add(TextPasswordProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 330, 230, 30));
+
+        btnSaveEditProfile.setForeground(new java.awt.Color(255, 255, 255));
+        btnSaveEditProfile.setText("Save");
+        btnSaveEditProfile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSaveEditProfileMouseClicked(evt);
+            }
+        });
+        PanelProfile.add(btnSaveEditProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 480, 100, -1));
+
+        btnCancelProfile.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelProfile.setText("Cancel");
+        btnCancelProfile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCancelProfileMouseClicked(evt);
+            }
+        });
+        PanelProfile.add(btnCancelProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 440, 150, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_account.png"))); // NOI18N
+        jLabel2.setText("Name:");
+        PanelProfile.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, 80, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_padlock.png"))); // NOI18N
+        jLabel4.setText("Password:");
+        PanelProfile.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, 110, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/GmailIcon.png"))); // NOI18N
+        jLabel5.setText("Gmail:");
+        PanelProfile.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, 90, -1));
+
+        CheckPassword.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        CheckPassword.setText("Show Password");
+        CheckPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CheckPasswordMouseClicked(evt);
+            }
+        });
+        PanelProfile.add(CheckPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 340, -1, -1));
+
+        jLabel6.setText("_________________________________________________________________");
+        PanelProfile.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 400, 370, -1));
+
+        jLabel7.setText("_________________________________________________________________");
+        PanelProfile.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, 370, -1));
 
         javax.swing.GroupLayout PanelContentsLayout = new javax.swing.GroupLayout(PanelContents);
         PanelContents.setLayout(PanelContentsLayout);
@@ -243,7 +344,7 @@ public class HomePage extends javax.swing.JFrame {
         );
         PanelContentsLayout.setVerticalGroup(
             PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
+            .addComponent(PanelProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(PanelContentsLayout.createSequentialGroup()
                     .addContainerGap()
@@ -251,6 +352,11 @@ public class HomePage extends javax.swing.JFrame {
         );
 
         jPanel1.add(PanelContents, java.awt.BorderLayout.CENTER);
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("© FootWearShop 2025. Redistribution or reproduction is strictly prohibited. ");
+        jPanel1.add(jLabel10, java.awt.BorderLayout.PAGE_END);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -267,14 +373,17 @@ public class HomePage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUploadAvatarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUploadAvatarMouseClicked
+
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             selectedFile = chooser.getSelectedFile();
-            ImageIcon icon = new ImageIcon(new ImageIcon(selectedFile.getAbsolutePath())
+            icon = new ImageIcon(new ImageIcon(selectedFile.getAbsolutePath())
                     .getImage().getScaledInstance(LabelAvatar.getWidth(), LabelAvatar.getHeight(), Image.SCALE_SMOOTH));
             LabelAvatar.setIcon(icon);
         }
+        saveToDatabase(currentAccount);
+
     }//GEN-LAST:event_btnUploadAvatarMouseClicked
 
     private void btnProfleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProfleMouseClicked
@@ -295,6 +404,59 @@ public class HomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnHomePageActionPerformed
 
+    private void btnEditProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditProfileMouseClicked
+
+        TextNameProfile.setEditable(true);
+        TextPasswordProfile.setEditable(true);
+        TextGmailProfile.setEditable(true);
+        TextNameProfile.requestFocus();
+        btnSaveEditProfile.setVisible(true);
+
+    }//GEN-LAST:event_btnEditProfileMouseClicked
+
+    private void btnCancelProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelProfileMouseClicked
+
+        TextNameProfile.setEditable(false);
+        TextPasswordProfile.setEditable(false);
+        TextGmailProfile.setEditable(false);
+        TextNameProfile.setText(currentAccount.getUserName());
+        TextPasswordProfile.setText(currentAccount.getUserPassword());
+        TextGmailProfile.setText(currentAccount.getUserGmail());
+        btnSaveEditProfile.setVisible(false);
+
+    }//GEN-LAST:event_btnCancelProfileMouseClicked
+
+    private void CheckPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CheckPasswordMouseClicked
+
+        if (CheckPassword.isSelected()) {
+            TextPasswordProfile.setEchoChar((char) 0);
+        } else {
+            TextPasswordProfile.setEchoChar('*');
+        }
+    }//GEN-LAST:event_CheckPasswordMouseClicked
+
+    private void btnSaveEditProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveEditProfileMouseClicked
+
+        try {
+
+            String name = TextNameProfile.getText();
+            if (name.equalsIgnoreCase(currentAccount.getUserName())) {
+                return;
+            }
+            if (AccountController.instance.UpdateUserName(name, currentAccount.getUserName())) {
+                JOptionPane.showMessageDialog(this, "Update name Successfulle");
+                btnSaveEditProfile.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(this, "Update name false");
+                return;
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage());
+        }
+
+    }//GEN-LAST:event_btnSaveEditProfileMouseClicked
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -307,21 +469,31 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox CheckPassword;
     private Forms.Components.ProfilePhoto LabelAvatar;
-    private javax.swing.JLabel LabelGmailProfile;
     private javax.swing.JLabel LabelLogo;
-    private javax.swing.JLabel LabelNameProfile;
-    private javax.swing.JLabel LabelPasswordProfile;
     private javax.swing.JPanel PanelContents;
     private javax.swing.JPanel PanelHomePage;
     private javax.swing.JPanel PanelMenu;
     private javax.swing.JPanel PanelProfile;
+    private Forms.Components.TextFieldController TextGmailProfile;
+    private Forms.Components.TextFieldController TextNameProfile;
+    private Forms.Components.PasswordField TextPasswordProfile;
+    private Forms.Components.HeaderButton btnCancelProfile;
     private Forms.Components.HeaderButton btnEditProfile;
     private Forms.Components.HeaderButton btnHomePage;
     private Forms.Components.HeaderButton btnLogOut;
     private Forms.Components.HeaderButton btnProfle;
+    private Forms.Components.HeaderButton btnSaveEditProfile;
     private Forms.Components.HeaderButton btnUploadAvatar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables

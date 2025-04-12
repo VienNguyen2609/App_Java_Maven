@@ -1,4 +1,3 @@
-
 package Forms;
 
 import Controllers.AccountController;
@@ -8,17 +7,14 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 
-
-
 public class CreateAccount extends javax.swing.JFrame {
 
-    
     public CreateAccount() {
         initComponents();
         setTitle("Create Account");
         setLocationRelativeTo(null);
         setResizable(false);
-         String iconPath = "D:\\DownLoad\\IconFootWear\\result_social.png";
+        String iconPath = "D:\\DownLoad\\IconFootWear\\result_social.png";
         setIconImage(Toolkit.getDefaultToolkit().getImage(new File(iconPath).getAbsolutePath()));
         LoginController.Init();
         AccountController.Init();
@@ -131,8 +127,8 @@ public class CreateAccount extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Go to sign in ==>");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 130, 30));
+        jLabel4.setText("Go to sign in ?");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 380, 130, 30));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(153, 255, 255));
@@ -152,13 +148,15 @@ public class CreateAccount extends javax.swing.JFrame {
 
         jLabel6.setText("_____________");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 70, 40));
+
+        Label.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 0, 0, new java.awt.Color(255, 255, 255)));
         jPanel1.add(Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 420));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 360, 420));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("© ShopFootWear 2025. Redistribution or reproduction is strictly prohibited. ");
+        jLabel10.setText("© FootWearShop 2025. Redistribution or reproduction is strictly prohibited. ");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 530, 520, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/BackgroundLogin.png"))); // NOI18N
@@ -171,36 +169,44 @@ public class CreateAccount extends javax.swing.JFrame {
     private void headerButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerButton1MouseClicked
         AccountController.instance.LoadAccount();
         try {
+            
             String name = this.txtName.getText().trim();
             String pass = this.txtPassword.getText().trim();
             String gmail = this.txtGmail.getText().trim();
             String inputText = name;
             if (name.equalsIgnoreCase("EnterName....") || pass.equalsIgnoreCase("EnterPassword...") || gmail.equalsIgnoreCase("EnterGmail.....")) {
                 CreateMessage.setText("error: INFORMATION CAN NOT  BE EMPTY");
-                return;
-            } else if (name.equalsIgnoreCase("") || pass.equalsIgnoreCase("") || gmail.equalsIgnoreCase("")) {
-                CreateMessage.setText("error:: INFORMATION CAN NOT  BE EMPTY");
-                return;
-            } else if (!gmail.contains("@gmail.com")) {
-                CreateMessage.setText("error: GMAIL FALSE");
-                return;
-            } else if (LoginController.instance.containsVietnameseCharacters(inputText)) {
-                CreateMessage.setText("error: USER NAME FALSE!");
-                return;
-            } else if (pass.length() < 7 || name.length() < 4) {
-                CreateMessage.setText("error: LENGTH PASSWORD >= 7 AND NAME >=4");
-                return;
-            } else if (AccountController.instance.addAccount(name, pass, gmail)) {
-                CreateMessage.setText("Create Account Successfully");
-
-            } else {
-                CreateMessage.setText("error: name is exist");
-                return;
+               
             }
+            
+            else if (name.equalsIgnoreCase("") || pass.equalsIgnoreCase("") || gmail.equalsIgnoreCase("")) {
+                CreateMessage.setText("error:: INFORMATION CAN NOT  BE EMPTY");
+            }
+            
+            else if (!gmail.contains("@gmail.com")) {
+                CreateMessage.setText("error: GMAIL FALSE");
+            }
+            
+            else if (LoginController.instance.containsVietnameseCharacters(inputText)) {
+                CreateMessage.setText("error: USER NAME FALSE!");
+            } 
+            
+            else if (pass.length() < 7 || name.length() < 4) {
+                CreateMessage.setText("error: LENGTH PASSWORD >= 7 AND NAME >=4");
+            } 
+            
+            else if (AccountController.instance.AddAccount(name, pass, gmail)) {
+                CreateMessage.setText("Create Account Successfully");
+                
+            }
+            else {
+                CreateMessage.setText("error: name is exist");
+            }
+            
         } catch (Exception e) {
-            //  JOptionPane.showMessageDialog(this, "error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            System.out.println(e.getMessage());
         }
-        
+
     }//GEN-LAST:event_headerButton1MouseClicked
 
     private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseEntered
@@ -212,13 +218,12 @@ public class CreateAccount extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel5MouseExited
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        new LoginUser().setVisible(true);
+        new UserLogin().setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel5MouseClicked
 
-  
     public static void main(String args[]) {
- 
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CreateAccount().setVisible(true);

@@ -25,7 +25,7 @@ public class AccountController {
         isInitiallized = true;
     }
 
-    public boolean LoginUser(String name, String pass ) {
+    public boolean CheckLogin(String name, String pass) {
         boolean check = false;
         try {
             if (name.isEmpty() || pass.isEmpty()) {
@@ -34,10 +34,9 @@ public class AccountController {
                 check = false;
             } else {
                 for (Account account : this.listAccount) {
-                    if (account.getName().equalsIgnoreCase(name) && (String.valueOf(account.getPass()).equalsIgnoreCase(pass))) {
+                    if (account.getUserName().equalsIgnoreCase(name) && (String.valueOf(account.getUserPassword()).equalsIgnoreCase(pass))) {
                         //gmail.equalsIgnoreCase(account.getGmail());
                         check = true;
-                        break;
                     }
                 }
             }
@@ -47,12 +46,12 @@ public class AccountController {
         return check;
     }
 
-    public boolean addAccount(String name, String pass, String gmail) {
+    public boolean AddAccount(String name, String pass, String gmail) {
         boolean check = false;
         try {
             SQLConnector.GetForName();
             Connection conn = SQLConnector.GetConnection();
-            String sql = "insert into account values (?,?,?)";
+            String sql = "INSERT INTO account (UserName, PasswordUser, GmailUser)VALUES(?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, name);
             ps.setString(2, pass);
@@ -84,10 +83,11 @@ public class AccountController {
             ResultSet rs = ps.executeQuery();
             int n = 1;
             while (rs.next()) {
-                String name = rs.getString("username");
-                String pass = rs.getString("pass");
-                String gmail = rs.getString("gmail");
-                Account _account = new Account(name, pass, gmail);
+                String name = rs.getString("UserName");
+                String pass = rs.getString("PasswordUser");
+                String gmail = rs.getString("GmailUser");
+                byte[] avatar = rs.getBytes("AvatarUser");
+                Account _account = new Account(name, pass, gmail, avatar);
                 this.listAccount.add(_account);
             }
             rs.close();
@@ -111,7 +111,7 @@ public class AccountController {
             int n = ps.executeUpdate();
             if (n > 0) {
                 for (Account account : this.listAccount) {
-                    if (account.getName().equalsIgnoreCase(name)) {
+                    if (account.getUserName().equalsIgnoreCase(name)) {
                         this.listAccount.remove(account);
                         check = true;
                         break;
@@ -119,13 +119,117 @@ public class AccountController {
                 }
             }
         } catch (Exception e) {
-            //  JOptionPane.showMessageDialog(null,"ERROR: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
         return check;
+    }
+
+    public boolean UpdateUserName(String name, String UserName) {
+        boolean check = false;
+        try {
+
+            SQLConnector.GetForName();
+            Connection conn = SQLConnector.GetConnection();
+            String updateUserName = "UPDATE account SET UserName = ? WHERE UserName = ?";
+            PreparedStatement ps = conn.prepareStatement(updateUserName);
+            ps.setString(1, name);
+            ps.setString(2, UserName);
+            int n = ps.executeUpdate();
+            if (n > 0) {
+                for (Account account : this.listAccount) {
+                    if (account.getUserName().equalsIgnoreCase(UserName)) {
+                        account.setUserName(name);
+                        check = true;
+                        break;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check;
+    }
+
+//    public boolean LoginUser1(String name, String pass, boolean rememberMe) {
+//        boolean check = false;
+//        try {
+//            SQLConnector.GetForName();
+//            Connection conn = SQLConnector.GetConnection();
+//            String sql = "SELECT * FROM account WHERE UserName = ? AND PasswordUser = ?";
+//            PreparedStatement ps = conn.prepareStatement(sql);
+//            ps.setString(1, name);
+//            ps.setString(2, pass);
+//            ResultSet rs = ps.executeQuery();
+//
+//            if (rs.next()) {
+//                String gmail = rs.getString("GmailUser");
+//                byte[] avatar = rs.getBytes("AvatarUser");
+//                Account acc = new Account(name, pass, gmail, avatar);
+//                this.listAccount.add(acc);
+//
+//                if (rememberMe) {
+//                    saveRememberedAccount(acc);
+//                }
+//                check = true;
+//            }
+//
+//            rs.close();
+//            ps.close();
+//            conn.close();
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//        return check;
+//    }
+//    private void saveRememberedAccount(Account acc) {
+//        try (BufferedWriter writer = new BufferedWriter(new FileWriter("remember.txt"))) {
+//            writer.write(acc.getUserName()+ ";" + acc.getUserPassword());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    public Account getRememberedAccount() {
+//        try (BufferedReader reader = new BufferedReader(new FileReader("remember.txt"))) {
+//            String line = reader.readLine();
+//            if (line != null) {
+//                String[] parts = line.split(";");
+//                if (parts.length == 2) {
+//                    String name = parts[0];
+//                    String pass = parts[1];
+//                    SQLConnector.GetForName();
+//                    Connection conn = SQLConnector.GetConnection();
+//                    String sql = "SELECT * FROM account WHERE UserName = ? AND PasswordUser = ?";
+//                    PreparedStatement ps = conn.prepareStatement(sql);
+//                    ps.setString(1, name);
+//                    ps.setString(2, pass);
+//                    ResultSet rs = ps.executeQuery();
+//                    if (rs.next()) {
+//                        String gmail = rs.getString("GmailUser");
+//                        byte[] avatar = rs.getBytes("AvatarUser");
+//                        return new Account(name, pass, gmail, avatar);
+//                    }
+//                }
+//            }
+//        } catch (IOException | SQLException | ClassNotFoundException ex) {
+//            ex.printStackTrace();
+//        }
+//        return null;
+//    }
+    public Account getAccountByUsername(String username) {
+        for (Account account : listAccount) {
+            if (account.getUserName().equalsIgnoreCase(username)) {
+                return account;
+            }
+        }
+        return null;
     }
 
     public ArrayList<Account> getDataAccount() {
         return listAccount;
     }
-
+//   public void in(){
+//       for(listAccount x: a){
+//           
+//       }
+//   }
 }

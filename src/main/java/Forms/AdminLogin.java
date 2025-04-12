@@ -6,14 +6,13 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import net.miginfocom.swing.MigLayout;
 
-public class LoginAdmin extends javax.swing.JFrame {
 
-    public LoginAdmin() {
+public class AdminLogin extends javax.swing.JFrame {
+
+    public AdminLogin() {
         initComponents();
         setTitle("Admin Login");
          String iconPath = "D:\\DownLoad\\IconFootWear\\result_social.png";
@@ -100,8 +99,10 @@ public class LoginAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void headerButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerButton1MouseClicked
+       
         String name = this.txtName.getText().trim();
         String password = this.txtPassword.getText().trim();
+        
         if (name.equalsIgnoreCase("admin") && password.equalsIgnoreCase("1234567")) {
             try {
                 UIManager.setLookAndFeel(new FlatDarkLaf());
@@ -110,12 +111,18 @@ public class LoginAdmin extends javax.swing.JFrame {
             }
             new HomePage().setVisible(true);
             dispose();
-        } else if (name.isEmpty() || password.isEmpty()) {
+        }
+        
+        else if (name.isEmpty() || password.isEmpty()) {
+            
             LabelMessage.setText("erroe: Information not blank ");
-            return;
-        } else {
+           
+        }
+        
+        else {
+            
             LabelMessage.setText("error: Name or password false!");
-            return;
+        
         }
     }//GEN-LAST:event_headerButton1MouseClicked
 
@@ -126,9 +133,9 @@ public class LoginAdmin extends javax.swing.JFrame {
                 try {
                     UIManager.setLookAndFeel(new FlatLightLaf());
                 } catch (UnsupportedLookAndFeelException e) {
-                    Logger.getLogger(LoginAdmin.class.getName()).log(Level.SEVERE, null, e);
+                    Logger.getLogger(AdminLogin.class.getName()).log(Level.SEVERE, null, e);
                 }
-                new LoginAdmin().setVisible(true);
+                new AdminLogin().setVisible(true);
             }
         });
     }
