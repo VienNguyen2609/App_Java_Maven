@@ -1,28 +1,52 @@
 create database AppJava_Maven
+
 go 
 use AppJava_Maven 
 go
-create table UserAccount
 
+CREATE TABLE UserAccount
 (
-UserId int  IDENTITY(1,1) primary key , 
-UserName varchar(20) unique NOT NULL , 
-UserPassword varchar(20) , 
-UserGmail varchar(50 ) ,
+
+UserId INT IDENTITY(1,1) PRIMARY KEY , 
+UserName VARCHAR(20) UNIQUE NOT NULL , 
+UserPassword VARCHAR(20) , 
+UserGmail VARCHAR(50 ) ,
 UserAvatar VARBINARY(MAX) 
 ) 
 
-Create table Products
-
+CREATE TABLE Products
 (
-ProductId int IDENTITY(1,1) primary key , 
-ProductName varchar(30) unique not null , 
-ProductPrice float ,
-ProductQuantity int  ,
-ProductColor varchar(15) ,
+
+ProductId INT IDENTITY(1,1) PRIMARY KEY , 
+ProductName VARCHAR(30) UNIQUE not null , 
+ProductPrice FLOAT ,
+ProductQuantity INT  ,
+ProductColor VARCHAR(15) ,
 ProductImage VARBINARY(MAX) 
 )
 
+
+CREATE TABLE Bill
+(
+
+BillId INT IDENTITY(1,1) PRIMARY KEY,
+UserId INT FOREIGN KEY REFERENCES UserAccount(UserId) , 
+BillDate DATETIME DEFAULT GETDATE()  ,
+TotalAmount FLOAT
+
+)
+
+
+CREATE TABLE BillDetail 
+(
+
+BillDetailId INT IDENTITY(1,1) PRIMARY KEY ,
+BillId INT FOREIGN KEY REFERENCES Bill(BillId),
+ProductId INT FOREIGN KEY REFERENCES Products(ProductId), 
+Quantity INT, 
+Price FLOAT
+
+)
 
 
 
@@ -30,12 +54,18 @@ select * from UserAccount
 
 select * from Products 
 
+select * from Bill
+
+select * from BillDetail
+
+
 
 INSERT INTO UserAccount (UserName, UserPassword, UserGmail)
 VALUES ('admin', '1234567', 'admin@gmail.com')
 
+
 INSERT INTO Products (ProductName, ProductPrice, ProductQuantity , ProductColor)
-VALUES ('vien', 5000, 400 , 'Green')
+VALUES ('Nike', 5000, 400 , 'Green')
 
 
 update UserAccount set UserName='vien' ,UserPassword='12345678' ,UserGmail='@gmail.com' where UserName ='vien'

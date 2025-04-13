@@ -21,7 +21,18 @@ public class Account {
     public Account(String name, String pass, String gmail) {
         this(name, pass, gmail, null);
     }
-
+    public Account(int UserId ,String name, String pass, String gmail) {
+        this(UserId ,name, pass, gmail, null);
+    }
+    
+    public Account(int UserId ,String userName, String userPassword, String userGmail, byte[] UserAvatar) {
+        this.userId = UserId ;
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.userGmail = userGmail;
+        this.UserAvatar = UserAvatar;
+    }
+    
     public Account(String userName, String userPassword, String userGmail, byte[] UserAvatar) {
         this.userName = userName;
         this.userPassword = userPassword;

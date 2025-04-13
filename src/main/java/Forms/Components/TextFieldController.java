@@ -9,8 +9,8 @@ import javax.swing.JTextField;
 
 public class TextFieldController extends JTextField {
 
-    Icon prefixIcon;
-    Icon suffixIcon;
+    private Icon prefixIcon;
+    private Icon suffixIcon;
 
     public Icon getPrefixIcon() {
         return prefixIcon;

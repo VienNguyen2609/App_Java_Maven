@@ -52,6 +52,7 @@ public class CreateAccount extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         Label = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -159,6 +160,11 @@ public class CreateAccount extends javax.swing.JFrame {
         jLabel10.setText("© FootWearShop 2025. Redistribution or reproduction is strictly prohibited. ");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 530, 520, -1));
 
+        jLabel11.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(204, 255, 204));
+        jLabel11.setText("WELCOME TO SHOP , LOGIN NOW  TO SHOPPING");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, -1, -1));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/BackgroundLogin.png"))); // NOI18N
         jLabel1.setOpaque(true);
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 620));
@@ -236,6 +242,7 @@ public class CreateAccount extends javax.swing.JFrame {
     private Forms.Components.HeaderButton headerButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

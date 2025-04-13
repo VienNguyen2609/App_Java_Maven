@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 
 public class AccountController {
 
-    ArrayList<Account> listAccount = new ArrayList<>();
+    private ArrayList<Account> listAccount = new ArrayList<>();
     public static AccountController instance;
 
     private static Connection conn;
@@ -50,11 +50,12 @@ public class AccountController {
             DatabaseConnected("select * from UserAccount");
             rs = ps.executeQuery();
             while (rs.next()) {
+                int id = rs.getInt("UserId");
                 String name = rs.getString("UserName");
                 String pass = rs.getString("UserPassword");
                 String gmail = rs.getString("UserGmail");
                 byte[] avatar = rs.getBytes("UserAvatar");
-                Account _account = new Account(name, pass, gmail, avatar);
+                Account _account = new Account(id, name, pass, gmail, avatar);
                 this.listAccount.add(_account);
             }
             rs.close();
@@ -152,9 +153,10 @@ public class AccountController {
     }
 
     public void saveAvatarToDatabase(File selectedFile, String nameUser) {
-
+        
+      
         try (
-                Connection con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=AppJava_Maven;user=sa;password=26092005;encrypt= false;"); FileInputStream fis = new FileInputStream(selectedFile)) {
+            Connection con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=AppJava_Maven;user=sa;password=26092005;encrypt= false;"); FileInputStream fis = new FileInputStream(selectedFile)) {
             String sql = "UPDATE UserAccount SET UserAvatar = ? WHERE UserName = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(2, nameUser);

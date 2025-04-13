@@ -11,7 +11,7 @@ import javafx.scene.layout.Background;
 public class HeaderButton extends JButton {
 
     private Color backgroundColor = new Color(204, 255, 204); // Màu mặc định
-    
+
     private RippleEffect rippleEffect;
 
     public HeaderButton(String text) {
@@ -30,7 +30,7 @@ public class HeaderButton extends JButton {
         setCursor(new Cursor(Cursor.HAND_CURSOR));
         putClientProperty(FlatClientProperties.STYLE, "" + "font:bold +3");
         setFocusPainted(false);
-       
+
     }
 
     @Override

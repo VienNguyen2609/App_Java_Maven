@@ -22,12 +22,11 @@ public class Shoes {
     public Shoes() {
     }
 
-    public Shoes(String productName, String ProductColor, int productId, int productQuantity, float productPrice) {
-        this(productId, productName, productQuantity, productPrice, ProductColor, null);
+    public Shoes(String productName, int productQuantity, float productPrice, String ProductColor) {
+        this(productName, productQuantity, productPrice, ProductColor, null);
     }
 
-    public Shoes(int productId, String productName, int productQuantity, float productPrice, String ProductColor, byte[] ProductImage) {
-        this.productId = productId;
+    public Shoes(String productName, int productQuantity, float productPrice, String ProductColor, byte[] ProductImage) {
         this.productName = productName;
         this.productQuantity = productQuantity;
         this.productPrice = productPrice;
@@ -35,6 +34,17 @@ public class Shoes {
         this.productImage = ProductImage;
     }
 
+    public Shoes(int productId ,String productName, int productQuantity, float productPrice, String ProductColor, byte[] ProductImage) {
+        this.productId = productId;
+        this.productName = productName;
+        this.productQuantity = productQuantity;
+        this.productPrice = productPrice;
+        this.ProductColor = ProductColor;
+        this.productImage = ProductImage;
+    }
+   public Shoes(int productId ,String productName, int productQuantity, float productPrice, String ProductColor) {
+        this(productId, productName, productQuantity, productPrice, ProductColor, null);
+    }
     public String getProductName() {
         return productName;
     }
@@ -83,9 +93,15 @@ public class Shoes {
         this.productImage = productAvatar;
     }
 
+    public float getTotalProduct() {
+        return getProductPrice() * getProductQuantity();
+    }
+
     @Override
     public String toString() {
-        return "Shoes{" + "productName=" + productName + ", ProductColor=" + ProductColor + ", productId=" + productId + ", productQuantity=" + productQuantity + ", productPrice=" + productPrice + '}';
+        return "Shoes{" + "productId=" + productId + ", productName=" + productName + ", ProductColor=" + ProductColor + ", productQuantity=" + productQuantity + ", productPrice=" + productPrice + '}';
     }
+
+  
 
 }

@@ -5,9 +5,11 @@ Forms\AdminLogin$1.class
 Forms\Components\RippleEffect$1.class
 Forms\CreateAccount$1.class
 Forms\HomePage$9.class
+Forms\HomePage$12.class
 Forms\Components\RoundedBorder.class
 Forms\UserLogin$4.class
 Forms\Components\HeaderButton.class
+Forms\HomePage$13.class
 Forms\CreateAccount.class
 Model\Account.class
 Forms\UserLogin$1.class
@@ -40,3 +42,4 @@ Forms\CreateAccount$2.class
 Controllers\LoginController$1.class
 Forms\HomePage$3.class
 Forms\Components\RippleEffect$Effect$1.class
+Forms\HomePage$11.class
