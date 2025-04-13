@@ -65,12 +65,12 @@ public class CreateAccount extends javax.swing.JFrame {
 
         txtName.setForeground(new java.awt.Color(255, 255, 255));
         txtName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtName.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/NameIcon.png"))); // NOI18N
+        txtName.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_account.png"))); // NOI18N
         jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 300, -1));
 
         txtPassword.setForeground(new java.awt.Color(255, 255, 255));
         txtPassword.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtPassword.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/PassIcon.png"))); // NOI18N
+        txtPassword.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_padlock.png"))); // NOI18N
         jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 270, -1));
 
         txtGmail.setForeground(new java.awt.Color(255, 255, 255));
@@ -174,21 +174,18 @@ public class CreateAccount extends javax.swing.JFrame {
             String pass = this.txtPassword.getText().trim();
             String gmail = this.txtGmail.getText().trim();
             String inputText = name;
-            if (name.equalsIgnoreCase("EnterName....") || pass.equalsIgnoreCase("EnterPassword...") || gmail.equalsIgnoreCase("EnterGmail.....")) {
-                CreateMessage.setText("error: INFORMATION CAN NOT  BE EMPTY");
-               
-            }
-            
-            else if (name.equalsIgnoreCase("") || pass.equalsIgnoreCase("") || gmail.equalsIgnoreCase("")) {
-                CreateMessage.setText("error:: INFORMATION CAN NOT  BE EMPTY");
+            if (name.isEmpty() || pass.isEmpty() || gmail.isEmpty()) {
+                CreateMessage.setText("error: INFORMATION CAN NOT EMPTY");             
             }
             
             else if (!gmail.contains("@gmail.com")) {
-                CreateMessage.setText("error: GMAIL FALSE");
+                CreateMessage.setText("error: GMAIL WRONG");
             }
-            
+            else if (name.equalsIgnoreCase("admin")){
+                CreateMessage.setText("error: For administrator use only!");
+            }
             else if (LoginController.instance.containsVietnameseCharacters(inputText)) {
-                CreateMessage.setText("error: USER NAME FALSE!");
+                CreateMessage.setText("error: USER NAME WRONG!");
             } 
             
             else if (pass.length() < 7 || name.length() < 4) {
@@ -196,11 +193,10 @@ public class CreateAccount extends javax.swing.JFrame {
             } 
             
             else if (AccountController.instance.AddAccount(name, pass, gmail)) {
-                CreateMessage.setText("Create Account Successfully");
-                
+                CreateMessage.setText("Create Account Successfully");                
             }
             else {
-                CreateMessage.setText("error: name is exist");
+                CreateMessage.setText("error: NAME IS EXIST!");
             }
             
         } catch (Exception e) {

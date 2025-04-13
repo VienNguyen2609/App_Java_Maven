@@ -113,7 +113,7 @@ public class UserLogin extends javax.swing.JFrame {
         txtName.setToolTipText("");
         txtName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtName.setOpaque(true);
-        txtName.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/NameIcon.png"))); // NOI18N
+        txtName.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_account.png"))); // NOI18N
         jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 220, -1));
 
         LabelNameUser.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
@@ -123,8 +123,9 @@ public class UserLogin extends javax.swing.JFrame {
 
         txtPassword.setForeground(new java.awt.Color(255, 255, 255));
         txtPassword.setToolTipText("");
+        txtPassword.setEchoChar('\u002A');
         txtPassword.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtPassword.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/PasswordIcon.png"))); // NOI18N
+        txtPassword.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_padlock.png"))); // NOI18N
         jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 220, -1));
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -227,6 +228,7 @@ public class UserLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_CheckPassMouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        
         new CreateAccount().setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
@@ -271,7 +273,6 @@ public class UserLogin extends javax.swing.JFrame {
 //        } catch (Exception e) {
 //            System.out.println("error: " + e.getMessage());
 //        }
-        AccountController.instance.LoadAccount();
         String username = txtName.getText();
         String password = String.valueOf(txtPassword.getPassword());
 

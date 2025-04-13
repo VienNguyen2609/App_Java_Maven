@@ -1,4 +1,5 @@
 Forms\HomePage$6.class
+Controllers\ProductController.class
 Forms\TestHome.class
 Forms\AdminLogin$1.class
 Forms\Components\RippleEffect$1.class
@@ -20,6 +21,7 @@ Main\Run.class
 Forms\HomePage$8.class
 Forms\UserLogin$2.class
 Forms\HomePage$1.class
+Model\Shoes.class
 Forms\UserLogin.class
 Forms\CreateAccount$3.class
 Controllers\LoginController.class
@@ -27,7 +29,7 @@ Forms\Components\ProfilePhoto.class
 Forms\HomePage$10.class
 Forms\Components\PasswordField.class
 Forms\HomePage$4.class
-SQLConnection\SQLConnector.class
+DatabaseConnection\SQLConnector.class
 Forms\Components\TextFieldController.class
 Forms\HomePage$7.class
 Forms\UserLogin$3.class

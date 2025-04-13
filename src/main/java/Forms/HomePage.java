@@ -9,11 +9,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -67,21 +62,6 @@ public class HomePage extends javax.swing.JFrame {
 
     }
 
-    private void saveToDatabase(Account account) {
-
-        try (Connection con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=USERLOGIN;user=sa;password=26092005;encrypt= false;"); FileInputStream fis = new FileInputStream(selectedFile)) {
-
-            String sql = "UPDATE account SET AvatarUser = ? WHERE UserName = ?";
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(2, account.getUserName());
-            pst.setBinaryStream(1, fis, (int) selectedFile.length());
-
-            int rows = pst.executeUpdate();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public void editComponents() {
 
@@ -382,7 +362,7 @@ public class HomePage extends javax.swing.JFrame {
                     .getImage().getScaledInstance(LabelAvatar.getWidth(), LabelAvatar.getHeight(), Image.SCALE_SMOOTH));
             LabelAvatar.setIcon(icon);
         }
-        saveToDatabase(currentAccount);
+       AccountController.instance.saveAvatarToDatabase(selectedFile ,currentAccount.getUserName());
 
     }//GEN-LAST:event_btnUploadAvatarMouseClicked
 
@@ -437,15 +417,22 @@ public class HomePage extends javax.swing.JFrame {
 
     private void btnSaveEditProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveEditProfileMouseClicked
 
+        AccountController.instance.LoadAccount();
         try {
 
             String name = TextNameProfile.getText();
-            if (name.equalsIgnoreCase(currentAccount.getUserName())) {
-                return;
-            }
-            if (AccountController.instance.UpdateUserName(name, currentAccount.getUserName())) {
+            String password = String.valueOf(TextPasswordProfile.getPassword());
+            String gmail = TextGmailProfile.getText();
+            Account UpdateAccount = AccountController.instance.UpdateUser(name, password, gmail, currentAccount.getUserName());
+            if (UpdateAccount != null) {
+                currentAccount = UpdateAccount;
                 JOptionPane.showMessageDialog(this, "Update name Successfulle");
                 btnSaveEditProfile.setVisible(false);
+                TextNameProfile.setEditable(false);
+                TextPasswordProfile.setEditable(false);
+                TextGmailProfile.setEditable(false);
+                return;
+
             } else {
                 JOptionPane.showMessageDialog(this, "Update name false");
                 return;

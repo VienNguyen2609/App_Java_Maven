@@ -60,7 +60,7 @@
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
             <Property name="prefixIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Image/NameIcon.png"/>
+              <Image iconType="3" name="/Image/result_account.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -78,7 +78,7 @@
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
             <Property name="prefixIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Image/PassIcon.png"/>
+              <Image iconType="3" name="/Image/result_padlock.png"/>
             </Property>
           </Properties>
           <Constraints>

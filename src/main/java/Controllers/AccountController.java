@@ -1,19 +1,27 @@
 package Controllers;
 
 import Model.Account;
-import SQLConnection.SQLConnector;
+import DatabaseConnection.SQLConnector;
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class AccountController {
 
     ArrayList<Account> listAccount = new ArrayList<>();
     public static AccountController instance;
+
+    private static Connection conn;
+    private static PreparedStatement ps;
+    private static ResultSet rs;
 
     private static boolean isInitiallized = false;
 
@@ -23,6 +31,40 @@ public class AccountController {
         }
         instance = new AccountController();
         isInitiallized = true;
+    }
+
+    public void DatabaseConnected(String sql) throws SQLException {
+        try {
+            SQLConnector.GetForName();
+            conn = SQLConnector.GetConnection();
+            ps = conn.prepareStatement(sql);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void LoadAccount() {
+        listAccount.clear();
+        try {
+            DatabaseConnected("select * from UserAccount");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String name = rs.getString("UserName");
+                String pass = rs.getString("UserPassword");
+                String gmail = rs.getString("UserGmail");
+                byte[] avatar = rs.getBytes("UserAvatar");
+                Account _account = new Account(name, pass, gmail, avatar);
+                this.listAccount.add(_account);
+            }
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Unexpected error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public boolean CheckLogin(String name, String pass) {
@@ -49,64 +91,24 @@ public class AccountController {
     public boolean AddAccount(String name, String pass, String gmail) {
         boolean check = false;
         try {
-            SQLConnector.GetForName();
-            Connection conn = SQLConnector.GetConnection();
-            String sql = "INSERT INTO account (UserName, PasswordUser, GmailUser)VALUES(?,?,?)";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, name);
-            ps.setString(2, pass);
-            ps.setString(3, gmail);
+            DatabaseConnected("INSERT INTO UserAccount (UserName, UserPassword, UserGmail)VALUES(?,?,?)");
             int n = ps.executeUpdate();
             if (n != 0) {
                 Account _account = new Account(name, pass, gmail);
                 this.listAccount.add(_account);
-                System.out.println("concac");
                 check = true;
             }
         } catch (SQLException e) {
-            // JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
 
         return check;
     }
 
-    public void LoadAccount() {
-        listAccount.clear();
-        try {
-            SQLConnector.GetForName();
-            Connection conn = SQLConnector.GetConnection();
-            String sql = "select * from account ";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            int n = 1;
-            while (rs.next()) {
-                String name = rs.getString("UserName");
-                String pass = rs.getString("PasswordUser");
-                String gmail = rs.getString("GmailUser");
-                byte[] avatar = rs.getBytes("AvatarUser");
-                Account _account = new Account(name, pass, gmail, avatar);
-                this.listAccount.add(_account);
-            }
-            rs.close();
-            ps.close();
-            conn.close();
-        } catch (SQLException e) {
-            //  JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e) {
-            //    JOptionPane.showMessageDialog(null, "Unexpected error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
     public boolean DeleteAccount(String name) {
         boolean check = false;
         try {
-            SQLConnector.GetForName();
-            Connection conn = SQLConnector.GetConnection();
-            String DeleteAccount = "Delete From account where name =?";
-            PreparedStatement ps = conn.prepareStatement(DeleteAccount);
+            DatabaseConnected("Delete From UserAccount where UserName =?");
             ps.setString(1, name);
             int n = ps.executeUpdate();
             if (n > 0) {
@@ -124,97 +126,47 @@ public class AccountController {
         return check;
     }
 
-    public boolean UpdateUserName(String name, String UserName) {
+    public Account UpdateUser(String name, String pass, String gmail, String UserName) {
         boolean check = false;
         try {
-
-            SQLConnector.GetForName();
-            Connection conn = SQLConnector.GetConnection();
-            String updateUserName = "UPDATE account SET UserName = ? WHERE UserName = ?";
-            PreparedStatement ps = conn.prepareStatement(updateUserName);
+            DatabaseConnected("UPDATE UserAccount SET UserName = ? , UserPassword = ?  , UserGmail = ? WHERE UserName = ?");
             ps.setString(1, name);
-            ps.setString(2, UserName);
+            ps.setString(2, pass);
+            ps.setString(3, gmail);
+            ps.setString(4, UserName);
             int n = ps.executeUpdate();
             if (n > 0) {
                 for (Account account : this.listAccount) {
                     if (account.getUserName().equalsIgnoreCase(UserName)) {
                         account.setUserName(name);
-                        check = true;
-                        break;
+                        account.setUserPassword(pass);
+                        account.setUserGmail(gmail);
+                        return account;
                     }
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return check;
+        return null;
     }
 
-//    public boolean LoginUser1(String name, String pass, boolean rememberMe) {
-//        boolean check = false;
-//        try {
-//            SQLConnector.GetForName();
-//            Connection conn = SQLConnector.GetConnection();
-//            String sql = "SELECT * FROM account WHERE UserName = ? AND PasswordUser = ?";
-//            PreparedStatement ps = conn.prepareStatement(sql);
-//            ps.setString(1, name);
-//            ps.setString(2, pass);
-//            ResultSet rs = ps.executeQuery();
-//
-//            if (rs.next()) {
-//                String gmail = rs.getString("GmailUser");
-//                byte[] avatar = rs.getBytes("AvatarUser");
-//                Account acc = new Account(name, pass, gmail, avatar);
-//                this.listAccount.add(acc);
-//
-//                if (rememberMe) {
-//                    saveRememberedAccount(acc);
-//                }
-//                check = true;
-//            }
-//
-//            rs.close();
-//            ps.close();
-//            conn.close();
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//        return check;
-//    }
-//    private void saveRememberedAccount(Account acc) {
-//        try (BufferedWriter writer = new BufferedWriter(new FileWriter("remember.txt"))) {
-//            writer.write(acc.getUserName()+ ";" + acc.getUserPassword());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//    public Account getRememberedAccount() {
-//        try (BufferedReader reader = new BufferedReader(new FileReader("remember.txt"))) {
-//            String line = reader.readLine();
-//            if (line != null) {
-//                String[] parts = line.split(";");
-//                if (parts.length == 2) {
-//                    String name = parts[0];
-//                    String pass = parts[1];
-//                    SQLConnector.GetForName();
-//                    Connection conn = SQLConnector.GetConnection();
-//                    String sql = "SELECT * FROM account WHERE UserName = ? AND PasswordUser = ?";
-//                    PreparedStatement ps = conn.prepareStatement(sql);
-//                    ps.setString(1, name);
-//                    ps.setString(2, pass);
-//                    ResultSet rs = ps.executeQuery();
-//                    if (rs.next()) {
-//                        String gmail = rs.getString("GmailUser");
-//                        byte[] avatar = rs.getBytes("AvatarUser");
-//                        return new Account(name, pass, gmail, avatar);
-//                    }
-//                }
-//            }
-//        } catch (IOException | SQLException | ClassNotFoundException ex) {
-//            ex.printStackTrace();
-//        }
-//        return null;
-//    }
+    public void saveAvatarToDatabase(File selectedFile, String nameUser) {
+
+        try (
+                Connection con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=AppJava_Maven;user=sa;password=26092005;encrypt= false;"); FileInputStream fis = new FileInputStream(selectedFile)) {
+            String sql = "UPDATE UserAccount SET UserAvatar = ? WHERE UserName = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(2, nameUser);
+            pst.setBinaryStream(1, fis, (int) selectedFile.length());
+
+            int rows = pst.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public Account getAccountByUsername(String username) {
         for (Account account : listAccount) {
             if (account.getUserName().equalsIgnoreCase(username)) {
@@ -227,9 +179,16 @@ public class AccountController {
     public ArrayList<Account> getDataAccount() {
         return listAccount;
     }
-//   public void in(){
-//       for(listAccount x: a){
-//           
-//       }
-//   }
+
+    public void in() {
+        for (Account account : listAccount) {
+            System.out.println(account.toString());
+        }
+    }
+
+    public static void main(String[] args) {
+        AccountController at = new AccountController();
+        at.LoadAccount();
+        at.in();
+    }
 }
