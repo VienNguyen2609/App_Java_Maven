@@ -194,7 +194,7 @@ public class UserLogin extends javax.swing.JFrame {
 
         StraightLine3.setText("___________________");
         jPanel1.add(StraightLine3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 110, 25));
-        jPanel1.add(LabelLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 390, 400));
+        jPanel1.add(LabelLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 410));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 370, 410));
 

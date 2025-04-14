@@ -5,6 +5,7 @@ Forms\AdminLogin$1.class
 Forms\Components\RippleEffect$1.class
 Forms\CreateAccount$1.class
 Forms\HomePage$9.class
+Forms\HomePage$15.class
 Forms\HomePage$12.class
 Forms\Components\RoundedBorder.class
 Forms\UserLogin$4.class
@@ -26,6 +27,7 @@ Forms\HomePage$1.class
 Model\Shoes.class
 Forms\UserLogin.class
 Forms\CreateAccount$3.class
+Forms\HomePage$14.class
 Controllers\LoginController.class
 Forms\Components\ProfilePhoto.class
 Forms\HomePage$10.class
