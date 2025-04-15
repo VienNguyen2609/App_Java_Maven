@@ -1,7 +1,7 @@
 package Forms;
 
 import Controllers.AccountController;
-import Controllers.LoginController;
+import Forms.Components.EffectComponents;
 import Model.Account;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
@@ -27,7 +27,7 @@ public class UserLogin extends javax.swing.JFrame {
         String iconPath = "D:\\DownLoad\\IconFootWear\\result_social.png";
         setIconImage(Toolkit.getDefaultToolkit().getImage(new File(iconPath).getAbsolutePath()));
         setLocationRelativeTo(null);
-        LoginController.Init();
+        EffectComponents.Init();
         AccountController.Init();
 
         setResizable(false);
@@ -46,15 +46,15 @@ public class UserLogin extends javax.swing.JFrame {
         CheckPass.setBorder(BorderFactory.createBevelBorder(0));
 
         try {
-            LoginController.instance.BufferedImage("D:\\DownLoad\\IconFootWear\\BackGroundLogin1.png", LabelLogin);
+            EffectComponents.instance.BufferedImage("D:\\DownLoad\\IconFootWear\\BackGroundLogin1.png", LabelLogin);
         } catch (IOException ex) {
             System.out.println("ERROR: " + ex.getMessage());
         }
 
         StraightLine.setVisible(false);
         StraightLine3.setVisible(false);
-        LoginController.instance.FocusPointer(txtName, LabelNameUser, jLabel7, Color.GREEN, Color.WHITE);
-        LoginController.instance.FocusPointer(txtPassword, LabelPasswordUser, jLabel6, Color.GREEN, Color.WHITE);
+        EffectComponents.instance.FocusPointer(txtName, LabelNameUser, jLabel7, Color.GREEN, Color.WHITE);
+        EffectComponents.instance.FocusPointer(txtPassword, LabelPasswordUser, jLabel6, Color.GREEN, Color.WHITE);
 
     }
 
@@ -160,7 +160,7 @@ public class UserLogin extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 255, 204));
-        jLabel4.setText("Register?");
+        jLabel4.setText("Sign Up");
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel4MouseClicked(evt);
@@ -219,6 +219,7 @@ public class UserLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void CheckPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CheckPassMouseClicked
+        
         if (CheckPass.isSelected()) {
             txtPassword.setEchoChar((char) 0);
         } else {

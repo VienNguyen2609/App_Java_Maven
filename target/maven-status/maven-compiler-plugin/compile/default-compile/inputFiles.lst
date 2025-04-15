@@ -1,8 +1,8 @@
 D:\FootWear\src\main\java\Controllers\AccountController.java
-D:\FootWear\src\main\java\Controllers\LoginController.java
 D:\FootWear\src\main\java\Controllers\ProductController.java
 D:\FootWear\src\main\java\DatabaseConnection\SQLConnector.java
 D:\FootWear\src\main\java\Forms\AdminLogin.java
+D:\FootWear\src\main\java\Forms\Components\EffectComponents.java
 D:\FootWear\src\main\java\Forms\Components\HeaderButton.java
 D:\FootWear\src\main\java\Forms\Components\PasswordField.java
 D:\FootWear\src\main\java\Forms\Components\ProfilePhoto.java

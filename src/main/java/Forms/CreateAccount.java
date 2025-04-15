@@ -1,7 +1,7 @@
 package Forms;
 
 import Controllers.AccountController;
-import Controllers.LoginController;
+import Forms.Components.EffectComponents;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.io.File;
@@ -16,17 +16,17 @@ public class CreateAccount extends javax.swing.JFrame {
         setResizable(false);
         String iconPath = "D:\\DownLoad\\IconFootWear\\result_social.png";
         setIconImage(Toolkit.getDefaultToolkit().getImage(new File(iconPath).getAbsolutePath()));
-        LoginController.Init();
+        EffectComponents.Init();
         AccountController.Init();
         try {
-            LoginController.instance.BufferedImage("D:\\DownLoad\\IconFootWear\\BackGroundLogin1.png", Label);
+            EffectComponents.instance.BufferedImage("D:\\DownLoad\\IconFootWear\\BackGroundLogin1.png", Label);
         } catch (IOException ex) {
             System.out.println("ERROR: " + ex.getMessage());
         }
         jLabel6.setVisible(false);
-        LoginController.instance.FocusPointer(txtName, LabelNameUser, jLabel9, Color.GREEN, Color.WHITE);
-        LoginController.instance.FocusPointer(txtPassword, LabelPasswordUser, jLabel8, Color.GREEN, Color.WHITE);
-        LoginController.instance.FocusPointer(txtGmail, LabelGmailUser, jLabel7, Color.GREEN, Color.WHITE);
+        EffectComponents.instance.FocusPointer(txtName, LabelNameUser, jLabel9, Color.GREEN, Color.WHITE);
+        EffectComponents.instance.FocusPointer(txtPassword, LabelPasswordUser, jLabel8, Color.GREEN, Color.WHITE);
+        EffectComponents.instance.FocusPointer(txtGmail, LabelGmailUser, jLabel7, Color.GREEN, Color.WHITE);
     }
 
     @SuppressWarnings("unchecked")
@@ -190,7 +190,7 @@ public class CreateAccount extends javax.swing.JFrame {
             else if (name.equalsIgnoreCase("admin")){
                 CreateMessage.setText("error: For administrator use only!");
             }
-            else if (LoginController.instance.containsVietnameseCharacters(inputText)) {
+            else if (EffectComponents.instance.containsVietnameseCharacters(inputText)) {
                 CreateMessage.setText("error: USER NAME WRONG!");
             } 
             

@@ -1,4 +1,4 @@
-package Controllers;
+package Forms.Components;
 
 import Forms.CreateAccount;
 import java.awt.AlphaComposite;
@@ -17,9 +17,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class LoginController {
+public class EffectComponents {
 
-    public static LoginController instance;
+    public static EffectComponents instance;
     private static boolean isInitiallized = false;
     private JTextField textField;
     private JLabel label;
@@ -28,7 +28,7 @@ public class LoginController {
         if (isInitiallized == true) {
             return;
         }
-        instance = new LoginController();
+        instance = new EffectComponents();
         isInitiallized = true;
 
     }
@@ -64,7 +64,7 @@ public class LoginController {
     
     public void BufferedImage(String c, JLabel label) throws IOException {
         BufferedImage image = ImageIO.read(new File(c));
-        LoginController.instance.makeTransparent(image, 0.2f, label);
+        EffectComponents.instance.makeTransparent(image, 0.2f, label);
     }
 
     
@@ -74,7 +74,7 @@ public class LoginController {
             @Override
             public void focusGained(FocusEvent e) {
                 label.setForeground(colorFirst);
-                openMenuBar(label1);
+                AnimationComponents(label1);
             }
 
             @Override
@@ -93,7 +93,7 @@ public class LoginController {
 
     
     //animation label 
-    public void openMenuBar(JLabel label) {
+    public void AnimationComponents(JLabel label) {
         int targetWidth = 260;
         int height = 30;
         // Tính điểm trung tâm ban đầu

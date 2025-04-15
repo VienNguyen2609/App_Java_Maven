@@ -1,7 +1,7 @@
 package Forms;
 
 import Controllers.AccountController;
-import Controllers.LoginController;
+import Forms.Components.EffectComponents;
 import Main.Run;
 import Model.Account;
 import java.awt.Color;
@@ -78,7 +78,7 @@ public class HomePage extends javax.swing.JFrame {
     public void editComponents() {
 
         AccountController.Init();
-        LoginController.Init();
+        EffectComponents.Init();
         btnUploadAvatar.setBackgroundColor(Color.lightGray);
         btnProfle.setBackgroundColor(Color.GRAY);
         btnHomePage.setBackgroundColor(Color.GRAY);

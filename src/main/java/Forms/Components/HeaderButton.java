@@ -6,7 +6,6 @@ import com.formdev.flatlaf.util.UIScale;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
-import javafx.scene.layout.Background;
 
 public class HeaderButton extends JButton {
 

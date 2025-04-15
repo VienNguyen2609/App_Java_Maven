@@ -34,6 +34,7 @@ public class AccountController {
     }
 
     public void DatabaseConnected(String sql) throws SQLException {
+       
         try {
             SQLConnector.GetForName();
             conn = SQLConnector.GetConnection();

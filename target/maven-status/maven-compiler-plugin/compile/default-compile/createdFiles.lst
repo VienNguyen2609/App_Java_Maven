@@ -28,7 +28,6 @@ Model\Shoes.class
 Forms\UserLogin.class
 Forms\CreateAccount$3.class
 Forms\HomePage$14.class
-Controllers\LoginController.class
 Forms\Components\ProfilePhoto.class
 Forms\HomePage$10.class
 Forms\Components\PasswordField.class
@@ -41,7 +40,8 @@ Controllers\AccountController.class
 Forms\AdminLogin$2.class
 Forms\HomePage.class
 Forms\CreateAccount$2.class
-Controllers\LoginController$1.class
+Forms\Components\EffectComponents$1.class
 Forms\HomePage$3.class
 Forms\Components\RippleEffect$Effect$1.class
 Forms\HomePage$11.class
+Forms\Components\EffectComponents.class
