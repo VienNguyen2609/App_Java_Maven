@@ -5,7 +5,6 @@ import DatabaseConnection.SQLConnector;
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,7 +33,7 @@ public class AccountController {
     }
 
     public void DatabaseConnected(String sql) throws SQLException {
-       
+
         try {
             SQLConnector.GetForName();
             conn = SQLConnector.GetConnection();
@@ -69,6 +68,7 @@ public class AccountController {
         }
     }
 
+    
     public boolean CheckLogin(String name, String pass) {
         boolean check = false;
         try {
@@ -90,10 +90,14 @@ public class AccountController {
         return check;
     }
 
+    
     public boolean AddAccount(String name, String pass, String gmail) {
         boolean check = false;
         try {
             DatabaseConnected("INSERT INTO UserAccount (UserName, UserPassword, UserGmail)VALUES(?,?,?)");
+            ps.setString(1, name);
+            ps.setString(2, pass);
+            ps.setString(3, gmail);
             int n = ps.executeUpdate();
             if (n != 0) {
                 Account _account = new Account(name, pass, gmail);
@@ -107,6 +111,7 @@ public class AccountController {
         return check;
     }
 
+    
     public boolean DeleteAccount(String name) {
         boolean check = false;
         try {
@@ -128,7 +133,9 @@ public class AccountController {
         return check;
     }
 
+    
     public Account UpdateUser(String name, String pass, String gmail, String UserName) {
+        
         boolean check = false;
         try {
             DatabaseConnected("UPDATE UserAccount SET UserName = ? , UserPassword = ?  , UserGmail = ? WHERE UserName = ?");
@@ -154,23 +161,21 @@ public class AccountController {
     }
 
     public void saveAvatarToDatabase(File selectedFile, String nameUser) {
-        
-      
-        try (
-            Connection con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=AppJava_Maven;user=sa;password=26092005;encrypt= false;"); FileInputStream fis = new FileInputStream(selectedFile)) {
-            String sql = "UPDATE UserAccount SET UserAvatar = ? WHERE UserName = ?";
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(2, nameUser);
-            pst.setBinaryStream(1, fis, (int) selectedFile.length());
 
-            int rows = pst.executeUpdate();
-
-        } catch (Exception e) {
+        try ( FileInputStream fis = new FileInputStream(selectedFile))
+        {
+            DatabaseConnected("UPDATE UserAccount SET UserAvatar = ? WHERE UserName = ?");
+            ps.setString(2, nameUser);
+            ps.setBinaryStream(1, fis, (int) selectedFile.length());
+            int n = ps.executeUpdate();
+        } 
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public Account getAccountByUsername(String username) {
+        
         for (Account account : listAccount) {
             if (account.getUserName().equalsIgnoreCase(username)) {
                 return account;
@@ -179,8 +184,16 @@ public class AccountController {
         return null;
     }
 
+    
     public ArrayList<Account> getDataAccount() {
         return listAccount;
+    }
+    
+    
+    public void test(){
+        for(int i = 0 ; i < getDataAccount().size() ; i++){
+            System.out.println("concac");
+        }
     }
 
     public void in() {

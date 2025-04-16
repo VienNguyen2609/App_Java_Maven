@@ -1,7 +1,9 @@
 package Forms;
 
+import Forms.Components.EffectComponents;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.io.File;
 import java.util.logging.Level;
@@ -15,12 +17,16 @@ public class AdminLogin extends javax.swing.JFrame {
     public AdminLogin() {
         initComponents();
         setTitle("Admin Login");
-         String iconPath = "D:\\DownLoad\\IconFootWear\\result_social.png";
+        String iconPath = "D:\\DownLoad\\IconFootWear\\result_social.png";
         setIconImage(Toolkit.getDefaultToolkit().getImage(new File(iconPath).getAbsolutePath()));
         setLocationRelativeTo(null);
         setResizable(false);
-        
+        EffectComponents.Init();
+      //  EffectComponents.instance.FocusPointer(txtName, null, jLabel8, null, null);
     }
+    
+    
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -103,7 +109,7 @@ public class AdminLogin extends javax.swing.JFrame {
         String name = this.txtName.getText().trim();
         String password = this.txtPassword.getText().trim();
         
-        if (name.equalsIgnoreCase("admin") && password.equalsIgnoreCase("1234567")) {
+        if (name.equalsIgnoreCase("admin") && password.equalsIgnoreCase("admin")) {
             try {
                 UIManager.setLookAndFeel(new FlatDarkLaf());
             } catch (UnsupportedLookAndFeelException e) {
@@ -113,16 +119,12 @@ public class AdminLogin extends javax.swing.JFrame {
             dispose();
         }
         
-        else if (name.isEmpty() || password.isEmpty()) {
-            
-            LabelMessage.setText("erroe: Information not blank ");
-           
+        else if (name.isEmpty() || password.isEmpty()) {           
+            LabelMessage.setText("erroe: Information not blank ");          
         }
         
-        else {
-            
-            LabelMessage.setText("error: Name or password false!");
-        
+        else {           
+            LabelMessage.setText("error: Name or password false!");       
         }
     }//GEN-LAST:event_headerButton1MouseClicked
 

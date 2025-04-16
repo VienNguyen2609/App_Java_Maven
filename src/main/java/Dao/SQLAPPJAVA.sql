@@ -61,8 +61,9 @@ select * from BillDetail
 
 
 INSERT INTO UserAccount (UserName, UserPassword, UserGmail)
-VALUES ('admin', '1234567', 'admin@gmail.com')
+VALUES ('vien', '123456', 'admin@gmail.com')
 
+delete From UserAccount
 
 INSERT INTO Products (ProductName, ProductPrice, ProductQuantity , ProductColor)
 VALUES ('Nike', 5000, 400 , 'Green')

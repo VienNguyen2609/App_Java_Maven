@@ -19,7 +19,6 @@ public class ProfilePhoto extends JComponent {
         return icon;
     }
 
-
     public int getBorderSize() {
         return borderSize;
     }
