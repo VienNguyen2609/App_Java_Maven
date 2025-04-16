@@ -6,12 +6,14 @@ Forms\Components\RippleEffect$1.class
 Forms\CreateAccount$1.class
 Forms\HomePage$9.class
 Forms\HomePage$15.class
+Forms\Components\SetThemFlatLaf$1.class
 Forms\HomePage$12.class
 Forms\Components\RoundedBorder.class
 Forms\UserLogin$4.class
 Forms\Components\HeaderButton.class
 Forms\HomePage$13.class
 Forms\CreateAccount.class
+Forms\PanelProducts.class
 Model\Account.class
 Forms\UserLogin$1.class
 Forms\Components\RippleEffect$Effect.class
@@ -19,6 +21,7 @@ Forms\HomePage$2.class
 Forms\Components\RippleEffect.class
 Forms\UserLogin$5.class
 Forms\AdminLogin.class
+Forms\Components\SetThemFlatLaf.class
 Forms\HomePage$5.class
 Main\Run.class
 Forms\HomePage$8.class
@@ -28,6 +31,7 @@ Model\Shoes.class
 Forms\UserLogin.class
 Forms\CreateAccount$3.class
 Forms\HomePage$14.class
+Forms\Components\ThemeFlatLaf.class
 Forms\Components\ProfilePhoto.class
 Forms\HomePage$10.class
 Forms\Components\PasswordField.class

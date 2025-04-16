@@ -251,7 +251,7 @@ public class UserLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_CheckPassMouseExited
 
     private void headerButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerButton1MouseClicked
-        AccountController.instance.LoadAccount();
+        AccountController.instance.loadAccount();
 //        try {
 //
 //            name = this.txtName.getText().trim();
@@ -282,7 +282,7 @@ public class UserLogin extends javax.swing.JFrame {
         } catch (UnsupportedLookAndFeelException e) {
             Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, e);
         }
-        if (AccountController.instance.CheckLogin(username, password)) {
+        if (AccountController.instance.checkLogin(username, password)) {
             Account user = AccountController.instance.getAccountByUsername(username);
             new HomePage(user).setVisible(true);
             dispose();

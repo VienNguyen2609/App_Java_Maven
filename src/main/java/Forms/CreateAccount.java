@@ -174,7 +174,7 @@ public class CreateAccount extends javax.swing.JFrame {
 
     private void headerButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerButton1MouseClicked
         
-        AccountController.instance.LoadAccount();
+        AccountController.instance.loadAccount();
         try {            
             String name = this.txtName.getText().trim();
             String pass = this.txtPassword.getText().trim();
@@ -198,7 +198,7 @@ public class CreateAccount extends javax.swing.JFrame {
                 CreateMessage.setText("error: LENGTH PASSWORD >= 7 AND NAME >=4");
             } 
             
-            else if (AccountController.instance.AddAccount(name, pass, gmail)) {
+            else if (AccountController.instance.addAccount(name, pass, gmail)) {
                 CreateMessage.setText("Create Account Successfully");                
             }
             else {

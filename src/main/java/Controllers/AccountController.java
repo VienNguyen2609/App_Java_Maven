@@ -32,11 +32,10 @@ public class AccountController {
         isInitiallized = true;
     }
 
-    public void DatabaseConnected(String sql) throws SQLException {
-
+    public void setupDatabaseCommand(String sql) throws SQLException {
         try {
-            SQLConnector.GetForName();
-            conn = SQLConnector.GetConnection();
+            SQLConnector.getForName();
+            conn = SQLConnector.getConnection();
             ps = conn.prepareStatement(sql);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
@@ -44,10 +43,10 @@ public class AccountController {
 
     }
 
-    public void LoadAccount() {
+    public void loadAccount() {
         listAccount.clear();
         try {
-            DatabaseConnected("select * from UserAccount");
+            setupDatabaseCommand("select * from UserAccount");
             rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("UserId");
@@ -69,7 +68,7 @@ public class AccountController {
     }
 
     
-    public boolean CheckLogin(String name, String pass) {
+    public boolean checkLogin(String name, String pass) {
         boolean check = false;
         try {
             if (name.isEmpty() || pass.isEmpty()) {
@@ -91,10 +90,10 @@ public class AccountController {
     }
 
     
-    public boolean AddAccount(String name, String pass, String gmail) {
+    public boolean addAccount(String name, String pass, String gmail) {
         boolean check = false;
         try {
-            DatabaseConnected("INSERT INTO UserAccount (UserName, UserPassword, UserGmail)VALUES(?,?,?)");
+            setupDatabaseCommand("INSERT INTO UserAccount (UserName, UserPassword, UserGmail)VALUES(?,?,?)");
             ps.setString(1, name);
             ps.setString(2, pass);
             ps.setString(3, gmail);
@@ -112,10 +111,10 @@ public class AccountController {
     }
 
     
-    public boolean DeleteAccount(String name) {
+    public boolean deleteAccount(String name) {
         boolean check = false;
         try {
-            DatabaseConnected("Delete From UserAccount where UserName =?");
+            setupDatabaseCommand("Delete From UserAccount where UserName =?");
             ps.setString(1, name);
             int n = ps.executeUpdate();
             if (n > 0) {
@@ -134,11 +133,11 @@ public class AccountController {
     }
 
     
-    public Account UpdateUser(String name, String pass, String gmail, String UserName) {
+    public Account updateUser(String name, String pass, String gmail, String UserName) {
         
         boolean check = false;
         try {
-            DatabaseConnected("UPDATE UserAccount SET UserName = ? , UserPassword = ?  , UserGmail = ? WHERE UserName = ?");
+            setupDatabaseCommand("UPDATE UserAccount SET UserName = ? , UserPassword = ?  , UserGmail = ? WHERE UserName = ?");
             ps.setString(1, name);
             ps.setString(2, pass);
             ps.setString(3, gmail);
@@ -160,11 +159,11 @@ public class AccountController {
         return null;
     }
 
+    
     public void saveAvatarToDatabase(File selectedFile, String nameUser) {
-
         try ( FileInputStream fis = new FileInputStream(selectedFile))
         {
-            DatabaseConnected("UPDATE UserAccount SET UserAvatar = ? WHERE UserName = ?");
+            setupDatabaseCommand("UPDATE UserAccount SET UserAvatar = ? WHERE UserName = ?");
             ps.setString(2, nameUser);
             ps.setBinaryStream(1, fis, (int) selectedFile.length());
             int n = ps.executeUpdate();
@@ -174,8 +173,7 @@ public class AccountController {
         }
     }
 
-    public Account getAccountByUsername(String username) {
-        
+    public Account getAccountByUsername(String username) {       
         for (Account account : listAccount) {
             if (account.getUserName().equalsIgnoreCase(username)) {
                 return account;
@@ -190,11 +188,6 @@ public class AccountController {
     }
     
     
-    public void test(){
-        for(int i = 0 ; i < getDataAccount().size() ; i++){
-            System.out.println("concac");
-        }
-    }
 
     public void in() {
         for (Account account : listAccount) {
@@ -204,7 +197,7 @@ public class AccountController {
 
     public static void main(String[] args) {
         AccountController at = new AccountController();
-        at.LoadAccount();
+        at.loadAccount();
         at.in();
     }
 }

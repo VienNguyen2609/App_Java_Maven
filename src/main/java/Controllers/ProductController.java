@@ -21,10 +21,10 @@ public class ProductController {
     private static PreparedStatement ps;
     private static ResultSet rs;
 
-    private static ProductController instance;
+    public static ProductController instance;
     private static boolean isInitiallized = false;
 
-    public static void Init() {
+    public static void init() {
         if (isInitiallized == true) {
             return;
         } else {
@@ -33,10 +33,10 @@ public class ProductController {
         }
     }
 
-    public void DatabaseConnected(String sql) throws SQLException {
+    public void setupDatabaseCommand(String sql) throws SQLException {
         try {
-            SQLConnector.GetForName();
-            conn = SQLConnector.GetConnection();
+            SQLConnector.getForName();
+            conn = SQLConnector.getConnection();
             ps = conn.prepareStatement(sql);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
@@ -44,10 +44,10 @@ public class ProductController {
 
     }
 
-    public void LoadData() {
+    public void loadData() {
         listShoes.clear();
         try {
-            DatabaseConnected("SELECT * FROM Products");
+            setupDatabaseCommand("SELECT * FROM Products");
             rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("ProductId");
@@ -55,7 +55,7 @@ public class ProductController {
                 float price = rs.getFloat("ProductPrice");
                 int quantity = rs.getInt("ProductQuantity");
                 String color = rs.getString("ProductColor");
-                Shoes _shoes = new Shoes(id ,name, quantity, price, color, null);
+                Shoes _shoes = new Shoes(id, name, quantity, price, color, null);
                 listShoes.add(_shoes);
             }
             rs.close();
@@ -72,7 +72,7 @@ public class ProductController {
     public boolean addProduct(String name, float price, int quantity, String color) {
         boolean check = false;
         try {
-            DatabaseConnected("INSERT INTO Products (ProductName, ProductPrice, ProductQuantity , ProductColor) VALUES (?,?,?,?)");
+            setupDatabaseCommand("INSERT INTO Products (ProductName, ProductPrice, ProductQuantity , ProductColor) VALUES (?,?,?,?)");
             ps.setString(1, name);
             ps.setFloat(2, price);
             ps.setInt(3, quantity);
@@ -93,11 +93,11 @@ public class ProductController {
         return check;
     }
 
-    public boolean UpdateProduct(String name, int quantity, float price, String color, String ProductName) {
+    public boolean updateProduct(String name, int quantity, float price, String color, String ProductName) {
         boolean check = false;
 
         try {
-            DatabaseConnected("UPDATE Products SET ProductName =? , ProductPrice = ?, ProductQuantity = ?, ProductColor = ? WHERE ProductName  = ?");
+            setupDatabaseCommand("UPDATE Products SET ProductName =? , ProductPrice = ?, ProductQuantity = ?, ProductColor = ? WHERE ProductName  = ?");
             ps.setString(1, name);
             ps.setDouble(2, price);
             ps.setInt(3, quantity);
@@ -159,10 +159,10 @@ public class ProductController {
         }
     }
 
-    public boolean DeleteProduct(String ProductName) {
+    public boolean deleteProduct(String ProductName) {
         boolean check = false;
         try {
-            DatabaseConnected("delete from Products where ProductName = ?");
+            setupDatabaseCommand("delete from Products where ProductName = ?");
             ps.setString(1, ProductName);
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected > 0) {
@@ -180,6 +180,10 @@ public class ProductController {
         return check;
     }
 
+    public ArrayList<Shoes> getDataProduct() {
+        return listShoes;
+    }
+
     public void in() {
         for (Shoes a : listShoes) {
             System.out.println(a.toString());
@@ -187,8 +191,8 @@ public class ProductController {
     }
 
     public static void main(String[] args) {
-        ProductController.Init();
-        ProductController.instance.LoadData();
+        ProductController.init();
+        ProductController.instance.loadData();
         ProductController.instance.in();
 
     }
