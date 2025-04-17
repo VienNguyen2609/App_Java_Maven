@@ -124,7 +124,7 @@ public class HomePage extends javax.swing.JFrame {
                     SimpleDateFormat tf = new SimpleDateFormat("h:mm:ss aa");
                     SimpleDateFormat df = new SimpleDateFormat("EEEE, dd-MM-yyyy");
                     String time = tf.format(date);
-                    jTxTime.setText(time.split(" ")[0] + " " + time.split(" ")[1]);
+                    jTxTime.setText(time.split(" ")[0] + " " + time.split(" ")[1]+", ");
                     jTxtDate.setText(df.format(date));
                 }
             }
@@ -250,15 +250,15 @@ public class HomePage extends javax.swing.JFrame {
 
         jTxTime.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jTxTime.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jTxTime.setMaximumSize(new java.awt.Dimension(90, 85));
-        jTxTime.setMinimumSize(new java.awt.Dimension(90, 85));
-        jTxTime.setPreferredSize(new java.awt.Dimension(90, 85));
+        jTxTime.setMaximumSize(new java.awt.Dimension(80, 85));
+        jTxTime.setMinimumSize(new java.awt.Dimension(80, 85));
+        jTxTime.setPreferredSize(new java.awt.Dimension(80, 85));
         jPanel4.add(jTxTime, new java.awt.GridBagConstraints());
 
         jTxtDate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jTxtDate.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jTxtDate.setMaximumSize(new java.awt.Dimension(130, 120));
-        jTxtDate.setMinimumSize(new java.awt.Dimension(130, 120));
+        jTxtDate.setMaximumSize(new java.awt.Dimension(140, 120));
+        jTxtDate.setMinimumSize(new java.awt.Dimension(140, 120));
         jTxtDate.setPreferredSize(new java.awt.Dimension(130, 120));
         jPanel4.add(jTxtDate, new java.awt.GridBagConstraints());
 
