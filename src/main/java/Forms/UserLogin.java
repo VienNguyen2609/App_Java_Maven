@@ -235,7 +235,6 @@ public class UserLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_CheckPassMouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        
         new CreateAccount().setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
@@ -257,7 +256,7 @@ public class UserLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_CheckPassMouseExited
 
     private void headerButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerButton1MouseClicked
-        AccountController.instance.loadAccount();
+        AccountController.instance.loadDataAccounts();
         String username = txtName.getText();
         String password = String.valueOf(txtPassword.getPassword());
 

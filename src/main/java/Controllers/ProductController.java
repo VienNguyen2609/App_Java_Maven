@@ -44,7 +44,7 @@ public class ProductController {
 
     }
 
-    public void loadData() {
+    public void loadDataProducts() {
         listShoes.clear();
         try {
             setupDatabaseCommand("SELECT * FROM Products");
@@ -192,7 +192,15 @@ public class ProductController {
 
     public static void main(String[] args) {
         ProductController.init();
-        ProductController.instance.loadData();
+        ProductController.instance.loadDataProducts();
+//        ProductController.instance.addProduct("Puma", 300, 4, "Green");
+//        ProductController.instance.addProduct("Gucci", 300, 4, "Green");
+//        ProductController.instance.addProduct("Luvis", 300, 4, "Green");
+//        ProductController.instance.addProduct("Adidas", 300, 4, "Green");
+//        ProductController.instance.addProduct("MlB", 300, 4, "Green");
+//        ProductController.instance.addProduct("Blance", 300, 4, "Green");
+//        ProductController.instance.addProduct("Promax", 300, 4, "Green");
+//        ProductController.instance.addProduct("Mira", 300, 4, "Green");
         ProductController.instance.in();
 
     }

@@ -145,9 +145,9 @@ public class HomePage extends javax.swing.JFrame {
         gbc.insets = new Insets(30, 30, 30, 30); // Khoảng cách giữa các item
         gbc.fill = GridBagConstraints.HORIZONTAL;
         // gbc.weightx = 1; // Giãn ngang
-
+        ProductController.instance.loadDataProducts();
         int cols = 3; // Số cột
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < ProductController.instance.getDataProduct().size(); i++) {
             var newJpanel = new PanelProducts();
             gbc.gridx = i % cols;
             gbc.gridy = i / cols;
@@ -399,7 +399,7 @@ public class HomePage extends javax.swing.JFrame {
         PanelContents.setOpaque(false);
         PanelContents.setPreferredSize(new java.awt.Dimension(1200, 634));
 
-        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         javax.swing.GroupLayout PanelContainProductLayout = new javax.swing.GroupLayout(PanelContainProduct);
@@ -702,7 +702,7 @@ public class HomePage extends javax.swing.JFrame {
 
     private void btnSaveEditProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveEditProfileMouseClicked
 
-        AccountController.instance.loadAccount();
+        AccountController.instance.loadDataAccounts();
         try {
 
             String name = TextNameProfile.getText();

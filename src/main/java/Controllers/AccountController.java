@@ -43,7 +43,7 @@ public class AccountController {
 
     }
 
-    public void loadAccount() {
+    public void loadDataAccounts() {
         listAccount.clear();
         try {
             setupDatabaseCommand("select * from UserAccount");
@@ -197,7 +197,7 @@ public class AccountController {
 
     public static void main(String[] args) {
         AccountController at = new AccountController();
-        at.loadAccount();
+        at.loadDataAccounts();
         at.in();
     }
 }

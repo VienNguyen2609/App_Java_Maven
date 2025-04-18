@@ -176,7 +176,7 @@ public class CreateAccount extends javax.swing.JFrame {
 
     private void headerButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerButton1MouseClicked
         
-        AccountController.instance.loadAccount();
+        AccountController.instance.loadDataAccounts();
         try {            
             String name = this.txtName.getText().trim();
             String pass = this.txtPassword.getText().trim();
