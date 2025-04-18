@@ -62,9 +62,9 @@ public class EffectComponents {
     }
 
     
-    public void BufferedImage(String c, JLabel label) throws IOException {
+    public void BufferedImage(String c, JLabel label , float alpha) throws IOException {
         BufferedImage image = ImageIO.read(new File(c));
-        EffectComponents.instance.makeTransparent(image, 0.2f, label);
+        EffectComponents.instance.makeTransparent(image, alpha, label);
     }
 
     
@@ -92,10 +92,10 @@ public class EffectComponents {
     }
 
     
-    //animation label 
+    //animation components 
     public void AnimationComponents(JLabel label) {
-        int targetWidth = 260;
-        int height = 30;
+        int targetWidth = label.getWidth();
+        int height = label.getHeight();
         // Tính điểm trung tâm ban đầu
         int centerX = label.getX() + label.getWidth() / 2;
         int centerY = label.getY();

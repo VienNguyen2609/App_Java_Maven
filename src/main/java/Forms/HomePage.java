@@ -121,10 +121,10 @@ public class HomePage extends javax.swing.JFrame {
                         Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     Date date = new Date();
-                    SimpleDateFormat tf = new SimpleDateFormat("h:mm:ss aa");
+                    SimpleDateFormat tf = new SimpleDateFormat("h:mm:ss aa,");
                     SimpleDateFormat df = new SimpleDateFormat("EEEE, dd-MM-yyyy");
                     String time = tf.format(date);
-                    jTxTime.setText(time.split(" ")[0] + " " + time.split(" ")[1]+", ");
+                    jTxTime.setText(time.split(" ")[0] + " " + time.split(" ")[1]);
                     jTxtDate.setText(df.format(date));
                 }
             }
@@ -250,16 +250,16 @@ public class HomePage extends javax.swing.JFrame {
 
         jTxTime.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jTxTime.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jTxTime.setMaximumSize(new java.awt.Dimension(80, 85));
-        jTxTime.setMinimumSize(new java.awt.Dimension(80, 85));
-        jTxTime.setPreferredSize(new java.awt.Dimension(80, 85));
+        jTxTime.setMaximumSize(new java.awt.Dimension(85, 85));
+        jTxTime.setMinimumSize(new java.awt.Dimension(85, 85));
+        jTxTime.setPreferredSize(new java.awt.Dimension(85, 85));
         jPanel4.add(jTxTime, new java.awt.GridBagConstraints());
 
         jTxtDate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jTxtDate.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jTxtDate.setMaximumSize(new java.awt.Dimension(140, 120));
-        jTxtDate.setMinimumSize(new java.awt.Dimension(140, 120));
-        jTxtDate.setPreferredSize(new java.awt.Dimension(130, 120));
+        jTxtDate.setMaximumSize(new java.awt.Dimension(135, 120));
+        jTxtDate.setMinimumSize(new java.awt.Dimension(135, 120));
+        jTxtDate.setPreferredSize(new java.awt.Dimension(135, 120));
         jPanel4.add(jTxtDate, new java.awt.GridBagConstraints());
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_flag.png"))); // NOI18N
@@ -270,7 +270,7 @@ public class HomePage extends javax.swing.JFrame {
 
         jPanel1.add(jPanel4, java.awt.BorderLayout.PAGE_START);
 
-        PanelMenu.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, new java.awt.Color(255, 51, 51)));
+        PanelMenu.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(0, 0, 0)));
         PanelMenu.setOpaque(false);
         PanelMenu.setPreferredSize(new java.awt.Dimension(137, 720));
         PanelMenu.setRequestFocusEnabled(false);
@@ -588,7 +588,7 @@ public class HomePage extends javax.swing.JFrame {
         PanelBill.setLayout(PanelBillLayout);
         PanelBillLayout.setHorizontalGroup(
             PanelBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1252, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1252, Short.MAX_VALUE)
         );
         PanelBillLayout.setVerticalGroup(
             PanelBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -640,7 +640,7 @@ public class HomePage extends javax.swing.JFrame {
     private void btnProfleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProfleMouseClicked
         PanelProfile.setVisible(true);
         PanelHomePage.setVisible(false);
-
+         PanelBill.setVisible(false);
     }//GEN-LAST:event_btnProfleMouseClicked
 
     private void btnHomePageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomePageMouseClicked

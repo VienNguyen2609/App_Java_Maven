@@ -46,7 +46,7 @@ public class UserLogin extends javax.swing.JFrame {
         CheckPass.setBorder(BorderFactory.createBevelBorder(0));
 
         try {
-            EffectComponents.instance.BufferedImage("D:\\DownLoad\\IconFootWear\\BackGroundLogin1.png", LabelLogin);
+            EffectComponents.instance.BufferedImage("D:\\DownLoad\\IconFootWear\\BackGroundLogin1.png", LabelLogin, 0.15f);
         } catch (IOException ex) {
             System.out.println("ERROR: " + ex.getMessage());
         }
@@ -137,7 +137,7 @@ public class UserLogin extends javax.swing.JFrame {
         LabelPasswordUser.setText("UserPassword");
         jPanel1.add(LabelPasswordUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 100, -1));
 
-        CheckPass.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        CheckPass.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         CheckPass.setForeground(new java.awt.Color(255, 255, 255));
         CheckPass.setText("Show Password");
         CheckPass.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -151,7 +151,7 @@ public class UserLogin extends javax.swing.JFrame {
                 CheckPassMouseExited(evt);
             }
         });
-        jPanel1.add(CheckPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, -1, 20));
+        jPanel1.add(CheckPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, -1, 20));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -174,7 +174,9 @@ public class UserLogin extends javax.swing.JFrame {
         });
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, -1, 30));
 
-        StraightLine.setText("________________");
+        StraightLine.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        StraightLine.setForeground(new java.awt.Color(255, 255, 255));
+        StraightLine.setText("____________");
         jPanel1.add(StraightLine, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, 110, 20));
 
         LoginMessage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -192,8 +194,10 @@ public class UserLogin extends javax.swing.JFrame {
         });
         jPanel1.add(headerButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 240, -1));
 
-        StraightLine3.setText("___________________");
-        jPanel1.add(StraightLine3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 110, 25));
+        StraightLine3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        StraightLine3.setForeground(new java.awt.Color(255, 255, 255));
+        StraightLine3.setText("__________________");
+        jPanel1.add(StraightLine3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 110, 25));
         jPanel1.add(LabelLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 410));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 370, 410));

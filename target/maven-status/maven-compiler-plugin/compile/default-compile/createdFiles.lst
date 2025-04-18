@@ -1,10 +1,7 @@
 Forms\HomePage$19.class
 Forms\HomePage$6.class
 Controllers\ProductController.class
-Forms\PanelProfile$1.class
 Forms\TestHome.class
-Forms\PanelProfile$4.class
-Forms\PanelProfile.class
 Forms\AdminLogin$1.class
 Forms\Components\RippleEffect$1.class
 Forms\CreateAccount$1.class
@@ -39,7 +36,6 @@ Forms\HomePage$14.class
 Forms\Components\ThemeFlatLaf.class
 Forms\Components\ProfilePhoto.class
 Forms\HomePage$10.class
-Forms\PanelProfile$3.class
 Forms\Components\PasswordField.class
 Forms\HomePage$17.class
 Forms\HomePage$4.class
@@ -47,7 +43,6 @@ DatabaseConnection\SQLConnector.class
 Forms\Components\TextFieldController.class
 Forms\HomePage$7.class
 Forms\UserLogin$3.class
-Forms\PanelProfile$5.class
 Controllers\AccountController.class
 Forms\AdminLogin$2.class
 Forms\HomePage.class
@@ -58,4 +53,3 @@ Forms\HomePage$3.class
 Forms\Components\RippleEffect$Effect$1.class
 Forms\HomePage$11.class
 Forms\Components\EffectComponents.class
-Forms\PanelProfile$2.class

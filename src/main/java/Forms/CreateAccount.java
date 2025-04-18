@@ -19,7 +19,7 @@ public class CreateAccount extends javax.swing.JFrame {
         EffectComponents.Init();
         AccountController.Init();
         try {
-            EffectComponents.instance.BufferedImage("D:\\DownLoad\\IconFootWear\\BackGroundLogin1.png", Label);
+            EffectComponents.instance.BufferedImage("D:\\DownLoad\\IconFootWear\\BackGroundLogin1.png", Label,0.15f);
         } catch (IOException ex) {
             System.out.println("ERROR: " + ex.getMessage());
         }
@@ -147,8 +147,10 @@ public class CreateAccount extends javax.swing.JFrame {
         });
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 60, 30));
 
-        jLabel6.setText("_____________");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 70, 40));
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("___________");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 80, 40));
 
         Label.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 0, 0, new java.awt.Color(255, 255, 255)));
         jPanel1.add(Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 420));
