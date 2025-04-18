@@ -11,7 +11,6 @@ public class Run {
     public static void main(String[] args) {
         runApp();       
     }   
-   
     
     public static void runApp() {
         SetThemFlatLaf.setThem(ThemeFlatLaf.Light);          

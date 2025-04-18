@@ -73,8 +73,7 @@ public class HomePage extends javax.swing.JFrame {
 
     }
 
-    private void editComponents() 
-    {
+    private void editComponents() {
         ProductController.init();
         AccountController.Init();
         EffectComponents.Init();
@@ -87,7 +86,7 @@ public class HomePage extends javax.swing.JFrame {
         btnUserBill.setBackgroundColor(Color.GRAY);
         PanelProfile.setVisible(false);
         PanelHomePage.setVisible(true);
-        PanelBill.setVisible(false);       
+        PanelBill.setVisible(false);
         btnEditProfile.setBackgroundColor(Color.lightGray);
         btnCancelProfile.setBackgroundColor(Color.lightGray);
         btnSaveEditProfile.setBackgroundColor(Color.lightGray);
@@ -505,8 +504,8 @@ public class HomePage extends javax.swing.JFrame {
         });
         PanelProfile.add(btnEditProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 390, 150, -1));
 
-        jLabel1.setText("________________________________________________________________");
-        PanelProfile.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 300, 370, -1));
+        jLabel1.setText("_________________________________________________________________");
+        PanelProfile.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 306, 370, 20));
 
         TextNameProfile.setEditable(false);
         TextNameProfile.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
@@ -566,10 +565,10 @@ public class HomePage extends javax.swing.JFrame {
         PanelProfile.add(CheckPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 300, -1, -1));
 
         jLabel6.setText("_________________________________________________________________");
-        PanelProfile.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 360, 370, -1));
+        PanelProfile.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 366, 370, 20));
 
         jLabel7.setText("_________________________________________________________________");
-        PanelProfile.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 240, 370, -1));
+        PanelProfile.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, 370, 30));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -640,7 +639,7 @@ public class HomePage extends javax.swing.JFrame {
     private void btnProfleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProfleMouseClicked
         PanelProfile.setVisible(true);
         PanelHomePage.setVisible(false);
-         PanelBill.setVisible(false);
+        PanelBill.setVisible(false);
     }//GEN-LAST:event_btnProfleMouseClicked
 
     private void btnHomePageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomePageMouseClicked
@@ -709,6 +708,29 @@ public class HomePage extends javax.swing.JFrame {
             String name = TextNameProfile.getText();
             String password = String.valueOf(TextPasswordProfile.getPassword());
             String gmail = TextGmailProfile.getText();
+
+            if (password.length() < 7 || name.length() < 4) {
+                JOptionPane.showMessageDialog(this, "error: LENGTH PASSWORD >= 7 AND NAME >=4");
+                return;
+            }
+
+            if (EffectComponents.instance.containsVietnameseCharacters(name)) {
+                JOptionPane.showMessageDialog(this, "error: NAME WRONG!");
+                return;
+            }
+            if (name.isEmpty() || password.isEmpty() || gmail.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "error: INFORMATION CAN NOT EMPTY");
+                return;
+            }
+
+            if (!gmail.contains("@gmail.com")) {
+                JOptionPane.showMessageDialog(this, "error: GMAIL WRONG");
+                return;
+            }
+            if (name.equalsIgnoreCase("admin")) {
+                JOptionPane.showMessageDialog(this, "error: NAME IS FOR ADMINISTRATOR USE ONLY!!");
+                return;
+            }
             Account UpdateAccount = AccountController.instance.updateUser(name, password, gmail, currentAccount.getUserName());
             if (UpdateAccount != null) {
                 currentAccount = UpdateAccount;
@@ -746,7 +768,7 @@ public class HomePage extends javax.swing.JFrame {
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             selectedFile = chooser.getSelectedFile();
             icon = new ImageIcon(new ImageIcon(selectedFile.getAbsolutePath())
-                .getImage().getScaledInstance(LabelAvatar.getWidth(), LabelAvatar.getHeight(), Image.SCALE_SMOOTH));
+                    .getImage().getScaledInstance(LabelAvatar.getWidth(), LabelAvatar.getHeight(), Image.SCALE_SMOOTH));
             LabelAvatar.setIcon(icon);
         }
 

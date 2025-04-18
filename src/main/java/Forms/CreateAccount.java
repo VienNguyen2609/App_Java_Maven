@@ -46,7 +46,7 @@ public class CreateAccount extends javax.swing.JFrame {
         LabelPasswordUser = new javax.swing.JLabel();
         LabelNameUser = new javax.swing.JLabel();
         headerButton1 = new Forms.Components.HeaderButton();
-        CreateMessage = new javax.swing.JLabel();
+        LabelMessage = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -121,10 +121,10 @@ public class CreateAccount extends javax.swing.JFrame {
         });
         jPanel1.add(headerButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 170, -1));
 
-        CreateMessage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        CreateMessage.setForeground(new java.awt.Color(255, 51, 51));
-        CreateMessage.setToolTipText("");
-        jPanel1.add(CreateMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 286, 320, 20));
+        LabelMessage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LabelMessage.setForeground(new java.awt.Color(255, 51, 51));
+        LabelMessage.setToolTipText("");
+        jPanel1.add(LabelMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 286, 320, 20));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -183,28 +183,28 @@ public class CreateAccount extends javax.swing.JFrame {
             String gmail = this.txtGmail.getText().trim();
             String inputText = name;
             if (name.isEmpty() || pass.isEmpty() || gmail.isEmpty()) {
-                CreateMessage.setText("error: INFORMATION CAN NOT EMPTY");             
+                LabelMessage.setText("error: INFORMATION CAN NOT EMPTY");             
             }
             
             else if (!gmail.contains("@gmail.com")) {
-                CreateMessage.setText("error: GMAIL WRONG");
+                LabelMessage.setText("error: GMAIL WRONG");
             }
             else if (name.equalsIgnoreCase("admin")){
-                CreateMessage.setText("error: For administrator use only!");
+                LabelMessage.setText("error: FOR ADMINISTRATOR USE ONLY!!");
             }
             else if (EffectComponents.instance.containsVietnameseCharacters(inputText)) {
-                CreateMessage.setText("error: USER NAME WRONG!");
+                LabelMessage.setText("error: USER NAME WRONG!");
             } 
             
             else if (pass.length() < 7 || name.length() < 4) {
-                CreateMessage.setText("error: LENGTH PASSWORD >= 7 AND NAME >=4");
+                LabelMessage.setText("error: LENGTH PASSWORD >= 7 AND NAME >=4");
             } 
             
             else if (AccountController.instance.addAccount(name, pass, gmail)) {
-                CreateMessage.setText("Create Account Successfully");                
+                LabelMessage.setText("CREATED ACCOUNT SUCCESSFULLY");                
             }
             else {
-                CreateMessage.setText("error: NAME IS EXIST!");
+                LabelMessage.setText("error: NAME IS EXIST!");
             }
             
         } catch (Exception e) {
@@ -236,9 +236,9 @@ public class CreateAccount extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel CreateMessage;
     private javax.swing.JLabel Label;
     private javax.swing.JLabel LabelGmailUser;
+    private javax.swing.JLabel LabelMessage;
     private javax.swing.JLabel LabelNameUser;
     private javax.swing.JLabel LabelPasswordUser;
     private Forms.Components.HeaderButton headerButton1;

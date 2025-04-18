@@ -2,6 +2,8 @@ package Forms;
 
 import Controllers.AccountController;
 import Forms.Components.EffectComponents;
+import Forms.Components.SetThemFlatLaf;
+import Forms.Components.ThemeFlatLaf;
 import Model.Account;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
@@ -75,7 +77,7 @@ public class UserLogin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         StraightLine = new javax.swing.JLabel();
-        LoginMessage = new javax.swing.JLabel();
+        LabelMessage = new javax.swing.JLabel();
         headerButton1 = new Forms.Components.HeaderButton();
         StraightLine3 = new javax.swing.JLabel();
         LabelLogin = new javax.swing.JLabel();
@@ -179,9 +181,9 @@ public class UserLogin extends javax.swing.JFrame {
         StraightLine.setText("____________");
         jPanel1.add(StraightLine, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, 110, 20));
 
-        LoginMessage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        LoginMessage.setForeground(new java.awt.Color(255, 102, 102));
-        jPanel1.add(LoginMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 310, 20));
+        LabelMessage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LabelMessage.setForeground(new java.awt.Color(255, 0, 51));
+        jPanel1.add(LabelMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 310, 20));
 
         headerButton1.setBackground(new java.awt.Color(255, 204, 51));
         headerButton1.setText("Sign In");
@@ -256,40 +258,22 @@ public class UserLogin extends javax.swing.JFrame {
 
     private void headerButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerButton1MouseClicked
         AccountController.instance.loadAccount();
-//        try {
-//
-//            name = this.txtName.getText().trim();
-//            password = this.txtPassword.getText().trim();
-//
-//            if (name.length() == 0 || password.length() == 0) {
-//                LoginMessage.setText("error: INFORMATION CAN NOT EMPTY");
-//            } else if (AccountController.instance.LoginUser(name, password)) {
-//                try {
-//                    UIManager.setLookAndFeel(new FlatDarkLaf());
-//                } catch (UnsupportedLookAndFeelException e) {
-//                    Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, e);
-//                }
-//                new HomePage(name, password).setVisible(true);
-//                this.dispose();
-//            } else {
-//                LoginMessage.setText("error: NAME OR PASSWORD FALSE!");
-//            }
-//
-//        } catch (Exception e) {
-//            System.out.println("error: " + e.getMessage());
-//        }
         String username = txtName.getText();
         String password = String.valueOf(txtPassword.getPassword());
 
-        try {
-            UIManager.setLookAndFeel(new FlatDarkLaf());
-        } catch (UnsupportedLookAndFeelException e) {
-            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, e);
-        }
+        SetThemFlatLaf.setThem(ThemeFlatLaf.Dark);
         if (AccountController.instance.checkLogin(username, password)) {
             Account user = AccountController.instance.getAccountByUsername(username);
             new HomePage(user).setVisible(true);
             dispose();
+        }
+        
+        else if (username.isEmpty() || password.isEmpty()){
+            LabelMessage.setText("error: INFORMATION NOT EMPTY!");
+        }
+        
+        else{
+            LabelMessage.setText("error: NAME OR PASSWORD WRONG!");
         }
     }//GEN-LAST:event_headerButton1MouseClicked
 
@@ -305,9 +289,9 @@ public class UserLogin extends javax.swing.JFrame {
     private javax.swing.JLabel BackgroupFormCreate;
     private javax.swing.JCheckBox CheckPass;
     private javax.swing.JLabel LabelLogin;
+    private javax.swing.JLabel LabelMessage;
     private javax.swing.JLabel LabelNameUser;
     private javax.swing.JLabel LabelPasswordUser;
-    private javax.swing.JLabel LoginMessage;
     private javax.swing.JLabel StraightLine;
     private javax.swing.JLabel StraightLine3;
     private Forms.Components.HeaderButton headerButton1;
