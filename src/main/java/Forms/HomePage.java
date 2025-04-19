@@ -11,6 +11,8 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import java.io.File;
 import java.util.Date;
@@ -19,8 +21,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
 public class HomePage extends javax.swing.JFrame {
 
@@ -46,9 +52,9 @@ public class HomePage extends javax.swing.JFrame {
         String iconPath = "D:\\DownLoad\\IconFootWear\\result_social.png";
         setIconImage(Toolkit.getDefaultToolkit().getImage(new File(iconPath).getAbsolutePath()));
 
-        TextNameProfile.setText(account.getUserName());
-        TextPasswordProfile.setText(account.getUserPassword());
-        TextGmailProfile.setText(account.getUserGmail());
+        txtNameProfile.setText(account.getUserName());
+        txtPasswordProfile.setText(account.getUserPassword());
+        txtGmailProfile.setText(account.getUserGmail());
 
         if (account.getAvatarUser() != null) {
             ImageIcon icon = new ImageIcon(account.getAvatarUser());
@@ -77,7 +83,7 @@ public class HomePage extends javax.swing.JFrame {
         ProductController.init();
         AccountController.Init();
         EffectComponents.Init();
-        btnUploadAvatar.setBackgroundColor(Color.lightGray);
+        btnUploadAvatar.setBackgroundColor(Color.ORANGE);
         btnProfle.setBackgroundColor(Color.GRAY);
         btnHomePage.setBackgroundColor(Color.GRAY);
         btnLogOut.setBackgroundColor(Color.GRAY);
@@ -86,27 +92,23 @@ public class HomePage extends javax.swing.JFrame {
         btnUserBill.setBackgroundColor(Color.GRAY);
         PanelProfile.setVisible(false);
         PanelHomePage.setVisible(true);
+        PanelProducts.setVisible(false);
         PanelBill.setVisible(false);
-        btnEditProfile.setBackgroundColor(Color.lightGray);
+        btnEditProfile.setBackgroundColor(Color.GREEN);
         btnCancelProfile.setBackgroundColor(Color.lightGray);
-        btnSaveEditProfile.setBackgroundColor(Color.lightGray);
+        btnSaveEditProfile.setBackgroundColor(Color.GREEN);
+        btnUploadProduct.setBackgroundColor(Color.ORANGE);
+        btnAddProduct.setBackgroundColor(Color.lightGray);
+        btnUpdateProduct.setBackgroundColor(Color.GREEN);
+        btnDeleteProduct.setBackgroundColor(Color.RED);
+        btnCancelProduct.setBackgroundColor(Color.BLUE);
         btnSaveEditProfile.setVisible(false);
         setTime();
         scaleImage();
         addPanelProducts();
-//        this.panelUserBill.setLayout(new GridBagLayout());
-//        GridBagConstraints gbc = new GridBagConstraints();
-//        gbc.insets = new Insets(30, 30, 30, 30); // Khoảng cách giữa các item
-//        gbc.fill = GridBagConstraints.HORIZONTAL;
-//        // gbc.weightx = 1; // Giãn ngang
-//
-//      
-//            var newJpanel = new PanelUserBill();
-//            this.panelUserBill.add(newJpanel, gbc);
-//        
-//
-//        this.panelUserBill.revalidate();
-//        this.panelUserBill.repaint();
+        EffectComponents.instance.FocusPointer1(txtNameProducts, LabelNameProduct, Color.GREEN, Color.WHITE);
+        EffectComponents.instance.FocusPointer1(txtPriceProduct, LabelPriceProduct, Color.GREEN, Color.WHITE);
+        EffectComponents.instance.FocusPointer1(txtColorProduct, LabelColorProduct, Color.GREEN, Color.WHITE);
     }
 
     private void setTime() {
@@ -158,6 +160,18 @@ public class HomePage extends javax.swing.JFrame {
         this.PanelContainProduct.repaint();
     }
 
+//   public void AnimationOfJspinner(JSpinner spinner , JComponent component) {
+//    Object value = spinner.getValue();
+//    if (value instanceof Number) {
+//        Number number = (Number) value;
+//        if (number.intValue() == 0) {
+//            component.setBackground(Color.WHITE);
+//        } else {
+//            component.setBackground(Color.GREEN);
+//        }
+//    }
+//   }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -195,9 +209,9 @@ public class HomePage extends javax.swing.JFrame {
         btnUploadAvatar = new Forms.Components.HeaderButton();
         btnEditProfile = new Forms.Components.HeaderButton();
         jLabel1 = new javax.swing.JLabel();
-        TextNameProfile = new Forms.Components.TextFieldController();
-        TextGmailProfile = new Forms.Components.TextFieldController();
-        TextPasswordProfile = new Forms.Components.PasswordField();
+        txtNameProfile = new Forms.Components.TextFieldController();
+        txtGmailProfile = new Forms.Components.TextFieldController();
+        txtPasswordProfile = new Forms.Components.PasswordField();
         btnSaveEditProfile = new Forms.Components.HeaderButton();
         btnCancelProfile = new Forms.Components.HeaderButton();
         jLabel2 = new javax.swing.JLabel();
@@ -209,6 +223,27 @@ public class HomePage extends javax.swing.JFrame {
         PanelBill = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        PanelProducts = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbProducts = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        btnDeleteProduct = new Forms.Components.HeaderButton();
+        btnCancelProduct = new Forms.Components.HeaderButton();
+        btnUploadProduct = new Forms.Components.HeaderButton();
+        btnAddProduct = new Forms.Components.HeaderButton();
+        btnUpdateProduct = new Forms.Components.HeaderButton();
+        profilePhoto1 = new Forms.Components.ProfilePhoto();
+        LabelNameProduct = new javax.swing.JLabel();
+        LabelPriceProduct = new javax.swing.JLabel();
+        LabelQuantityProduct = new javax.swing.JLabel();
+        LabelColorProduct = new javax.swing.JLabel();
+        txtQuantityProduct = new javax.swing.JSpinner();
+        txtPriceProduct = new Forms.Components.TextFieldController();
+        txtColorProduct = new Forms.Components.TextFieldController();
+        txtNameProducts = new Forms.Components.TextFieldController();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -470,19 +505,21 @@ public class HomePage extends javax.swing.JFrame {
         PanelHomePageLayout.setHorizontalGroup(
             PanelHomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelHomePageLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         PanelHomePageLayout.setVerticalGroup(
             PanelHomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
             .addGroup(PanelHomePageLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         PanelProfile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        LabelAvatar.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
         PanelProfile.add(LabelAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 40, 170, 130));
 
         btnUploadAvatar.setBackground(new java.awt.Color(153, 153, 255));
@@ -507,20 +544,20 @@ public class HomePage extends javax.swing.JFrame {
         jLabel1.setText("_________________________________________________________________");
         PanelProfile.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 306, 370, 20));
 
-        TextNameProfile.setEditable(false);
-        TextNameProfile.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        PanelProfile.add(TextNameProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 260, -1));
+        txtNameProfile.setEditable(false);
+        txtNameProfile.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        PanelProfile.add(txtNameProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 260, -1));
 
-        TextGmailProfile.setEditable(false);
-        TextGmailProfile.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        PanelProfile.add(TextGmailProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 350, 270, -1));
+        txtGmailProfile.setEditable(false);
+        txtGmailProfile.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        PanelProfile.add(txtGmailProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 350, 270, -1));
 
-        TextPasswordProfile.setEditable(false);
-        TextPasswordProfile.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(0, 0, 0)));
-        TextPasswordProfile.setEchoChar('\u002A'
+        txtPasswordProfile.setEditable(false);
+        txtPasswordProfile.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(0, 0, 0)));
+        txtPasswordProfile.setEchoChar('\u002A'
         );
-        TextPasswordProfile.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        PanelProfile.add(TextPasswordProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 290, 230, 30));
+        txtPasswordProfile.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        PanelProfile.add(txtPasswordProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 290, 230, 30));
 
         btnSaveEditProfile.setForeground(new java.awt.Color(255, 255, 255));
         btnSaveEditProfile.setText("Save");
@@ -587,32 +624,139 @@ public class HomePage extends javax.swing.JFrame {
         PanelBill.setLayout(PanelBillLayout);
         PanelBillLayout.setHorizontalGroup(
             PanelBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1252, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1260, Short.MAX_VALUE)
         );
         PanelBillLayout.setVerticalGroup(
             PanelBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
         );
 
+        tbProducts.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Name", "Price", "Quantity", "Color"
+            }
+        ));
+        jScrollPane3.setViewportView(tbProducts);
+
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnDeleteProduct.setForeground(new java.awt.Color(255, 255, 255));
+        btnDeleteProduct.setText("Delete");
+        jPanel2.add(btnDeleteProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 520, 130, -1));
+
+        btnCancelProduct.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelProduct.setText("Cancel");
+        jPanel2.add(btnCancelProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 520, 130, -1));
+
+        btnUploadProduct.setForeground(new java.awt.Color(255, 255, 255));
+        btnUploadProduct.setText("UploadImage");
+        btnUploadProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUploadProductActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnUploadProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 130, -1));
+
+        btnAddProduct.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddProduct.setText("Add");
+        jPanel2.add(btnAddProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 470, 130, -1));
+
+        btnUpdateProduct.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdateProduct.setText("Update");
+        jPanel2.add(btnUpdateProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, 130, -1));
+
+        profilePhoto1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        jPanel2.add(profilePhoto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(214, 18, 190, 90));
+
+        LabelNameProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LabelNameProduct.setForeground(new java.awt.Color(255, 255, 255));
+        LabelNameProduct.setText("NameProduct");
+        jPanel2.add(LabelNameProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, -1, -1));
+
+        LabelPriceProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LabelPriceProduct.setForeground(new java.awt.Color(255, 255, 255));
+        LabelPriceProduct.setText("Price");
+        jPanel2.add(LabelPriceProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
+
+        LabelQuantityProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LabelQuantityProduct.setForeground(new java.awt.Color(255, 255, 255));
+        LabelQuantityProduct.setText("Quantity");
+        jPanel2.add(LabelQuantityProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, -1, -1));
+
+        LabelColorProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LabelColorProduct.setForeground(new java.awt.Color(255, 255, 255));
+        LabelColorProduct.setText("Color");
+        jPanel2.add(LabelColorProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, -1, -1));
+        jPanel2.add(txtQuantityProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, 80, -1));
+
+        txtPriceProduct.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/PriceIcon.png"))); // NOI18N
+        jPanel2.add(txtPriceProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 150, -1));
+
+        txtColorProduct.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/ColorIcon.png"))); // NOI18N
+        jPanel2.add(txtColorProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, 150, -1));
+
+        txtNameProducts.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/ProductManagerIcon.png"))); // NOI18N
+        jPanel2.add(txtNameProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 170, -1));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("____________________________________");
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 210, -1));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("____________________________________");
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 410, 210, -1));
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("____________________________________");
+        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 210, -1));
+
+        javax.swing.GroupLayout PanelProductsLayout = new javax.swing.GroupLayout(PanelProducts);
+        PanelProducts.setLayout(PanelProductsLayout);
+        PanelProductsLayout.setHorizontalGroup(
+            PanelProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelProductsLayout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 717, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        PanelProductsLayout.setVerticalGroup(
+            PanelProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout PanelContentsLayout = new javax.swing.GroupLayout(PanelContents);
         PanelContents.setLayout(PanelContentsLayout);
         PanelContentsLayout.setHorizontalGroup(
             PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE)
+            .addComponent(PanelProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 1266, Short.MAX_VALUE)
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(PanelHomePage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(PanelContentsLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(PanelBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(PanelProducts, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelContentsLayout.setVerticalGroup(
             PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(PanelProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(PanelHomePage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(PanelBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(PanelProducts, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(PanelContents, java.awt.BorderLayout.CENTER);
@@ -640,12 +784,14 @@ public class HomePage extends javax.swing.JFrame {
         PanelProfile.setVisible(true);
         PanelHomePage.setVisible(false);
         PanelBill.setVisible(false);
+        PanelProducts.setVisible(false);
     }//GEN-LAST:event_btnProfleMouseClicked
 
     private void btnHomePageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomePageMouseClicked
         PanelProfile.setVisible(false);
         PanelHomePage.setVisible(true);
         PanelBill.setVisible(false);
+        PanelProducts.setVisible(false);
     }//GEN-LAST:event_btnHomePageMouseClicked
 
     private void btnLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogOutMouseClicked
@@ -661,6 +807,8 @@ public class HomePage extends javax.swing.JFrame {
         PanelBill.setVisible(true);
         PanelHomePage.setVisible(false);
         PanelProfile.setVisible(false);
+        PanelProducts.setVisible(false);
+
     }//GEN-LAST:event_btnUserBillMouseClicked
 
     private void btnUserBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserBillActionPerformed
@@ -670,7 +818,7 @@ public class HomePage extends javax.swing.JFrame {
     private void btnProfleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfleActionPerformed
 
         if (!PanelProfile.isVisible()) {
-            TextPasswordProfile.setEchoChar('*');
+            txtPasswordProfile.setEchoChar('*');
             CheckPassword.setSelected(false);
         }
 
@@ -683,20 +831,20 @@ public class HomePage extends javax.swing.JFrame {
     private void CheckPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CheckPasswordMouseClicked
 
         if (CheckPassword.isSelected()) {
-            TextPasswordProfile.setEchoChar((char) 0);
+            txtPasswordProfile.setEchoChar((char) 0);
         } else {
-            TextPasswordProfile.setEchoChar('*');
+            txtPasswordProfile.setEchoChar('*');
         }
     }//GEN-LAST:event_CheckPasswordMouseClicked
 
     private void btnCancelProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelProfileMouseClicked
 
-        TextNameProfile.setEditable(false);
-        TextPasswordProfile.setEditable(false);
-        TextGmailProfile.setEditable(false);
-        TextNameProfile.setText(currentAccount.getUserName());
-        TextPasswordProfile.setText(currentAccount.getUserPassword());
-        TextGmailProfile.setText(currentAccount.getUserGmail());
+        txtNameProfile.setEditable(false);
+        txtPasswordProfile.setEditable(false);
+        txtGmailProfile.setEditable(false);
+        txtNameProfile.setText(currentAccount.getUserName());
+        txtPasswordProfile.setText(currentAccount.getUserPassword());
+        txtGmailProfile.setText(currentAccount.getUserGmail());
         btnSaveEditProfile.setVisible(false);
     }//GEN-LAST:event_btnCancelProfileMouseClicked
 
@@ -705,9 +853,9 @@ public class HomePage extends javax.swing.JFrame {
         AccountController.instance.loadDataAccounts();
         try {
 
-            String name = TextNameProfile.getText();
-            String password = String.valueOf(TextPasswordProfile.getPassword());
-            String gmail = TextGmailProfile.getText();
+            String name = txtNameProfile.getText();
+            String password = String.valueOf(txtPasswordProfile.getPassword());
+            String gmail = txtGmailProfile.getText();
 
             if (password.length() < 7 || name.length() < 4) {
                 JOptionPane.showMessageDialog(this, "error: LENGTH PASSWORD >= 7 AND NAME >=4");
@@ -736,9 +884,9 @@ public class HomePage extends javax.swing.JFrame {
                 currentAccount = UpdateAccount;
                 JOptionPane.showMessageDialog(this, "Profile Updated Successfully");
                 btnSaveEditProfile.setVisible(false);
-                TextNameProfile.setEditable(false);
-                TextPasswordProfile.setEditable(false);
-                TextGmailProfile.setEditable(false);
+                txtNameProfile.setEditable(false);
+                txtPasswordProfile.setEditable(false);
+                txtGmailProfile.setEditable(false);
                 return;
 
             } else {
@@ -753,10 +901,10 @@ public class HomePage extends javax.swing.JFrame {
 
     private void btnEditProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditProfileMouseClicked
 
-        TextNameProfile.setEditable(true);
-        TextPasswordProfile.setEditable(true);
-        TextGmailProfile.setEditable(true);
-        TextNameProfile.requestFocus();
+        txtNameProfile.setEditable(true);
+        txtPasswordProfile.setEditable(true);
+        txtGmailProfile.setEditable(true);
+        txtNameProfile.requestFocus();
         btnSaveEditProfile.setVisible(true);
     }//GEN-LAST:event_btnEditProfileMouseClicked
 
@@ -776,12 +924,16 @@ public class HomePage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "PHOTO NOT UPDATE YET!");
             return;
         }
-
         AccountController.instance.saveAvatarToDatabase(selectedFile, currentAccount.getUserName());
+        LabelAvatar.setBorder(new EmptyBorder(0, 0, 0, 0));
+        
     }//GEN-LAST:event_btnUploadAvatarMouseClicked
 
     private void btnManagerProductsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnManagerProductsMouseClicked
-        // TODO add your handling code here:
+        PanelBill.setVisible(false);
+        PanelHomePage.setVisible(false);
+        PanelProfile.setVisible(false);
+        PanelProducts.setVisible(true);
     }//GEN-LAST:event_btnManagerProductsMouseClicked
 
     private void btnManagerProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManagerProductsActionPerformed
@@ -795,6 +947,10 @@ public class HomePage extends javax.swing.JFrame {
     private void btnManagerAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManagerAccountsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnManagerAccountsActionPerformed
+
+    private void btnUploadProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadProductActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUploadProductActionPerformed
 
     public static void main(String args[]) {
 
@@ -810,17 +966,22 @@ public class HomePage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox CheckPassword;
     private Forms.Components.ProfilePhoto LabelAvatar;
+    private javax.swing.JLabel LabelColorProduct;
     private javax.swing.JLabel LabelLogo;
+    private javax.swing.JLabel LabelNameProduct;
+    private javax.swing.JLabel LabelPriceProduct;
+    private javax.swing.JLabel LabelQuantityProduct;
     private javax.swing.JPanel PanelBill;
     private javax.swing.JPanel PanelContainProduct;
     private javax.swing.JPanel PanelContents;
     private javax.swing.JPanel PanelHomePage;
     private javax.swing.JPanel PanelMenu;
+    private javax.swing.JPanel PanelProducts;
     private javax.swing.JPanel PanelProfile;
-    private Forms.Components.TextFieldController TextGmailProfile;
-    private Forms.Components.TextFieldController TextNameProfile;
-    private Forms.Components.PasswordField TextPasswordProfile;
+    private Forms.Components.HeaderButton btnAddProduct;
+    private Forms.Components.HeaderButton btnCancelProduct;
     private Forms.Components.HeaderButton btnCancelProfile;
+    private Forms.Components.HeaderButton btnDeleteProduct;
     private Forms.Components.HeaderButton btnEditProfile;
     private Forms.Components.HeaderButton btnHomePage;
     private Forms.Components.HeaderButton btnLogOut;
@@ -828,7 +989,9 @@ public class HomePage extends javax.swing.JFrame {
     private Forms.Components.HeaderButton btnManagerProducts;
     private Forms.Components.HeaderButton btnProfle;
     private Forms.Components.HeaderButton btnSaveEditProfile;
+    private Forms.Components.HeaderButton btnUpdateProduct;
     private Forms.Components.HeaderButton btnUploadAvatar;
+    private Forms.Components.HeaderButton btnUploadProduct;
     private Forms.Components.HeaderButton btnUserBill;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -837,6 +1000,9 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -846,14 +1012,25 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel jTxTime;
     private javax.swing.JLabel jTxtDate;
+    private Forms.Components.ProfilePhoto profilePhoto1;
+    private javax.swing.JTable tbProducts;
     private Forms.Components.TextFieldController textFieldController1;
     private Forms.Components.TextFieldController textFieldController3;
+    private Forms.Components.TextFieldController txtColorProduct;
+    private Forms.Components.TextFieldController txtGmailProfile;
+    private Forms.Components.TextFieldController txtNameProducts;
+    private Forms.Components.TextFieldController txtNameProfile;
+    private Forms.Components.PasswordField txtPasswordProfile;
+    private Forms.Components.TextFieldController txtPriceProduct;
+    private javax.swing.JSpinner txtQuantityProduct;
     // End of variables declaration//GEN-END:variables
 }

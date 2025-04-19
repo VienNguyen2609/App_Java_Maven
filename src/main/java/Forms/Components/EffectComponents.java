@@ -12,8 +12,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.layout.Border;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -68,7 +70,9 @@ public class EffectComponents {
     }
 
     
-    public void FocusPointer(JTextField textField, JLabel label, JLabel label1, Color colorFirst, Color colorLast) {
+   
+
+     public void FocusPointer(JTextField textField, JLabel label ,JLabel label1 ,  Color colorFirst, Color colorLast) {
 
         textField.addFocusListener(new FocusListener() {
             @Override
@@ -90,8 +94,27 @@ public class EffectComponents {
             }
         });
     }
+     public void FocusPointer1(JTextField textField, JComponent jComponent ,  Color colorFirst, Color colorLast) {
 
-    
+        textField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                jComponent.setForeground(colorFirst);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (textField.getText().length() != 0) {
+                    jComponent.setForeground(colorFirst);
+
+                } else {
+                    jComponent.setForeground(colorLast);
+
+                }
+
+            }
+        });
+    }
     //animation components 
     public void AnimationComponents(JLabel label) {
         int targetWidth = label.getWidth();
@@ -117,7 +140,7 @@ public class EffectComponents {
     }
 
     
-    // bắt lổi tiếng việt
+    // catch errors in vietnameese
     public static boolean containsVietnameseCharacters(String text) {
         String vietnamesePattern = ".*[àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ].*";
         return text.matches(vietnamesePattern);

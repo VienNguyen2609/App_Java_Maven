@@ -6,6 +6,7 @@ Forms\AdminLogin$1.class
 Forms\Components\RippleEffect$1.class
 Forms\CreateAccount$1.class
 Forms\HomePage$9.class
+Forms\Components\EffectComponents$2.class
 Forms\HomePage$15.class
 Forms\Components\SetThemFlatLaf$1.class
 Forms\HomePage$12.class
@@ -14,9 +15,11 @@ Forms\UserLogin$4.class
 Forms\Components\HeaderButton.class
 Forms\HomePage$13.class
 Forms\CreateAccount.class
+Forms\Components\NewJFrame.class
 Forms\PanelProducts.class
 Model\Account.class
 Forms\UserLogin$1.class
+Forms\Components\NewJFrame$1.class
 Forms\Components\RippleEffect$Effect.class
 Forms\HomePage$2.class
 Forms\Components\RippleEffect.class
@@ -37,6 +40,7 @@ Forms\Components\ThemeFlatLaf.class
 Forms\Components\ProfilePhoto.class
 Forms\HomePage$10.class
 Forms\Components\PasswordField.class
+Forms\HomePage$20.class
 Forms\HomePage$17.class
 Forms\HomePage$4.class
 DatabaseConnection\SQLConnector.class

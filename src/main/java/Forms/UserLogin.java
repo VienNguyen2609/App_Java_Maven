@@ -57,7 +57,6 @@ public class UserLogin extends javax.swing.JFrame {
         StraightLine3.setVisible(false);
         EffectComponents.instance.FocusPointer(txtName, LabelNameUser, jLabel7, Color.GREEN, Color.WHITE);
         EffectComponents.instance.FocusPointer(txtPassword, LabelPasswordUser, jLabel6, Color.GREEN, Color.WHITE);
-
     }
 
     @SuppressWarnings("unchecked")
