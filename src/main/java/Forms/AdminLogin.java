@@ -126,6 +126,7 @@ public class AdminLogin extends javax.swing.JFrame {
         else {           
             LabelMessage.setText("error: Name or password false!");       
         }
+        
     }//GEN-LAST:event_headerButton1MouseClicked
 
     public static void main(String args[]) {

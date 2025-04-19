@@ -5,28 +5,27 @@ import Controllers.ProductController;
 import Forms.Components.EffectComponents;
 import Main.Run;
 import Model.Account;
+import Model.Shoes;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-
 import java.io.File;
+import java.sql.SQLException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JSpinner;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 public class HomePage extends javax.swing.JFrame {
 
@@ -47,23 +46,11 @@ public class HomePage extends javax.swing.JFrame {
     private void initForUser(Account account) {
 
         initComponents();
-        setLocationRelativeTo(null);
-        setTitle("FOOTWEAR  ,  SHOP FOR YOU ");
-        String iconPath = "D:\\DownLoad\\IconFootWear\\result_social.png";
-        setIconImage(Toolkit.getDefaultToolkit().getImage(new File(iconPath).getAbsolutePath()));
-
+        setupWindow();
         txtNameProfile.setText(account.getUserName());
         txtPasswordProfile.setText(account.getUserPassword());
         txtGmailProfile.setText(account.getUserGmail());
-
-        if (account.getAvatarUser() != null) {
-            ImageIcon icon = new ImageIcon(account.getAvatarUser());
-            Image img = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            LabelAvatar.setIcon(new ImageIcon(img));
-        }
-        if (account.getAvatarUser() == null) {
-            LabelAvatar.setIcon(new ImageIcon(getClass().getResource("/Image/cat.png")));
-        }
+        setAvatar(account.getAvatarUser());
         editComponents();
 
     }
@@ -71,41 +58,34 @@ public class HomePage extends javax.swing.JFrame {
     private void initForAmin() {
 
         initComponents();
-        setLocationRelativeTo(null);
-        setTitle("FOOTWEAR  ,  SHOP FOR YOU ");
-        String iconPath = "D:\\DownLoad\\IconFootWear\\result_social.png";
-        setIconImage(Toolkit.getDefaultToolkit().getImage(new File(iconPath).getAbsolutePath()));
+        setupWindow();
         editComponents();
-
+        Account account = new Account("admin", "admin", "admin@gmail.com");
+        txtNameProfile.setText(account.getUserName());
+        txtPasswordProfile.setText(account.getUserPassword());
+        txtGmailProfile.setText(account.getUserGmail());
+        setAvatar(account.getAvatarUser());
     }
 
     private void editComponents() {
         ProductController.init();
         AccountController.Init();
         EffectComponents.Init();
-        btnUploadAvatar.setBackgroundColor(Color.ORANGE);
-        btnProfle.setBackgroundColor(Color.GRAY);
-        btnHomePage.setBackgroundColor(Color.GRAY);
-        btnLogOut.setBackgroundColor(Color.GRAY);
-        btnManagerAccounts.setBackgroundColor(Color.GRAY);
-        btnManagerProducts.setBackgroundColor(Color.GRAY);
-        btnUserBill.setBackgroundColor(Color.GRAY);
         PanelProfile.setVisible(false);
         PanelHomePage.setVisible(true);
         PanelProducts.setVisible(false);
         PanelBill.setVisible(false);
-        btnEditProfile.setBackgroundColor(Color.GREEN);
-        btnCancelProfile.setBackgroundColor(Color.lightGray);
-        btnSaveEditProfile.setBackgroundColor(Color.GREEN);
-        btnUploadProduct.setBackgroundColor(Color.ORANGE);
-        btnAddProduct.setBackgroundColor(Color.lightGray);
-        btnUpdateProduct.setBackgroundColor(Color.GREEN);
-        btnDeleteProduct.setBackgroundColor(Color.RED);
-        btnCancelProduct.setBackgroundColor(Color.BLUE);
-        btnSaveEditProfile.setVisible(false);
+        styleButton();
         setTime();
         scaleImage();
         addPanelProducts();
+        try {
+            ViewProduct();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassCastException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         EffectComponents.instance.FocusPointer1(txtNameProducts, LabelNameProduct, Color.GREEN, Color.WHITE);
         EffectComponents.instance.FocusPointer1(txtPriceProduct, LabelPriceProduct, Color.GREEN, Color.WHITE);
         EffectComponents.instance.FocusPointer1(txtColorProduct, LabelColorProduct, Color.GREEN, Color.WHITE);
@@ -147,6 +127,7 @@ public class HomePage extends javax.swing.JFrame {
         gbc.insets = new Insets(30, 30, 30, 30); // Khoảng cách giữa các item
         gbc.fill = GridBagConstraints.HORIZONTAL;
         // gbc.weightx = 1; // Giãn ngang
+        this.PanelContainProduct.removeAll();
         ProductController.instance.loadDataProducts();
         int cols = 3; // Số cột
         for (int i = 0; i < ProductController.instance.getDataProduct().size(); i++) {
@@ -160,18 +141,95 @@ public class HomePage extends javax.swing.JFrame {
         this.PanelContainProduct.repaint();
     }
 
-//   public void AnimationOfJspinner(JSpinner spinner , JComponent component) {
-//    Object value = spinner.getValue();
-//    if (value instanceof Number) {
-//        Number number = (Number) value;
-//        if (number.intValue() == 0) {
-//            component.setBackground(Color.WHITE);
-//        } else {
-//            component.setBackground(Color.GREEN);
-//        }
-//    }
-//   }
+    private void setupWindow() {
+        setLocationRelativeTo(null);
+        setTitle("FOOTWEAR  ,  SHOP FOR YOU ");
+        String iconPath = "D:\\DownLoad\\IconFootWear\\result_social.png";
+        setIconImage(Toolkit.getDefaultToolkit().getImage(new File(iconPath).getAbsolutePath()));
+    }
 
+    private void styleButton() {
+        btnUploadAvatar.setBackgroundColor(Color.ORANGE);
+        btnProfle.setBackgroundColor(Color.GRAY);
+        btnHomePage.setBackgroundColor(Color.GRAY);
+        btnLogOut.setBackgroundColor(Color.GRAY);
+        btnManagerAccounts.setBackgroundColor(Color.GRAY);
+        btnManagerProducts.setBackgroundColor(Color.GRAY);
+        btnUserBill.setBackgroundColor(Color.GRAY);
+        btnEditProfile.setBackgroundColor(Color.GREEN);
+        btnCancelProfile.setBackgroundColor(Color.lightGray);
+        btnSaveEditProfile.setBackgroundColor(Color.GREEN);
+        btnUploadProduct.setBackgroundColor(Color.ORANGE);
+        btnAddProduct.setBackgroundColor(Color.lightGray);
+        btnUpdateProduct.setBackgroundColor(Color.GREEN);
+        btnDeleteProduct.setBackgroundColor(Color.RED);
+        btnCancelProduct.setBackgroundColor(Color.BLUE);
+        btnSaveEditProfile.setVisible(false);
+    }
+
+    private void setAvatar(byte[] avatarBytes) {
+
+        if (avatarBytes != null) {
+            ImageIcon icon = new ImageIcon(avatarBytes);
+            Image img = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            LabelAvatar.setIcon(new ImageIcon(img));
+        }
+        if (avatarBytes == null) {
+            LabelAvatar.setIcon(new ImageIcon(getClass().getResource("/Image/cat.png")));
+        }
+        LabelAvatar.setBorder(null);
+    }
+
+    public void clickMouseTableProduct() {
+        int selectedRow = tbProduct.getSelectedRow();
+        if (selectedRow != -1) {
+            String name = tbProduct.getValueAt(selectedRow, 2).toString();
+            float price = Float.parseFloat(tbProduct.getValueAt(selectedRow, 3).toString());
+            int quantity = Integer.parseInt(tbProduct.getValueAt(selectedRow, 4).toString());
+            String color = tbProduct.getValueAt(selectedRow, 5).toString();
+            txtNameProducts.setText(name);
+            txtPriceProduct.setText(price + ""); // hoặc setValue nếu là JSpinner
+            txtQuantityProduct.setValue(quantity); // JSpinner
+            txtColorProduct.setText(color);
+        }
+    }
+
+    public void ViewProduct() throws SQLException, ClassCastException {
+        ProductController.init();
+        //load data tu cai instance
+        ProductController.instance.loadDataProducts();
+        LoadTableProduct();
+    }
+
+    private void LoadTableProduct() {
+//        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+//        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+//        for (int i = 0; i < tbProduct.getColumnCount(); i++) {
+//            tbProduct.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+//        }
+        DefaultTableModel model = (DefaultTableModel) this.tbProduct.getModel();
+        model.setNumRows(0);
+        var data = ProductController.instance.getDataProduct();
+        int n = 0;
+        for (Shoes shoes : data) {
+            model.addRow(new Object[]{n++, shoes.getProductId(), shoes.getProductName(), shoes.getProductPrice(), shoes.getProductQuantity(), shoes.getProductColor(), shoes.getProductAvatar(),});
+        }
+    }
+
+    public void View() {
+        txtNameProducts.setText("");
+        txtPriceProduct.setText("");
+        txtQuantityProduct.setValue(0);
+        txtColorProduct.setText("");
+
+    }
+
+//     public boolean View() {
+//        txtID.setText("");
+//        txtNameProduct.setText("");
+//        txtSize.setText("");
+//        txtPrice.setText("");;
+//     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -225,7 +283,7 @@ public class HomePage extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         PanelProducts = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tbProducts = new javax.swing.JTable();
+        tbProduct = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         btnDeleteProduct = new Forms.Components.HeaderButton();
         btnCancelProduct = new Forms.Components.HeaderButton();
@@ -631,27 +689,54 @@ public class HomePage extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
         );
 
-        tbProducts.setModel(new javax.swing.table.DefaultTableModel(
+        tbProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tbProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Name", "Price", "Quantity", "Color"
+                "No.", "ID", "Name", "Price", "Quantity", "Color", "Image"
             }
-        ));
-        jScrollPane3.setViewportView(tbProducts);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tbProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tbProductMouseReleased(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tbProduct);
+        if (tbProduct.getColumnModel().getColumnCount() > 0) {
+            tbProduct.getColumnModel().getColumn(0).setCellRenderer(null);
+        }
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnDeleteProduct.setForeground(new java.awt.Color(255, 255, 255));
         btnDeleteProduct.setText("Delete");
+        btnDeleteProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteProductMouseClicked(evt);
+            }
+        });
         jPanel2.add(btnDeleteProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 520, 130, -1));
 
         btnCancelProduct.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelProduct.setText("Cancel");
+        btnCancelProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCancelProductMouseClicked(evt);
+            }
+        });
         jPanel2.add(btnCancelProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 520, 130, -1));
 
         btnUploadProduct.setForeground(new java.awt.Color(255, 255, 255));
@@ -665,6 +750,11 @@ public class HomePage extends javax.swing.JFrame {
 
         btnAddProduct.setForeground(new java.awt.Color(255, 255, 255));
         btnAddProduct.setText("Add");
+        btnAddProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddProductMouseClicked(evt);
+            }
+        });
         jPanel2.add(btnAddProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 470, 130, -1));
 
         btnUpdateProduct.setForeground(new java.awt.Color(255, 255, 255));
@@ -792,6 +882,7 @@ public class HomePage extends javax.swing.JFrame {
         PanelHomePage.setVisible(true);
         PanelBill.setVisible(false);
         PanelProducts.setVisible(false);
+        addPanelProducts();       
     }//GEN-LAST:event_btnHomePageMouseClicked
 
     private void btnLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogOutMouseClicked
@@ -926,7 +1017,7 @@ public class HomePage extends javax.swing.JFrame {
         }
         AccountController.instance.saveAvatarToDatabase(selectedFile, currentAccount.getUserName());
         LabelAvatar.setBorder(new EmptyBorder(0, 0, 0, 0));
-        
+
     }//GEN-LAST:event_btnUploadAvatarMouseClicked
 
     private void btnManagerProductsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnManagerProductsMouseClicked
@@ -951,6 +1042,48 @@ public class HomePage extends javax.swing.JFrame {
     private void btnUploadProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadProductActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnUploadProductActionPerformed
+
+    private void tbProductMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProductMouseReleased
+        clickMouseTableProduct();
+    }//GEN-LAST:event_tbProductMouseReleased
+
+    private void btnAddProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddProductMouseClicked
+        String name = txtNameProducts.getText().trim();
+        String priceText = txtPriceProduct.getText().trim();
+        String quantityText = txtQuantityProduct.getValue().toString();
+        String color = txtColorProduct.getText().trim();
+        try {
+            float price = Float.parseFloat(priceText);
+            int quantity = Integer.parseInt(quantityText);
+
+            if (ProductController.instance.addProduct(name, price, quantity, color)) {
+                LoadTableProduct();
+                View();
+                JOptionPane.showMessageDialog(this, "PRODUCT ADDED SUCCESSFULLY");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+
+
+    }//GEN-LAST:event_btnAddProductMouseClicked
+
+    private void btnCancelProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelProductMouseClicked
+        View();
+    }//GEN-LAST:event_btnCancelProductMouseClicked
+
+    private void btnDeleteProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteProductMouseClicked
+        String name = txtNameProducts.getText();
+        try {
+            if(ProductController.instance.deleteProduct(name)){
+              LoadTableProduct();
+              View();
+              JOptionPane.showMessageDialog(this, "DELETED SUCCESSFULLY");
+            }
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnDeleteProductMouseClicked
 
     public static void main(String args[]) {
 
@@ -1022,7 +1155,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jTxTime;
     private javax.swing.JLabel jTxtDate;
     private Forms.Components.ProfilePhoto profilePhoto1;
-    private javax.swing.JTable tbProducts;
+    private javax.swing.JTable tbProduct;
     private Forms.Components.TextFieldController textFieldController1;
     private Forms.Components.TextFieldController textFieldController3;
     private Forms.Components.TextFieldController txtColorProduct;
