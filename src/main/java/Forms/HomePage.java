@@ -13,9 +13,10 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.io.File;
-import java.sql.SQLException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -33,7 +34,6 @@ public class HomePage extends javax.swing.JFrame {
     private File selectedFile;
     private Icon icon;
     private Account currentAccount;
-    //private boolean status = false;
 
     public HomePage() {
         initForAmin();
@@ -78,15 +78,9 @@ public class HomePage extends javax.swing.JFrame {
         PanelBill.setVisible(false);
         styleButton();
         setTime();
-        scaleImage();
+        EffectComponents.instance.scaleImage(LabelLogo, "/Image/LogoShopImage.png");
         addPanelProducts();
-        try {
-            ViewProduct();
-        } catch (SQLException ex) {
-            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassCastException ex) {
-            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        LoadTableProduct();
         EffectComponents.instance.FocusPointer1(txtNameProduct, LabelNameProduct, Color.GREEN, Color.WHITE);
         EffectComponents.instance.FocusPointer1(txtPriceProduct, LabelPriceProduct, Color.GREEN, Color.WHITE);
         EffectComponents.instance.FocusPointer1(txtColorProduct, LabelColorProduct, Color.GREEN, Color.WHITE);
@@ -113,17 +107,11 @@ public class HomePage extends javax.swing.JFrame {
         }).start();
     }
 
-    private void scaleImage() {
-        ImageIcon icon = new ImageIcon(getClass().getResource("/Image/LogoShopImage.png"));
-        Image img = icon.getImage();
-        Image imgScale = img.getScaledInstance(LabelLogo.getWidth(), LabelLogo.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon acalledIcon = new ImageIcon(imgScale);
-        LabelLogo.setIcon(acalledIcon);
-    }
-
     private void addPanelProducts() {
 
-        this.PanelContainProduct.setLayout(new GridBagLayout());
+        if (!(PanelContainProduct.getLayout() instanceof GridBagLayout)) {
+            PanelContainProduct.setLayout(new GridBagLayout());
+        }
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(30, 30, 30, 30); // Khoảng cách giữa các item
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -132,7 +120,8 @@ public class HomePage extends javax.swing.JFrame {
         ProductController.instance.loadDataProducts();
         int cols = 3; // Số cột
         for (int i = 0; i < ProductController.instance.getDataProduct().size(); i++) {
-            var newJpanel = new PanelProducts();
+            Shoes shoes = ProductController.instance.getDataProduct().get(i);
+            var newJpanel = new PanelProducts(shoes);
             gbc.gridx = i % cols;
             gbc.gridy = i / cols;
             this.PanelContainProduct.add(newJpanel, gbc);
@@ -197,20 +186,15 @@ public class HomePage extends javax.swing.JFrame {
         }
     }
 
-    public void ViewProduct() throws SQLException, ClassCastException {
-        //load data tu cai instance
-        ProductController.instance.loadDataProducts();
-        LoadTableProduct();
-    }
-
     private void LoadTableProduct() {
-//        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-//        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-//        for (int i = 0; i < tbProduct.getColumnCount(); i++) {
-//            tbProduct.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-//        }
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        for (int i = 0; i < tbProduct.getColumnCount(); i++) {
+            tbProduct.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
         DefaultTableModel model = (DefaultTableModel) this.tbProduct.getModel();
         model.setNumRows(0);
+        ProductController.instance.loadDataProducts();
         var data = ProductController.instance.getDataProduct();
         int n = 0;
         String c = "not updated";
@@ -396,11 +380,6 @@ public class HomePage extends javax.swing.JFrame {
                 btnHomePageMouseClicked(evt);
             }
         });
-        btnHomePage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHomePageActionPerformed(evt);
-            }
-        });
 
         btnLogOut.setForeground(new java.awt.Color(204, 255, 255));
         btnLogOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/logoutIcon.png"))); // NOI18N
@@ -488,7 +467,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addComponent(btnManagerProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(btnManagerAccounts, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 256, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 352, Short.MAX_VALUE)
                 .addComponent(btnProfle, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -576,7 +555,7 @@ public class HomePage extends javax.swing.JFrame {
         );
         PanelHomePageLayout.setVerticalGroup(
             PanelHomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
             .addGroup(PanelHomePageLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -693,7 +672,7 @@ public class HomePage extends javax.swing.JFrame {
         );
         PanelBillLayout.setVerticalGroup(
             PanelBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
 
         tbProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -716,6 +695,7 @@ public class HomePage extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tbProduct.getTableHeader().setReorderingAllowed(false);
         tbProduct.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tbProductMouseReleased(evt);
@@ -763,6 +743,11 @@ public class HomePage extends javax.swing.JFrame {
 
         btnUpdateProduct.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdateProduct.setText("Update");
+        btnUpdateProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUpdateProductMouseClicked(evt);
+            }
+        });
         jPanel2.add(btnUpdateProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, 130, -1));
 
         LabelImageProduct.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
@@ -787,31 +772,36 @@ public class HomePage extends javax.swing.JFrame {
         LabelColorProduct.setForeground(new java.awt.Color(255, 255, 255));
         LabelColorProduct.setText("Color");
         jPanel2.add(LabelColorProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, -1, -1));
+
+        txtQuantityProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jPanel2.add(txtQuantityProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, 80, -1));
 
+        txtPriceProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtPriceProduct.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/PriceIcon.png"))); // NOI18N
         jPanel2.add(txtPriceProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 150, -1));
 
+        txtColorProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtColorProduct.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/ColorIcon.png"))); // NOI18N
         jPanel2.add(txtColorProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, 150, -1));
 
+        txtNameProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNameProduct.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/ProductManagerIcon.png"))); // NOI18N
         jPanel2.add(txtNameProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 170, -1));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("____________________________________");
-        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 210, -1));
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 210, 30));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("____________________________________");
-        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 410, 210, -1));
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 410, 210, 30));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("____________________________________");
-        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 210, -1));
+        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 210, 30));
 
         btnUploadSave.setForeground(new java.awt.Color(255, 255, 255));
         btnUploadSave.setText("SaveUpload");
@@ -820,7 +810,7 @@ public class HomePage extends javax.swing.JFrame {
                 btnUploadSaveMouseClicked(evt);
             }
         });
-        jPanel2.add(btnUploadSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 520, 130, -1));
+        jPanel2.add(btnUploadSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 470, 130, -1));
 
         javax.swing.GroupLayout PanelProductsLayout = new javax.swing.GroupLayout(PanelProducts);
         PanelProducts.setLayout(PanelProductsLayout);
@@ -829,12 +819,13 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelProductsLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 717, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 717, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         PanelProductsLayout.setVerticalGroup(
             PanelProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane3)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout PanelContentsLayout = new javax.swing.GroupLayout(PanelContents);
@@ -853,7 +844,7 @@ public class HomePage extends javax.swing.JFrame {
         );
         PanelContentsLayout.setVerticalGroup(
             PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
+            .addComponent(PanelProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(PanelHomePage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -902,10 +893,6 @@ public class HomePage extends javax.swing.JFrame {
         Run.runApp();
         dispose();
     }//GEN-LAST:event_btnLogOutMouseClicked
-
-    private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnHomePageActionPerformed
 
     private void btnUserBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserBillMouseClicked
         PanelBill.setVisible(true);
@@ -1112,33 +1099,53 @@ public class HomePage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "PHOTO NOT UPDATE YET!");
             return;
         }
-       
+
 
     }//GEN-LAST:event_btnUploadProductMouseClicked
 
     private void btnUploadSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUploadSaveMouseClicked
+
         String name = txtNameProduct.getText();
         ProductController.instance.loadDataProducts();
-        if(name.isEmpty()){
+        if (name.isEmpty()) {
             JOptionPane.showMessageDialog(this, "FAILURE , NAME IS EMPTY");
-            return ;
+            return;
         }
-        if(ProductController.instance.saveImageToDatabase(selectedFile, name)){
-        LabelImageProduct.setBorder(new EmptyBorder(0, 0, 0, 0));
-        LoadTableProduct();
-            JOptionPane.showMessageDialog(this, "UPLOAD IMAGE OF PRODUCT "+name+" SUCCESSFULLY");
+        if (ProductController.instance.saveImageToDatabase(selectedFile, name)) {
+            LabelImageProduct.setBorder(new EmptyBorder(0, 0, 0, 0));
+            LoadTableProduct();
+            JOptionPane.showMessageDialog(this, "UPLOAD IMAGE OF PRODUCT " + name + " SUCCESSFULLY");
             btnUploadSave.setVisible(false);
             View();
             LabelImageProduct.setIcon(null);
-            LabelImageProduct.setBorder(new MatteBorder(1,1,1,1,Color.WHITE));
-            return ;
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "UPLOAD IMAGE OF PRODUCT "+name+" FAILURE");
+            LabelImageProduct.setBorder(new MatteBorder(1, 1, 1, 1, Color.WHITE));
+            addPanelProducts();
+            return;
+        } else {
+            JOptionPane.showMessageDialog(this, "UPLOAD IMAGE OF PRODUCT " + name + " FAILURE");
             return;
         }
-        
     }//GEN-LAST:event_btnUploadSaveMouseClicked
+
+    private void btnUpdateProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateProductMouseClicked
+        String name = txtNameProduct.getText().trim();
+        String color = txtColorProduct.getText().trim();
+        int selectedRow = tbProduct.getSelectedRow();
+        float price = Float.parseFloat(txtPriceProduct.getText().trim());
+        int quantity = Integer.parseInt(txtQuantityProduct.getValue().toString().trim());
+        int idProduct = Integer.parseInt(tbProduct.getValueAt(selectedRow, 1).toString().trim());
+
+        if (ProductController.instance.updateProduct(name, quantity, price, color, idProduct)) {
+            JOptionPane.showMessageDialog(this, "UPDATED THIS PRODUCT ID: " + idProduct + " SUCCESSFULLY");
+            LoadTableProduct();
+            View();
+            return;
+        } else {
+            JOptionPane.showMessageDialog(this, "UPDATED FAILURE THIS PRODUCT ID: " + idProduct);
+            return;
+        }
+
+    }//GEN-LAST:event_btnUpdateProductMouseClicked
 
     public static void main(String args[]) {
 

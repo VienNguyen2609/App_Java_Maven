@@ -63,10 +63,18 @@ select * from BillDetail
 INSERT INTO UserAccount (UserName, UserPassword, UserGmail)
 VALUES ('vien', '123456', 'admin@gmail.com')
 
-delete From UserAccount
+delete From Products
 
+UPDATE Products SET ProductImage =  WHERE ProductName = Adias
+
+UPDATE Products
+SET ProductImage = (
+    SELECT * FROM OPENROWSET(BULK N'D:\Image\BackgroundVideoDesktop.mp4', SINGLE_BLOB) AS ImageData
+)
+
+WHERE ProductName = 'Adias'
 INSERT INTO Products (ProductName, ProductPrice, ProductQuantity , ProductColor)
-VALUES ('Nike', 5000, 400 , 'Green')
+VALUES ('Nike4', 5000, 400 , 'Green')
 
 
 update UserAccount set UserName='vien' ,UserPassword='12345678' ,UserGmail='@gmail.com' where UserName ='vien'

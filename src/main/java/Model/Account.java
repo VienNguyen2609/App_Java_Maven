@@ -88,6 +88,5 @@ public class Account {
         return "Account{" + "userId=" + userId + ", userName=" + userName + ", userPassword=" + userPassword + ", userGmail=" + userGmail + ", UserAvatar=" + UserAvatar + '}';
     }
 
-   
 
 }

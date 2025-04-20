@@ -5,6 +5,7 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.image.BufferedImage;
@@ -139,7 +140,13 @@ public class EffectComponents {
         }).start();
     }
 
-    
+    public void scaleImage(JLabel LabelLogo  , String c ) {
+        ImageIcon icon = new ImageIcon(getClass().getResource(c));
+        Image img = icon.getImage();
+        Image imgScale = img.getScaledInstance(LabelLogo.getWidth(), LabelLogo.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon acalledIcon = new ImageIcon(imgScale);
+        LabelLogo.setIcon(acalledIcon);
+    }
     // catch errors in vietnameese
     public static boolean containsVietnameseCharacters(String text) {
         String vietnamesePattern = ".*[àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ].*";

@@ -57,7 +57,8 @@ public class ProductController {
                 float price = rs.getFloat("ProductPrice");
                 int quantity = rs.getInt("ProductQuantity");
                 String color = rs.getString("ProductColor");
-                Shoes _shoes = new Shoes(id, name, quantity, price, color, null);
+                byte[] image = rs.getBytes("ProductImage");
+                Shoes _shoes = new Shoes(id, name, quantity, price, color, image);
                 listShoes.add(_shoes);
             }
             rs.close();
@@ -95,20 +96,20 @@ public class ProductController {
         return check;
     }
 
-    public boolean updateProduct(String name, int quantity, float price, String color, String ProductName) {
+    public boolean updateProduct(String name, int quantity, float price, String color, int idProduct) {
         boolean check = false;
 
         try {
-            setupDatabaseCommand("UPDATE Products SET ProductName =? , ProductPrice = ?, ProductQuantity = ?, ProductColor = ? WHERE ProductName  = ?");
+            setupDatabaseCommand("UPDATE Products SET ProductName =? , ProductPrice = ?, ProductQuantity = ?, ProductColor = ? WHERE ProductId  = ?");
             ps.setString(1, name);
             ps.setDouble(2, price);
             ps.setInt(3, quantity);
             ps.setString(4, color);
-            ps.setString(5, ProductName);
+            ps.setInt(5, idProduct);
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected > 0) {
                 for (Shoes shoes : listShoes) {
-                    if (shoes.getProductName().equalsIgnoreCase(ProductName)) {
+                    if (shoes.getProductId() == idProduct) {
                         shoes.setProductName(name);
                         shoes.setProductQuantity(quantity);
                         shoes.setProductPrice(price);

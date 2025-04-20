@@ -17,11 +17,9 @@ Forms\UserLogin$4.class
 Forms\Components\HeaderButton.class
 Forms\HomePage$13.class
 Forms\CreateAccount.class
-Forms\Components\NewJFrame.class
 Forms\PanelProducts.class
 Model\Account.class
 Forms\UserLogin$1.class
-Forms\Components\NewJFrame$1.class
 Forms\Components\RippleEffect$Effect.class
 Forms\HomePage$2.class
 Forms\Components\RippleEffect.class
