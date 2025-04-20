@@ -24,6 +24,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -86,7 +87,7 @@ public class HomePage extends javax.swing.JFrame {
         } catch (ClassCastException ex) {
             Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
         }
-        EffectComponents.instance.FocusPointer1(txtNameProducts, LabelNameProduct, Color.GREEN, Color.WHITE);
+        EffectComponents.instance.FocusPointer1(txtNameProduct, LabelNameProduct, Color.GREEN, Color.WHITE);
         EffectComponents.instance.FocusPointer1(txtPriceProduct, LabelPriceProduct, Color.GREEN, Color.WHITE);
         EffectComponents.instance.FocusPointer1(txtColorProduct, LabelColorProduct, Color.GREEN, Color.WHITE);
     }
@@ -164,7 +165,9 @@ public class HomePage extends javax.swing.JFrame {
         btnUpdateProduct.setBackgroundColor(Color.GREEN);
         btnDeleteProduct.setBackgroundColor(Color.RED);
         btnCancelProduct.setBackgroundColor(Color.BLUE);
+        btnUploadSave.setBackgroundColor(Color.magenta);
         btnSaveEditProfile.setVisible(false);
+        btnUploadSave.setVisible(false);
     }
 
     private void setAvatar(byte[] avatarBytes) {
@@ -187,7 +190,7 @@ public class HomePage extends javax.swing.JFrame {
             float price = Float.parseFloat(tbProduct.getValueAt(selectedRow, 3).toString());
             int quantity = Integer.parseInt(tbProduct.getValueAt(selectedRow, 4).toString());
             String color = tbProduct.getValueAt(selectedRow, 5).toString();
-            txtNameProducts.setText(name);
+            txtNameProduct.setText(name);
             txtPriceProduct.setText(price + ""); // hoặc setValue nếu là JSpinner
             txtQuantityProduct.setValue(quantity); // JSpinner
             txtColorProduct.setText(color);
@@ -195,7 +198,6 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     public void ViewProduct() throws SQLException, ClassCastException {
-        ProductController.init();
         //load data tu cai instance
         ProductController.instance.loadDataProducts();
         LoadTableProduct();
@@ -211,13 +213,17 @@ public class HomePage extends javax.swing.JFrame {
         model.setNumRows(0);
         var data = ProductController.instance.getDataProduct();
         int n = 0;
+        String c = "not updated";
         for (Shoes shoes : data) {
-            model.addRow(new Object[]{n++, shoes.getProductId(), shoes.getProductName(), shoes.getProductPrice(), shoes.getProductQuantity(), shoes.getProductColor(), shoes.getProductAvatar(),});
+            if (shoes.getProductAvatar() != null) {
+                c = "Updated";
+            }
+            model.addRow(new Object[]{n++, shoes.getProductId(), shoes.getProductName(), shoes.getProductPrice(), shoes.getProductQuantity(), shoes.getProductColor(), c});
         }
     }
 
     public void View() {
-        txtNameProducts.setText("");
+        txtNameProduct.setText("");
         txtPriceProduct.setText("");
         txtQuantityProduct.setValue(0);
         txtColorProduct.setText("");
@@ -290,7 +296,7 @@ public class HomePage extends javax.swing.JFrame {
         btnUploadProduct = new Forms.Components.HeaderButton();
         btnAddProduct = new Forms.Components.HeaderButton();
         btnUpdateProduct = new Forms.Components.HeaderButton();
-        profilePhoto1 = new Forms.Components.ProfilePhoto();
+        LabelImageProduct = new Forms.Components.ProfilePhoto();
         LabelNameProduct = new javax.swing.JLabel();
         LabelPriceProduct = new javax.swing.JLabel();
         LabelQuantityProduct = new javax.swing.JLabel();
@@ -298,10 +304,11 @@ public class HomePage extends javax.swing.JFrame {
         txtQuantityProduct = new javax.swing.JSpinner();
         txtPriceProduct = new Forms.Components.TextFieldController();
         txtColorProduct = new Forms.Components.TextFieldController();
-        txtNameProducts = new Forms.Components.TextFieldController();
+        txtNameProduct = new Forms.Components.TextFieldController();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        btnUploadSave = new Forms.Components.HeaderButton();
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -715,9 +722,6 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
         jScrollPane3.setViewportView(tbProduct);
-        if (tbProduct.getColumnModel().getColumnCount() > 0) {
-            tbProduct.getColumnModel().getColumn(0).setCellRenderer(null);
-        }
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -741,12 +745,12 @@ public class HomePage extends javax.swing.JFrame {
 
         btnUploadProduct.setForeground(new java.awt.Color(255, 255, 255));
         btnUploadProduct.setText("UploadImage");
-        btnUploadProduct.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUploadProductActionPerformed(evt);
+        btnUploadProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUploadProductMouseClicked(evt);
             }
         });
-        jPanel2.add(btnUploadProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 130, -1));
+        jPanel2.add(btnUploadProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 130, -1));
 
         btnAddProduct.setForeground(new java.awt.Color(255, 255, 255));
         btnAddProduct.setText("Add");
@@ -761,8 +765,8 @@ public class HomePage extends javax.swing.JFrame {
         btnUpdateProduct.setText("Update");
         jPanel2.add(btnUpdateProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, 130, -1));
 
-        profilePhoto1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
-        jPanel2.add(profilePhoto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(214, 18, 190, 90));
+        LabelImageProduct.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        jPanel2.add(LabelImageProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(214, 18, 190, 90));
 
         LabelNameProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelNameProduct.setForeground(new java.awt.Color(255, 255, 255));
@@ -791,8 +795,8 @@ public class HomePage extends javax.swing.JFrame {
         txtColorProduct.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/ColorIcon.png"))); // NOI18N
         jPanel2.add(txtColorProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, 150, -1));
 
-        txtNameProducts.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/ProductManagerIcon.png"))); // NOI18N
-        jPanel2.add(txtNameProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 170, -1));
+        txtNameProduct.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/ProductManagerIcon.png"))); // NOI18N
+        jPanel2.add(txtNameProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 170, -1));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
@@ -809,6 +813,15 @@ public class HomePage extends javax.swing.JFrame {
         jLabel17.setText("____________________________________");
         jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 210, -1));
 
+        btnUploadSave.setForeground(new java.awt.Color(255, 255, 255));
+        btnUploadSave.setText("SaveUpload");
+        btnUploadSave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUploadSaveMouseClicked(evt);
+            }
+        });
+        jPanel2.add(btnUploadSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 520, 130, -1));
+
         javax.swing.GroupLayout PanelProductsLayout = new javax.swing.GroupLayout(PanelProducts);
         PanelProducts.setLayout(PanelProductsLayout);
         PanelProductsLayout.setHorizontalGroup(
@@ -821,7 +834,7 @@ public class HomePage extends javax.swing.JFrame {
         PanelProductsLayout.setVerticalGroup(
             PanelProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane3)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout PanelContentsLayout = new javax.swing.GroupLayout(PanelContents);
@@ -882,7 +895,7 @@ public class HomePage extends javax.swing.JFrame {
         PanelHomePage.setVisible(true);
         PanelBill.setVisible(false);
         PanelProducts.setVisible(false);
-        addPanelProducts();       
+        addPanelProducts();
     }//GEN-LAST:event_btnHomePageMouseClicked
 
     private void btnLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogOutMouseClicked
@@ -1039,16 +1052,12 @@ public class HomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnManagerAccountsActionPerformed
 
-    private void btnUploadProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadProductActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUploadProductActionPerformed
-
     private void tbProductMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProductMouseReleased
         clickMouseTableProduct();
     }//GEN-LAST:event_tbProductMouseReleased
 
     private void btnAddProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddProductMouseClicked
-        String name = txtNameProducts.getText().trim();
+        String name = txtNameProduct.getText().trim();
         String priceText = txtPriceProduct.getText().trim();
         String quantityText = txtQuantityProduct.getValue().toString();
         String color = txtColorProduct.getText().trim();
@@ -1057,6 +1066,7 @@ public class HomePage extends javax.swing.JFrame {
             int quantity = Integer.parseInt(quantityText);
 
             if (ProductController.instance.addProduct(name, price, quantity, color)) {
+                ProductController.instance.loadDataProducts();
                 LoadTableProduct();
                 View();
                 JOptionPane.showMessageDialog(this, "PRODUCT ADDED SUCCESSFULLY");
@@ -1073,17 +1083,62 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelProductMouseClicked
 
     private void btnDeleteProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteProductMouseClicked
-        String name = txtNameProducts.getText();
+        String name = txtNameProduct.getText();
+        ProductController.instance.loadDataProducts();
         try {
-            if(ProductController.instance.deleteProduct(name)){
-              LoadTableProduct();
-              View();
-              JOptionPane.showMessageDialog(this, "DELETED SUCCESSFULLY");
+            if (ProductController.instance.deleteProduct(name)) {
+                LoadTableProduct();
+                View();
+                JOptionPane.showMessageDialog(this, "DELETED SUCCESSFULLY");
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnDeleteProductMouseClicked
+
+    private void btnUploadProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUploadProductMouseClicked
+        btnUploadSave.setVisible(true);
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            selectedFile = chooser.getSelectedFile();
+            icon = new ImageIcon(new ImageIcon(selectedFile.getAbsolutePath())
+                    .getImage().getScaledInstance(LabelImageProduct.getWidth(), LabelImageProduct.getHeight(), Image.SCALE_SMOOTH));
+            LabelImageProduct.setIcon(icon);
+            LabelImageProduct.setBorder(null);
+        }
+
+        if (selectedFile == null) {
+            JOptionPane.showMessageDialog(this, "PHOTO NOT UPDATE YET!");
+            return;
+        }
+       
+
+    }//GEN-LAST:event_btnUploadProductMouseClicked
+
+    private void btnUploadSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUploadSaveMouseClicked
+        String name = txtNameProduct.getText();
+        ProductController.instance.loadDataProducts();
+        if(name.isEmpty()){
+            JOptionPane.showMessageDialog(this, "FAILURE , NAME IS EMPTY");
+            return ;
+        }
+        if(ProductController.instance.saveImageToDatabase(selectedFile, name)){
+        LabelImageProduct.setBorder(new EmptyBorder(0, 0, 0, 0));
+        LoadTableProduct();
+            JOptionPane.showMessageDialog(this, "UPLOAD IMAGE OF PRODUCT "+name+" SUCCESSFULLY");
+            btnUploadSave.setVisible(false);
+            View();
+            LabelImageProduct.setIcon(null);
+            LabelImageProduct.setBorder(new MatteBorder(1,1,1,1,Color.WHITE));
+            return ;
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "UPLOAD IMAGE OF PRODUCT "+name+" FAILURE");
+            return;
+        }
+        
+    }//GEN-LAST:event_btnUploadSaveMouseClicked
 
     public static void main(String args[]) {
 
@@ -1100,6 +1155,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JCheckBox CheckPassword;
     private Forms.Components.ProfilePhoto LabelAvatar;
     private javax.swing.JLabel LabelColorProduct;
+    private Forms.Components.ProfilePhoto LabelImageProduct;
     private javax.swing.JLabel LabelLogo;
     private javax.swing.JLabel LabelNameProduct;
     private javax.swing.JLabel LabelPriceProduct;
@@ -1125,6 +1181,7 @@ public class HomePage extends javax.swing.JFrame {
     private Forms.Components.HeaderButton btnUpdateProduct;
     private Forms.Components.HeaderButton btnUploadAvatar;
     private Forms.Components.HeaderButton btnUploadProduct;
+    private Forms.Components.HeaderButton btnUploadSave;
     private Forms.Components.HeaderButton btnUserBill;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -1154,13 +1211,12 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel jTxTime;
     private javax.swing.JLabel jTxtDate;
-    private Forms.Components.ProfilePhoto profilePhoto1;
     private javax.swing.JTable tbProduct;
     private Forms.Components.TextFieldController textFieldController1;
     private Forms.Components.TextFieldController textFieldController3;
     private Forms.Components.TextFieldController txtColorProduct;
     private Forms.Components.TextFieldController txtGmailProfile;
-    private Forms.Components.TextFieldController txtNameProducts;
+    private Forms.Components.TextFieldController txtNameProduct;
     private Forms.Components.TextFieldController txtNameProfile;
     private Forms.Components.PasswordField txtPasswordProfile;
     private Forms.Components.TextFieldController txtPriceProduct;

@@ -85,7 +85,9 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" + "userId=" + userId + ", userName=" + userName + ", userPassword=" + userPassword + ", userGmail=" + userGmail + '}';
+        return "Account{" + "userId=" + userId + ", userName=" + userName + ", userPassword=" + userPassword + ", userGmail=" + userGmail + ", UserAvatar=" + UserAvatar + '}';
     }
+
+   
 
 }

@@ -2,6 +2,8 @@ package Controllers;
 
 import DatabaseConnection.SQLConnector;
 import Model.Shoes;
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -106,7 +108,7 @@ public class ProductController {
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected > 0) {
                 for (Shoes shoes : listShoes) {
-                    if (Find(ProductName)) {
+                    if (shoes.getProductName().equalsIgnoreCase(ProductName)) {
                         shoes.setProductName(name);
                         shoes.setProductQuantity(quantity);
                         shoes.setProductPrice(price);
@@ -125,19 +127,19 @@ public class ProductController {
         return check;
     }
 
-    public boolean Find(String name) {
-        boolean check = false;
-        try {
-            for (Shoes shoes : listShoes) {
-                if (shoes.getProductName().equalsIgnoreCase(name)) {
-                    check = true;
-                }
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-        return check;
-    }
+//    public boolean Find(String name) {
+//        boolean check = false;
+//        try {
+//            for (Shoes shoes : listShoes) {
+//                if (shoes.getProductName().equalsIgnoreCase(name)) {
+//                    check = true;
+//                }
+//            }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+//        }
+//        return check;
+//    }
 
     public void FindProduct(String name, JTable tbProduct) {
         DefaultTableModel model = (DefaultTableModel) tbProduct.getModel();
@@ -167,10 +169,10 @@ public class ProductController {
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected > 0) {
                 for (Shoes shoes : listShoes) {
-                    if (Find(ProductName)) {
+                    if (shoes.getProductName().equalsIgnoreCase(ProductName)) {
                         listShoes.remove(shoes);
                         check = true;
-                        break;
+                        break ;
                     }
                 }
             }
@@ -179,7 +181,23 @@ public class ProductController {
         }
         return check;
     }
-
+    
+     public boolean saveImageToDatabase(File selectedFile, String ProductName) {
+        boolean check = false;
+        try ( FileInputStream fis = new FileInputStream(selectedFile))
+        {
+            setupDatabaseCommand("UPDATE Products SET ProductImage = ? WHERE ProductName = ?");
+            ps.setString(2, ProductName);
+            ps.setBinaryStream(1, fis, (int) selectedFile.length());
+            int n = ps.executeUpdate();
+            check = true; 
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check;
+    }
+     
     public ArrayList<Shoes> getDataProduct() {
         return listShoes;
     }

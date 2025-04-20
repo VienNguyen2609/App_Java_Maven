@@ -99,8 +99,10 @@ public class Shoes {
 
     @Override
     public String toString() {
-        return "Shoes{" + "productId=" + productId + ", productName=" + productName + ", ProductColor=" + ProductColor + ", productQuantity=" + productQuantity + ", productPrice=" + productPrice + '}';
+        return "Shoes{" + "productName=" + productName + ", ProductColor=" + ProductColor + ", productId=" + productId + ", productQuantity=" + productQuantity + ", productPrice=" + productPrice + ", productImage=" + productImage + '}';
     }
+
+    
 
   
 
