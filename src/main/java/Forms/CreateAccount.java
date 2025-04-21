@@ -19,7 +19,7 @@ public class CreateAccount extends javax.swing.JFrame {
         EffectComponents.Init();
         AccountController.Init();
         try {
-            EffectComponents.instance.BufferedImage("D:\\DownLoad\\IconFootWear\\BackGroundLogin1.png", Label,0.15f);
+            EffectComponents.instance.BufferedImage("D:\\DownLoad\\IconFootWear\\BackGroundLogin1.png", Label, 0.15f);
         } catch (IOException ex) {
             System.out.println("ERROR: " + ex.getMessage());
         }
@@ -175,38 +175,19 @@ public class CreateAccount extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void headerButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerButton1MouseClicked
-        
+
         AccountController.instance.loadDataAccounts();
-        try {            
+        try {
             String name = this.txtName.getText().trim();
             String pass = this.txtPassword.getText().trim();
             String gmail = this.txtGmail.getText().trim();
-            String inputText = name;
-            if (name.isEmpty() || pass.isEmpty() || gmail.isEmpty()) {
-                LabelMessage.setText("error: INFORMATION CAN NOT EMPTY");             
-            }
-            
-            else if (!gmail.contains("@gmail.com")) {
-                LabelMessage.setText("error: GMAIL WRONG");
-            }
-            else if (name.equalsIgnoreCase("admin")){
-                LabelMessage.setText("error: FOR ADMINISTRATOR USE ONLY!!");
-            }
-            else if (EffectComponents.instance.containsVietnameseCharacters(inputText)) {
-                LabelMessage.setText("error: USER NAME WRONG!");
+
+            if (!AccountController.instance.checkAccount(name, pass, gmail)) {
+                return;
             } 
-            
-            else if (pass.length() < 7 || name.length() < 4) {
-                LabelMessage.setText("error: LENGTH PASSWORD >= 7 AND NAME >=4");
-            } 
-            
             else if (AccountController.instance.addAccount(name, pass, gmail)) {
-                LabelMessage.setText("CREATED ACCOUNT SUCCESSFULLY");                
+                LabelMessage.setText("CREATED ACCOUNT SUCCESSFULLY");
             }
-            else {
-                LabelMessage.setText("error: NAME IS EXIST!");
-            }
-            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

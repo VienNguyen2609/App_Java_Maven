@@ -15,8 +15,6 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -34,9 +32,11 @@ public class HomePage extends javax.swing.JFrame {
     private File selectedFile;
     private Icon icon;
     private Account currentAccount;
-
+    private Account accountAdmin;
+    
     public HomePage() {
-        initForAmin();
+        initForAmin(accountAdmin);
+        this.currentAccount = accountAdmin;
     }
 
     public HomePage(Account account) {
@@ -56,16 +56,16 @@ public class HomePage extends javax.swing.JFrame {
 
     }
 
-    private void initForAmin() {
+    private void initForAmin(Account account) {
 
         initComponents();
         setupWindow();
         editComponents();
-        Account account = new Account("admin", "admin", "admin@gmail.com");
-        txtNameProfile.setText(account.getUserName());
-        txtPasswordProfile.setText(account.getUserPassword());
-        txtGmailProfile.setText(account.getUserGmail());
-        setAvatar(account.getAvatarUser());
+        accountAdmin = new Account("admin", "admin", "admin@gmail.com");
+        txtNameProfile.setText(accountAdmin.getUserName());
+        txtPasswordProfile.setText(accountAdmin.getUserPassword());
+        txtGmailProfile.setText(accountAdmin.getUserGmail());
+        setAvatar(accountAdmin.getAvatarUser());
     }
 
     private void editComponents() {
@@ -206,7 +206,7 @@ public class HomePage extends javax.swing.JFrame {
         }
     }
 
-    public void View() {
+       public void View() {
         txtNameProduct.setText("");
         txtPriceProduct.setText("");
         txtQuantityProduct.setValue(0);
@@ -214,12 +214,6 @@ public class HomePage extends javax.swing.JFrame {
 
     }
 
-//     public boolean View() {
-//        txtID.setText("");
-//        txtNameProduct.setText("");
-//        txtSize.setText("");
-//        txtPrice.setText("");;
-//     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -948,28 +942,10 @@ public class HomePage extends javax.swing.JFrame {
             String password = String.valueOf(txtPasswordProfile.getPassword());
             String gmail = txtGmailProfile.getText();
 
-            if (password.length() < 7 || name.length() < 4) {
-                JOptionPane.showMessageDialog(this, "error: LENGTH PASSWORD >= 7 AND NAME >=4");
+            if(!AccountController.instance.checkAccount(name, password, gmail)){
                 return;
             }
-
-            if (EffectComponents.instance.containsVietnameseCharacters(name)) {
-                JOptionPane.showMessageDialog(this, "error: NAME WRONG!");
-                return;
-            }
-            if (name.isEmpty() || password.isEmpty() || gmail.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "error: INFORMATION CAN NOT EMPTY");
-                return;
-            }
-
-            if (!gmail.contains("@gmail.com")) {
-                JOptionPane.showMessageDialog(this, "error: GMAIL WRONG");
-                return;
-            }
-            if (name.equalsIgnoreCase("admin")) {
-                JOptionPane.showMessageDialog(this, "error: NAME IS FOR ADMINISTRATOR USE ONLY!!");
-                return;
-            }
+            
             Account UpdateAccount = AccountController.instance.updateUser(name, password, gmail, currentAccount.getUserName());
             if (UpdateAccount != null) {
                 currentAccount = UpdateAccount;

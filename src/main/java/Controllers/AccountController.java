@@ -2,6 +2,7 @@ package Controllers;
 
 import Model.Account;
 import DatabaseConnection.SQLConnector;
+import Forms.Components.EffectComponents;
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Connection;
@@ -67,7 +68,6 @@ public class AccountController {
         }
     }
 
-    
     public boolean checkLogin(String name, String pass) {
         boolean check = false;
         try {
@@ -89,7 +89,6 @@ public class AccountController {
         return check;
     }
 
-    
     public boolean addAccount(String name, String pass, String gmail) {
         boolean check = false;
         try {
@@ -104,13 +103,12 @@ public class AccountController {
                 check = true;
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "error: NAME IS EXIST!" );
         }
 
         return check;
     }
 
-    
     public boolean deleteAccount(String name) {
         boolean check = false;
         try {
@@ -132,9 +130,8 @@ public class AccountController {
         return check;
     }
 
-    
     public Account updateUser(String name, String pass, String gmail, String UserName) {
-        
+
         boolean check = false;
         try {
             setupDatabaseCommand("UPDATE UserAccount SET UserName = ? , UserPassword = ?  , UserGmail = ? WHERE UserName = ?");
@@ -159,21 +156,45 @@ public class AccountController {
         return null;
     }
 
-    
+    public boolean checkAccount(String name, String password, String gmail) {
+        boolean check = true;
+        if (password.length() < 7 || name.length() < 4) {
+            JOptionPane.showMessageDialog(null, "error: LENGTH PASSWORD >= 7 AND NAME >=4");
+            check = false;
+        }
+
+        if (EffectComponents.instance.containsVietnameseCharacters(name)) {
+            JOptionPane.showMessageDialog(null, "error: NAME WRONG!");
+            check = false;
+        }
+        if (name.isEmpty() || password.isEmpty() || gmail.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "error: INFORMATION CAN NOT EMPTY");
+            check = false;
+        }
+
+        if (!gmail.contains("@gmail.com")) {
+            JOptionPane.showMessageDialog(null, "error: GMAIL WRONG");
+            check = false;
+        }
+        if (name.equalsIgnoreCase("admin")) {
+            JOptionPane.showMessageDialog(null, "error: NAME IS FOR ADMINISTRATOR USE ONLY!!");
+            check = false;
+        }
+        return check;
+    }
+
     public void saveAvatarToDatabase(File selectedFile, String nameUser) {
-        try ( FileInputStream fis = new FileInputStream(selectedFile))
-        {
+        try (FileInputStream fis = new FileInputStream(selectedFile)) {
             setupDatabaseCommand("UPDATE UserAccount SET UserAvatar = ? WHERE UserName = ?");
             ps.setString(2, nameUser);
             ps.setBinaryStream(1, fis, (int) selectedFile.length());
             int n = ps.executeUpdate();
-        } 
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public Account getAccountByUsername(String username) {       
+    public Account getAccountByUsername(String username) {
         for (Account account : listAccount) {
             if (account.getUserName().equalsIgnoreCase(username)) {
                 return account;
@@ -182,12 +203,9 @@ public class AccountController {
         return null;
     }
 
-    
     public ArrayList<Account> getDataAccount() {
         return listAccount;
     }
-    
-    
 
     public void in() {
         for (Account account : listAccount) {
