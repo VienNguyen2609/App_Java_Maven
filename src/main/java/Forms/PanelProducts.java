@@ -19,8 +19,8 @@ public class PanelProducts extends javax.swing.JPanel {
 //        String color = shoes.getProductColor();
 //        txtColor.setForeground(Color.getColor(color.toUpperCase()));
         byte[] imageBytes = shoes.getProductAvatar();
-        int defaultWidth = 135;
-        int defaultHeight = 90;
+        int defaultWidth = 300;
+        int defaultHeight = 200;
         if (imageBytes != null && imageBytes.length > 0) {
             try {
                 ByteArrayInputStream bais = new ByteArrayInputStream(imageBytes);
@@ -37,7 +37,7 @@ public class PanelProducts extends javax.swing.JPanel {
                 ex.printStackTrace();
             }
         } else {
-            LabelImage.setText("  NOT UPDATED IMAGE");
+           jLabel1.setText("NOT UPDATED IMAGE");
         }        
         
     }
@@ -49,11 +49,12 @@ public class PanelProducts extends javax.swing.JPanel {
         jPanel16 = new javax.swing.JPanel();
         jLabel69 = new javax.swing.JLabel();
         jLabel70 = new javax.swing.JLabel();
-        LabelImage = new javax.swing.JLabel();
         txtName = new Forms.Components.TextFieldController();
         jCheckBox2 = new javax.swing.JCheckBox();
         txtPrice = new Forms.Components.TextFieldController();
         txtColor = new Forms.Components.TextFieldController();
+        LabelImage = new Forms.Components.ProfilePhoto();
+        jLabel1 = new javax.swing.JLabel();
 
         jPanel16.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
 
@@ -63,11 +64,6 @@ public class PanelProducts extends javax.swing.JPanel {
         jLabel70.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel70.setText("Color:");
 
-        LabelImage.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        LabelImage.setForeground(new java.awt.Color(255, 0, 51));
-        LabelImage.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-
-        txtName.setText("Nike");
         txtName.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
 
         jCheckBox2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -81,6 +77,12 @@ public class PanelProducts extends javax.swing.JPanel {
         txtColor.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtColor.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/ColorIcon.png"))); // NOI18N
 
+        LabelImage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 51));
+        LabelImage.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 160, 30));
+
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
@@ -88,6 +90,7 @@ public class PanelProducts extends javax.swing.JPanel {
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addComponent(jLabel69, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -98,23 +101,19 @@ public class PanelProducts extends javax.swing.JPanel {
                         .addComponent(jLabel70, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addGap(0, 14, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(LabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(LabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel69)
                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -143,8 +142,9 @@ public class PanelProducts extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LabelImage;
+    private Forms.Components.ProfilePhoto LabelImage;
     private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel70;
     private javax.swing.JPanel jPanel16;

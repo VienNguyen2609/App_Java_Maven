@@ -745,7 +745,7 @@ public class HomePage extends javax.swing.JFrame {
         jPanel2.add(btnUpdateProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, 130, -1));
 
         LabelImageProduct.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
-        jPanel2.add(LabelImageProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(214, 18, 190, 90));
+        jPanel2.add(LabelImageProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(234, 18, 160, 100));
 
         LabelNameProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelNameProduct.setForeground(new java.awt.Color(255, 255, 255));
