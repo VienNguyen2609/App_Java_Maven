@@ -17,6 +17,7 @@ Forms\UserLogin$4.class
 Forms\Components\HeaderButton.class
 Forms\HomePage$13.class
 Forms\CreateAccount.class
+RunAdmin\RunAdmin.class
 Forms\PanelProducts.class
 Model\Account.class
 Forms\UserLogin$1.class

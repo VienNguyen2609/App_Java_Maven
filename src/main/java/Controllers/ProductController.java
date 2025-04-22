@@ -72,17 +72,18 @@ public class ProductController {
         }
     }
 
-    public boolean addProduct(String name, float price, int quantity, String color) {
+    public boolean addProduct(String name, float price, int quantity, String color , byte [] image) {
         boolean check = false;
         try {
-            setupDatabaseCommand("INSERT INTO Products (ProductName, ProductPrice, ProductQuantity , ProductColor) VALUES (?,?,?,?)");
+            setupDatabaseCommand("INSERT INTO Products (ProductName, ProductPrice, ProductQuantity , ProductColor ,ProductImage ) VALUES (?,?,?,?,?)");
             ps.setString(1, name);
             ps.setFloat(2, price);
             ps.setInt(3, quantity);
             ps.setString(4, color);
+            ps.setBytes(5, image);
             int n = ps.executeUpdate();
             if (n > 0) {
-                Shoes _shoes = new Shoes(name, quantity, price, color);
+                Shoes _shoes = new Shoes(name, quantity, price, color, image);
                 listShoes.add(_shoes);
                 check = true;
             }
@@ -96,16 +97,17 @@ public class ProductController {
         return check;
     }
 
-    public boolean updateProduct(String name, int quantity, float price, String color, int idProduct) {
+    public boolean updateProduct(String name, int quantity, float price, String color, int idProduct, byte [] image) {
         boolean check = false;
 
         try {
-            setupDatabaseCommand("UPDATE Products SET ProductName =? , ProductPrice = ?, ProductQuantity = ?, ProductColor = ? WHERE ProductId  = ?");
+            setupDatabaseCommand("UPDATE Products SET ProductName =? , ProductPrice = ?, ProductQuantity = ?, ProductColor = ? , ProductImage =? WHERE ProductId  = ?");
             ps.setString(1, name);
             ps.setDouble(2, price);
             ps.setInt(3, quantity);
             ps.setString(4, color);
-            ps.setInt(5, idProduct);
+            ps.setBytes(5, image);
+            ps.setInt(6, idProduct);
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected > 0) {
                 for (Shoes shoes : listShoes) {
@@ -114,6 +116,7 @@ public class ProductController {
                         shoes.setProductQuantity(quantity);
                         shoes.setProductPrice(price);
                         shoes.setProductColor(color);
+                        shoes.setProductAvatar(image);
                         check = true;
                         break;
                     }
@@ -183,21 +186,21 @@ public class ProductController {
         return check;
     }
     
-     public boolean saveImageToDatabase(File selectedFile, String ProductName) {
-        boolean check = false;
-        try ( FileInputStream fis = new FileInputStream(selectedFile))
-        {
-            setupDatabaseCommand("UPDATE Products SET ProductImage = ? WHERE ProductName = ?");
-            ps.setString(2, ProductName);
-            ps.setBinaryStream(1, fis, (int) selectedFile.length());
-            int n = ps.executeUpdate();
-            check = true; 
-        } 
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return check;
-    }
+//     public boolean saveImageToDatabase(File selectedFile, String ProductName) {
+//        boolean check = false;
+//        try ( FileInputStream fis = new FileInputStream(selectedFile))
+//        {
+//            setupDatabaseCommand("UPDATE Products SET ProductImage = ? WHERE ProductName = ?");
+//            ps.setString(2, ProductName);
+//            ps.setBinaryStream(1, fis, (int) selectedFile.length());
+//            int n = ps.executeUpdate();
+//            check = true; 
+//        } 
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return check;
+//    }
      
     public ArrayList<Shoes> getDataProduct() {
         return listShoes;

@@ -132,7 +132,6 @@ public class AccountController {
 
     public Account updateAccount(String name, String pass, String gmail, String UserName) {
 
-        boolean check = false;
         try {
             setupDatabaseCommand("UPDATE UserAccount SET UserName = ? , UserPassword = ?  , UserGmail = ? WHERE UserName = ?");
             ps.setString(1, name);
@@ -156,6 +155,8 @@ public class AccountController {
         return null;
     }
 
+    
+    
     public boolean checkAccount(String name, String password, String gmail) {
         boolean check = true;
         if (password.length() < 7 || name.length() < 4) {
