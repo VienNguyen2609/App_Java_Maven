@@ -21,7 +21,7 @@ public class AdminLogin extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(new File(iconPath).getAbsolutePath()));
         setLocationRelativeTo(null);
         setResizable(false);
-        EffectComponents.Init();
+        EffectComponents.init();
       //  EffectComponents.instance.FocusPointer(txtName, null, jLabel8, null, null);
     }
     

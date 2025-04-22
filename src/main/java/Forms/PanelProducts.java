@@ -16,8 +16,6 @@ public class PanelProducts extends javax.swing.JPanel {
         txtName.setText(shoes.getProductName());
         txtPrice.setText(String.valueOf(shoes.getProductPrice()) + "  $");
         txtColor.setText(shoes.getProductColor());
-//        String color = shoes.getProductColor();
-//        txtColor.setForeground(Color.getColor(color.toUpperCase()));
         byte[] imageBytes = shoes.getProductAvatar();
         int defaultWidth = 300;
         int defaultHeight = 200;

@@ -15,7 +15,7 @@ import java.util.List;
 public class RippleEffect {
 
     private final Component component;
-    private Color rippleColor = new Color(0 , 0, 0);
+    private Color rippleColor = new Color(0, 0, 0);
     private List<Effect> effects;
      
     public Color getBackgroundColor() {

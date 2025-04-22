@@ -16,16 +16,16 @@ import javax.swing.JOptionPane;
 
 public class AccountController {
 
-    private ArrayList<Account> listAccount = new ArrayList<>();
+    private  ArrayList<Account> listAccount = new ArrayList<>();
+    
     public static AccountController instance;
-
     private static Connection conn;
     private static PreparedStatement ps;
     private static ResultSet rs;
 
     private static boolean isInitiallized = false;
 
-    public static void Init() {
+    public static void init() {
         if (isInitiallized == true) {
             return;
         }
@@ -130,7 +130,7 @@ public class AccountController {
         return check;
     }
 
-    public Account updateUser(String name, String pass, String gmail, String UserName) {
+    public Account updateAccount(String name, String pass, String gmail, String UserName) {
 
         boolean check = false;
         try {

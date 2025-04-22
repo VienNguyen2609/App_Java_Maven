@@ -33,7 +33,7 @@ public class HomePage extends javax.swing.JFrame {
     private Icon icon;
     private Account currentAccount;
     private Account accountAdmin;
-    
+
     public HomePage() {
         initForAmin(accountAdmin);
         this.currentAccount = accountAdmin;
@@ -45,9 +45,7 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     private void initForUser(Account account) {
-
         initComponents();
-        setupWindow();
         txtNameProfile.setText(account.getUserName());
         txtPasswordProfile.setText(account.getUserPassword());
         txtGmailProfile.setText(account.getUserGmail());
@@ -57,9 +55,7 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     private void initForAmin(Account account) {
-
         initComponents();
-        setupWindow();
         editComponents();
         accountAdmin = new Account("admin", "admin", "admin@gmail.com");
         txtNameProfile.setText(accountAdmin.getUserName());
@@ -70,20 +66,22 @@ public class HomePage extends javax.swing.JFrame {
 
     private void editComponents() {
         ProductController.init();
-        AccountController.Init();
-        EffectComponents.Init();
+        AccountController.init();
+        EffectComponents.init();
         PanelProfile.setVisible(false);
         PanelHomePage.setVisible(true);
         PanelProducts.setVisible(false);
         PanelBill.setVisible(false);
+        jScrollPane2.getVerticalScrollBar().setUnitIncrement(15); // tốc độ lướt của jscroll 
         styleButton();
         setTime();
-        EffectComponents.instance.scaleImage(LabelLogo, "/Image/LogoShopImage.png");
+        setupWindow();
         addPanelProducts();
         LoadTableProduct();
-        EffectComponents.instance.FocusPointer1(txtNameProduct, LabelNameProduct, Color.GREEN, Color.WHITE);
-        EffectComponents.instance.FocusPointer1(txtPriceProduct, LabelPriceProduct, Color.GREEN, Color.WHITE);
-        EffectComponents.instance.FocusPointer1(txtColorProduct, LabelColorProduct, Color.GREEN, Color.WHITE);
+        EffectComponents.instance.scaleImage(LabelLogo, "/Image/LogoShopImage.png");
+        EffectComponents.instance.focusPointer1(txtNameProduct, LabelNameProduct, Color.GREEN, Color.WHITE);
+        EffectComponents.instance.focusPointer1(txtPriceProduct, LabelPriceProduct, Color.GREEN, Color.WHITE);
+        EffectComponents.instance.focusPointer1(txtColorProduct, LabelColorProduct, Color.GREEN, Color.WHITE);
     }
 
     private void setTime() {
@@ -206,12 +204,11 @@ public class HomePage extends javax.swing.JFrame {
         }
     }
 
-       public void View() {
+    public void View() {
         txtNameProduct.setText("");
         txtPriceProduct.setText("");
         txtQuantityProduct.setValue(0);
         txtColorProduct.setText("");
-
     }
 
     @SuppressWarnings("unchecked")
@@ -220,7 +217,7 @@ public class HomePage extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        PanelHeader = new javax.swing.JPanel();
         LabelLogo = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTxTime = new javax.swing.JLabel();
@@ -294,10 +291,10 @@ public class HomePage extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        jPanel4.setMinimumSize(new java.awt.Dimension(562, 80));
-        jPanel4.setPreferredSize(new java.awt.Dimension(1293, 80));
-        jPanel4.setLayout(new java.awt.GridBagLayout());
+        PanelHeader.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        PanelHeader.setMinimumSize(new java.awt.Dimension(562, 80));
+        PanelHeader.setPreferredSize(new java.awt.Dimension(1293, 80));
+        PanelHeader.setLayout(new java.awt.GridBagLayout());
 
         LabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/LogoShopImage.png"))); // NOI18N
         LabelLogo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, new java.awt.Color(255, 0, 51)));
@@ -309,7 +306,7 @@ public class HomePage extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel4.add(LabelLogo, gridBagConstraints);
+        PanelHeader.add(LabelLogo, gridBagConstraints);
 
         jLabel3.setFont(new java.awt.Font("Verdana", 1, 23)); // NOI18N
         jLabel3.setText(" CHÀO MỪNG 30/4/2025 , cali TUỔI LÒN ,VIỆT NAM MUÔN NĂM");
@@ -323,29 +320,29 @@ public class HomePage extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel4.add(jLabel3, gridBagConstraints);
+        PanelHeader.add(jLabel3, gridBagConstraints);
 
         jTxTime.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jTxTime.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jTxTime.setMaximumSize(new java.awt.Dimension(85, 85));
         jTxTime.setMinimumSize(new java.awt.Dimension(85, 85));
         jTxTime.setPreferredSize(new java.awt.Dimension(85, 85));
-        jPanel4.add(jTxTime, new java.awt.GridBagConstraints());
+        PanelHeader.add(jTxTime, new java.awt.GridBagConstraints());
 
         jTxtDate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jTxtDate.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jTxtDate.setMaximumSize(new java.awt.Dimension(135, 120));
         jTxtDate.setMinimumSize(new java.awt.Dimension(135, 120));
         jTxtDate.setPreferredSize(new java.awt.Dimension(135, 120));
-        jPanel4.add(jTxtDate, new java.awt.GridBagConstraints());
+        PanelHeader.add(jTxtDate, new java.awt.GridBagConstraints());
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_flag.png"))); // NOI18N
         jLabel11.setMaximumSize(new java.awt.Dimension(90, 90));
         jLabel11.setMinimumSize(new java.awt.Dimension(90, 90));
         jLabel11.setPreferredSize(new java.awt.Dimension(90, 90));
-        jPanel4.add(jLabel11, new java.awt.GridBagConstraints());
+        PanelHeader.add(jLabel11, new java.awt.GridBagConstraints());
 
-        jPanel1.add(jPanel4, java.awt.BorderLayout.PAGE_START);
+        jPanel1.add(PanelHeader, java.awt.BorderLayout.PAGE_START);
 
         PanelMenu.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(0, 0, 0)));
         PanelMenu.setOpaque(false);
@@ -858,7 +855,7 @@ public class HomePage extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1395, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1395, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -942,11 +939,11 @@ public class HomePage extends javax.swing.JFrame {
             String password = String.valueOf(txtPasswordProfile.getPassword());
             String gmail = txtGmailProfile.getText();
 
-            if(!AccountController.instance.checkAccount(name, password, gmail)){
+            if (!AccountController.instance.checkAccount(name, password, gmail)) {
                 return;
             }
-            
-            Account UpdateAccount = AccountController.instance.updateUser(name, password, gmail, currentAccount.getUserName());
+
+            Account UpdateAccount = AccountController.instance.updateAccount(name, password, gmail, currentAccount.getUserName());
             if (UpdateAccount != null) {
                 currentAccount = UpdateAccount;
                 JOptionPane.showMessageDialog(this, "Profile Updated Successfully");
@@ -1146,6 +1143,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel PanelBill;
     private javax.swing.JPanel PanelContainProduct;
     private javax.swing.JPanel PanelContents;
+    private javax.swing.JPanel PanelHeader;
     private javax.swing.JPanel PanelHomePage;
     private javax.swing.JPanel PanelMenu;
     private javax.swing.JPanel PanelProducts;
@@ -1187,7 +1185,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

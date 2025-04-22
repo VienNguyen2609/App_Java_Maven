@@ -16,17 +16,17 @@ public class CreateAccount extends javax.swing.JFrame {
         setResizable(false);
         String iconPath = "D:\\DownLoad\\IconFootWear\\result_social.png";
         setIconImage(Toolkit.getDefaultToolkit().getImage(new File(iconPath).getAbsolutePath()));
-        EffectComponents.Init();
-        AccountController.Init();
+        EffectComponents.init();
+        AccountController.init();
         try {
-            EffectComponents.instance.BufferedImage("D:\\DownLoad\\IconFootWear\\BackGroundLogin1.png", Label, 0.15f);
+            EffectComponents.instance.bufferedImage("D:\\DownLoad\\IconFootWear\\BackGroundLogin1.png", Label, 0.15f);
         } catch (IOException ex) {
             System.out.println("ERROR: " + ex.getMessage());
         }
         jLabel6.setVisible(false);
-        EffectComponents.instance.FocusPointer(txtName, LabelNameUser, jLabel9, Color.GREEN, Color.WHITE);
-        EffectComponents.instance.FocusPointer(txtPassword, LabelPasswordUser, jLabel8, Color.GREEN, Color.WHITE);
-        EffectComponents.instance.FocusPointer(txtGmail, LabelGmailUser, jLabel7, Color.GREEN, Color.WHITE);
+        EffectComponents.instance.focusPointer(txtName, LabelNameUser, jLabel9, Color.GREEN, Color.WHITE);
+        EffectComponents.instance.focusPointer(txtPassword, LabelPasswordUser, jLabel8, Color.GREEN, Color.WHITE);
+        EffectComponents.instance.focusPointer(txtGmail, LabelGmailUser, jLabel7, Color.GREEN, Color.WHITE);
     }
 
     @SuppressWarnings("unchecked")

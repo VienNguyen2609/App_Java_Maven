@@ -5,17 +5,12 @@ import Forms.Components.EffectComponents;
 import Forms.Components.SetThemFlatLaf;
 import Forms.Components.ThemeFlatLaf;
 import Model.Account;
-import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 public class UserLogin extends javax.swing.JFrame {
 
@@ -29,8 +24,8 @@ public class UserLogin extends javax.swing.JFrame {
         String iconPath = "D:\\DownLoad\\IconFootWear\\result_social.png";
         setIconImage(Toolkit.getDefaultToolkit().getImage(new File(iconPath).getAbsolutePath()));
         setLocationRelativeTo(null);
-        EffectComponents.Init();
-        AccountController.Init();
+        EffectComponents.init();
+        AccountController.init();
 
         setResizable(false);
         txtName.setOpaque(false);
@@ -48,15 +43,15 @@ public class UserLogin extends javax.swing.JFrame {
         CheckPass.setBorder(BorderFactory.createBevelBorder(0));
 
         try {
-            EffectComponents.instance.BufferedImage("D:\\DownLoad\\IconFootWear\\BackGroundLogin1.png", LabelLogin, 0.15f);
+            EffectComponents.instance.bufferedImage("D:\\DownLoad\\IconFootWear\\BackGroundLogin1.png", LabelLogin, 0.15f);
         } catch (IOException ex) {
             System.out.println("ERROR: " + ex.getMessage());
         }
 
         StraightLine.setVisible(false);
         StraightLine3.setVisible(false);
-        EffectComponents.instance.FocusPointer(txtName, LabelNameUser, jLabel7, Color.GREEN, Color.WHITE);
-        EffectComponents.instance.FocusPointer(txtPassword, LabelPasswordUser, jLabel6, Color.GREEN, Color.WHITE);
+        EffectComponents.instance.focusPointer(txtName, LabelNameUser, jLabel7, Color.GREEN, Color.WHITE);
+        EffectComponents.instance.focusPointer(txtPassword, LabelPasswordUser, jLabel6, Color.GREEN, Color.WHITE);
     }
 
     @SuppressWarnings("unchecked")
@@ -256,8 +251,8 @@ public class UserLogin extends javax.swing.JFrame {
 
     private void headerButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerButton1MouseClicked
         AccountController.instance.loadDataAccounts();
-        String username = txtName.getText();
-        String password = String.valueOf(txtPassword.getPassword());
+        String username = txtName.getText().trim();
+        String password = String.valueOf(txtPassword.getPassword()).trim();
 
         SetThemFlatLaf.setThem(ThemeFlatLaf.Dark);
         if (AccountController.instance.checkLogin(username, password)) {

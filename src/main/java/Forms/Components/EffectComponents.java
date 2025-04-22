@@ -13,7 +13,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.layout.Border;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -22,12 +21,13 @@ import javax.swing.JTextField;
 
 public class EffectComponents {
 
-    public static EffectComponents instance;
-    private static boolean isInitiallized = false;
     private JTextField textField;
     private JLabel label;
-
-    public static void Init() {
+    
+    public static EffectComponents instance;
+    private static boolean isInitiallized = false;
+    
+    public static void init() {
         if (isInitiallized == true) {
             return;
         }
@@ -36,20 +36,6 @@ public class EffectComponents {
 
     }
 
-    public void addPlaceHolderStyle(JTextField textField, Color color) {
-        Font font = textField.getFont();
-        font = font.deriveFont(Font.ITALIC | Font.BOLD);
-        textField.setFont(font);
-        textField.setForeground(color);
-    }
-
-    
-    public void removePlaceHolderStyle(JTextField textField, Color color) {
-        Font font = textField.getFont();
-        font = font.deriveFont(Font.ITALIC | Font.BOLD);
-        textField.setFont(font);
-        textField.setForeground(color);
-    }
 
     
     public static BufferedImage makeTransparent(BufferedImage img, float alpha, JLabel label) {
@@ -65,7 +51,7 @@ public class EffectComponents {
     }
 
     
-    public void BufferedImage(String c, JLabel label , float alpha) throws IOException {
+    public void bufferedImage(String c, JLabel label , float alpha) throws IOException {
         BufferedImage image = ImageIO.read(new File(c));
         EffectComponents.instance.makeTransparent(image, alpha, label);
     }
@@ -73,13 +59,13 @@ public class EffectComponents {
     
    
 
-     public void FocusPointer(JTextField textField, JLabel label ,JLabel label1 ,  Color colorFirst, Color colorLast) {
+     public void focusPointer(JTextField textField, JLabel label ,JLabel label1 ,  Color colorFirst, Color colorLast) {
 
         textField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
                 label.setForeground(colorFirst);
-                AnimationComponents(label1);
+                animationComponents(label1);
             }
 
             @Override
@@ -95,7 +81,7 @@ public class EffectComponents {
             }
         });
     }
-     public void FocusPointer1(JTextField textField, JComponent jComponent ,  Color colorFirst, Color colorLast) {
+     public void focusPointer1(JTextField textField, JComponent jComponent ,  Color colorFirst, Color colorLast) {
 
         textField.addFocusListener(new FocusListener() {
             @Override
@@ -116,8 +102,9 @@ public class EffectComponents {
             }
         });
     }
+     
     //animation components 
-    public void AnimationComponents(JLabel label) {
+    public void animationComponents(JLabel label) {
         int targetWidth = label.getWidth();
         int height = label.getHeight();
         // Tính điểm trung tâm ban đầu
@@ -147,7 +134,7 @@ public class EffectComponents {
         ImageIcon acalledIcon = new ImageIcon(imgScale);
         LabelLogo.setIcon(acalledIcon);
     }
-    // catch errors in vietnameese
+    //bắt lổi tiếng việt 
     public static boolean containsVietnameseCharacters(String text) {
         String vietnamesePattern = ".*[àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ].*";
         return text.matches(vietnamesePattern);

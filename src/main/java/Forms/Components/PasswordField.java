@@ -1,4 +1,3 @@
-
 package Forms.Components;
 
 import java.awt.Graphics;
@@ -7,8 +6,6 @@ import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
-
-
 
 public class PasswordField extends JPasswordField {
 

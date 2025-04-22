@@ -29,7 +29,6 @@ public class HeaderButton extends JButton {
         setCursor(new Cursor(Cursor.HAND_CURSOR));
         putClientProperty(FlatClientProperties.STYLE, "" + "font:bold +3");
         setFocusPainted(false);
-
     }
 
     @Override

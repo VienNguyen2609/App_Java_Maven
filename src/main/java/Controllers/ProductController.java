@@ -142,25 +142,25 @@ public class ProductController {
 //        return check;
 //    }
 
-    public void FindProduct(String name, JTable tbProduct) {
-        DefaultTableModel model = (DefaultTableModel) tbProduct.getModel();
-        model.setNumRows(0);
-        int temp = 0;
-        try {
-            for (Shoes shoes : listShoes) {
-                if (shoes.getProductName().equalsIgnoreCase(name)) {
-                    temp++;
-                    int a = listShoes.indexOf(shoes);
-                    model.addRow(new Object[]{a++, shoes.getProductId(), shoes.getProductName(), shoes.getProductPrice(), shoes.getProductQuantity(), shoes.getProductColor(), shoes.getTotalProduct()});
-                }
-            }
-            if (temp == 0) {
-                JOptionPane.showMessageDialog(null, "NAME: " + name + "   \nFAILD!");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-    }
+//    public void findProduct(String name, JTable tbProduct) {
+//        DefaultTableModel model = (DefaultTableModel) tbProduct.getModel();
+//        model.setNumRows(0);
+//        int temp = 0;
+//        try {
+//            for (Shoes shoes : listShoes) {
+//                if (shoes.getProductName().equalsIgnoreCase(name)) {
+//                    temp++;
+//                    int a = listShoes.indexOf(shoes);
+//                    model.addRow(new Object[]{a++, shoes.getProductId(), shoes.getProductName(), shoes.getProductPrice(), shoes.getProductQuantity(), shoes.getProductColor(), shoes.getTotalProduct()});
+//                }
+//            }
+//            if (temp == 0) {
+//                JOptionPane.showMessageDialog(null, "NAME: " + name + "   \nFAILD!");
+//            }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+//        }
+//    }
 
     public boolean deleteProduct(String ProductName) {
         boolean check = false;
