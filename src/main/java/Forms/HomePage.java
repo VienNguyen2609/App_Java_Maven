@@ -6,6 +6,7 @@ import Forms.Components.EffectComponents;
 import Main.Run;
 import Model.Account;
 import Model.Shoes;
+import RunAdmin.RunAdmin;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -36,14 +37,17 @@ public class HomePage extends javax.swing.JFrame {
 
     private File selectedFile;
     private Icon icon;
-    private String nameText, colorText , passwordText ,gmailText;
+    private String nameText, colorText, passwordText, gmailText;
     private float priceText;
     private int idProductText, quantityText, selectedRow;
     private byte[] image = null;
 
+    private int status = 0;
+
     public HomePage() {
         initForAmin(accountAdmin);
         this.currentAccount = accountAdmin;
+        status = 1;
     }
 
     public HomePage(Account account) {
@@ -58,6 +62,8 @@ public class HomePage extends javax.swing.JFrame {
         txtGmailProfile.setText(account.getUserGmail());
         setAvatar(account.getAvatarUser());
         editComponents();
+        btnManagerProducts.setVisible(false);
+        btnManagerAccounts.setVisible(false);
 
     }
 
@@ -92,14 +98,18 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     private void getTextfiledOfProductComponents() {
-        nameText = txtNameProduct.getText().trim();
+        nameText = this.txtNameProduct.getText().trim();
         colorText = txtColorProduct.getText().trim();
         selectedRow = tbProduct.getSelectedRow();
         priceText = Float.parseFloat(txtPriceProduct.getText().trim());
         quantityText = Integer.parseInt(txtQuantityProduct.getValue().toString().trim());
         idProductText = Integer.parseInt(tbProduct.getValueAt(selectedRow, 1).toString().trim());
         try {
+            if (selectedFile == null) {
+                return;
+            }
             image = Files.readAllBytes(selectedFile.toPath());
+
         } catch (IOException ex) {
             Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -411,8 +421,11 @@ public class HomePage extends javax.swing.JFrame {
 
         btnUserBill.setForeground(new java.awt.Color(204, 255, 255));
         btnUserBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_bill.png"))); // NOI18N
-        btnUserBill.setText("Your Bill");
+        btnUserBill.setText("Bill");
         btnUserBill.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        btnUserBill.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnUserBill.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnUserBill.setIconTextGap(5);
         btnUserBill.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnUserBillMouseClicked(evt);
@@ -567,13 +580,13 @@ public class HomePage extends javax.swing.JFrame {
         PanelHomePageLayout.setHorizontalGroup(
             PanelHomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelHomePageLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 951, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 953, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         PanelHomePageLayout.setVerticalGroup(
             PanelHomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
             .addGroup(PanelHomePageLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -686,7 +699,7 @@ public class HomePage extends javax.swing.JFrame {
         PanelBill.setLayout(PanelBillLayout);
         PanelBillLayout.setHorizontalGroup(
             PanelBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1260, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1277, Short.MAX_VALUE)
         );
         PanelBillLayout.setVerticalGroup(
             PanelBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -859,14 +872,14 @@ public class HomePage extends javax.swing.JFrame {
         PanelProductsLayout.setVerticalGroup(
             PanelProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane3)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout PanelContentsLayout = new javax.swing.GroupLayout(PanelContents);
         PanelContents.setLayout(PanelContentsLayout);
         PanelContentsLayout.setHorizontalGroup(
             PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 1266, Short.MAX_VALUE)
+            .addComponent(PanelProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 1283, Short.MAX_VALUE)
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(PanelHomePage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -898,7 +911,7 @@ public class HomePage extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1395, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1395, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -924,8 +937,14 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHomePageMouseClicked
 
     private void btnLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogOutMouseClicked
-        Run.runApp();
-        dispose();
+        if (status == 1) {
+            RunAdmin.runApp();
+            dispose();
+        } else {
+            Run.runApp();
+            dispose();
+        }
+
     }//GEN-LAST:event_btnLogOutMouseClicked
 
     private void btnUserBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserBillMouseClicked
@@ -974,11 +993,11 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelProfileMouseClicked
 
     private void btnSaveEditProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveEditProfileMouseClicked
-        
+
         getTextfiledOfProfileComponents();
         AccountController.instance.loadDataAccounts();
         try {
-            
+
             if (!AccountController.instance.checkAccount(nameText, passwordText, gmailText)) {
                 return;
             }
@@ -1057,6 +1076,7 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_tbProductMouseReleased
 
     private void btnAddProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddProductMouseClicked
+
         getTextfiledOfProductComponents();
         try {
             if (ProductController.instance.addProduct(nameText, priceText, quantityText, colorText, image)) {
@@ -1079,6 +1099,7 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelProductMouseClicked
 
     private void btnDeleteProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteProductMouseClicked
+
         getTextfiledOfProductComponents();
         ProductController.instance.loadDataProducts();
         try {
@@ -1086,6 +1107,9 @@ public class HomePage extends javax.swing.JFrame {
                 LoadTableProduct();
                 View();
                 JOptionPane.showMessageDialog(this, "DELETED SUCCESSFULLY");
+            } else {
+                JOptionPane.showMessageDialog(this, "DELETE FAILURE");
+                return;
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);

@@ -2,8 +2,6 @@ package Controllers;
 
 import DatabaseConnection.SQLConnector;
 import Model.Shoes;
-import java.io.File;
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,8 +10,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 public class ProductController {
 

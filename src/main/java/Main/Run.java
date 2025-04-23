@@ -5,13 +5,13 @@ import Forms.Components.ThemeFlatLaf;
 import Forms.UserLogin;
 
 public class Run {
-    
+
     public static void main(String[] args) {
-        runApp();       
-    }   
-    
+        runApp();
+    }
+
     public static void runApp() {
-        SetThemFlatLaf.setThem(ThemeFlatLaf.Light);          
+        SetThemFlatLaf.setThem(ThemeFlatLaf.Light);
         new UserLogin().setVisible(true);
     }
 
