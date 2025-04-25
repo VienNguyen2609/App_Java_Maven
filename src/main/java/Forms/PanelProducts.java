@@ -1,6 +1,7 @@
 package Forms;
 
 import Model.Shoes;
+import java.awt.Dimension;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -9,15 +10,17 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class PanelProducts extends javax.swing.JPanel {
-    
+
     public PanelProducts(Shoes shoes) {
+
         initComponents();
         txtName.setText(shoes.getProductName());
         txtPrice.setText(String.valueOf(shoes.getProductPrice()) + "$");
         txtColor.setText(shoes.getProductColor());
         byte[] imageBytes = shoes.getProductAvatar();
-        int defaultWidth = 300;
-        int defaultHeight = 200;
+        int defaultWidth = 201;
+        int defaultHeight = 129;
+
         if (imageBytes != null && imageBytes.length > 0) {
             try {
                 ByteArrayInputStream bais = new ByteArrayInputStream(imageBytes);
@@ -28,117 +31,77 @@ public class PanelProducts extends javax.swing.JPanel {
                     LabelImage.setIcon(icon);
                 } else {
                     System.out.println("CAN NOT UPLOAD IMAGE PRODUCTS");
-                    
+
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         } else {
-           jLabel1.setText("NOT UPDATED IMAGE");
-        }        
-        
+            jLabel1.setText("NOT UPDATED IMAGE");
+        }
+        this.jLabel1.repaint();
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel16 = new javax.swing.JPanel();
-        LabelImage = new Forms.Components.ProfilePhoto();
-        jLabel1 = new javax.swing.JLabel();
         jLabel69 = new javax.swing.JLabel();
         jLabel70 = new javax.swing.JLabel();
         txtName = new Forms.Components.TextFieldController();
         jCheckBox2 = new javax.swing.JCheckBox();
         txtPrice = new Forms.Components.TextFieldController();
         txtColor = new Forms.Components.TextFieldController();
+        jLabel1 = new javax.swing.JLabel();
+        LabelImage = new javax.swing.JLabel();
 
         jPanel16.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
-
-        LabelImage.setPreferredSize(new java.awt.Dimension(145, 145));
-        LabelImage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 0, 51));
-        LabelImage.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 150, 18));
+        jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel69.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel69.setText("Price:");
+        jPanel16.add(jLabel69, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 224, 43, -1));
 
         jLabel70.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel70.setText("Color:");
+        jPanel16.add(jLabel70, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 280, 43, -1));
 
         txtName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtName.setToolTipText("");
         txtName.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jPanel16.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 7, 130, -1));
 
         jCheckBox2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jCheckBox2.setText("Purchase");
+        jPanel16.add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 329, -1, -1));
 
         txtPrice.setForeground(new java.awt.Color(204, 255, 255));
         txtPrice.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtPrice.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/PriceIcon.png"))); // NOI18N
+        jPanel16.add(txtPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 219, 189, -1));
 
         txtColor.setForeground(new java.awt.Color(255, 255, 255));
         txtColor.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtColor.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/ColorIcon.png"))); // NOI18N
+        jPanel16.add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 275, 189, -1));
 
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(jCheckBox2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addComponent(jLabel69, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addComponent(jLabel70, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                        .addComponent(LabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38))))
-        );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel69)
-                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel70)
-                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addComponent(jCheckBox2))
-        );
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel16.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 190, 20));
+
+        LabelImage.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 0)));
+        jPanel16.add(LabelImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 45, 201, 129));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,7 +111,7 @@ public class PanelProducts extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Forms.Components.ProfilePhoto LabelImage;
+    private javax.swing.JLabel LabelImage;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel69;

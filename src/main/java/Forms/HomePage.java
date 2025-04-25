@@ -145,13 +145,12 @@ public class HomePage extends javax.swing.JFrame {
 
     private void addPanelProducts() {
 
-        if (!(PanelContainProduct.getLayout() instanceof GridBagLayout)) {
-            PanelContainProduct.setLayout(new GridBagLayout());
-        }
+        this.PanelContainProduct.setLayout(new GridBagLayout());
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(20, 20, 20, 20); // Khoảng cách giữa các item
         gbc.fill = GridBagConstraints.HORIZONTAL;
-       // gbc.weightx = 1; // Giãn ngang
+        // gbc.weightx = 1; // Giãn ngang
         this.PanelContainProduct.removeAll();
         ProductController.instance.loadDataProducts();
         int cols = 3; // Số cột
@@ -160,7 +159,7 @@ public class HomePage extends javax.swing.JFrame {
             var newJpanel = new PanelProducts(shoes);
             gbc.gridx = i % cols;
             gbc.gridy = i / cols;
-            PanelContainProduct.add(newJpanel, gbc);
+            this.PanelContainProduct.add(newJpanel, gbc);
         }
 
         this.PanelContainProduct.revalidate();
