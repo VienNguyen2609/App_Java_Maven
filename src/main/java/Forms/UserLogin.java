@@ -192,7 +192,7 @@ public class UserLogin extends javax.swing.JFrame {
 
         StraightLine3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         StraightLine3.setForeground(new java.awt.Color(255, 255, 255));
-        StraightLine3.setText("__________________");
+        StraightLine3.setText("___________________");
         jPanel1.add(StraightLine3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 110, 25));
         jPanel1.add(LabelLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 410));
 

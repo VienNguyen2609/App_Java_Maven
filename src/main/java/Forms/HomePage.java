@@ -35,6 +35,7 @@ public class HomePage extends javax.swing.JFrame {
     private Account currentAccount;
     private Account accountAdmin;
 
+    private int quantityAvailableBill;
     private File selectedFile;
     private Icon icon;
     private String nameText, colorText, passwordText, gmailText;
@@ -156,7 +157,7 @@ public class HomePage extends javax.swing.JFrame {
         int cols = 3; // Số cột
         for (int i = 0; i < ProductController.instance.getDataProduct().size(); i++) {
             Shoes shoes = ProductController.instance.getDataProduct().get(i);
-            var newJpanel = new PanelProducts(shoes);
+            var newJpanel = new PanelProducts(shoes, this);
             gbc.gridx = i % cols;
             gbc.gridy = i / cols;
             this.PanelContainProduct.add(newJpanel, gbc);
@@ -247,6 +248,14 @@ public class HomePage extends javax.swing.JFrame {
         txtColorProduct.setText("");
     }
 
+    public void updateBill(String name, String price, String color, int quantityAvailable) {
+
+        txtBillName.setText(name);
+        txtBillPrice.setText(price);
+        txtBillColor.setText(color);
+        this.quantityAvailableBill = quantityAvailable;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -272,11 +281,14 @@ public class HomePage extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        textFieldController3 = new Forms.Components.TextFieldController();
-        textFieldController1 = new Forms.Components.TextFieldController();
         jButton1 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        txtBillName = new Forms.Components.TextFieldController();
+        txtBillPrice = new Forms.Components.TextFieldController();
+        txtBillQuantity = new Forms.Components.TextFieldController();
+        txtBillColor = new Forms.Components.TextFieldController();
+        jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         PanelContainProduct = new javax.swing.JPanel();
         PanelProfile = new javax.swing.JPanel();
@@ -530,24 +542,14 @@ public class HomePage extends javax.swing.JFrame {
         jLabel12.setText("Price: ");
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 60, 20));
 
-        textFieldController3.setForeground(new java.awt.Color(255, 51, 51));
-        textFieldController3.setText("textFieldController3");
-        textFieldController3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jPanel3.add(textFieldController3, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 113, 150, 40));
-
-        textFieldController1.setForeground(new java.awt.Color(255, 0, 51));
-        textFieldController1.setText("textFieldController1");
-        textFieldController1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        textFieldController1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldController1ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(textFieldController1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 177, 160, 33));
-
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton1.setText("Buy it");
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 390, 110, -1));
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 110, -1));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 0, 0));
@@ -560,6 +562,37 @@ public class HomePage extends javax.swing.JFrame {
         jLabel14.setText("Quantity:");
         jLabel14.setToolTipText("");
         jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, 20));
+
+        txtBillName.setEditable(false);
+        txtBillName.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        txtBillName.setForeground(new java.awt.Color(255, 51, 51));
+        txtBillName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jPanel3.add(txtBillName, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 170, 20));
+
+        txtBillPrice.setEditable(false);
+        txtBillPrice.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        txtBillPrice.setForeground(new java.awt.Color(255, 51, 51));
+        txtBillPrice.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jPanel3.add(txtBillPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 180, 20));
+
+        txtBillQuantity.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        txtBillQuantity.setForeground(new java.awt.Color(255, 51, 51));
+        txtBillQuantity.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jPanel3.add(txtBillQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 140, 20));
+
+        txtBillColor.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        txtBillColor.setForeground(new java.awt.Color(255, 51, 51));
+        txtBillColor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jPanel3.add(txtBillColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 170, 20));
+
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton2.setText("Cancel");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 110, -1));
 
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -582,7 +615,7 @@ public class HomePage extends javax.swing.JFrame {
         PanelHomePageLayout.setHorizontalGroup(
             PanelHomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelHomePageLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 959, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1153,9 +1186,24 @@ public class HomePage extends javax.swing.JFrame {
         addPanelProducts();
     }//GEN-LAST:event_btnPushProductToHomeMouseClicked
 
-    private void textFieldController1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldController1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldController1ActionPerformed
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        try {
+            int quantity = Integer.parseInt(txtBillQuantity.getText());
+            if (quantity > quantityAvailableBill) {
+                JOptionPane.showMessageDialog(this, "Purchase quantity exceeds available stock!");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "ENTER A NUMBER NOT STRING", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        txtBillName.setText("");
+        txtBillPrice.setText("");
+        txtBillColor.setText("");
+        txtBillQuantity.setText("");
+    }//GEN-LAST:event_jButton2MouseClicked
 
     public static void main(String args[]) {
 
@@ -1202,6 +1250,7 @@ public class HomePage extends javax.swing.JFrame {
     private Forms.Components.HeaderButton btnUploadImageProduct;
     private Forms.Components.HeaderButton btnUserBill;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1229,8 +1278,10 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jTxTime;
     private javax.swing.JLabel jTxtDate;
     private javax.swing.JTable tbProduct;
-    private Forms.Components.TextFieldController textFieldController1;
-    private Forms.Components.TextFieldController textFieldController3;
+    private Forms.Components.TextFieldController txtBillColor;
+    private Forms.Components.TextFieldController txtBillName;
+    private Forms.Components.TextFieldController txtBillPrice;
+    private Forms.Components.TextFieldController txtBillQuantity;
     private Forms.Components.TextFieldController txtColorProduct;
     private Forms.Components.TextFieldController txtGmailProfile;
     private Forms.Components.TextFieldController txtNameProduct;

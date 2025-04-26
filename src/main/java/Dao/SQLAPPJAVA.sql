@@ -26,15 +26,21 @@ ProductImage VARBINARY(MAX)
 )
 
 
-CREATE TABLE Bill
-(
 
-BillId INT IDENTITY(1,1) PRIMARY KEY,
-UserId INT FOREIGN KEY REFERENCES UserAccount(UserId) , 
-BillDate DATETIME DEFAULT GETDATE()  ,
-TotalAmount FLOAT
+CREATE TABLE Bill (
 
+    BillId INT IDENTITY(1,1) PRIMARY KEY, 
+    UserId INT NOT NULL,                  
+    ProductId INT NOT NULL,                
+    BillDate DATETIME DEFAULT GETDATE(),  
+    Quantity INT ,    
+    Price FLOAT ,        
+    TotalAmount AS (Quantity * Price) PERSISTED,
+
+    CONSTRAINT FK_Bill_User FOREIGN KEY (UserId) REFERENCES UserAccount(UserId),
+    CONSTRAINT FK_Bill_Product FOREIGN KEY (ProductId) REFERENCES Products(ProductId)
 )
+
 
 
 CREATE TABLE BillDetail 
@@ -79,5 +85,6 @@ VALUES ('Nike4', 5000, 400 , 'Green')
 
 update UserAccount set UserName='vien' ,UserPassword='12345678' ,UserGmail='@gmail.com' where UserName ='vien'
 
+DROP TABLE IF EXISTS Bill;
 
 delete From UserAccount where UserName='admin'
