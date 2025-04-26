@@ -3,7 +3,6 @@ Forms\HomePage$6.class
 Forms\HomePage$22.class
 Controllers\ProductController.class
 Forms\TestHome.class
-Forms\PanelProducts$5.class
 Forms\AdminLogin$1.class
 Forms\Components\RippleEffect$1.class
 Forms\CreateAccount$1.class
@@ -27,6 +26,7 @@ Model\Account.class
 Forms\UserLogin$1.class
 Forms\Components\RippleEffect$Effect.class
 Forms\HomePage$2.class
+Forms\HomePage$28.class
 Forms\Components\RippleEffect.class
 Forms\HomePage$16.class
 Forms\UserLogin$5.class

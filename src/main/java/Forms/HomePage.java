@@ -25,6 +25,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -87,6 +88,8 @@ public class HomePage extends javax.swing.JFrame {
         PanelProducts.setVisible(false);
         PanelBill.setVisible(false);
         jScrollPane2.getVerticalScrollBar().setUnitIncrement(15); // tốc độ lướt của jscroll 
+        SpinnerNumberModel model = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1); 
+        txtQuantityProduct.setModel(model);
         styleButton();
         setTime();
         setupWindow();
@@ -580,6 +583,7 @@ public class HomePage extends javax.swing.JFrame {
         txtBillQuantity.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jPanel3.add(txtBillQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 140, 20));
 
+        txtBillColor.setEditable(false);
         txtBillColor.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         txtBillColor.setForeground(new java.awt.Color(255, 51, 51));
         txtBillColor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -727,7 +731,17 @@ public class HomePage extends javax.swing.JFrame {
             new String [] {
                 "UserName", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.getTableHeader().setResizingAllowed(false);
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout PanelBillLayout = new javax.swing.GroupLayout(PanelBill);
@@ -756,11 +770,19 @@ public class HomePage extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
+        tbProduct.getTableHeader().setResizingAllowed(false);
         tbProduct.getTableHeader().setReorderingAllowed(false);
         tbProduct.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {

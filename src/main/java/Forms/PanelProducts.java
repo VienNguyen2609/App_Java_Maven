@@ -81,7 +81,6 @@ public class PanelProducts extends javax.swing.JPanel {
         LabelImage = new javax.swing.JLabel();
         jLabel71 = new javax.swing.JLabel();
         txtQuantity = new Forms.Components.TextFieldController();
-        txtQuantity1 = new Forms.Components.TextFieldController();
 
         jPanel16.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
         jPanel16.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -148,17 +147,6 @@ public class PanelProducts extends javax.swing.JPanel {
         });
         jPanel16.add(txtQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 40, 40));
 
-        txtQuantity1.setEditable(false);
-        txtQuantity1.setForeground(new java.awt.Color(204, 255, 255));
-        txtQuantity1.setText("Products");
-        txtQuantity1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtQuantity1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtQuantity1ActionPerformed(evt);
-            }
-        });
-        jPanel16.add(txtQuantity1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 100, 40));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -184,10 +172,6 @@ public class PanelProducts extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jPanel16MouseClicked
 
-    private void txtQuantity1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantity1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtQuantity1ActionPerformed
-
     private void txtQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantityActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtQuantityActionPerformed
@@ -205,6 +189,5 @@ public class PanelProducts extends javax.swing.JPanel {
     private Forms.Components.TextFieldController txtName;
     private Forms.Components.TextFieldController txtPrice;
     private Forms.Components.TextFieldController txtQuantity;
-    private Forms.Components.TextFieldController txtQuantity1;
     // End of variables declaration//GEN-END:variables
 }
