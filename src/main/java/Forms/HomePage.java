@@ -88,7 +88,7 @@ public class HomePage extends javax.swing.JFrame {
         PanelProducts.setVisible(false);
         PanelBill.setVisible(false);
         jScrollPane2.getVerticalScrollBar().setUnitIncrement(15); // tốc độ lướt của jscroll 
-        SpinnerNumberModel model = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1); 
+        SpinnerNumberModel model = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1);
         txtQuantityProduct.setModel(model);
         styleButton();
         setTime();
@@ -108,12 +108,18 @@ public class HomePage extends javax.swing.JFrame {
         priceText = Float.parseFloat(txtPriceProduct.getText().trim());
         quantityText = Integer.parseInt(txtQuantityProduct.getValue().toString().trim());
         idProductText = Integer.parseInt(tbProduct.getValueAt(selectedRow, 1).toString().trim());
+
+        if (nameText.isBlank() || nameText.isBlank() || nameText.isBlank() || nameText.isBlank() || nameText.isBlank() || nameText.isBlank()) {
+            JOptionPane.showMessageDialog(this, "INFORMATION NOT EMPTY");
+            return;
+        }
         try {
             if (selectedFile == null) {
+               
                 return;
+            } else {
+                image = Files.readAllBytes(selectedFile.toPath());
             }
-            image = Files.readAllBytes(selectedFile.toPath());
-
         } catch (IOException ex) {
             Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1138,6 +1144,7 @@ public class HomePage extends javax.swing.JFrame {
                 LabelImageProduct.setIcon(null);
                 LabelImageProduct.setBorder(new MatteBorder(1, 1, 1, 1, Color.YELLOW));
                 JOptionPane.showMessageDialog(this, "PRODUCT ADDED SUCCESSFULLY");
+
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -1155,14 +1162,21 @@ public class HomePage extends javax.swing.JFrame {
         getTextfiledOfProductComponents();
         ProductController.instance.loadDataProducts();
         try {
-            if (ProductController.instance.deleteProduct(nameText)) {
-                LoadTableProduct();
-                View();
-                JOptionPane.showMessageDialog(this, "DELETED SUCCESSFULLY");
+            int check = JOptionPane.showConfirmDialog(this, "DO YOU WANT DELETE THIS PRODUCT!", "CONFIRM", JOptionPane.YES_NO_OPTION);
+
+            if (check == JOptionPane.YES_OPTION) {
+                if (ProductController.instance.deleteProduct(nameText)) {
+                    LoadTableProduct();
+                    View();
+                    JOptionPane.showMessageDialog(this, "DELETED SUCCESSFULLY");
+                } else {
+                    JOptionPane.showMessageDialog(this, "DELETE FAILURE");
+                    return;
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "DELETE FAILURE");
                 return;
             }
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
@@ -1205,7 +1219,15 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateProductMouseClicked
 
     private void btnPushProductToHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPushProductToHomeMouseClicked
-        addPanelProducts();
+
+        int check = JOptionPane.showConfirmDialog(this, "UPLOAD ALL PRODUCT TO HOMEPAGE!", "CONFIRM", JOptionPane.YES_NO_OPTION);
+        if (check == JOptionPane.YES_OPTION) {
+            addPanelProducts();
+            JOptionPane.showMessageDialog(this, "UPLOAD TO HOMEPAGE SUCCESSFULLY!");
+        } else {
+            return;
+        }
+
     }//GEN-LAST:event_btnPushProductToHomeMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked

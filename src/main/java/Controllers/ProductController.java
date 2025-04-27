@@ -68,7 +68,11 @@ public class ProductController {
         }
     }
 
-    public boolean addProduct(String name, float price, int quantity, String color , byte [] image) {
+    public boolean addProduct(String name, float price, int quantity, String color, byte[] image) {
+        if (image == null) {
+            JOptionPane.showMessageDialog(null, "PRODUCT IMAGE MUST NOT BE EMPTY!");
+            return false;
+        }
         boolean check = false;
         try {
             setupDatabaseCommand("INSERT INTO Products (ProductName, ProductPrice, ProductQuantity , ProductColor ,ProductImage ) VALUES (?,?,?,?,?)");
@@ -78,11 +82,13 @@ public class ProductController {
             ps.setString(4, color);
             ps.setBytes(5, image);
             int n = ps.executeUpdate();
+
             if (n > 0) {
                 Shoes _shoes = new Shoes(name, quantity, price, color, image);
                 listShoes.add(_shoes);
                 check = true;
             }
+
             ps.close();
             conn.close();
         } catch (SQLException e) {
@@ -93,7 +99,7 @@ public class ProductController {
         return check;
     }
 
-    public boolean updateProduct(String name, int quantity, float price, String color, int idProduct, byte [] image) {
+    public boolean updateProduct(String name, int quantity, float price, String color, int idProduct, byte[] image) {
         boolean check = false;
 
         try {
@@ -140,7 +146,6 @@ public class ProductController {
 //        }
 //        return check;
 //    }
-
 //    public void findProduct(String name, JTable tbProduct) {
 //        DefaultTableModel model = (DefaultTableModel) tbProduct.getModel();
 //        model.setNumRows(0);
@@ -160,7 +165,6 @@ public class ProductController {
 //            JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 //        }
 //    }
-
     public boolean deleteProduct(String ProductName) {
         boolean check = false;
         try {
@@ -172,7 +176,7 @@ public class ProductController {
                     if (shoes.getProductName().equalsIgnoreCase(ProductName)) {
                         listShoes.remove(shoes);
                         check = true;
-                        break ;
+                        break;
                     }
                 }
             }
@@ -181,7 +185,7 @@ public class ProductController {
         }
         return check;
     }
-    
+
 //     public boolean saveImageToDatabase(File selectedFile, String ProductName) {
 //        boolean check = false;
 //        try ( FileInputStream fis = new FileInputStream(selectedFile))
@@ -197,7 +201,6 @@ public class ProductController {
 //        }
 //        return check;
 //    }
-     
     public ArrayList<Shoes> getDataProduct() {
         return listShoes;
     }
