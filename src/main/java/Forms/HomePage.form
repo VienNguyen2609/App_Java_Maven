@@ -1027,7 +1027,7 @@
                             <Column editable="false" title="Price" type="java.lang.Float"/>
                             <Column editable="false" title="Quantity" type="java.lang.Integer"/>
                             <Column editable="false" title="Color" type="java.lang.String"/>
-                            <Column editable="false" title="Image" type="java.lang.String"/>
+                            <Column editable="false" title="Image" type="java.lang.Byte"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

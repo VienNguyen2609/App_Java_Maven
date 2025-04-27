@@ -115,7 +115,7 @@ public class HomePage extends javax.swing.JFrame {
         }
         try {
             if (selectedFile == null) {
-               
+
                 return;
             } else {
                 image = Files.readAllBytes(selectedFile.toPath());
@@ -223,10 +223,15 @@ public class HomePage extends javax.swing.JFrame {
             float price = Float.parseFloat(tbProduct.getValueAt(selectedRow, 3).toString());
             int quantity = Integer.parseInt(tbProduct.getValueAt(selectedRow, 4).toString());
             String color = tbProduct.getValueAt(selectedRow, 5).toString();
+            byte[] image = (byte[]) tbProduct.getValueAt(selectedRow, 6);
             txtNameProduct.setText(name);
             txtPriceProduct.setText(price + ""); // hoặc setValue nếu là JSpinner
             txtQuantityProduct.setValue(quantity); // JSpinner
             txtColorProduct.setText(color);
+            if (image != null) {
+                ImageIcon icon = new ImageIcon(image);
+                LabelImageProduct.setIcon(icon);
+            }
         }
     }
 
@@ -241,12 +246,12 @@ public class HomePage extends javax.swing.JFrame {
         ProductController.instance.loadDataProducts();
         var data = ProductController.instance.getDataProduct();
         int n = 0;
-        String c = "not updated";
+        //  String c = "not updated";
         for (Shoes shoes : data) {
-            if (shoes.getProductAvatar() != null) {
-                c = "Updated";
-            }
-            model.addRow(new Object[]{n++, shoes.getProductId(), shoes.getProductName(), shoes.getProductPrice(), shoes.getProductQuantity(), shoes.getProductColor(), c});
+//            if (shoes.getProductAvatar() != null) {
+//                c = "Updated";
+//            }
+            model.addRow(new Object[]{n++, shoes.getProductId(), shoes.getProductName(), shoes.getProductPrice(), shoes.getProductQuantity(), shoes.getProductColor(), shoes.getProductAvatar()});
         }
     }
 
@@ -774,7 +779,7 @@ public class HomePage extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Integer.class, java.lang.String.class, java.lang.Byte.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
@@ -1142,7 +1147,7 @@ public class HomePage extends javax.swing.JFrame {
                 LoadTableProduct();
                 View();
                 LabelImageProduct.setIcon(null);
-                LabelImageProduct.setBorder(new MatteBorder(1, 1, 1, 1, Color.YELLOW));
+               // LabelImageProduct.setBorder(new MatteBorder(1, 1, 1, 1, Color.YELLOW));
                 JOptionPane.showMessageDialog(this, "PRODUCT ADDED SUCCESSFULLY");
 
             }
@@ -1209,7 +1214,7 @@ public class HomePage extends javax.swing.JFrame {
             LoadTableProduct();
             View();
             LabelImageProduct.setIcon(null);
-            LabelImageProduct.setBorder(new MatteBorder(1, 1, 1, 1, Color.YELLOW));
+         //   LabelImageProduct.setBorder(new MatteBorder(1, 1, 1, 1, Color.YELLOW));
             return;
         } else {
             JOptionPane.showMessageDialog(this, "UPDATED FAILURE THIS PRODUCT ID: " + idProductText);

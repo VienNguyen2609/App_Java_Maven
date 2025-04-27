@@ -15,6 +15,7 @@ Forms\Components\SetThemFlatLaf$1.class
 Model\Bill.class
 Forms\HomePage$12.class
 Forms\Components\RoundedBorder.class
+Controllers\BillController.class
 Forms\UserLogin$4.class
 Forms\Components\HeaderButton.class
 Forms\HomePage$13.class

@@ -31,7 +31,7 @@ public class ProductController {
         }
     }
 
-    public void setupDatabaseCommand(String sql) throws SQLException {
+    private void setupDatabaseCommand(String sql) throws SQLException {
         try {
             SQLConnector.getForName();
             conn = SQLConnector.getConnection();
