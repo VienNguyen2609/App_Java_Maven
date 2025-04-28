@@ -18,11 +18,13 @@ public class PanelProducts extends javax.swing.JPanel {
     
     private HomePage homePage ; 
     private int quantityAvailable ;
+    private int productIdCurrent; 
     
     public PanelProducts(Shoes shoes , HomePage homePage) {
         this.homePage = homePage ; 
         
         initComponents();
+        productIdCurrent = shoes.getProductId() ; 
         txtName.setText(shoes.getProductName());
         txtPrice.setText(String.valueOf(shoes.getProductPrice()) );
         txtQuantity.setText(String.valueOf(shoes.getProductQuantity()));
@@ -57,7 +59,7 @@ public class PanelProducts extends javax.swing.JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (chkPurchase.isSelected()) {
-                homePage.updateBill(txtName.getText(), txtPrice.getText(), txtColor.getText() , quantityAvailable);
+                homePage.getTextBill(productIdCurrent, txtName.getText(), txtPrice.getText(), txtColor.getText() , quantityAvailable);
             }
         }
     });

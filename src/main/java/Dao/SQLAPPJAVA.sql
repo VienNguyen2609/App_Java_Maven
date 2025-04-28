@@ -12,7 +12,9 @@ UserName VARCHAR(20) UNIQUE NOT NULL ,
 UserPassword VARCHAR(20) , 
 UserGmail VARCHAR(50 ) ,
 UserAvatar VARBINARY(MAX) 
+
 ) 
+
 
 CREATE TABLE Products
 (
@@ -23,6 +25,7 @@ ProductPrice FLOAT ,
 ProductQuantity INT  ,
 ProductColor VARCHAR(15) ,
 ProductImage VARBINARY(MAX) 
+
 )
 
 

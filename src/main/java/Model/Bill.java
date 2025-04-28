@@ -26,14 +26,23 @@ public class Bill {
     public Bill() { }
     
     
-    public Bill(int BillId, int UserId, int ProductId, int Quantity, float TotalAmount, float Price, Date BillDate) {
+    public Bill(int BillId, int UserId, int ProductId, int Quantity ,float total , float Price, Date BillDate) {
         this.billId = BillId;
         this.userId = UserId;
         this.productId = ProductId;
         this.quantity = Quantity;
-        this.totalAmount = TotalAmount;
+        this.totalAmount = total;
+        this.price = Price;    
+        this.billDate = BillDate;
+    }
+    
+     public Bill( int UserId, int ProductId, int Quantity, float Price, Date BillDate) {
+        this.userId = UserId;
+        this.productId = ProductId;
+        this.quantity = Quantity;
         this.price = Price;
         this.billDate = BillDate;
+        
     }
 
     public int getBillId() {
@@ -66,11 +75,10 @@ public class Bill {
 
     public void setQuantity(int Quantity) {
         this.quantity = Quantity;
-        calculateTotalAmount() ; 
     }
 
     public float getTotalAmount() {
-        return totalAmount;
+        return totalAmount = price * quantity;
     }
 
     public void setTotalAmount(float TotalAmount) {
@@ -84,7 +92,6 @@ public class Bill {
 
     public void setPrice(float Price) {
         this.price = Price;
-        calculateTotalAmount() ;
     }
 
     public Date getBillDate() {
@@ -95,24 +102,8 @@ public class Bill {
         this.billDate = BillDate;
     }
 
-    public static boolean isIsInitiallized() {
-        return isInitiallized;
-    }
 
-    public static void setIsInitiallized(boolean isInitiallized) {
-        Bill.isInitiallized = isInitiallized;
-    }
-
-    public static Bill getInstance() {
-        return instance;
-    }
-
-    public static void setInstance(Bill instance) {
-        Bill.instance = instance;
-    }
     
-     private void calculateTotalAmount() {
-        this.totalAmount = this.quantity * this.price;
-    }
+   
     
 }
