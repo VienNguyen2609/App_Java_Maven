@@ -392,7 +392,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="PanelProfile" alignment="0" pref="634" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Component id="PanelHomePage" alignment="1" pref="634" max="32767" attributes="0"/>
+                      <Component id="PanelHomePage" alignment="1" pref="624" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
                       <Component id="PanelBill" alignment="0" max="32767" attributes="0"/>
@@ -926,23 +926,31 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="TbBill">
+                    <Component class="javax.swing.JTable" name="tbBill">
                       <Properties>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                            <EmptyBorder/>
+                          </Border>
+                        </Property>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="15" style="1"/>
+                        </Property>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="8" rowCount="4">
-                            <Column editable="false" title="No1." type="java.lang.Object"/>
+                            <Column editable="false" title="No1." type="java.lang.Integer"/>
                             <Column editable="false" title="BillId" type="java.lang.Integer"/>
-                            <Column editable="false" title="UserId" type="java.lang.Integer"/>
-                            <Column editable="false" title="ProductId" type="java.lang.Integer"/>
-                            <Column editable="false" title="Date" type="java.lang.Object"/>
-                            <Column editable="false" title="Quanitty" type="java.lang.Integer"/>
+                            <Column editable="false" title="UserName" type="java.lang.String"/>
+                            <Column editable="false" title="Product" type="java.lang.String"/>
+                            <Column editable="false" title="Quantity" type="java.lang.Integer"/>
                             <Column editable="false" title="Price" type="java.lang.Float"/>
                             <Column editable="false" title="Total" type="java.lang.Float"/>
+                            <Column editable="false" title="DateBooking" type="java.lang.Object"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0">
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                            <Column maxWidth="70" minWidth="70" prefWidth="-1" resizable="true">
                               <Title/>
                               <Editor/>
                               <Renderer/>
@@ -984,6 +992,8 @@
                             </Column>
                           </TableColumnModel>
                         </Property>
+                        <Property name="showHorizontalLines" type="boolean" value="true"/>
+                        <Property name="showVerticalLines" type="boolean" value="true"/>
                         <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                           <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
                         </Property>
@@ -1068,13 +1078,15 @@
                               <Editor/>
                               <Renderer/>
                             </Column>
-                            <Column maxWidth="110" minWidth="155" prefWidth="-1" resizable="true">
+                            <Column maxWidth="105" minWidth="155" prefWidth="-1" resizable="true">
                               <Title/>
                               <Editor/>
                               <Renderer/>
                             </Column>
                           </TableColumnModel>
                         </Property>
+                        <Property name="showHorizontalLines" type="boolean" value="true"/>
+                        <Property name="showVerticalLines" type="boolean" value="true"/>
                         <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                           <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
                         </Property>

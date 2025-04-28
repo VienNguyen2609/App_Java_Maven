@@ -96,8 +96,8 @@ public class HomePage extends javax.swing.JFrame {
         setTime();
         setupWindow();
         addPanelProducts();
-        loadTableProduct();
-        loadTableBill();
+        ProductController.instance.loadTableProduct(tbProduct);
+        BillController.instance.loadBills(tbBill);
         EffectComponents.instance.scaleImage(LabelLogo, "/Image/LogoShopImage.png");
         EffectComponents.instance.focusPointer1(txtNameProduct, LabelNameProduct, Color.GREEN, Color.WHITE);
         EffectComponents.instance.focusPointer1(txtPriceProduct, LabelPriceProduct, Color.GREEN, Color.WHITE);
@@ -238,44 +238,6 @@ public class HomePage extends javax.swing.JFrame {
         }
     }
 
-    private void loadTableProduct() {
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        for (int i = 0; i < tbProduct.getColumnCount(); i++) {
-            tbProduct.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-        }
-        DefaultTableModel model = (DefaultTableModel) this.tbProduct.getModel();
-        model.setNumRows(0);
-        ProductController.instance.loadDataProducts();
-        var data = ProductController.instance.getDataProduct();
-        int n = 0;
-        //  String c = "not updated";
-        for (Shoes shoes : data) {
-//            if (shoes.getProductAvatar() != null) {
-//                c = "Updated";
-//            }
-            model.addRow(new Object[]{n++, shoes.getProductId(), shoes.getProductName(), shoes.getProductPrice(), shoes.getProductQuantity(), shoes.getProductColor(), shoes.getProductAvatar()});
-        }
-    }
-    
-    private void loadTableBill() {
-        
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        for (int i = 0; i < TbBill.getColumnCount(); i++) {
-            TbBill.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-        }
-        DefaultTableModel model = (DefaultTableModel) this.TbBill.getModel();
-        model.setNumRows(0);
-        BillController.instance.loadBill();
-        var data = BillController.instance.getDataBills();
-        int n = 0;
-        for (Bill bill : data) {
-            model.addRow(new Object[]{n++, bill.getBillId(), bill.getUserId(), bill.getProductId(), bill.getBillDate(), bill.getQuantity() , bill.getPrice(),bill.getTotalAmount()});
-        }
-    }
-
-
     public void view() {
         txtNameProduct.setText("");
         txtPriceProduct.setText("");
@@ -283,10 +245,10 @@ public class HomePage extends javax.swing.JFrame {
         txtColorProduct.setText("");
     }
 
-    
-    private int productIdCurrent; 
-    public void getTextBill(int productId , String name, String price, String color, int quantityAvailable) {
-         productIdCurrent = productId ;
+    private int productIdCurrent;
+
+    public void getTextBill(int productId, String name, String price, String color, int quantityAvailable) {
+        productIdCurrent = productId;
         txtBillName.setText(name);
         txtBillPrice.setText(price);
         txtBillColor.setText(color);
@@ -346,7 +308,7 @@ public class HomePage extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         PanelBill = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TbBill = new javax.swing.JTable();
+        tbBill = new javax.swing.JTable();
         PanelProducts = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbProduct = new javax.swing.JTable();
@@ -755,7 +717,9 @@ public class HomePage extends javax.swing.JFrame {
         jLabel7.setText("_________________________________________________________________");
         PanelProfile.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, 370, 30));
 
-        TbBill.setModel(new javax.swing.table.DefaultTableModel(
+        tbBill.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        tbBill.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        tbBill.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -763,11 +727,11 @@ public class HomePage extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "No1.", "BillId", "UserId", "ProductId", "Date", "Quanitty", "Price", "Total"
+                "No1.", "BillId", "UserName", "Product", "Quantity", "Price", "Total", "DateBooking"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Float.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Float.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false
@@ -781,18 +745,21 @@ public class HomePage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        TbBill.getTableHeader().setResizingAllowed(false);
-        TbBill.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(TbBill);
-        if (TbBill.getColumnModel().getColumnCount() > 0) {
-            TbBill.getColumnModel().getColumn(0).setResizable(false);
-            TbBill.getColumnModel().getColumn(1).setResizable(false);
-            TbBill.getColumnModel().getColumn(2).setResizable(false);
-            TbBill.getColumnModel().getColumn(3).setResizable(false);
-            TbBill.getColumnModel().getColumn(4).setResizable(false);
-            TbBill.getColumnModel().getColumn(5).setResizable(false);
-            TbBill.getColumnModel().getColumn(6).setResizable(false);
-            TbBill.getColumnModel().getColumn(7).setResizable(false);
+        tbBill.setShowHorizontalLines(true);
+        tbBill.setShowVerticalLines(true);
+        tbBill.getTableHeader().setResizingAllowed(false);
+        tbBill.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tbBill);
+        if (tbBill.getColumnModel().getColumnCount() > 0) {
+            tbBill.getColumnModel().getColumn(0).setMinWidth(70);
+            tbBill.getColumnModel().getColumn(0).setMaxWidth(70);
+            tbBill.getColumnModel().getColumn(1).setResizable(false);
+            tbBill.getColumnModel().getColumn(2).setResizable(false);
+            tbBill.getColumnModel().getColumn(3).setResizable(false);
+            tbBill.getColumnModel().getColumn(4).setResizable(false);
+            tbBill.getColumnModel().getColumn(5).setResizable(false);
+            tbBill.getColumnModel().getColumn(6).setResizable(false);
+            tbBill.getColumnModel().getColumn(7).setResizable(false);
         }
 
         javax.swing.GroupLayout PanelBillLayout = new javax.swing.GroupLayout(PanelBill);
@@ -833,6 +800,8 @@ public class HomePage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbProduct.setShowHorizontalLines(true);
+        tbProduct.setShowVerticalLines(true);
         tbProduct.getTableHeader().setResizingAllowed(false);
         tbProduct.getTableHeader().setReorderingAllowed(false);
         tbProduct.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -855,7 +824,7 @@ public class HomePage extends javax.swing.JFrame {
             tbProduct.getColumnModel().getColumn(5).setMinWidth(150);
             tbProduct.getColumnModel().getColumn(5).setMaxWidth(150);
             tbProduct.getColumnModel().getColumn(6).setMinWidth(155);
-            tbProduct.getColumnModel().getColumn(6).setMaxWidth(110);
+            tbProduct.getColumnModel().getColumn(6).setMaxWidth(105);
         }
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1000,7 +969,7 @@ public class HomePage extends javax.swing.JFrame {
             PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PanelProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(PanelHomePage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE))
+                .addComponent(PanelHomePage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE))
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(PanelBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1184,10 +1153,10 @@ public class HomePage extends javax.swing.JFrame {
         try {
             if (ProductController.instance.addProduct(nameText, priceText, quantityText, colorText, image)) {
                 ProductController.instance.loadDataProducts();
-                loadTableProduct();
+                ProductController.instance.loadTableProduct(tbProduct);
                 view();
                 LabelImageProduct.setIcon(null);
-               // LabelImageProduct.setBorder(new MatteBorder(1, 1, 1, 1, Color.YELLOW));
+                // LabelImageProduct.setBorder(new MatteBorder(1, 1, 1, 1, Color.YELLOW));
                 JOptionPane.showMessageDialog(this, "PRODUCT ADDED SUCCESSFULLY");
 
             }
@@ -1211,7 +1180,7 @@ public class HomePage extends javax.swing.JFrame {
 
             if (check == JOptionPane.YES_OPTION) {
                 if (ProductController.instance.deleteProduct(nameText)) {
-                    loadTableProduct();
+                    ProductController.instance.loadTableProduct(tbProduct);
                     view();
                     JOptionPane.showMessageDialog(this, "DELETED SUCCESSFULLY");
                 } else {
@@ -1251,10 +1220,10 @@ public class HomePage extends javax.swing.JFrame {
         getTextfiledOfProductComponents();
         if (ProductController.instance.updateProduct(nameText, quantityText, priceText, colorText, idProductText, image)) {
             JOptionPane.showMessageDialog(this, "UPDATED THIS PRODUCT ID: " + idProductText + " SUCCESSFULLY");
-            loadTableProduct();
+            ProductController.instance.loadTableProduct(tbProduct);
             view();
             LabelImageProduct.setIcon(null);
-         //   LabelImageProduct.setBorder(new MatteBorder(1, 1, 1, 1, Color.YELLOW));
+            //   LabelImageProduct.setBorder(new MatteBorder(1, 1, 1, 1, Color.YELLOW));
             return;
         } else {
             JOptionPane.showMessageDialog(this, "UPDATED FAILURE THIS PRODUCT ID: " + idProductText);
@@ -1276,20 +1245,23 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPushProductToHomeMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+
         try {
-            
+
             int quantity = Integer.parseInt(txtBillQuantity.getText().trim());
-            if (quantity > quantityAvailableBill) {
+            if (quantity > quantityAvailableBill || quantity < 0 || quantity == 0 ) {
                 JOptionPane.showMessageDialog(this, "Purchase quantity exceeds available stock!");
                 return;
             }
             float price = Float.parseFloat(txtBillPrice.getText().trim());
-          
-           if(BillController.instance.addBill(currentAccount.getUserId(), productIdCurrent, new java.sql.Date(new Date().getTime()), quantity, price)){
-               JOptionPane.showMessageDialog(this, "BUY SUCCESSFULLY");
-               return;
-           }
-             
+
+            if (BillController.instance.addBill(currentAccount.getUserId(), productIdCurrent, new java.sql.Date(new Date().getTime()), quantity, price)) {
+                JOptionPane.showMessageDialog(this, "BUY SUCCESSFULLY");
+                BillController.instance.loadBills(tbBill);
+                addPanelProducts();
+                return;
+            }
+
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "ENTER A NUMBER NOT STRING", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1330,7 +1302,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel PanelMenu;
     private javax.swing.JPanel PanelProducts;
     private javax.swing.JPanel PanelProfile;
-    private javax.swing.JTable TbBill;
     private Forms.Components.HeaderButton btnAddProduct;
     private Forms.Components.HeaderButton btnCancelProduct;
     private Forms.Components.HeaderButton btnCancelProfile;
@@ -1374,6 +1345,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel jTxTime;
     private javax.swing.JLabel jTxtDate;
+    private javax.swing.JTable tbBill;
     private javax.swing.JTable tbProduct;
     private Forms.Components.TextFieldController txtBillColor;
     private Forms.Components.TextFieldController txtBillName;

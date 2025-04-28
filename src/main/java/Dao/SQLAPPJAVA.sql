@@ -88,6 +88,8 @@ VALUES ('Nike4', 5000, 400 , 'Green')
 
 update UserAccount set UserName='vien' ,UserPassword='12345678' ,UserGmail='@gmail.com' where UserName ='vien'
 
+delete from Bill
+
 DROP TABLE IF EXISTS Bill;
 
 delete From UserAccount where UserName='admin'

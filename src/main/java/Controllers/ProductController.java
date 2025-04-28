@@ -9,7 +9,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 public class ProductController {
 
@@ -65,6 +69,24 @@ public class ProductController {
             JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Unexpected error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+     public void loadTableProduct(JTable table) {
+         
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setNumRows(0);
+        ProductController.instance.loadDataProducts();
+        var data = ProductController.instance.getDataProduct();
+        int n = 0;
+        for (Shoes shoes : data) {
+            model.addRow(new Object[]{n++, shoes.getProductId(), shoes.getProductName(), shoes.getProductPrice(), shoes.getProductQuantity(), shoes.getProductColor(), shoes.getProductAvatar()});
         }
     }
 
@@ -186,21 +208,7 @@ public class ProductController {
         return check;
     }
 
-//     public boolean saveImageToDatabase(File selectedFile, String ProductName) {
-//        boolean check = false;
-//        try ( FileInputStream fis = new FileInputStream(selectedFile))
-//        {
-//            setupDatabaseCommand("UPDATE Products SET ProductImage = ? WHERE ProductName = ?");
-//            ps.setString(2, ProductName);
-//            ps.setBinaryStream(1, fis, (int) selectedFile.length());
-//            int n = ps.executeUpdate();
-//            check = true; 
-//        } 
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return check;
-//    }
+
     public ArrayList<Shoes> getDataProduct() {
         return listShoes;
     }
