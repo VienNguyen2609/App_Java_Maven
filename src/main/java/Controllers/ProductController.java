@@ -55,10 +55,11 @@ public class ProductController {
                 int id = rs.getInt("ProductId");
                 String name = rs.getString("ProductName");
                 float price = rs.getFloat("ProductPrice");
+                int size = rs.getInt("ProductSize");
                 int quantity = rs.getInt("ProductQuantity");
                 String color = rs.getString("ProductColor");
                 byte[] image = rs.getBytes("ProductImage");
-                Shoes _shoes = new Shoes(id, name, quantity, price, color, image);
+                Shoes _shoes = new Shoes(id, name, size, quantity, price, color, image);
                 listShoes.add(_shoes);
             }
             rs.close();
@@ -71,42 +72,43 @@ public class ProductController {
             JOptionPane.showMessageDialog(null, "Unexpected error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-     public void loadTableProduct(JTable table) {
-         
+
+    public void loadTableProduct(JTable table) {
+
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         for (int i = 0; i < table.getColumnCount(); i++) {
             table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
-        
+
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setNumRows(0);
         ProductController.instance.loadDataProducts();
         var data = ProductController.instance.getDataProduct();
         int n = 0;
         for (Shoes shoes : data) {
-            model.addRow(new Object[]{n++, shoes.getProductId(), shoes.getProductName(), shoes.getProductPrice(), shoes.getProductQuantity(), shoes.getProductColor(), shoes.getProductAvatar()});
+            model.addRow(new Object[]{n++, shoes.getProductId(), shoes.getProductName(),shoes.getProductSize() ,  shoes.getProductPrice(), shoes.getProductQuantity(), shoes.getProductColor(), shoes.getProductAvatar()});
         }
     }
 
-    public boolean addProduct(String name, float price, int quantity, String color, byte[] image) {
+    public boolean addProduct(String name, int size, float price, int quantity, String color, byte[] image) {
         if (image == null) {
             JOptionPane.showMessageDialog(null, "PRODUCT IMAGE MUST NOT BE EMPTY!");
             return false;
         }
         boolean check = false;
         try {
-            setupDatabaseCommand("INSERT INTO Products (ProductName, ProductPrice, ProductQuantity , ProductColor ,ProductImage ) VALUES (?,?,?,?,?)");
+            setupDatabaseCommand("INSERT INTO Products (ProductName, ProductSize, ProductPrice, ProductQuantity , ProductColor ,ProductImage ) VALUES (?,?,?,?,?,?)");
             ps.setString(1, name);
-            ps.setFloat(2, price);
-            ps.setInt(3, quantity);
-            ps.setString(4, color);
-            ps.setBytes(5, image);
+            ps.setInt(2, size);
+            ps.setFloat(3, price);
+            ps.setInt(4, quantity);
+            ps.setString(5, color);
+            ps.setBytes(6, image);
             int n = ps.executeUpdate();
 
             if (n > 0) {
-                Shoes _shoes = new Shoes(name, quantity, price, color, image);
+                Shoes _shoes = new Shoes(name, size, quantity, price, color, image);
                 listShoes.add(_shoes);
                 check = true;
             }
@@ -121,22 +123,24 @@ public class ProductController {
         return check;
     }
 
-    public boolean updateProduct(String name, int quantity, float price, String color, int idProduct, byte[] image) {
+    public boolean updateProduct(String name, int size ,  int quantity, float price, String color, byte[] image ,int idProduct ) {
         boolean check = false;
 
         try {
-            setupDatabaseCommand("UPDATE Products SET ProductName =? , ProductPrice = ?, ProductQuantity = ?, ProductColor = ? , ProductImage =? WHERE ProductId  = ?");
+            setupDatabaseCommand("UPDATE Products SET ProductName =? , ProductSize =? , ProductPrice = ?, ProductQuantity = ?, ProductColor = ? , ProductImage =? WHERE ProductId  = ?");
             ps.setString(1, name);
-            ps.setDouble(2, price);
-            ps.setInt(3, quantity);
-            ps.setString(4, color);
-            ps.setBytes(5, image);
-            ps.setInt(6, idProduct);
+            ps.setInt(2, size);
+            ps.setFloat(3, price);
+            ps.setInt(4, quantity);
+            ps.setString(5, color);
+            ps.setBytes(6, image);
+            ps.setInt(7, idProduct);
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected > 0) {
                 for (Shoes shoes : listShoes) {
                     if (shoes.getProductId() == idProduct) {
                         shoes.setProductName(name);
+                        shoes.setProductSize(size);
                         shoes.setProductQuantity(quantity);
                         shoes.setProductPrice(price);
                         shoes.setProductColor(color);
@@ -208,7 +212,6 @@ public class ProductController {
         return check;
     }
 
-
     public ArrayList<Shoes> getDataProduct() {
         return listShoes;
     }
@@ -222,14 +225,10 @@ public class ProductController {
     public static void main(String[] args) {
         ProductController.init();
         ProductController.instance.loadDataProducts();
-//        ProductController.instance.addProduct("Puma", 300, 4, "Green");
-//        ProductController.instance.addProduct("Gucci", 300, 4, "Green");
-//        ProductController.instance.addProduct("Luvis", 300, 4, "Green");
-//        ProductController.instance.addProduct("Adidas", 300, 4, "Green");
-//        ProductController.instance.addProduct("MlB", 300, 4, "Green");
-//        ProductController.instance.addProduct("Blance", 300, 4, "Green");
-//        ProductController.instance.addProduct("Promax", 300, 4, "Green");
-//        ProductController.instance.addProduct("Mira", 300, 4, "Green");
+        
+        ProductController.instance.addProduct("Puma", 40 ,300, 4, "Green" , null);
+  
+
         ProductController.instance.in();
 
     }

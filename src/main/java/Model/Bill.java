@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Bill {
     
-    private int billId , userId ,productId , quantity ; 
+    private int billId , size , userId ,productId , quantity ; 
     private float totalAmount  , price; 
     private Date billDate ; 
     
@@ -26,25 +26,36 @@ public class Bill {
     public Bill() { }
     
     
-    public Bill(int BillId, int UserId, int ProductId, int Quantity ,float total , float Price, Date BillDate) {
+    public Bill(int BillId, int UserId, int ProductId, int size , int Quantity ,float total , float Price, Date BillDate) {
         this.billId = BillId;
         this.userId = UserId;
         this.productId = ProductId;
+        this.size = size ;
         this.quantity = Quantity;
         this.totalAmount = total;
         this.price = Price;    
         this.billDate = BillDate;
     }
     
-     public Bill( int UserId, int ProductId, int Quantity, float Price, Date BillDate) {
+     public Bill( int UserId, int ProductId, int size ,int Quantity, float Price, Date BillDate) {
         this.userId = UserId;
         this.productId = ProductId;
+        this.size = size ;
         this.quantity = Quantity;
         this.price = Price;
         this.billDate = BillDate;
         
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+     
     public int getBillId() {
         return billId;
     }

@@ -84,7 +84,7 @@ public class BillController {
             table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
         try {
-            setupDatabaseCommand("SELECT b.BillId, u.UserName, p.ProductName, b.Quantity, b.Price, b.TotalAmount, b.BillDate "
+            setupDatabaseCommand("SELECT b.BillId, u.UserName, p.ProductName, p.ProductSize, b.Quantity, b.Price, b.TotalAmount, b.BillDate "
                     + "FROM Bill b "
                     + "JOIN UserAccount u ON b.UserId = u.UserId "
                     + "JOIN Products p ON b.ProductId = p.ProductId");
@@ -95,6 +95,7 @@ public class BillController {
                     rs.getInt("BillId"),
                     rs.getString("UserName"),
                     rs.getString("ProductName"),
+                    rs.getInt("ProductSize"),
                     rs.getInt("Quantity"),
                     rs.getFloat("Price"),
                     rs.getFloat("TotalAmount"),
@@ -109,15 +110,16 @@ public class BillController {
         }
     }
 
-    public boolean addBill(int userId, int productId, Date billDate, int quantity, float price) {
+    public boolean addBill(int userId, int productId, int size , Date billDate, int quantity, float price) {
 
         try {
-            setupDatabaseCommand("INSERT INTO bill ( UserId, ProductId , BillDate ,Quantity ,Price ) VALUES (?,?,?,?,?)");
+            setupDatabaseCommand("INSERT INTO bill ( UserId, ProductId , size , BillDate ,Quantity ,Price ) VALUES (?,?,?,?,?,?)");
             ps.setInt(1, userId);
             ps.setInt(2, productId);
-            ps.setDate(3, new java.sql.Date(billDate.getTime()));
-            ps.setInt(4, quantity);
-            ps.setFloat(5, price);
+            ps.setInt(3, size);
+            ps.setDate(4, new java.sql.Date(billDate.getTime()));
+            ps.setInt(5, quantity);
+            ps.setFloat(6, price);
             int n = ps.executeUpdate();
             ps.close();
 
@@ -133,7 +135,7 @@ public class BillController {
                 if (m > 0) {
 
                     // Nếu UPDATE thành công, thêm vào listBill
-                    Bill bill = new Bill(userId, productId, quantity, price, billDate);
+                    Bill bill = new Bill(userId, productId, size ,quantity, price, billDate);
                     listBill.add(bill);
                     return true;
                 }

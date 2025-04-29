@@ -50,6 +50,7 @@ Forms\Components\ProfilePhoto.class
 Forms\HomePage$10.class
 Forms\Components\PasswordField.class
 Forms\HomePage$20.class
+Forms\HomePage$30.class
 Forms\HomePage$17.class
 Forms\HomePage$27.class
 Forms\PanelProducts$3.class

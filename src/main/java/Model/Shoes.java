@@ -2,9 +2,12 @@ package Model;
 
 public class Shoes {
 
-    private String productName, ProductColor;
-    private int productId, productQuantity;
+    private int productId;
+    private String productName;
+    private int productSize;
+    private int productQuantity;
     private float productPrice;
+    private String productColor;
     private byte[] productImage;
     private static Shoes instance;
     private static boolean isInitiallized = false;
@@ -22,29 +25,33 @@ public class Shoes {
     public Shoes() {
     }
 
-    public Shoes(String productName, int productQuantity, float productPrice, String ProductColor) {
-        this(productName, productQuantity, productPrice, ProductColor, null);
-    }
-
-    public Shoes(String productName, int productQuantity, float productPrice, String ProductColor, byte[] ProductImage) {
-        this.productName = productName;
-        this.productQuantity = productQuantity;
-        this.productPrice = productPrice;
-        this.ProductColor = ProductColor;
-        this.productImage = ProductImage;
-    }
-
-    public Shoes(int productId ,String productName, int productQuantity, float productPrice, String ProductColor, byte[] ProductImage) {
+    public Shoes(int productId, String productName, int productSize, int productQuantity, float productPrice, String productColor, byte[] productImage) {
         this.productId = productId;
         this.productName = productName;
+        this.productSize = productSize;
         this.productQuantity = productQuantity;
         this.productPrice = productPrice;
-        this.ProductColor = ProductColor;
-        this.productImage = ProductImage;
+        this.productColor = productColor;
+        this.productImage = productImage;
     }
-   public Shoes(int productId ,String productName, int productQuantity, float productPrice, String ProductColor) {
-        this(productId, productName, productQuantity, productPrice, ProductColor, null);
+
+    public Shoes(String productName, int productSize, int productQuantity, float productPrice, String productColor, byte[] productImage) {
+        this.productName = productName;
+        this.productSize = productSize;
+        this.productQuantity = productQuantity;
+        this.productPrice = productPrice;
+        this.productColor = productColor;
+        this.productImage = productImage;
     }
+
+    public int getProductSize() {
+        return productSize;
+    }
+
+    public void setProductSize(int productSize) {
+        this.productSize = productSize;
+    }
+
     public String getProductName() {
         return productName;
     }
@@ -54,11 +61,11 @@ public class Shoes {
     }
 
     public String getProductColor() {
-        return ProductColor;
+        return productColor;
     }
 
-    public void setProductColor(String ProductColor) {
-        this.ProductColor = ProductColor;
+    public void setProductColor(String productColor) {
+        this.productColor = productColor;
     }
 
     public int getProductId() {
@@ -99,11 +106,7 @@ public class Shoes {
 
     @Override
     public String toString() {
-        return "Shoes{" + "productName=" + productName + ", ProductColor=" + ProductColor + ", productId=" + productId + ", productQuantity=" + productQuantity + ", productPrice=" + productPrice + ", productImage=" + productImage + '}';
+        return "Shoes{" + "productName=" + productName + ", ProductColor=" + productColor + ", productId=" + productId + ", productQuantity=" + productQuantity + ", productPrice=" + productPrice + ", productImage=" + productImage + '}';
     }
-
-    
-
-  
 
 }

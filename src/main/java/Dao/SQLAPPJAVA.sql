@@ -16,13 +16,15 @@ UserAvatar VARBINARY(MAX)
 ) 
 
 
+
 CREATE TABLE Products
 (
 
 ProductId INT IDENTITY(1,1) PRIMARY KEY , 
 ProductName VARCHAR(30) UNIQUE not null , 
-ProductPrice FLOAT ,
+ProductSize int,
 ProductQuantity INT  ,
+ProductPrice money ,
 ProductColor VARCHAR(15) ,
 ProductImage VARBINARY(MAX) 
 
@@ -35,9 +37,10 @@ CREATE TABLE Bill (
     BillId INT IDENTITY(1,1) PRIMARY KEY, 
     UserId INT NOT NULL,                  
     ProductId INT NOT NULL,                
-    BillDate DATETIME DEFAULT GETDATE(),  
-    Quantity INT ,    
-    Price FLOAT ,        
+    BillDate DATETIME DEFAULT GETDATE(), 
+	size FLOAT,
+    Quantity INT ,
+    Price money ,        
     TotalAmount AS (Quantity * Price) PERSISTED,
 
     CONSTRAINT FK_Bill_User FOREIGN KEY (UserId) REFERENCES UserAccount(UserId),
@@ -82,8 +85,9 @@ SET ProductImage = (
 )
 
 WHERE ProductName = 'Adias'
-INSERT INTO Products (ProductName, ProductPrice, ProductQuantity , ProductColor)
-VALUES ('Nike4', 5000, 400 , 'Green')
+
+INSERT INTO Products (ProductName, ProductPrice, ProductQuantity , ProductColor, ProductSize)
+VALUES ('ADdias', 5000, 400 , 'Green', 40)
 
 
 update UserAccount set UserName='vien' ,UserPassword='12345678' ,UserGmail='@gmail.com' where UserName ='vien'
