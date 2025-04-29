@@ -23,7 +23,8 @@ public class BillController {
     private static Connection conn;
     private static PreparedStatement ps;
     private static ResultSet rs;
-
+    public DefaultTableModel model ; 
+    
     private static boolean isInitiallized = false;
     public static BillController instance;
 
@@ -72,12 +73,10 @@ public class BillController {
 //            JOptionPane.showMessageDialog(null, "Unexpected error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 //        }
 //    }
-    
-    
     public void loadBills(JTable table) {
         listBill.clear();
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.setRowCount(0);
+         model = (DefaultTableModel) table.getModel();
+         model.setRowCount(0);
 
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -112,7 +111,6 @@ public class BillController {
 
     public boolean addBill(int userId, int productId, Date billDate, int quantity, float price) {
 
-        boolean check = false;
         try {
             setupDatabaseCommand("INSERT INTO bill ( UserId, ProductId , BillDate ,Quantity ,Price ) VALUES (?,?,?,?,?)");
             ps.setInt(1, userId);
@@ -122,9 +120,9 @@ public class BillController {
             ps.setFloat(5, price);
             int n = ps.executeUpdate();
             ps.close();
-            
+
             if (n > 0) {
-               
+
                 // Nếu thêm thành công, cập nhật số lượng sản phẩm
                 setupDatabaseCommand("UPDATE Products SET ProductQuantity = ProductQuantity - ? WHERE ProductId = ?");
                 ps.setInt(1, quantity);
@@ -133,11 +131,11 @@ public class BillController {
                 ps.close();
 
                 if (m > 0) {
-                    
+
                     // Nếu UPDATE thành công, thêm vào listBill
                     Bill bill = new Bill(userId, productId, quantity, price, billDate);
                     listBill.add(bill);
-                    check = true;
+                    return true;
                 }
             }
 
@@ -146,7 +144,30 @@ public class BillController {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Unexpected error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-        return check;
+        return false;
+    }
+
+    public boolean cancelBill(int billId, String productName, int quantity) {
+        try {
+            setupDatabaseCommand("UPDATE Products SET ProductQuantity = ProductQuantity + ? WHERE ProductName = ?");
+            ps.setInt(1, quantity);
+            ps.setString(2, productName);
+            ps.executeUpdate();
+            ps.close();
+
+            setupDatabaseCommand("DELETE FROM Bill WHERE BillId = ?");
+            ps.setInt(1, billId);
+            int n = ps.executeUpdate();
+            ps.close();
+
+            if (n > 0) {
+                listBill.removeIf(b -> b.getBillId() == billId);
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public ArrayList<Bill> getDataBills() {

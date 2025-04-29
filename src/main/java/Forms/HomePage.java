@@ -15,6 +15,8 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -96,6 +98,7 @@ public class HomePage extends javax.swing.JFrame {
         setTime();
         setupWindow();
         addPanelProducts();
+        mouseClickRightTableBill();
         ProductController.instance.loadTableProduct(tbProduct);
         BillController.instance.loadBills(tbBill);
         EffectComponents.instance.scaleImage(LabelLogo, "/Image/LogoShopImage.png");
@@ -255,11 +258,57 @@ public class HomePage extends javax.swing.JFrame {
         this.quantityAvailableBill = quantityAvailable;
     }
 
+    public void mouseClickRightTableBill() {
+
+        // Popup Menu (chuột phải)
+        deleteItem.addActionListener(e -> {
+            int selectedRow = tbBill.getSelectedRow();
+            if (selectedRow != -1) {
+                int confirm = JOptionPane.showConfirmDialog(this, "DO YOU WANT DELELE THIS BILL ? ", "CONFIRM", JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    int billId = Integer.parseInt(tbBill.getValueAt(selectedRow, 1).toString());
+                    String productName = tbBill.getValueAt(selectedRow, 3).toString();
+                    int quantity = Integer.parseInt(tbBill.getValueAt(selectedRow, 4).toString());
+                    //BillController.instance.model.removeRow(selectedRow);
+                    BillController.instance.cancelBill(billId, productName, quantity);
+                    BillController.instance.loadBills(tbBill);
+                    addPanelProducts();
+                }
+            }
+        });
+
+        popupMenu.add(deleteItem);
+
+        // Bắt sự kiện chuột phải để mở popup
+        tbBill.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                showPopup(e);
+            }
+
+            public void mouseReleased(MouseEvent e) {
+                showPopup(e);
+            }
+
+            private void showPopup(MouseEvent e) {
+                if (e.isPopupTrigger()) {
+                    int row = tbBill.rowAtPoint(e.getPoint());
+                    if (row != -1) {
+                        tbBill.setRowSelectionInterval(row, row);
+                        popupMenu.show(e.getComponent(), e.getX(), e.getY());
+                    }
+                }
+            }
+        });
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        popupMenu = new javax.swing.JPopupMenu();
+        deleteItem = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         PanelHeader = new javax.swing.JPanel();
         LabelLogo = new javax.swing.JLabel();
@@ -332,6 +381,8 @@ public class HomePage extends javax.swing.JFrame {
         btnPushProductToHome = new Forms.Components.HeaderButton();
         LabelImageProduct = new Forms.Components.ProfilePhoto();
         jLabel10 = new javax.swing.JLabel();
+
+        deleteItem.setText("CANCEL THIS BILL?");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 600));
@@ -541,7 +592,9 @@ public class HomePage extends javax.swing.JFrame {
         jLabel12.setText("Price: ");
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 60, 20));
 
+        jButton1.setBackground(new java.awt.Color(255, 0, 51));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Buy it");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -585,6 +638,7 @@ public class HomePage extends javax.swing.JFrame {
         txtBillColor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jPanel3.add(txtBillColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 170, 20));
 
+        jButton2.setBackground(new java.awt.Color(255, 255, 51));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton2.setText("Cancel");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -727,7 +781,7 @@ public class HomePage extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "No1.", "BillId", "UserName", "Product", "Quantity", "Price", "Total", "DateBooking"
+                "No.", "BillId", "UserName", "Product", "Quantity", "Price", "Total", "DateBooking"
             }
         ) {
             Class[] types = new Class [] {
@@ -1244,35 +1298,39 @@ public class HomePage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnPushProductToHomeMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-
-        try {
-
-            int quantity = Integer.parseInt(txtBillQuantity.getText().trim());
-            if (quantity > quantityAvailableBill || quantity < 0 || quantity == 0 ) {
-                JOptionPane.showMessageDialog(this, "Purchase quantity exceeds available stock!");
-                return;
-            }
-            float price = Float.parseFloat(txtBillPrice.getText().trim());
-
-            if (BillController.instance.addBill(currentAccount.getUserId(), productIdCurrent, new java.sql.Date(new Date().getTime()), quantity, price)) {
-                JOptionPane.showMessageDialog(this, "BUY SUCCESSFULLY");
-                BillController.instance.loadBills(tbBill);
-                addPanelProducts();
-                return;
-            }
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "ENTER A NUMBER NOT STRING", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jButton1MouseClicked
-
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         txtBillName.setText("");
         txtBillPrice.setText("");
         txtBillColor.setText("");
         txtBillQuantity.setText("");
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+
+        try {
+
+            int quantity = Integer.parseInt(txtBillQuantity.getText().trim());
+            if (quantity > quantityAvailableBill || quantity < 0 || quantity == 0) {
+                JOptionPane.showMessageDialog(this, "Purchase quantity exceeds available stock!");
+                return;
+            }
+
+            float price = Float.parseFloat(txtBillPrice.getText().trim());
+            int check = JOptionPane.showConfirmDialog(this, "ARE YOU SURE WANT BUY IT ", "CONFIRM", JOptionPane.YES_NO_OPTION);
+            if (check == JOptionPane.YES_OPTION) {
+                if (BillController.instance.addBill(currentAccount.getUserId(), productIdCurrent, new java.sql.Date(new Date().getTime()), quantity, price)) {
+                    JOptionPane.showMessageDialog(this, "BUY SUCCESSFULLY");
+                    BillController.instance.loadBills(tbBill);
+                    addPanelProducts();
+                    return;
+                }
+            } else {
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "ENTER A NUMBER NOT STRING", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
 
     public static void main(String args[]) {
 
@@ -1318,6 +1376,7 @@ public class HomePage extends javax.swing.JFrame {
     private Forms.Components.HeaderButton btnUploadAvatar;
     private Forms.Components.HeaderButton btnUploadImageProduct;
     private Forms.Components.HeaderButton btnUserBill;
+    private javax.swing.JMenuItem deleteItem;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -1345,6 +1404,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel jTxTime;
     private javax.swing.JLabel jTxtDate;
+    private javax.swing.JPopupMenu popupMenu;
     private javax.swing.JTable tbBill;
     private javax.swing.JTable tbProduct;
     private Forms.Components.TextFieldController txtBillColor;

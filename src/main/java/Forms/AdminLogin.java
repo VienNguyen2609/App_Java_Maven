@@ -38,10 +38,13 @@ public class AdminLogin extends javax.swing.JFrame {
         txtPassword = new Forms.Components.TextFieldController();
         txtName = new Forms.Components.TextFieldController();
         headerButton1 = new Forms.Components.HeaderButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         LabelMessage = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 255, 255));
@@ -51,6 +54,7 @@ public class AdminLogin extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/LogoShopImage.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 110));
 
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("_______________________________________________");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, 240, 20));
 
@@ -74,11 +78,22 @@ public class AdminLogin extends javax.swing.JFrame {
         });
         jPanel1.add(headerButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, 220, -1));
 
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("SHOP MANAGER ");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 160, -1));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("© FootWearShop 2025. Redistribution or reproduction is strictly prohibited. ");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 580, 520, -1));
+
         LabelMessage.setBackground(new java.awt.Color(255, 51, 51));
         LabelMessage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelMessage.setForeground(new java.awt.Color(255, 51, 51));
         jPanel1.add(LabelMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, 300, 20));
 
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("_______________________________________________");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, 240, -1));
 
@@ -89,6 +104,9 @@ public class AdminLogin extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/BackgroundLoginAdmin.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 636));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/BackgroundLoginAdmin.png"))); // NOI18N
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 636));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,8 +165,11 @@ public class AdminLogin extends javax.swing.JFrame {
     private javax.swing.JLabel LabelMessage;
     private Forms.Components.HeaderButton headerButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
