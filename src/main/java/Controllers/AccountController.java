@@ -3,6 +3,8 @@ package Controllers;
 import Model.Account;
 import DatabaseConnection.SQLConnector;
 import Forms.Components.EffectComponents;
+import Model.Shoes;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Connection;
@@ -12,7 +14,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 public class AccountController {
 
@@ -68,6 +74,24 @@ public class AccountController {
         }
     }
 
+    public void loadTableAccount(JTable table) {
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setNumRows(0);
+        AccountController.instance.loadDataAccounts();
+        var data = AccountController.instance.getDataAccount();
+        int n = 0;
+        for (Account account : data) {
+            model.addRow(new Object[]{n++, account.getUserId() , account.getUserName(),account.getUserPassword(),account.getUserGmail(),account.getAvatarUser()});
+        }
+    }
+    
     public boolean checkLogin(String name, String pass) {
         boolean check = false;
         try {
@@ -89,7 +113,27 @@ public class AccountController {
         return check;
     }
 
-    public boolean addAccount(String name, String pass, String gmail) {
+    public boolean addAccount(String name, String pass, String gmail ,byte[] image) {
+        boolean check = false;
+        try {
+            setupDatabaseCommand("INSERT INTO UserAccount (UserName, UserPassword, UserGmail,UserAvatar)VALUES(?,?,?,?)");
+            ps.setString(1, name);
+            ps.setString(2, pass);
+            ps.setString(3, gmail);
+            ps.setBytes(4, image);
+            int n = ps.executeUpdate();
+            if (n != 0) {
+                Account _account = new Account(name, pass, gmail, image);
+                this.listAccount.add(_account);
+                check = true;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "error: NAME IS EXIST!" );
+        }
+
+        return check;
+    }
+     public boolean addAccountNotImage(String name, String pass, String gmail ) {
         boolean check = false;
         try {
             setupDatabaseCommand("INSERT INTO UserAccount (UserName, UserPassword, UserGmail)VALUES(?,?,?)");
@@ -108,6 +152,7 @@ public class AccountController {
 
         return check;
     }
+    
 
     public boolean deleteAccount(String name) {
         boolean check = false;

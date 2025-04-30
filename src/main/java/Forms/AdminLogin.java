@@ -85,7 +85,7 @@ public class AdminLogin extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("© FootWearShop 2025. Redistribution or reproduction is strictly prohibited. ");
+        jLabel11.setText("© SHOPEEKY 2025. Redistribution or reproduction is strictly prohibited. ");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 580, 520, -1));
 
         LabelMessage.setBackground(new java.awt.Color(255, 51, 51));

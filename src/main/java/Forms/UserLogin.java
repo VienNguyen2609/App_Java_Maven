@@ -200,7 +200,7 @@ public class UserLogin extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("© FootWearShop 2025. Redistribution or reproduction is strictly prohibited. ");
+        jLabel1.setText("© SHOPEEKY 2025. Redistribution or reproduction is strictly prohibited. ");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 530, 520, -1));
 
         jLabel8.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N

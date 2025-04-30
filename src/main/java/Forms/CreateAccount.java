@@ -159,7 +159,7 @@ public class CreateAccount extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("© FootWearShop 2025. Redistribution or reproduction is strictly prohibited. ");
+        jLabel10.setText("© SHOPEEKY 2025. Redistribution or reproduction is strictly prohibited. ");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 530, 520, -1));
 
         jLabel11.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
@@ -181,11 +181,11 @@ public class CreateAccount extends javax.swing.JFrame {
             String name = this.txtName.getText().trim();
             String pass = this.txtPassword.getText().trim();
             String gmail = this.txtGmail.getText().trim();
-
+            
             if (!AccountController.instance.checkAccount(name, pass, gmail)) {
                 return;
             } 
-            else if (AccountController.instance.addAccount(name, pass, gmail)) {
+            else if (AccountController.instance.addAccountNotImage(name, pass, gmail)) {
                 LabelMessage.setText("CREATED ACCOUNT SUCCESSFULLY");
             }
         } catch (Exception e) {
