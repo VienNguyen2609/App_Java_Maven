@@ -84,6 +84,7 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     private void editComponents() {
+
         ProductController.init();
         AccountController.init();
         EffectComponents.init();
@@ -104,6 +105,7 @@ public class HomePage extends javax.swing.JFrame {
         ProductController.instance.loadTableProduct(tbProduct);
         BillController.instance.loadBills(tbBill);
         AccountController.instance.loadTableAccount(tbAccount);
+        tbAccount.getTableHeader().setReorderingAllowed(false);
         EffectComponents.instance.scaleImage(LabelLogo, "/Image/LogoShopImage.png");
         EffectComponents.instance.focusPointer1(txtNameProduct, LabelNameProduct, Color.GREEN, Color.WHITE);
         EffectComponents.instance.focusPointer1(txtSizeProduct, LabelSizeProduct, Color.GREEN, Color.WHITE);
@@ -920,7 +922,7 @@ public class HomePage extends javax.swing.JFrame {
         PanelBill.setLayout(PanelBillLayout);
         PanelBillLayout.setHorizontalGroup(
             PanelBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1312, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1310, Short.MAX_VALUE)
         );
         PanelBillLayout.setVerticalGroup(
             PanelBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1274,7 +1276,7 @@ public class HomePage extends javax.swing.JFrame {
             PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PanelProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 1312, Short.MAX_VALUE)
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(PanelHomePage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1312, Short.MAX_VALUE))
+                .addComponent(PanelHomePage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1310, Short.MAX_VALUE))
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(PanelBill, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1306,7 +1308,7 @@ public class HomePage extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1395, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1395, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1649,9 +1651,9 @@ public class HomePage extends javax.swing.JFrame {
         String name = txtNameUser.getText().trim();
         String pass = txtPasswordUser.getText().trim();
         String gamil = txtGmailUser.getText().trim();
-        
-        if(!AccountController.instance.checkAccount(name, pass, gamil)){
-            return; 
+
+        if (!AccountController.instance.checkAccount(name, pass, gamil)) {
+            return;
         }
         if (selectedFile == null) {
             return;

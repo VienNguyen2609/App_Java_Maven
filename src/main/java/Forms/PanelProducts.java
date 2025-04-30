@@ -1,6 +1,7 @@
 package Forms;
 
 import Model.Shoes;
+import java.awt.Color;
 
 
 import java.awt.Image;
@@ -11,6 +12,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.border.Border;
+import javax.swing.border.MatteBorder;
 
 
 public class PanelProducts extends javax.swing.JPanel {
@@ -87,6 +90,12 @@ public class PanelProducts extends javax.swing.JPanel {
         jLabel72 = new javax.swing.JLabel();
         txtSize = new Forms.Components.TextFieldController();
 
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                formMouseEntered(evt);
+            }
+        });
+
         jPanel16.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
         jPanel16.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -125,7 +134,7 @@ public class PanelProducts extends javax.swing.JPanel {
         jPanel16.add(txtPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 190, 30));
 
         txtColor.setEditable(false);
-        txtColor.setForeground(new java.awt.Color(255, 255, 255));
+        txtColor.setForeground(new java.awt.Color(204, 255, 255));
         txtColor.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtColor.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/ColorIcon.png"))); // NOI18N
         jPanel16.add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 200, -1));
@@ -145,12 +154,13 @@ public class PanelProducts extends javax.swing.JPanel {
         txtQuantity.setEditable(false);
         txtQuantity.setForeground(new java.awt.Color(204, 255, 255));
         txtQuantity.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtQuantity.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_quantity.png"))); // NOI18N
         txtQuantity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtQuantityActionPerformed(evt);
             }
         });
-        jPanel16.add(txtQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 40, 40));
+        jPanel16.add(txtQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 80, 40));
 
         jLabel72.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel72.setText("Price:");
@@ -159,7 +169,7 @@ public class PanelProducts extends javax.swing.JPanel {
         txtSize.setEditable(false);
         txtSize.setForeground(new java.awt.Color(204, 255, 255));
         txtSize.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtSize.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/PriceIcon.png"))); // NOI18N
+        txtSize.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/SizeIcon.png"))); // NOI18N
         jPanel16.add(txtSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 190, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -190,6 +200,10 @@ public class PanelProducts extends javax.swing.JPanel {
     private void txtQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantityActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtQuantityActionPerformed
+
+    private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
+     //  jPanel16.setBorder(new MatteBorder(1,1,1,1,Color.GREEN));
+    }//GEN-LAST:event_formMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

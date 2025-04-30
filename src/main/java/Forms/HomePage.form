@@ -406,7 +406,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="PanelProfile" alignment="0" pref="702" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Component id="PanelHomePage" alignment="1" pref="624" max="32767" attributes="0"/>
+                      <Component id="PanelHomePage" alignment="1" pref="702" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
                       <Component id="PanelBill" alignment="0" max="32767" attributes="0"/>
@@ -980,7 +980,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="1" pref="1312" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="1" pref="1310" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
