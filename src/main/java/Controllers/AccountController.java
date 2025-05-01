@@ -22,8 +22,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class AccountController {
 
-    private  ArrayList<Account> listAccount = new ArrayList<>();
-    
+    private ArrayList<Account> listAccount = new ArrayList<>();
+
     public static AccountController instance;
     private static Connection conn;
     private static PreparedStatement ps;
@@ -88,10 +88,10 @@ public class AccountController {
         var data = AccountController.instance.getDataAccount();
         int n = 0;
         for (Account account : data) {
-            model.addRow(new Object[]{n++, account.getUserId() , account.getUserName(),account.getUserPassword(),account.getUserGmail(),account.getAvatarUser()});
+            model.addRow(new Object[]{n++, account.getUserId(), account.getUserName(), account.getUserPassword(), account.getUserGmail(), account.getAvatarUser()});
         }
     }
-    
+
     public boolean checkLogin(String name, String pass) {
         boolean check = false;
         try {
@@ -113,7 +113,7 @@ public class AccountController {
         return check;
     }
 
-    public boolean addAccount(String name, String pass, String gmail ,byte[] image) {
+    public boolean addAccount(String name, String pass, String gmail, byte[] image) {
         boolean check = false;
         try {
             setupDatabaseCommand("INSERT INTO UserAccount (UserName, UserPassword, UserGmail,UserAvatar)VALUES(?,?,?,?)");
@@ -128,12 +128,13 @@ public class AccountController {
                 check = true;
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "error: NAME IS EXIST!" );
+            JOptionPane.showMessageDialog(null, "error: NAME IS EXIST!");
         }
 
         return check;
     }
-     public boolean addAccountNotImage(String name, String pass, String gmail ) {
+
+    public boolean addAccountNotImage(String name, String pass, String gmail) {
         boolean check = false;
         try {
             setupDatabaseCommand("INSERT INTO UserAccount (UserName, UserPassword, UserGmail)VALUES(?,?,?)");
@@ -147,46 +148,45 @@ public class AccountController {
                 check = true;
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "error: NAME IS EXIST!" );
+            JOptionPane.showMessageDialog(null, "error: NAME IS EXIST!");
         }
 
         return check;
     }
-    
 
-    public boolean deleteAccount(String name) {
-        boolean check = false;
+    public boolean deleteAccount(int id) {
+
         try {
-            setupDatabaseCommand("Delete From UserAccount where UserName =?");
-            ps.setString(1, name);
+            setupDatabaseCommand("Delete From UserAccount where UserId =?");
+            ps.setInt(1, id);
             int n = ps.executeUpdate();
             if (n > 0) {
                 for (Account account : this.listAccount) {
-                    if (account.getUserName().equalsIgnoreCase(name)) {
+                    if (account.getUserId() == id) {
                         this.listAccount.remove(account);
-                        check = true;
-                        break;
+                        return true;
+
                     }
                 }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return check;
+        return false;
     }
 
-    public Account updateAccount(String name, String pass, String gmail, String UserName) {
+    public Account updateAccount(String name, String pass, String gmail, String Username) {
 
         try {
             setupDatabaseCommand("UPDATE UserAccount SET UserName = ? , UserPassword = ?  , UserGmail = ? WHERE UserName = ?");
             ps.setString(1, name);
             ps.setString(2, pass);
             ps.setString(3, gmail);
-            ps.setString(4, UserName);
+            ps.setString(4, Username);
             int n = ps.executeUpdate();
             if (n > 0) {
-                for (Account account : this.listAccount) {
-                    if (account.getUserName().equalsIgnoreCase(UserName)) {
+                for (Account account : listAccount) {
+                    if (account.getUserName().equalsIgnoreCase(Username)) {
                         account.setUserName(name);
                         account.setUserPassword(pass);
                         account.setUserGmail(gmail);
@@ -199,9 +199,32 @@ public class AccountController {
         }
         return null;
     }
+    
+    public boolean updateAccountManager(String name, String pass, String gmail, int id) {
 
-    
-    
+        try {
+            setupDatabaseCommand("UPDATE UserAccount SET UserName = ? , UserPassword = ?  , UserGmail = ? WHERE UserId = ?");
+            ps.setString(1, name);
+            ps.setString(2, pass);
+            ps.setString(3, gmail);
+            ps.setInt(4, id);
+            int n = ps.executeUpdate();
+            if (n > 0) {
+                for (Account account : listAccount) {
+                    if (account.getUserId() == id) {
+                        account.setUserName(name);
+                        account.setUserPassword(pass);
+                        account.setUserGmail(gmail);
+                        return true;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public boolean checkAccount(String name, String password, String gmail) {
         boolean check = true;
         if (password.length() < 7 || name.length() < 4) {
