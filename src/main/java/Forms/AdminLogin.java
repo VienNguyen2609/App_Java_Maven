@@ -1,6 +1,8 @@
 package Forms;
 
+import Controllers.AccountController;
 import Forms.Components.EffectComponents;
+import Model.Account;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
@@ -10,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-
 
 public class AdminLogin extends javax.swing.JFrame {
 
@@ -22,11 +23,13 @@ public class AdminLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         EffectComponents.init();
-      //  EffectComponents.instance.FocusPointer(txtName, null, jLabel8, null, null);
+        txtPassword.setOpaque(false);
+        txtPassword.setBackground(null);
+        StraightLine3.setVisible(false);
+        AccountController.init();
+        EffectComponents.instance.focusPointer1(txtName, jLabel8, Color.GREEN, Color.WHITE);
+        EffectComponents.instance.focusPointer1(txtPassword, jLabel7, Color.GREEN, Color.WHITE);
     }
-    
-    
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -35,11 +38,16 @@ public class AdminLogin extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtPassword = new Forms.Components.TextFieldController();
         txtName = new Forms.Components.TextFieldController();
+        txtPassword = new Forms.Components.PasswordField();
         headerButton1 = new Forms.Components.HeaderButton();
+        CheckPass = new javax.swing.JCheckBox();
+        StraightLine3 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         LabelMessage = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -58,15 +66,22 @@ public class AdminLogin extends javax.swing.JFrame {
         jLabel7.setText("_______________________________________________");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, 240, 20));
 
-        txtPassword.setForeground(new java.awt.Color(255, 255, 255));
-        txtPassword.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        txtPassword.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_padlock.png"))); // NOI18N
-        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 310, 230, 40));
-
         txtName.setForeground(new java.awt.Color(255, 255, 255));
-        txtName.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        txtName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtName.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_setting.png"))); // NOI18N
         jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 230, 30));
+
+        txtPassword.setForeground(new java.awt.Color(255, 255, 255));
+        txtPassword.setEchoChar('\u002A');
+        txtPassword.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtPassword.setOpaque(true);
+        txtPassword.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_padlock.png"))); // NOI18N
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 310, 230, 40));
 
         headerButton1.setBackground(new java.awt.Color(204, 255, 204));
         headerButton1.setText("Login");
@@ -76,7 +91,33 @@ public class AdminLogin extends javax.swing.JFrame {
                 headerButton1MouseClicked(evt);
             }
         });
-        jPanel1.add(headerButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, 220, -1));
+        jPanel1.add(headerButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 420, 220, -1));
+
+        CheckPass.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        CheckPass.setForeground(new java.awt.Color(255, 255, 255));
+        CheckPass.setText("Show Password");
+        CheckPass.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 255, 255)));
+        CheckPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CheckPassMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                CheckPassMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                CheckPassMouseExited(evt);
+            }
+        });
+        jPanel1.add(CheckPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 350, -1, 30));
+
+        StraightLine3.setForeground(new java.awt.Color(255, 255, 255));
+        StraightLine3.setText("__________________________");
+        jPanel1.add(StraightLine3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 360, 140, -1));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("SHOPEEKY");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 110, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -88,10 +129,20 @@ public class AdminLogin extends javax.swing.JFrame {
         jLabel11.setText("© SHOPEEKY 2025. Redistribution or reproduction is strictly prohibited. ");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 580, 520, -1));
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Password");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, 70, 30));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Name");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, -1, -1));
+
         LabelMessage.setBackground(new java.awt.Color(255, 51, 51));
         LabelMessage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelMessage.setForeground(new java.awt.Color(255, 51, 51));
-        jPanel1.add(LabelMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, 300, 20));
+        jPanel1.add(LabelMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 380, 300, 20));
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("_______________________________________________");
@@ -123,29 +174,47 @@ public class AdminLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void headerButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerButton1MouseClicked
-       
+
         String name = this.txtName.getText().trim();
         String password = this.txtPassword.getText().trim();
-        
+        AccountController.instance.loadDataAccounts();
         if (name.equalsIgnoreCase("admin") && password.equalsIgnoreCase("admin")) {
             try {
                 UIManager.setLookAndFeel(new FlatDarkLaf());
             } catch (UnsupportedLookAndFeelException e) {
                 Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, e);
             }
-            new HomePage().setVisible(true);
+            Account user = AccountController.instance.getAccountByUsername(name);
+            new HomePage(user).setVisible(true);
             dispose();
+        } else if (name.isEmpty() || password.isEmpty()) {
+            LabelMessage.setText("erroe: Information not blank ");
+        } else {
+            LabelMessage.setText("error: Name or password false!");
         }
-        
-        else if (name.isEmpty() || password.isEmpty()) {           
-            LabelMessage.setText("erroe: Information not blank ");          
-        }
-        
-        else {           
-            LabelMessage.setText("error: Name or password false!");       
-        }
-        
+
     }//GEN-LAST:event_headerButton1MouseClicked
+
+    private void CheckPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CheckPassMouseClicked
+
+        if (CheckPass.isSelected()) {
+            txtPassword.setEchoChar((char) 0);
+        } else {
+            txtPassword.setEchoChar('*');
+        }
+    }//GEN-LAST:event_CheckPassMouseClicked
+
+    private void CheckPassMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CheckPassMouseEntered
+         StraightLine3.setVisible(true);
+    }//GEN-LAST:event_CheckPassMouseEntered
+
+    private void CheckPassMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CheckPassMouseExited
+         StraightLine3.setVisible(false);
+    }//GEN-LAST:event_CheckPassMouseExited
+
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
 
     public static void main(String args[]) {
 
@@ -162,18 +231,23 @@ public class AdminLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox CheckPass;
     private javax.swing.JLabel LabelMessage;
+    private javax.swing.JLabel StraightLine3;
     private Forms.Components.HeaderButton headerButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private Forms.Components.TextFieldController txtName;
-    private Forms.Components.TextFieldController txtPassword;
+    private Forms.Components.PasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 }

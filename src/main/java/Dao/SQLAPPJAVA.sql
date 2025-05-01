@@ -73,7 +73,8 @@ select * from BillDetail
 
 
 INSERT INTO UserAccount (UserName, UserPassword, UserGmail)
-VALUES ('vien', '123456', 'admin@gmail.com')
+VALUES ('admin', 'admin', 'admin@gmail.com')
+
 
 delete From Products
 
@@ -87,13 +88,16 @@ SET ProductImage = (
 WHERE ProductName = 'Adias'
 
 INSERT INTO Products (ProductName, ProductPrice, ProductQuantity , ProductColor, ProductSize)
-VALUES ('ADdias', 5000, 400 , 'Green', 40)
+VALUES ('Nike', 5000, 400 , 'Green', 40)
 
 
 update UserAccount set UserName='vien' ,UserPassword='12345678' ,UserGmail='@gmail.com' where UserName ='vien'
 
 delete from Bill
+delete from UserAccount
 
 DROP TABLE IF EXISTS Bill;
 
 delete From UserAccount where UserName='admin'
+
+

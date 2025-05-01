@@ -164,7 +164,7 @@ public class CreateAccount extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(204, 255, 204));
-        jLabel11.setText("WELCOME TO SHOP , LOGIN NOW  TO SHOPPING");
+        jLabel11.setText("WELCOME TO SHOP , SIGN UP NOW TO SHOPPING");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/BackgroundLogin.png"))); // NOI18N

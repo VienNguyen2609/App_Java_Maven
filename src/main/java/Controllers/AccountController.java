@@ -199,7 +199,7 @@ public class AccountController {
         }
         return null;
     }
-    
+
     public boolean updateAccountManager(String name, String pass, String gmail, int id) {
 
         try {
@@ -248,6 +248,37 @@ public class AccountController {
         if (name.equalsIgnoreCase("admin")) {
             JOptionPane.showMessageDialog(null, "error: NAME IS FOR ADMINISTRATOR USE ONLY!!");
             check = false;
+        }
+        return check;
+    }
+
+    public boolean checkAccount1(String name, String password, String gmail, int status) {
+        boolean check = true;
+        if (password.length() < 7 || name.length() < 4) {
+            JOptionPane.showMessageDialog(null, "error: LENGTH PASSWORD >= 7 AND NAME >=4");
+            check = false;
+        }
+
+        if (EffectComponents.instance.containsVietnameseCharacters(name)) {
+            JOptionPane.showMessageDialog(null, "error: NAME WRONG!");
+            check = false;
+        }
+        if (name.isEmpty() || password.isEmpty() || gmail.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "error: INFORMATION CAN NOT EMPTY");
+            check = false;
+        }
+
+        if (!gmail.contains("@gmail.com")) {
+            JOptionPane.showMessageDialog(null, "error: GMAIL WRONG");
+            check = false;
+        }
+        if (name.equalsIgnoreCase("admin")) {
+            if (status == 0) {
+                check = true;
+            } else {
+                check = false;
+                JOptionPane.showMessageDialog(null, "error: NAME IS FOR ADMINISTRATOR USE ONLY!!");
+            }
         }
         return check;
     }

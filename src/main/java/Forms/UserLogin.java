@@ -98,8 +98,8 @@ public class UserLogin extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Login To Your Account");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 210, -1));
+        jLabel5.setText("Sign In To Your Account");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 210, -1));
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("______________________________________________");
@@ -205,7 +205,7 @@ public class UserLogin extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(204, 255, 204));
-        jLabel8.setText("WELCOME TO SHOP , LOGIN NOW  TO SHOPPING");
+        jLabel8.setText("WELCOME TO SHOP , SIGN IN NOW TO SHOPPING");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, -1, -1));
 
         BackgroupFormCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/BackgroundLogin.png"))); // NOI18N

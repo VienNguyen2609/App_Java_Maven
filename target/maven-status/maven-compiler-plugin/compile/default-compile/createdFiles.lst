@@ -34,6 +34,7 @@ Forms\HomePage$30.class
 Forms\HomePage$27.class
 Forms\HomePage$4.class
 DatabaseConnection\SQLConnector.class
+Forms\AdminLogin$4.class
 Forms\Components\TextFieldController.class
 Controllers\AccountController.class
 Forms\HomePage.class
@@ -61,6 +62,7 @@ Forms\HomePage$2.class
 Forms\HomePage$16.class
 Forms\HomePage$21.class
 Forms\HomePage$5.class
+Forms\AdminLogin$3.class
 Forms\HomePage$8.class
 Forms\HomePage$36.class
 Forms\UserLogin$2.class

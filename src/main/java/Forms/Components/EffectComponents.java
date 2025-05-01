@@ -81,6 +81,7 @@ public class EffectComponents {
             }
         });
     }
+     
      public void focusPointer1(JTextField textField, JComponent jComponent ,  Color colorFirst, Color colorLast) {
 
         textField.addFocusListener(new FocusListener() {
@@ -119,7 +120,7 @@ public class EffectComponents {
                 label.setBounds(newX, centerY, newWidth, height);
 
                 try {
-                    Thread.sleep(2);
+                    Thread.sleep(1);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(CreateAccount.class.getName()).log(Level.SEVERE, null, ex);
                 }

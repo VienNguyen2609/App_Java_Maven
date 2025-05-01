@@ -28,6 +28,7 @@ public class PasswordField extends JPasswordField {
     public void setSuffixIcon(Icon suffixIcon) {
         this.suffixIcon = suffixIcon;
         initBorder();
+       // setOpaque(false);
     }
 
     public PasswordField() {
