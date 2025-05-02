@@ -32,20 +32,23 @@ ProductImage VARBINARY(MAX)
 
 
 
-CREATE TABLE Bill (
-
-    BillId INT IDENTITY(1,1) PRIMARY KEY, 
-    UserId INT NOT NULL,                  
-    ProductId INT NOT NULL,                
-    BillDate DATETIME DEFAULT GETDATE(), 
-	size FLOAT,
-    Quantity INT ,
-    Price money ,        
+CREATE TABLE Bill
+(
+    BillId INT IDENTITY(1,1) PRIMARY KEY,
+    UserId INT NOT NULL,
+    ProductId INT NOT NULL,
+    BillDate DATETIME DEFAULT GETDATE(),
+    Size FLOAT,
+    Quantity INT,
+    Price MONEY,
     TotalAmount AS (Quantity * Price) PERSISTED,
-
+    
     CONSTRAINT FK_Bill_User FOREIGN KEY (UserId) REFERENCES UserAccount(UserId),
     CONSTRAINT FK_Bill_Product FOREIGN KEY (ProductId) REFERENCES Products(ProductId)
 )
+
+
+
 
 
 
@@ -75,29 +78,26 @@ select * from BillDetail
 INSERT INTO UserAccount (UserName, UserPassword, UserGmail)
 VALUES ('admin', 'admin', 'admin@gmail.com')
 
+INSERT INTO Products (ProductName, ProductPrice, ProductQuantity , ProductColor, ProductSize)
+VALUES ('Nike', 5000, 400 , 'Green', 40)
 
-delete From Products
+INSERT INTO Bill (UserId , ProductId , BillDate , Size , Quantity  , Price )
+VALUES (22, 9, '2025-05-01' , 40, 12 , 5000)
 
 UPDATE Products SET ProductImage =  WHERE ProductName = Adias
+
 
 UPDATE Products
 SET ProductImage = (
     SELECT * FROM OPENROWSET(BULK N'D:\Image\BackgroundVideoDesktop.mp4', SINGLE_BLOB) AS ImageData
 )
 
-WHERE ProductName = 'Adias'
-
-INSERT INTO Products (ProductName, ProductPrice, ProductQuantity , ProductColor, ProductSize)
-VALUES ('Nike', 5000, 400 , 'Green', 40)
-
 
 update UserAccount set UserName='vien' ,UserPassword='12345678' ,UserGmail='@gmail.com' where UserName ='vien'
 
 delete from Bill
 delete from UserAccount
+delete From UserAccount 
 
-DROP TABLE IF EXISTS Bill;
-
-delete From UserAccount where UserName='admin'
 
 

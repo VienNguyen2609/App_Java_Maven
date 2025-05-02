@@ -31,8 +31,7 @@ public class TextFieldController extends JTextField {
 
     private void applyDefaults() {
         setOpaque(false);
-        setBackground(new java.awt.Color(0, 0, 0, 0)); 
-        
+        setBackground(new java.awt.Color(0, 0, 0, 0));        
     }
 
     public Icon getSuffixIcon() {

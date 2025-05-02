@@ -83,10 +83,9 @@ public class ProductController {
 
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setNumRows(0);
-        ProductController.instance.loadDataProducts();
-        var data = ProductController.instance.getDataProduct();
+        loadDataProducts();
         int n = 0;
-        for (Shoes shoes : data) {
+        for (Shoes shoes : listShoes) {
             model.addRow(new Object[]{n++, shoes.getProductId(), shoes.getProductName(),shoes.getProductSize() ,  shoes.getProductPrice(), shoes.getProductQuantity(), shoes.getProductColor(), shoes.getProductAvatar()});
         }
     }

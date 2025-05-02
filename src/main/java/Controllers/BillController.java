@@ -23,8 +23,8 @@ public class BillController {
     private static Connection conn;
     private static PreparedStatement ps;
     private static ResultSet rs;
-    public DefaultTableModel model ; 
-    
+    public DefaultTableModel model;
+
     private static boolean isInitiallized = false;
     public static BillController instance;
 
@@ -48,35 +48,10 @@ public class BillController {
 
     }
 
-//     public void loadBill() {
-//        listBill.clear();
-//        try {
-//            setupDatabaseCommand("select * from Bill");
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                int billId = rs.getInt("BillId");
-//                int userId = rs.getInt("UserId");
-//                int productId = rs.getInt("ProductId");
-//                Date date = rs.getDate("BillDate");
-//                int quantity = rs.getInt("Quantity");
-//                float price = rs.getFloat("Price");
-//                float total = rs.getFloat("TotalAmount");
-//                Bill _bill = new Bill(billId, userId,productId , quantity, total  , price , date );
-//                this.listBill.add(_bill);
-//            }
-//            rs.close();
-//            ps.close();
-//            conn.close();
-//        } catch (SQLException e) {
-//            JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, "Unexpected error: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-//        }
-//    }
-    public void loadBills(JTable table) {
+    public void loadBills(JTable table, String name) {
         listBill.clear();
-         model = (DefaultTableModel) table.getModel();
-         model.setRowCount(0);
+        model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
 
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -84,10 +59,19 @@ public class BillController {
             table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
         try {
-            setupDatabaseCommand("SELECT b.BillId, u.UserName, p.ProductName, p.ProductSize, b.Quantity, b.Price, b.TotalAmount, b.BillDate "
-                    + "FROM Bill b "
-                    + "JOIN UserAccount u ON b.UserId = u.UserId "
-                    + "JOIN Products p ON b.ProductId = p.ProductId");
+            if (name.equalsIgnoreCase("admin")) {
+                setupDatabaseCommand("SELECT b.BillId, u.UserName, p.ProductName, p.ProductSize, b.Quantity, b.Price, b.TotalAmount, b.BillDate "
+                        + "FROM Bill b "
+                        + "JOIN UserAccount u ON b.UserId = u.UserId "
+                        + "JOIN Products p ON b.ProductId = p.ProductId ");
+            } else {
+                setupDatabaseCommand("SELECT b.BillId, u.UserName, p.ProductName, p.ProductSize, b.Quantity, b.Price, b.TotalAmount, b.BillDate "
+                        + "FROM Bill b "
+                        + "JOIN UserAccount u ON b.UserId = u.UserId "
+                        + "JOIN Products p ON b.ProductId = p.ProductId "
+                        + "WHERE u.UserName = ?");
+                ps.setString(1, name);
+            }
             rs = ps.executeQuery();
             int n = 0;
             while (rs.next()) {
@@ -110,7 +94,7 @@ public class BillController {
         }
     }
 
-    public boolean addBill(int userId, int productId, int size , Date billDate, int quantity, float price) {
+    public boolean addBill(int userId, int productId, int size, Date billDate, int quantity, float price) {
 
         try {
             setupDatabaseCommand("INSERT INTO bill ( UserId, ProductId , size , BillDate ,Quantity ,Price ) VALUES (?,?,?,?,?,?)");
@@ -135,7 +119,7 @@ public class BillController {
                 if (m > 0) {
 
                     // Nếu UPDATE thành công, thêm vào listBill
-                    Bill bill = new Bill(userId, productId, size ,quantity, price, billDate);
+                    Bill bill = new Bill(userId, productId, size, quantity, price, billDate);
                     listBill.add(bill);
                     return true;
                 }

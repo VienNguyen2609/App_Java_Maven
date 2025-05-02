@@ -1,50 +1,51 @@
-
 package Model;
 
 import java.util.Date;
 
-
 public class Bill {
-    
-    private int billId , size , userId ,productId , quantity ; 
-    private float totalAmount  , price; 
-    private Date billDate ; 
-    
-    private static  boolean isInitiallized = false ; 
-    private static Bill instance ; 
-    
-    public static void init(){
-        if(isInitiallized == true){
-            return ;
-        }
-        else{
-            instance = new Bill(); 
-            isInitiallized = true ; 
+
+    private int billId;
+    private int size;
+    private int userId;
+    private int productId;
+    private int quantity;
+    private float totalAmount, price;
+    private Date billDate;
+
+    private static boolean isInitiallized = false;
+    private static Bill instance;
+
+    public static void init() {
+        if (isInitiallized == true) {
+            return;
+        } else {
+            instance = new Bill();
+            isInitiallized = true;
         }
     }
 
-    public Bill() { }
-    
-    
-    public Bill(int BillId, int UserId, int ProductId, int size , int Quantity ,float total , float Price, Date BillDate) {
+    public Bill() {
+    }
+
+    public Bill(int BillId, int UserId, int ProductId, int size, int Quantity, float total, float Price, Date BillDate) {
         this.billId = BillId;
         this.userId = UserId;
         this.productId = ProductId;
-        this.size = size ;
+        this.size = size;
         this.quantity = Quantity;
         this.totalAmount = total;
-        this.price = Price;    
+        this.price = Price;
         this.billDate = BillDate;
     }
-    
-     public Bill( int UserId, int ProductId, int size ,int Quantity, float Price, Date BillDate) {
+
+    public Bill(int UserId, int ProductId, int size, int Quantity, float Price, Date BillDate) {
         this.userId = UserId;
         this.productId = ProductId;
-        this.size = size ;
+        this.size = size;
         this.quantity = Quantity;
         this.price = Price;
         this.billDate = BillDate;
-        
+
     }
 
     public int getSize() {
@@ -55,7 +56,6 @@ public class Bill {
         this.size = size;
     }
 
-     
     public int getBillId() {
         return billId;
     }
@@ -98,7 +98,7 @@ public class Bill {
 
     public float getPrice() {
         return price;
-        
+
     }
 
     public void setPrice(float Price) {
@@ -113,8 +113,4 @@ public class Bill {
         this.billDate = BillDate;
     }
 
-
-    
-   
-    
 }

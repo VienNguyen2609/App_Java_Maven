@@ -29,16 +29,16 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 
 public class HomePage extends javax.swing.JFrame {
-    
+
     private Account currentAccount;
-    private Account accountAdmin;
-    
+
     private int quantityAvailableBill;
     private File selectedFile;
     private Icon icon;
-    
+
     private String nameText;
     private String colorText;
     private String passwordText;
@@ -49,29 +49,22 @@ public class HomePage extends javax.swing.JFrame {
     private int quantityText;
     private int selectedRow;
     private byte[] imageProduct = null;
-    
+
     private byte[] imageUser = null;
     private int idUserText;
-    
+
     private int status = 0;
 
-//    public HomePage() {
-//        initForAmin(accountAdmin);
-//        this.currentAccount = accountAdmin;
-//        status = 1;
-//    }
     public HomePage() {
-        initComponents();
-        editComponents();
     }
-    
+
     public HomePage(Account account) {
         this.currentAccount = account;
         init(account);
     }
-    
+
     private void init(Account account) {
-        
+
         initComponents();
         txtNameProfile.setText(account.getUserName());
         txtPasswordProfile.setText(account.getUserPassword());
@@ -83,39 +76,31 @@ public class HomePage extends javax.swing.JFrame {
             btnManagerAccounts.setVisible(false);
             status = 1;
         }
-        
+
     }
 
-//    private void initForAmin(Account account) {
-//        initComponents();
-//        editComponents();
-//        accountAdmin = new Account("admin", "admin", "admin@gmail.com");
-//        txtNameProfile.setText(accountAdmin.getUserName());
-//        txtPasswordProfile.setText(accountAdmin.getUserPassword());
-//        txtGmailProfile.setText(accountAdmin.getUserGmail());
-//        setAvatar(accountAdmin.getAvatarUser());
-//    }
     private void editComponents() {
-        
+
         ProductController.init();
         AccountController.init();
         EffectComponents.init();
         BillController.init();
-        PanelProfile.setVisible(false);
-        PanelHomePage.setVisible(true);
-        PanelProducts.setVisible(false);
-        PanelBill.setVisible(false);
-        PanelAccount.setVisible(false);
         jScrollPane2.getVerticalScrollBar().setUnitIncrement(15); // tốc độ lướt của jscroll 
         SpinnerNumberModel model = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1);
         txtQuantityProduct.setModel(model);
         styleButton();
+        stylePanel();
         setTime();
         setupWindow();
         addPanelProducts();
         mouseClickRightTableBill();
+        txtBillName.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
+        txtBillSize.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
+        txtBillQuantity.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
+        txtBillPrice.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
+        txtBillColor.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
         ProductController.instance.loadTableProduct(tbProduct);
-        BillController.instance.loadBills(tbBill);
+        BillController.instance.loadBills(tbBill, currentAccount.getUserName());
         AccountController.instance.loadTableAccount(tbAccount);
         tbAccount.getTableHeader().setReorderingAllowed(false);
         EffectComponents.instance.scaleImage(LabelLogo, "/Image/LogoShopImage.png");
@@ -127,9 +112,9 @@ public class HomePage extends javax.swing.JFrame {
         EffectComponents.instance.focusPointer1(txtPasswordUser, LabelPasswordUser, Color.GREEN, Color.WHITE);
         EffectComponents.instance.focusPointer1(txtGmailUser, LabelGmailUser, Color.GREEN, Color.WHITE);
     }
-    
+
     private void getTextfiledOfProductComponents() {
-        
+
         nameText = txtNameProduct.getText().trim();
         sizeProductText = Integer.parseInt(txtSizeProduct.getText().trim());
         colorText = txtColorProduct.getText().trim();
@@ -141,7 +126,7 @@ public class HomePage extends javax.swing.JFrame {
         priceText = Float.parseFloat(txtPriceProduct.getText().trim());
         quantityText = Integer.parseInt(txtQuantityProduct.getValue().toString().trim());
         idProductText = Integer.parseInt(tbProduct.getValueAt(selectedRow, 1).toString().trim());
-        
+
         if (nameText.isEmpty() || sizeProductText <= 0 || colorText.isEmpty() || priceText <= 0 || quantityText <= 0) {
             JOptionPane.showMessageDialog(this, "INFORMATION NOT EMPTY");
             return;
@@ -156,14 +141,14 @@ public class HomePage extends javax.swing.JFrame {
             Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private void getTextfiledOfProfileComponents() {
         nameText = txtNameProfile.getText();
         passwordText = String.valueOf(txtPasswordProfile.getPassword());
         gmailText = txtGmailProfile.getText();
-        
+
     }
-    
+
     private void setTime() {
         new Thread(new Runnable() {
             @Override
@@ -184,11 +169,11 @@ public class HomePage extends javax.swing.JFrame {
             }
         }).start();
     }
-    
+
     private void addPanelProducts() {
-        
+
         this.PanelContainProduct.setLayout(new GridBagLayout());
-        
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(20, 20, 20, 20); // Khoảng cách giữa các item
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -203,18 +188,18 @@ public class HomePage extends javax.swing.JFrame {
             gbc.gridy = i / cols;
             this.PanelContainProduct.add(newJpanel, gbc);
         }
-        
+
         this.PanelContainProduct.revalidate();
         this.PanelContainProduct.repaint();
     }
-    
+
     private void setupWindow() {
         setLocationRelativeTo(null);
         setTitle("FOOTWEAR  ,  SHOP FOR YOU ");
         String iconPath = "D:\\DownLoad\\IconFootWear\\result_social.png";
         setIconImage(Toolkit.getDefaultToolkit().getImage(new File(iconPath).getAbsolutePath()));
     }
-    
+
     private void styleButton() {
         btnUploadAvatar.setBackgroundColor(Color.ORANGE);
         btnProfle.setBackgroundColor(Color.GRAY);
@@ -240,9 +225,17 @@ public class HomePage extends javax.swing.JFrame {
         btnRefreshBill.setBackgroundColor(Color.RED);
         btnSaveEditProfile.setVisible(false);
     }
-    
+
+    private void stylePanel() {
+        PanelProfile.setVisible(false);
+        PanelHomePage.setVisible(true);
+        PanelProducts.setVisible(false);
+        PanelBill.setVisible(false);
+        PanelAccount.setVisible(false);
+    }
+
     private void setAvatar(byte[] avatarBytes) {
-        
+
         if (avatarBytes != null) {
             ImageIcon icon = new ImageIcon(avatarBytes);
             Image img = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
@@ -253,7 +246,7 @@ public class HomePage extends javax.swing.JFrame {
         }
         LabelAvatar.setBorder(null);
     }
-    
+
     public void clickMouseTableProduct() {
         selectedRow = tbProduct.getSelectedRow();
         if (selectedRow != -1) {
@@ -280,9 +273,9 @@ public class HomePage extends javax.swing.JFrame {
                 LabelImageProduct.setIcon(null);
             }
         }
-        
+
     }
-    
+
     public void clickMouseTableAccount() {
         selectedRow = tbAccount.getSelectedRow();
         if (selectedRow != -1) {
@@ -306,7 +299,7 @@ public class HomePage extends javax.swing.JFrame {
             }
         }
     }
-    
+
     public void view() {
         txtNameProduct.setText("");
         txtSizeProduct.setText("");
@@ -314,10 +307,19 @@ public class HomePage extends javax.swing.JFrame {
         txtQuantityProduct.setValue(0);
         txtColorProduct.setText("");
     }
+
+    public void viewBill() {
+        ImageProductBill.setIcon(null);
+        txtBillColor.setText("");
+        txtBillSize.setText("");
+        txtBillPrice.setText("");
+        txtBillColor.setText("");
+        txtBillQuantity.setText("");
+    }
     
     private int productIdCurrent;
-    
-    public void getTextBill(int productId, String name, String size, String price, String color, int quantityAvailable) {
+    public void getTextBill(int productId, String name, String size, String price, String color, int quantityAvailable, ImageIcon imageIcon) {
+        ImageProductBill.setIcon(imageIcon);
         productIdCurrent = productId;
         txtBillName.setText(name);
         txtBillPrice.setText(price);
@@ -325,7 +327,7 @@ public class HomePage extends javax.swing.JFrame {
         txtBillSize.setText(size);
         this.quantityAvailableBill = quantityAvailable;
     }
-    
+
     public void mouseClickRightTableBill() {
 
         // Popup Menu (chuột phải)
@@ -339,12 +341,12 @@ public class HomePage extends javax.swing.JFrame {
                     int quantity = Integer.parseInt(tbBill.getValueAt(selectedRow, 4).toString());
                     //BillController.instance.model.removeRow(selectedRow);
                     BillController.instance.cancelBill(billId, productName, quantity);
-                    BillController.instance.loadBills(tbBill);
+                    BillController.instance.loadBills(tbBill, currentAccount.getUserName());
                     addPanelProducts();
                 }
             }
         });
-        
+
         popupMenu.add(deleteItem);
 
         // Bắt sự kiện chuột phải để mở popup
@@ -352,11 +354,11 @@ public class HomePage extends javax.swing.JFrame {
             public void mousePressed(MouseEvent e) {
                 showPopup(e);
             }
-            
+
             public void mouseReleased(MouseEvent e) {
                 showPopup(e);
             }
-            
+
             private void showPopup(MouseEvent e) {
                 if (e.isPopupTrigger()) {
                     int row = tbBill.rowAtPoint(e.getPoint());
@@ -367,9 +369,9 @@ public class HomePage extends javax.swing.JFrame {
                 }
             }
         });
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -400,13 +402,14 @@ public class HomePage extends javax.swing.JFrame {
         btnBuy = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        btnCanelBuy = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        ImageProductBill = new javax.swing.JLabel();
+        txtBillColor = new Forms.Components.TextFieldController();
+        txtBillName = new Forms.Components.TextFieldController();
         txtBillSize = new Forms.Components.TextFieldController();
         txtBillPrice = new Forms.Components.TextFieldController();
         txtBillQuantity = new Forms.Components.TextFieldController();
-        txtBillColor = new Forms.Components.TextFieldController();
-        btnCanelBuy = new javax.swing.JButton();
-        jLabel19 = new javax.swing.JLabel();
-        txtBillName = new Forms.Components.TextFieldController();
         jScrollPane2 = new javax.swing.JScrollPane();
         PanelContainProduct = new javax.swing.JPanel();
         PanelProfile = new javax.swing.JPanel();
@@ -673,14 +676,14 @@ public class HomePage extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel9.setText("Color:");
+        jLabel9.setText("Color");
         jLabel9.setToolTipText("");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, 20));
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, -1, 30));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel12.setText("Price: ");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 60, 20));
+        jLabel12.setText("Price ");
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 50, 30));
 
         btnBuy.setBackground(new java.awt.Color(255, 0, 51));
         btnBuy.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -697,47 +700,19 @@ public class HomePage extends javax.swing.JFrame {
                 btnBuyMouseExited(evt);
             }
         });
-        jPanel3.add(btnBuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 110, -1));
+        jPanel3.add(btnBuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 110, -1));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel13.setText("Size:");
+        jLabel13.setText("Size");
         jLabel13.setToolTipText("");
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, 20));
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, 30));
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel14.setText("Quantity:");
+        jLabel14.setText("Quantity");
         jLabel14.setToolTipText("");
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, 20));
-
-        txtBillSize.setEditable(false);
-        txtBillSize.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        txtBillSize.setForeground(new java.awt.Color(255, 51, 51));
-        txtBillSize.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtBillSize.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBillSizeActionPerformed(evt);
-            }
-        });
-        jPanel3.add(txtBillSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 180, 30));
-
-        txtBillPrice.setEditable(false);
-        txtBillPrice.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        txtBillPrice.setForeground(new java.awt.Color(255, 51, 51));
-        txtBillPrice.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jPanel3.add(txtBillPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 180, 20));
-
-        txtBillQuantity.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        txtBillQuantity.setForeground(new java.awt.Color(255, 51, 51));
-        txtBillQuantity.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jPanel3.add(txtBillQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 140, 20));
-
-        txtBillColor.setEditable(false);
-        txtBillColor.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        txtBillColor.setForeground(new java.awt.Color(255, 51, 51));
-        txtBillColor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jPanel3.add(txtBillColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, 170, 20));
+        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, -1, 30));
 
         btnCanelBuy.setBackground(new java.awt.Color(204, 204, 204));
         btnCanelBuy.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -754,19 +729,71 @@ public class HomePage extends javax.swing.JFrame {
                 btnCanelBuyMouseExited(evt);
             }
         });
-        jPanel3.add(btnCanelBuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 110, -1));
+        jPanel3.add(btnCanelBuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, 110, -1));
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel19.setText("Name:");
+        jLabel19.setText("Name");
         jLabel19.setToolTipText("");
-        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, 20));
+        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
 
-        txtBillName.setEditable(false);
-        txtBillName.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        txtBillName.setForeground(new java.awt.Color(255, 51, 51));
-        txtBillName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jPanel3.add(txtBillName, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 170, 20));
+        ImageProductBill.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 0)));
+        jPanel3.add(ImageProductBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 210, 130));
+
+        txtBillColor.setBorder(new javax.swing.border.MatteBorder(null));
+        txtBillColor.setForeground(new java.awt.Color(255, 0, 51));
+        txtBillColor.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtBillColor.setName(""); // NOI18N
+        txtBillColor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBillColorActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txtBillColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 480, 170, 30));
+
+        txtBillName.setBorder(new javax.swing.border.MatteBorder(null));
+        txtBillName.setForeground(new java.awt.Color(255, 0, 51));
+        txtBillName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtBillName.setName(""); // NOI18N
+        txtBillName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBillNameActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txtBillName, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 170, 30));
+
+        txtBillSize.setBorder(new javax.swing.border.MatteBorder(null));
+        txtBillSize.setForeground(new java.awt.Color(255, 0, 51));
+        txtBillSize.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtBillSize.setName(""); // NOI18N
+        txtBillSize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBillSizeActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txtBillSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 170, 30));
+
+        txtBillPrice.setBorder(new javax.swing.border.MatteBorder(null));
+        txtBillPrice.setForeground(new java.awt.Color(255, 0, 51));
+        txtBillPrice.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtBillPrice.setName(""); // NOI18N
+        txtBillPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBillPriceActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txtBillPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, 170, 30));
+
+        txtBillQuantity.setBorder(new javax.swing.border.MatteBorder(null));
+        txtBillQuantity.setForeground(new java.awt.Color(255, 0, 51));
+        txtBillQuantity.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtBillQuantity.setName(""); // NOI18N
+        txtBillQuantity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBillQuantityActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txtBillQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, 170, 30));
 
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -945,9 +972,9 @@ public class HomePage extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnRefreshBill, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addComponent(btnRefreshBill, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -963,14 +990,17 @@ public class HomePage extends javax.swing.JFrame {
         PanelBillLayout.setHorizontalGroup(
             PanelBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelBillLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1262, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         PanelBillLayout.setVerticalGroup(
             PanelBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(PanelBillLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tbProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -1321,7 +1351,7 @@ public class HomePage extends javax.swing.JFrame {
             PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PanelProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 1310, Short.MAX_VALUE)
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(PanelHomePage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1270, Short.MAX_VALUE))
+                .addComponent(PanelHomePage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1377, Short.MAX_VALUE))
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(PanelBill, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1380,6 +1410,7 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHomePageMouseClicked
 
     private void btnLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogOutMouseClicked
+
         if (status == 1) {
             Run.runApp();
             dispose();
@@ -1403,7 +1434,7 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUserBillActionPerformed
 
     private void btnProfleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfleActionPerformed
-        
+
         if (!PanelProfile.isVisible()) {
             txtPasswordProfile.setEchoChar('*');
             CheckPassword.setSelected(false);
@@ -1412,7 +1443,7 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProfleActionPerformed
 
     private void CheckPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CheckPasswordMouseClicked
-        
+
         if (CheckPassword.isSelected()) {
             txtPasswordProfile.setEchoChar((char) 0);
         } else {
@@ -1421,7 +1452,7 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_CheckPasswordMouseClicked
 
     private void btnCancelProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelProfileMouseClicked
-        
+
         txtNameProfile.setEditable(false);
         txtPasswordProfile.setEditable(false);
         txtGmailProfile.setEditable(false);
@@ -1432,15 +1463,15 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelProfileMouseClicked
 
     private void btnSaveEditProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveEditProfileMouseClicked
-        
+
         getTextfiledOfProfileComponents();
         AccountController.instance.loadDataAccounts();
         try {
-            
+
             if (!AccountController.instance.checkAccount1(nameText, passwordText, gmailText, status)) {
                 return;
             }
-            
+
             Account UpdateAccount = AccountController.instance.updateAccount(nameText, passwordText, gmailText, currentAccount.getUserName());
             if (UpdateAccount != null) {
                 currentAccount = UpdateAccount;
@@ -1450,19 +1481,19 @@ public class HomePage extends javax.swing.JFrame {
                 txtPasswordProfile.setEditable(false);
                 txtGmailProfile.setEditable(false);
                 return;
-                
+
             } else {
                 JOptionPane.showMessageDialog(this, "Update name false");
                 return;
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage());
         }
     }//GEN-LAST:event_btnSaveEditProfileMouseClicked
 
     private void btnEditProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditProfileMouseClicked
-        
+
         txtNameProfile.setEditable(true);
         txtPasswordProfile.setEditable(true);
         txtGmailProfile.setEditable(true);
@@ -1471,17 +1502,17 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditProfileMouseClicked
 
     private void btnUploadAvatarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUploadAvatarMouseClicked
-        
+
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        
+
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             selectedFile = chooser.getSelectedFile();
             icon = new ImageIcon(new ImageIcon(selectedFile.getAbsolutePath())
                     .getImage().getScaledInstance(LabelAvatar.getWidth(), LabelAvatar.getHeight(), Image.SCALE_SMOOTH));
             LabelAvatar.setIcon(icon);
         }
-        
+
         if (selectedFile == null) {
             JOptionPane.showMessageDialog(this, "PHOTO NOT UPDATE YET!");
             return;
@@ -1516,7 +1547,7 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_tbProductMouseReleased
 
     private void btnAddProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddProductMouseClicked
-        
+
         getTextfiledOfProductComponents();
         try {
             if (ProductController.instance.addProduct(nameText, sizeProductText, priceText, quantityText, colorText, imageProduct)) {
@@ -1526,12 +1557,12 @@ public class HomePage extends javax.swing.JFrame {
                 LabelImageProduct.setIcon(null);
                 // LabelImageProduct.setBorder(new MatteBorder(1, 1, 1, 1, Color.YELLOW));
                 JOptionPane.showMessageDialog(this, "PRODUCT ADDED SUCCESSFULLY");
-                
+
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-        
+
 
     }//GEN-LAST:event_btnAddProductMouseClicked
 
@@ -1540,12 +1571,12 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelProductMouseClicked
 
     private void btnDeleteProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteProductMouseClicked
-        
+
         getTextfiledOfProductComponents();
         ProductController.instance.loadDataProducts();
         try {
             int check = JOptionPane.showConfirmDialog(this, "DO YOU WANT DELETE THIS PRODUCT!", "CONFIRM", JOptionPane.YES_NO_OPTION);
-            
+
             if (check == JOptionPane.YES_OPTION) {
                 if (ProductController.instance.deleteProduct(nameText)) {
                     ProductController.instance.loadTableProduct(tbProduct);
@@ -1558,14 +1589,14 @@ public class HomePage extends javax.swing.JFrame {
             } else {
                 return;
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnDeleteProductMouseClicked
 
     private void btnUploadImageProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUploadImageProductMouseClicked
-        
+
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -1579,12 +1610,12 @@ public class HomePage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "PHOTO NOT UPDATE YET!");
             return;
         }
-        
+
 
     }//GEN-LAST:event_btnUploadImageProductMouseClicked
 
     private void btnUpdateProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateProductMouseClicked
-        
+
         getTextfiledOfProductComponents();
         if (ProductController.instance.updateProduct(nameText, sizeProductText, quantityText, priceText, colorText, imageProduct, idProductText)) {
             JOptionPane.showMessageDialog(this, "UPDATED THIS PRODUCT ID: " + idProductText + " SUCCESSFULLY");
@@ -1601,7 +1632,7 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateProductMouseClicked
 
     private void btnPushProductToHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPushProductToHomeMouseClicked
-        
+
         int check = JOptionPane.showConfirmDialog(this, "UPLOAD ALL PRODUCT TO HOMEPAGE!", "CONFIRM", JOptionPane.YES_NO_OPTION);
         if (check == JOptionPane.YES_OPTION) {
             addPanelProducts();
@@ -1613,31 +1644,28 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPushProductToHomeMouseClicked
 
     private void btnCanelBuyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCanelBuyMouseClicked
-        txtBillName.setText("");
-        txtBillSize.setText("");
-        txtBillPrice.setText("");
-        txtBillColor.setText("");
-        txtBillQuantity.setText("");
+        viewBill();
     }//GEN-LAST:event_btnCanelBuyMouseClicked
 
     private void btnBuyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuyMouseClicked
-        
+
         try {
-            
+
             int quantity = Integer.parseInt(txtBillQuantity.getText().trim());
             if (quantity > quantityAvailableBill || quantity < 0 || quantity == 0) {
                 JOptionPane.showMessageDialog(this, "Purchase quantity exceeds available stock!");
                 return;
             }
-            
+
             float price = Float.parseFloat(txtBillPrice.getText().trim());
             int size = Integer.parseInt(txtBillSize.getText().trim());
             int check = JOptionPane.showConfirmDialog(this, "ARE YOU SURE WANT BUY IT ", "CONFIRM", JOptionPane.YES_NO_OPTION);
             if (check == JOptionPane.YES_OPTION) {
                 if (BillController.instance.addBill(currentAccount.getUserId(), productIdCurrent, size, new java.sql.Date(new Date().getTime()), quantity, price)) {
                     JOptionPane.showMessageDialog(this, "BUY SUCCESSFULLY");
-                    BillController.instance.loadBills(tbBill);
+                    BillController.instance.loadBills(tbBill, currentAccount.getUserName());
                     addPanelProducts();
+                    viewBill();
                     return;
                 }
             } else {
@@ -1647,10 +1675,6 @@ public class HomePage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "ENTER A NUMBER NOT STRING", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnBuyMouseClicked
-
-    private void txtBillSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBillSizeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBillSizeActionPerformed
 
     private void btnBuyMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuyMouseEntered
         btnBuy.setBackground(Color.GREEN);
@@ -1669,7 +1693,7 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCanelBuyMouseExited
 
     private void btnDeleteUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteUserMouseClicked
-        
+
         selectedRow = tbAccount.getSelectedRow();
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this, "Please select a product from the table first!");
@@ -1706,11 +1730,11 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUploadAvatarUserMouseClicked
 
     private void btnAddUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddUserMouseClicked
-        
+
         String name = txtNameUser.getText().trim();
         String pass = txtPasswordUser.getText().trim();
         String gamil = txtGmailUser.getText().trim();
-        
+
         if (!AccountController.instance.checkAccount(name, pass, gamil)) {
             return;
         }
@@ -1732,7 +1756,7 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddUserMouseClicked
 
     private void btnUpdateUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateUserMouseClicked
-        
+
         selectedRow = tbAccount.getSelectedRow();
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this, "Please select a product from the table first!");
@@ -1748,7 +1772,7 @@ public class HomePage extends javax.swing.JFrame {
         if (AccountController.instance.updateAccountManager(name, pass, gamil, idUserText)) {
             JOptionPane.showMessageDialog(this, "UPDATE SUCCESSFULLY ID USER:" + idProductText);
             AccountController.instance.loadTableAccount(tbAccount);
-            
+
         }
     }//GEN-LAST:event_btnUpdateUserMouseClicked
 
@@ -1757,15 +1781,35 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_tbAccountMouseReleased
 
     private void btnRefreshBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefreshBillMouseClicked
-        BillController.instance.loadBills(tbBill);
+        BillController.instance.loadBills(tbBill, currentAccount.getUserName());
     }//GEN-LAST:event_btnRefreshBillMouseClicked
-    
+
+    private void txtBillColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBillColorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBillColorActionPerformed
+
+    private void txtBillNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBillNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBillNameActionPerformed
+
+    private void txtBillSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBillSizeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBillSizeActionPerformed
+
+    private void txtBillPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBillPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBillPriceActionPerformed
+
+    private void txtBillQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBillQuantityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBillQuantityActionPerformed
+
     public static void main(String args[]) {
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
-            
+
             public void run() {
-                
+
                 new HomePage().setVisible(true);
             }
         });
@@ -1773,6 +1817,7 @@ public class HomePage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox CheckPassword;
+    private javax.swing.JLabel ImageProductBill;
     private Forms.Components.ProfilePhoto LabelAvatar;
     private javax.swing.JLabel LabelColorProduct;
     private javax.swing.JLabel LabelGmailUser;

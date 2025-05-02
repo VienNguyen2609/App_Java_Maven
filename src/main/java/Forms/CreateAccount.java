@@ -181,11 +181,10 @@ public class CreateAccount extends javax.swing.JFrame {
             String name = this.txtName.getText().trim();
             String pass = this.txtPassword.getText().trim();
             String gmail = this.txtGmail.getText().trim();
-            
+
             if (!AccountController.instance.checkAccount(name, pass, gmail)) {
                 return;
-            } 
-            else if (AccountController.instance.addAccountNotImage(name, pass, gmail)) {
+            } else if (AccountController.instance.addAccount(name, pass, gmail, null)) {
                 LabelMessage.setText("CREATED ACCOUNT SUCCESSFULLY");
             }
         } catch (Exception e) {

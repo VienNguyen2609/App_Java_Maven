@@ -220,12 +220,7 @@ public class AdminLogin extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    UIManager.setLookAndFeel(new FlatLightLaf());
-                } catch (UnsupportedLookAndFeelException e) {
-                    Logger.getLogger(AdminLogin.class.getName()).log(Level.SEVERE, null, e);
-                }
-                new AdminLogin().setVisible(true);
+               new AdminLogin().setVisible(true);
             }
         });
     }

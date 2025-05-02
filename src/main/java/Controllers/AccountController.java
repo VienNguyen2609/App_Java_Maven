@@ -3,8 +3,6 @@ package Controllers;
 import Model.Account;
 import DatabaseConnection.SQLConnector;
 import Forms.Components.EffectComponents;
-import Model.Shoes;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Connection;
@@ -64,6 +62,8 @@ public class AccountController {
                 Account _account = new Account(id, name, pass, gmail, avatar);
                 this.listAccount.add(_account);
             }
+            // Mỗi ResultSet/PreparedStatement chiếm bộ nhớ
+            //Không đóng sẽ khiến bộ nhớ không được thu hồi           
             rs.close();
             ps.close();
             conn.close();
@@ -84,10 +84,9 @@ public class AccountController {
 
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setNumRows(0);
-        AccountController.instance.loadDataAccounts();
-        var data = AccountController.instance.getDataAccount();
+        loadDataAccounts();
         int n = 0;
-        for (Account account : data) {
+        for (Account account : listAccount) {
             model.addRow(new Object[]{n++, account.getUserId(), account.getUserName(), account.getUserPassword(), account.getUserGmail(), account.getAvatarUser()});
         }
     }
@@ -116,34 +115,26 @@ public class AccountController {
     public boolean addAccount(String name, String pass, String gmail, byte[] image) {
         boolean check = false;
         try {
-            setupDatabaseCommand("INSERT INTO UserAccount (UserName, UserPassword, UserGmail,UserAvatar)VALUES(?,?,?,?)");
-            ps.setString(1, name);
-            ps.setString(2, pass);
-            ps.setString(3, gmail);
-            ps.setBytes(4, image);
-            int n = ps.executeUpdate();
-            if (n != 0) {
-                Account _account = new Account(name, pass, gmail, image);
-                this.listAccount.add(_account);
-                check = true;
+            if (image != null) {
+                setupDatabaseCommand("INSERT INTO UserAccount (UserName, UserPassword, UserGmail,UserAvatar)VALUES(?,?,?,?)");
+                ps.setString(1, name);
+                ps.setString(2, pass);
+                ps.setString(3, gmail);
+                ps.setBytes(4, image);
+            } else {
+                setupDatabaseCommand("INSERT INTO UserAccount (UserName, UserPassword, UserGmail)VALUES(?,?,?)");
+                ps.setString(1, name);
+                ps.setString(2, pass);
+                ps.setString(3, gmail);
             }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "error: NAME IS EXIST!");
-        }
-
-        return check;
-    }
-
-    public boolean addAccountNotImage(String name, String pass, String gmail) {
-        boolean check = false;
-        try {
-            setupDatabaseCommand("INSERT INTO UserAccount (UserName, UserPassword, UserGmail)VALUES(?,?,?)");
-            ps.setString(1, name);
-            ps.setString(2, pass);
-            ps.setString(3, gmail);
             int n = ps.executeUpdate();
             if (n != 0) {
-                Account _account = new Account(name, pass, gmail);
+                Account _account;
+                if (image != null) {
+                    _account = new Account(name, pass, gmail, image);
+                } else {
+                    _account = new Account(name, pass, gmail);
+                }
                 this.listAccount.add(_account);
                 check = true;
             }
@@ -286,8 +277,8 @@ public class AccountController {
     public void saveAvatarToDatabase(File selectedFile, String nameUser) {
         try (FileInputStream fis = new FileInputStream(selectedFile)) {
             setupDatabaseCommand("UPDATE UserAccount SET UserAvatar = ? WHERE UserName = ?");
-            ps.setString(2, nameUser);
             ps.setBinaryStream(1, fis, (int) selectedFile.length());
+            ps.setString(2, nameUser);
             int n = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

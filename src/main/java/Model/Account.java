@@ -3,7 +3,9 @@ package Model;
 public class Account {
 
     private int userId;
-    private String userName, userPassword, userGmail;
+    private String userName;
+    private String userPassword;
+    private String userGmail;
     private byte[] UserAvatar;
 
     public static Account instance;
@@ -21,18 +23,19 @@ public class Account {
     public Account(String name, String pass, String gmail) {
         this(name, pass, gmail, null);
     }
-    public Account(int UserId ,String name, String pass, String gmail) {
-        this(UserId ,name, pass, gmail, null);
+
+    public Account(int UserId, String name, String pass, String gmail) {
+        this(UserId, name, pass, gmail, null);
     }
-    
-    public Account(int UserId ,String userName, String userPassword, String userGmail, byte[] UserAvatar) {
-        this.userId = UserId ;
+
+    public Account(int UserId, String userName, String userPassword, String userGmail, byte[] UserAvatar) {
+        this.userId = UserId;
         this.userName = userName;
         this.userPassword = userPassword;
         this.userGmail = userGmail;
         this.UserAvatar = UserAvatar;
     }
-    
+
     public Account(String userName, String userPassword, String userGmail, byte[] UserAvatar) {
         this.userName = userName;
         this.userPassword = userPassword;
@@ -87,6 +90,5 @@ public class Account {
     public String toString() {
         return "Account{" + "userId=" + userId + ", userName=" + userName + ", userPassword=" + userPassword + ", userGmail=" + userGmail + ", UserAvatar=" + UserAvatar + '}';
     }
-
 
 }

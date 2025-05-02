@@ -8,10 +8,10 @@ import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.border.Border;
 
-
+// class chưa sử dụng , có thể xóa bỏ 
 public class RoundedBorder implements Border {
 
-    private int radius;
+    private int radius; //độ cong của góc
 
     public RoundedBorder(int radius) {
         this.radius = radius;

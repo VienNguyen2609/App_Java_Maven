@@ -39,12 +39,14 @@ Forms\Components\TextFieldController.class
 Controllers\AccountController.class
 Forms\HomePage.class
 Forms\CreateAccount$2.class
+Forms\HomePage$38.class
 Forms\Components\EffectComponents$1.class
 Forms\HomePage$3.class
 Forms\HomePage$31.class
 Forms\Components\EffectComponents.class
 Forms\HomePage$26.class
 Forms\HomePage$19.class
+Forms\HomePage$39.class
 Forms\HomePage$29.class
 Forms\TestHome.class
 Forms\AdminLogin$1.class
@@ -65,10 +67,12 @@ Forms\HomePage$5.class
 Forms\AdminLogin$3.class
 Forms\HomePage$8.class
 Forms\HomePage$36.class
+Forms\HomePage$41.class
 Forms\UserLogin$2.class
 Forms\HomePage$1.class
 Model\Shoes.class
 Forms\HomePage$24.class
+Forms\HomePage$40.class
 Forms\HomePage$34.class
 Forms\HomePage$10.class
 Forms\Components\PasswordField.class

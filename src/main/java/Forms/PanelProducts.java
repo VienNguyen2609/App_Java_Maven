@@ -1,36 +1,32 @@
 package Forms;
 
 import Model.Shoes;
-import java.awt.Color;
-
-
 import java.awt.Image;
+import Forms.Components.RoundedBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.border.Border;
-import javax.swing.border.MatteBorder;
-
+import javax.swing.JLabel;
 
 public class PanelProducts extends javax.swing.JPanel {
 
-    
-    private HomePage homePage ; 
-    private int quantityAvailable ;
-    private int productIdCurrent; 
-    
-    public PanelProducts(Shoes shoes , HomePage homePage) {
-        this.homePage = homePage ; 
-        
+    private HomePage homePage;
+    private int quantityAvailable;
+    private int productIdCurrent;
+    private ImageIcon icon;
+
+    public PanelProducts(Shoes shoes, HomePage homePage) {
+        this.homePage = homePage;
+
         initComponents();
-        productIdCurrent = shoes.getProductId() ; 
+        productIdCurrent = shoes.getProductId();
         txtName.setText(shoes.getProductName());
         txtSize.setText(String.valueOf(shoes.getProductSize()));
-        txtPrice.setText(String.valueOf(shoes.getProductPrice()) );
+        txtPrice.setText(String.valueOf(shoes.getProductPrice()));
         txtQuantity.setText(String.valueOf(shoes.getProductQuantity()));
         txtColor.setText(shoes.getProductColor());
         this.quantityAvailable = shoes.getProductQuantity();
@@ -44,8 +40,10 @@ public class PanelProducts extends javax.swing.JPanel {
                 BufferedImage bufferedImage = ImageIO.read(bais);
                 if (bufferedImage != null) {
                     Image scaledImage = bufferedImage.getScaledInstance(defaultWidth, defaultHeight, Image.SCALE_SMOOTH);
-                    ImageIcon icon = new ImageIcon(scaledImage);
+                    icon = new ImageIcon(scaledImage);
                     LabelImage.setIcon(icon);
+                  //  LabelImage.setBorder(new RoundedBorder(30));
+
                 } else {
                     System.out.println("CAN NOT UPLOAD IMAGE PRODUCTS");
 
@@ -56,21 +54,19 @@ public class PanelProducts extends javax.swing.JPanel {
         } else {
             jLabel1.setText("NOT UPDATED IMAGE");
         }
-        
+
         this.jLabel1.repaint();
-        
+
         chkPurchase.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (chkPurchase.isSelected()) {
-                homePage.getTextBill(productIdCurrent, txtName.getText(), txtSize.getText() , txtPrice.getText(), txtColor.getText() , quantityAvailable);
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (chkPurchase.isSelected()) {
+                    homePage.getTextBill(productIdCurrent, txtName.getText(), txtSize.getText(), txtPrice.getText(), txtColor.getText(), quantityAvailable, icon);
+                }
             }
-        }
-    });
+        });
 
     }
-    
-  
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -189,11 +185,11 @@ public class PanelProducts extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void chkPurchaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chkPurchaseMouseClicked
-       
+
     }//GEN-LAST:event_chkPurchaseMouseClicked
 
     private void jPanel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel16MouseClicked
-      
+
 
     }//GEN-LAST:event_jPanel16MouseClicked
 
@@ -202,7 +198,7 @@ public class PanelProducts extends javax.swing.JPanel {
     }//GEN-LAST:event_txtQuantityActionPerformed
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
-     //  jPanel16.setBorder(new MatteBorder(1,1,1,1,Color.GREEN));
+        //  jPanel16.setBorder(new MatteBorder(1,1,1,1,Color.GREEN));
     }//GEN-LAST:event_formMouseEntered
 
 
