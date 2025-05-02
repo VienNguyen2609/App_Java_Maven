@@ -7,8 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -86,7 +88,7 @@ public class ProductController {
         loadDataProducts();
         int n = 0;
         for (Shoes shoes : listShoes) {
-            model.addRow(new Object[]{n++, shoes.getProductId(), shoes.getProductName(),shoes.getProductSize() ,  shoes.getProductPrice(), shoes.getProductQuantity(), shoes.getProductColor(), shoes.getProductAvatar()});
+            model.addRow(new Object[]{n++, shoes.getProductId(), shoes.getProductName(), shoes.getProductSize(), shoes.getProductPrice(), shoes.getProductQuantity(), shoes.getProductColor(), shoes.getProductAvatar()});
         }
     }
 
@@ -122,7 +124,7 @@ public class ProductController {
         return check;
     }
 
-    public boolean updateProduct(String name, int size ,  int quantity, float price, String color, byte[] image ,int idProduct ) {
+    public boolean updateProduct(String name, int size, int quantity, float price, String color, byte[] image, int idProduct) {
         boolean check = false;
 
         try {
@@ -215,20 +217,17 @@ public class ProductController {
         return listShoes;
     }
 
-    public void in() {
-        for (Shoes a : listShoes) {
-            System.out.println(a.toString());
-        }
+   public Shoes searchProductByName(String keyword) {
+    if (keyword == null || keyword.trim().isEmpty()) {
+        return null; // Không có từ khóa thì không tìm
     }
 
-    public static void main(String[] args) {
-        ProductController.init();
-        ProductController.instance.loadDataProducts();
-        
-        ProductController.instance.addProduct("Puma", 40 ,300, 4, "Green" , null);
-  
+    String finalKeyword = keyword.toLowerCase();
+    return getDataProduct().stream()
+            .filter(shoes -> shoes.getProductName() != null &&
+                             shoes.getProductName().toLowerCase().equals(finalKeyword))
+            .findFirst()
+            .orElse(null); // Trả về null nếu không tìm thấy
+}
 
-        ProductController.instance.in();
-
-    }
 }

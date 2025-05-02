@@ -81,7 +81,6 @@ public class AccountController {
         for (int i = 0; i < table.getColumnCount(); i++) {
             table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
-
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setNumRows(0);
         loadDataAccounts();
@@ -92,28 +91,25 @@ public class AccountController {
     }
 
     public boolean checkLogin(String name, String pass) {
-        boolean check = false;
         try {
             if (name.isEmpty() || pass.isEmpty()) {
-                check = false;// JOptionPane.showMessageDialog(null, "INFORMATION CAN NOT BE EMPTY", "ERROR", JOptionPane.CANCEL_OPTION);
+                return false;// JOptionPane.showMessageDialog(null, "INFORMATION CAN NOT BE EMPTY", "ERROR", JOptionPane.CANCEL_OPTION);
             } else if (name.equalsIgnoreCase("admin")) {
-                check = false;
+                return false;
             } else {
                 for (Account account : this.listAccount) {
                     if (account.getUserName().equalsIgnoreCase(name) && (String.valueOf(account.getUserPassword()).equalsIgnoreCase(pass))) {
-                        //gmail.equalsIgnoreCase(account.getGmail());
-                        check = true;
+                       return true;
                     }
                 }
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return check;
+        return false;
     }
 
     public boolean addAccount(String name, String pass, String gmail, byte[] image) {
-        boolean check = false;
         try {
             if (image != null) {
                 setupDatabaseCommand("INSERT INTO UserAccount (UserName, UserPassword, UserGmail,UserAvatar)VALUES(?,?,?,?)");
@@ -136,13 +132,13 @@ public class AccountController {
                     _account = new Account(name, pass, gmail);
                 }
                 this.listAccount.add(_account);
-                check = true;
+               return true;
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "error: NAME IS EXIST!");
         }
 
-        return check;
+        return false;
     }
 
     public boolean deleteAccount(int id) {
@@ -296,17 +292,5 @@ public class AccountController {
 
     public ArrayList<Account> getDataAccount() {
         return listAccount;
-    }
-
-    public void in() {
-        for (Account account : listAccount) {
-            System.out.println(account.toString());
-        }
-    }
-
-    public static void main(String[] args) {
-        AccountController at = new AccountController();
-        at.loadDataAccounts();
-        at.in();
     }
 }

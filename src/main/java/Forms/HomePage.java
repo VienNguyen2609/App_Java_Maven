@@ -9,11 +9,15 @@ import Model.Account;
 import Model.Shoes;
 import RunAdmin.RunAdmin;
 import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -92,6 +96,7 @@ public class HomePage extends javax.swing.JFrame {
         stylePanel();
         setTime();
         setupWindow();
+        //   searchProduct();
         addPanelProducts();
         mouseClickRightTableBill();
         txtBillName.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
@@ -170,25 +175,131 @@ public class HomePage extends javax.swing.JFrame {
         }).start();
     }
 
+//    private void searchProduct() {
+//        txtSearch.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                PanelContainProduct.setLayout(new GridBagLayout());
+//                PanelContainProduct.removeAll();
+//                
+//                GridBagConstraints gbc = new GridBagConstraints();
+//                gbc.gridx = 0;
+//                gbc.gridy = 0;
+//                gbc.gridwidth = 2;
+//                PanelContainProduct.add(txtSearch, gbc);
+//                PanelContainProduct.add(btnSearch, gbc);
+//
+//                Shoes found = ProductController.instance.searchProductByName(txtSearch.getText().trim());
+//                if (found != null) {
+//                    gbc.gridx = 0;
+//                    gbc.gridy = 1;
+//                    gbc.gridwidth = 2;
+//                    PanelProducts panel = new PanelProducts(found, null);
+//                    PanelContainProduct.add(panel, gbc);
+//                } else {
+//                    gbc.gridx = 0;
+//                    gbc.gridy = 1;
+//                    gbc.gridwidth = 2;
+//                    JLabel notFound = new JLabel("Không tìm thấy sản phẩm!");
+//                    notFound.setForeground(Color.RED);
+//                    notFound.setFont(new Font("Arial", Font.BOLD, 16));
+//                    PanelContainProduct.add(notFound, gbc);
+//                }
+//
+//                if (txtSearch.getText().isEmpty()) {
+//                    addPanelProducts(); // Hiển thị lại tất cả nếu không nhập gì
+//                    return;
+//                }
+//            }
+//        });
+//    }
+//    private void performSearch(String keyword) {
+//        this.PanelContainProduct.removeAll();
+//        this.PanelContainProduct.setLayout(new GridBagLayout());
+//
+//        GridBagConstraints gbc = new GridBagConstraints();
+//        gbc.insets = new Insets(10, 30, 30, 30);
+//        gbc.fill = GridBagConstraints.HORIZONTAL;
+//
+//        // Thêm lại txtSearch và btnSearch
+//        gbc.gridx = 1;
+//        gbc.gridy = 0;
+//        gbc.gridwidth = 1;
+//        this.PanelContainProduct.add(txtSearch, gbc);
+//        this.PanelContainProduct.add(btnSearch, gbc);
+//        if (keyword.isEmpty()) {
+//            displayAllProducts(); // Hiển thị lại tất cả nếu không nhập gì
+//            return;
+//        }
+//
+//        Shoes found = ProductController.instance.searchProductByName(keyword);
+//        if (found != null) {
+//            gbc.gridx = 0;
+//            gbc.gridy = 1;
+//            gbc.gridwidth = 2;
+//            PanelProducts panel = new PanelProducts(found, this);
+//            this.PanelContainProduct.add(panel, gbc);
+//        } else {
+//            gbc.gridx = 0;
+//            gbc.gridy = 1;
+//            gbc.gridwidth = 2;
+//            JLabel notFound = new JLabel("Không tìm thấy sản phẩm!");
+//            notFound.setForeground(Color.RED);
+//            notFound.setFont(new Font("Arial", Font.BOLD, 16));
+//            this.PanelContainProduct.add(notFound, gbc);
+//        }
+//
+//        this.PanelContainProduct.revalidate();
+//        this.PanelContainProduct.repaint();
+//    }
+//
+//    private void displayAllProducts() {
+//        GridBagConstraints gbc = new GridBagConstraints();
+//        gbc.insets = new Insets(10, 30, 30, 30);
+//        gbc.fill = GridBagConstraints.HORIZONTAL;
+//        gbc.gridx = 1;
+//        gbc.gridy = 0;
+//        gbc.gridwidth = 1;
+//        this.PanelContainProduct.add(txtSearch, gbc);
+//        this.PanelContainProduct.add(btnSearch, gbc);
+//        int cols = 3;
+//        for (int i = 0; i < ProductController.instance.getDataProduct().size(); i++) {
+//            Shoes shoes = ProductController.instance.getDataProduct().get(i);
+//            var newJpanel = new PanelProducts(shoes, this);
+//            gbc.gridx = i % cols;
+//            gbc.gridy = (i / cols) + 1;
+//            this.PanelContainProduct.add(newJpanel, gbc);
+//        }
+//
+//        this.PanelContainProduct.revalidate();
+//        this.PanelContainProduct.repaint();
+//    }
     private void addPanelProducts() {
 
         this.PanelContainProduct.setLayout(new GridBagLayout());
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(20, 20, 20, 20); // Khoảng cách giữa các item
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        // gbc.weightx = 1; // Giãn ngang
         this.PanelContainProduct.removeAll();
         ProductController.instance.loadDataProducts();
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 30, 30, 30); // Khoảng cách giữa các item
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        // gbc.weightx = 1; // Giãn ngang
+
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        this.PanelContainProduct.add(txtSearch, gbc);
+        this.PanelContainProduct.add(btnSearch, gbc);
+
+        gbc.gridwidth = 1;
         int cols = 3; // Số cột
         for (int i = 0; i < ProductController.instance.getDataProduct().size(); i++) {
             Shoes shoes = ProductController.instance.getDataProduct().get(i);
             var newJpanel = new PanelProducts(shoes, this);
             gbc.gridx = i % cols;
-            gbc.gridy = i / cols;
+            gbc.gridy = (i / cols) + 1;
             this.PanelContainProduct.add(newJpanel, gbc);
         }
-
         this.PanelContainProduct.revalidate();
         this.PanelContainProduct.repaint();
     }
@@ -223,6 +334,7 @@ public class HomePage extends javax.swing.JFrame {
         btnDeleteUser.setBackgroundColor(Color.GREEN);
         btnCancelUser.setBackgroundColor(Color.BLUE);
         btnRefreshBill.setBackgroundColor(Color.RED);
+        btnSearch.setBackgroundColor(Color.LIGHT_GRAY);
         btnSaveEditProfile.setVisible(false);
     }
 
@@ -316,8 +428,9 @@ public class HomePage extends javax.swing.JFrame {
         txtBillColor.setText("");
         txtBillQuantity.setText("");
     }
-    
+
     private int productIdCurrent;
+
     public void getTextBill(int productId, String name, String size, String price, String color, int quantityAvailable, ImageIcon imageIcon) {
         ImageProductBill.setIcon(imageIcon);
         productIdCurrent = productId;
@@ -329,7 +442,6 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     public void mouseClickRightTableBill() {
-
         // Popup Menu (chuột phải)
         deleteItem.addActionListener(e -> {
             int selectedRow = tbBill.getSelectedRow();
@@ -346,9 +458,7 @@ public class HomePage extends javax.swing.JFrame {
                 }
             }
         });
-
         popupMenu.add(deleteItem);
-
         // Bắt sự kiện chuột phải để mở popup
         tbBill.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
@@ -412,6 +522,8 @@ public class HomePage extends javax.swing.JFrame {
         txtBillQuantity = new Forms.Components.TextFieldController();
         jScrollPane2 = new javax.swing.JScrollPane();
         PanelContainProduct = new javax.swing.JPanel();
+        txtSearch = new Forms.Components.TextFieldController();
+        btnSearch = new Forms.Components.HeaderButton();
         PanelProfile = new javax.swing.JPanel();
         LabelAvatar = new Forms.Components.ProfilePhoto();
         btnUploadAvatar = new Forms.Components.HeaderButton();
@@ -798,15 +910,36 @@ public class HomePage extends javax.swing.JFrame {
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
+        txtSearch.setForeground(new java.awt.Color(255, 255, 255));
+        txtSearch.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        txtSearch.setMinimumSize(new java.awt.Dimension(70, 40));
+        txtSearch.setPreferredSize(new java.awt.Dimension(70, 40));
+        txtSearch.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/searchIcon.png"))); // NOI18N
+
+        btnSearch.setForeground(new java.awt.Color(255, 255, 255));
+        btnSearch.setText("Search");
+        btnSearch.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnSearch.setMinimumSize(new java.awt.Dimension(77, 28));
+        btnSearch.setPreferredSize(new java.awt.Dimension(77, 40));
+
         javax.swing.GroupLayout PanelContainProductLayout = new javax.swing.GroupLayout(PanelContainProduct);
         PanelContainProduct.setLayout(PanelContainProductLayout);
         PanelContainProductLayout.setHorizontalGroup(
             PanelContainProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1713, Short.MAX_VALUE)
+            .addGroup(PanelContainProductLayout.createSequentialGroup()
+                .addGap(209, 209, 209)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1093, Short.MAX_VALUE))
         );
         PanelContainProductLayout.setVerticalGroup(
             PanelContainProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1106, Short.MAX_VALUE)
+            .addGroup(PanelContainProductLayout.createSequentialGroup()
+                .addGroup(PanelContainProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 1080, Short.MAX_VALUE))
         );
 
         jScrollPane2.setViewportView(PanelContainProduct);
@@ -816,13 +949,13 @@ public class HomePage extends javax.swing.JFrame {
         PanelHomePageLayout.setHorizontalGroup(
             PanelHomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelHomePageLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 980, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1007, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         PanelHomePageLayout.setVerticalGroup(
             PanelHomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 802, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -997,7 +1130,7 @@ public class HomePage extends javax.swing.JFrame {
         );
         PanelBillLayout.setVerticalGroup(
             PanelBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
             .addGroup(PanelBillLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1363,7 +1496,7 @@ public class HomePage extends javax.swing.JFrame {
             PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PanelProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(PanelHomePage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE))
+                .addComponent(PanelHomePage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE))
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(PanelBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1857,6 +1990,7 @@ public class HomePage extends javax.swing.JFrame {
     private Forms.Components.HeaderButton btnPushProductToHome;
     private Forms.Components.HeaderButton btnRefreshBill;
     private Forms.Components.HeaderButton btnSaveEditProfile;
+    private Forms.Components.HeaderButton btnSearch;
     private Forms.Components.HeaderButton btnUpdateProduct;
     private Forms.Components.HeaderButton btnUpdateUser;
     private Forms.Components.HeaderButton btnUploadAvatar;
@@ -1916,6 +2050,7 @@ public class HomePage extends javax.swing.JFrame {
     private Forms.Components.TextFieldController txtPasswordUser;
     private Forms.Components.TextFieldController txtPriceProduct;
     private javax.swing.JSpinner txtQuantityProduct;
+    private Forms.Components.TextFieldController txtSearch;
     private Forms.Components.TextFieldController txtSizeProduct;
     // End of variables declaration//GEN-END:variables
 }
