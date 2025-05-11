@@ -1,3 +1,4 @@
+Forms\HomePage$42.class
 Forms\HomePage$6.class
 Forms\HomePage$22.class
 Forms\HomePage$32.class
@@ -28,6 +29,7 @@ Forms\UserLogin.class
 Forms\CreateAccount$3.class
 Forms\HomePage$14.class
 Forms\Components\ThemeFlatLaf.class
+Forms\HomePage$44.class
 Forms\Components\ProfilePhoto.class
 Forms\HomePage$20.class
 Forms\HomePage$30.class
@@ -37,6 +39,7 @@ DatabaseConnection\SQLConnector.class
 Forms\AdminLogin$4.class
 Forms\Components\TextFieldController.class
 Controllers\AccountController.class
+Forms\HomePage$43.class
 Forms\HomePage.class
 Forms\CreateAccount$2.class
 Forms\HomePage$38.class

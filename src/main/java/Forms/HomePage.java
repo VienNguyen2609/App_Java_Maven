@@ -9,15 +9,11 @@ import Model.Account;
 import Model.Shoes;
 import RunAdmin.RunAdmin;
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -109,6 +105,7 @@ public class HomePage extends javax.swing.JFrame {
         AccountController.instance.loadTableAccount(tbAccount);
         tbAccount.getTableHeader().setReorderingAllowed(false);
         EffectComponents.instance.scaleImage(LabelLogo, "/Image/LogoShopImage.png");
+      //  EffectComponents.instance.scaleImage(LabelIconProfile, "/Image/profileIcon.png");
         EffectComponents.instance.focusPointer1(txtNameProduct, LabelNameProduct, Color.GREEN, Color.WHITE);
         EffectComponents.instance.focusPointer1(txtSizeProduct, LabelSizeProduct, Color.GREEN, Color.WHITE);
         EffectComponents.instance.focusPointer1(txtPriceProduct, LabelPriceProduct, Color.GREEN, Color.WHITE);
@@ -281,7 +278,7 @@ public class HomePage extends javax.swing.JFrame {
         ProductController.instance.loadDataProducts();
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 30, 30, 30); // Khoảng cách giữa các item
+        gbc.insets = new Insets(10, 20, 20, 20); // Khoảng cách giữa các item
         gbc.fill = GridBagConstraints.HORIZONTAL;
         // gbc.weightx = 1; // Giãn ngang
 
@@ -412,7 +409,7 @@ public class HomePage extends javax.swing.JFrame {
         }
     }
 
-    public void view() {
+    public void viewTextProduct() {
         txtNameProduct.setText("");
         txtSizeProduct.setText("");
         txtPriceProduct.setText("");
@@ -625,8 +622,12 @@ public class HomePage extends javax.swing.JFrame {
         jLabel3.setVerifyInputWhenFocusTarget(false);
         jLabel3.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipady = -11;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 565, 1, 0);
         PanelHeader.add(jLabel3, gridBagConstraints);
 
         jTxTime.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -634,7 +635,12 @@ public class HomePage extends javax.swing.JFrame {
         jTxTime.setMaximumSize(new java.awt.Dimension(85, 85));
         jTxTime.setMinimumSize(new java.awt.Dimension(85, 30));
         jTxTime.setPreferredSize(new java.awt.Dimension(85, 30));
-        PanelHeader.add(jTxTime, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(24, 189, 0, 0);
+        PanelHeader.add(jTxTime, gridBagConstraints);
 
         jTxtDate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jTxtDate.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -643,13 +649,25 @@ public class HomePage extends javax.swing.JFrame {
         jTxtDate.setMinimumSize(new java.awt.Dimension(155, 30));
         jTxtDate.setPreferredSize(new java.awt.Dimension(155, 30));
         jTxtDate.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        PanelHeader.add(jTxtDate, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(24, 0, 0, 0);
+        PanelHeader.add(jTxtDate, gridBagConstraints);
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_flag.png"))); // NOI18N
         jLabel11.setMaximumSize(new java.awt.Dimension(90, 90));
         jLabel11.setMinimumSize(new java.awt.Dimension(90, 90));
         jLabel11.setPreferredSize(new java.awt.Dimension(90, 90));
-        PanelHeader.add(jLabel11, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipady = -11;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 1, 1);
+        PanelHeader.add(jLabel11, gridBagConstraints);
 
         jPanel1.add(PanelHeader, java.awt.BorderLayout.PAGE_START);
 
@@ -949,20 +967,22 @@ public class HomePage extends javax.swing.JFrame {
         PanelHomePageLayout.setHorizontalGroup(
             PanelHomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelHomePageLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1007, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1049, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         PanelHomePageLayout.setVerticalGroup(
             PanelHomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 802, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        PanelProfile.setMinimumSize(new java.awt.Dimension(898, 458));
+        PanelProfile.setPreferredSize(new java.awt.Dimension(898, 458));
         PanelProfile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LabelAvatar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        PanelProfile.add(LabelAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 40, 170, 130));
+        PanelProfile.add(LabelAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, 170, 130));
 
         btnUploadAvatar.setBackground(new java.awt.Color(153, 153, 255));
         btnUploadAvatar.setForeground(new java.awt.Color(255, 255, 255));
@@ -972,7 +992,7 @@ public class HomePage extends javax.swing.JFrame {
                 btnUploadAvatarMouseClicked(evt);
             }
         });
-        PanelProfile.add(btnUploadAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 170, 150, -1));
+        PanelProfile.add(btnUploadAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 210, 150, -1));
 
         btnEditProfile.setForeground(new java.awt.Color(255, 255, 255));
         btnEditProfile.setText("Edit Profile");
@@ -981,25 +1001,25 @@ public class HomePage extends javax.swing.JFrame {
                 btnEditProfileMouseClicked(evt);
             }
         });
-        PanelProfile.add(btnEditProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 390, 150, -1));
+        PanelProfile.add(btnEditProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 150, -1));
 
         jLabel1.setText("_________________________________________________________________");
-        PanelProfile.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 306, 370, 20));
+        PanelProfile.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, 370, 20));
 
         txtNameProfile.setEditable(false);
         txtNameProfile.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        PanelProfile.add(txtNameProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 260, -1));
+        PanelProfile.add(txtNameProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 270, 260, -1));
 
         txtGmailProfile.setEditable(false);
         txtGmailProfile.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        PanelProfile.add(txtGmailProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 350, 270, -1));
+        PanelProfile.add(txtGmailProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 390, 270, -1));
 
         txtPasswordProfile.setEditable(false);
         txtPasswordProfile.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, new java.awt.Color(0, 0, 0)));
         txtPasswordProfile.setEchoChar('\u002A'
         );
         txtPasswordProfile.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        PanelProfile.add(txtPasswordProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 290, 230, 30));
+        PanelProfile.add(txtPasswordProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 330, 230, 30));
 
         btnSaveEditProfile.setForeground(new java.awt.Color(255, 255, 255));
         btnSaveEditProfile.setText("Save");
@@ -1008,7 +1028,7 @@ public class HomePage extends javax.swing.JFrame {
                 btnSaveEditProfileMouseClicked(evt);
             }
         });
-        PanelProfile.add(btnSaveEditProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, 100, -1));
+        PanelProfile.add(btnSaveEditProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 600, 100, -1));
 
         btnCancelProfile.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelProfile.setText("Cancel");
@@ -1017,22 +1037,22 @@ public class HomePage extends javax.swing.JFrame {
                 btnCancelProfileMouseClicked(evt);
             }
         });
-        PanelProfile.add(btnCancelProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 390, 110, -1));
+        PanelProfile.add(btnCancelProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 430, 110, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_account.png"))); // NOI18N
         jLabel2.setText("Name:");
-        PanelProfile.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, 80, -1));
+        PanelProfile.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 80, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/result_padlock.png"))); // NOI18N
         jLabel4.setText("Password:");
-        PanelProfile.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, 110, -1));
+        PanelProfile.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 330, 110, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/GmailIcon.png"))); // NOI18N
         jLabel5.setText("Gmail:");
-        PanelProfile.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, 90, -1));
+        PanelProfile.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 390, 90, -1));
 
         CheckPassword.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         CheckPassword.setText("Show Password");
@@ -1041,13 +1061,13 @@ public class HomePage extends javax.swing.JFrame {
                 CheckPasswordMouseClicked(evt);
             }
         });
-        PanelProfile.add(CheckPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 300, -1, -1));
+        PanelProfile.add(CheckPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 340, -1, -1));
 
         jLabel6.setText("_________________________________________________________________");
-        PanelProfile.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 366, 370, 20));
+        PanelProfile.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, 370, 20));
 
         jLabel7.setText("_________________________________________________________________");
-        PanelProfile.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, 370, 30));
+        PanelProfile.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 280, 370, 30));
 
         tbBill.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         tbBill.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
@@ -1470,7 +1490,7 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelAccountLayout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE))
         );
         PanelAccountLayout.setVerticalGroup(
             PanelAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1482,7 +1502,7 @@ public class HomePage extends javax.swing.JFrame {
         PanelContents.setLayout(PanelContentsLayout);
         PanelContentsLayout.setHorizontalGroup(
             PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 1310, Short.MAX_VALUE)
+            .addComponent(PanelProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 1379, Short.MAX_VALUE)
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(PanelHomePage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1377, Short.MAX_VALUE))
             .addGroup(PanelContentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1686,7 +1706,7 @@ public class HomePage extends javax.swing.JFrame {
             if (ProductController.instance.addProduct(nameText, sizeProductText, priceText, quantityText, colorText, imageProduct)) {
                 ProductController.instance.loadDataProducts();
                 ProductController.instance.loadTableProduct(tbProduct);
-                view();
+                viewTextProduct();
                 LabelImageProduct.setIcon(null);
                 // LabelImageProduct.setBorder(new MatteBorder(1, 1, 1, 1, Color.YELLOW));
                 JOptionPane.showMessageDialog(this, "PRODUCT ADDED SUCCESSFULLY");
@@ -1700,7 +1720,7 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddProductMouseClicked
 
     private void btnCancelProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelProductMouseClicked
-        view();
+        viewTextProduct();
     }//GEN-LAST:event_btnCancelProductMouseClicked
 
     private void btnDeleteProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteProductMouseClicked
@@ -1713,7 +1733,7 @@ public class HomePage extends javax.swing.JFrame {
             if (check == JOptionPane.YES_OPTION) {
                 if (ProductController.instance.deleteProduct(nameText)) {
                     ProductController.instance.loadTableProduct(tbProduct);
-                    view();
+                    viewTextProduct();
                     JOptionPane.showMessageDialog(this, "DELETED SUCCESSFULLY");
                 } else {
                     JOptionPane.showMessageDialog(this, "DELETE FAILURE");
@@ -1753,7 +1773,7 @@ public class HomePage extends javax.swing.JFrame {
         if (ProductController.instance.updateProduct(nameText, sizeProductText, quantityText, priceText, colorText, imageProduct, idProductText)) {
             JOptionPane.showMessageDialog(this, "UPDATED THIS PRODUCT ID: " + idProductText + " SUCCESSFULLY");
             ProductController.instance.loadTableProduct(tbProduct);
-            view();
+            viewTextProduct();
             LabelImageProduct.setIcon(null);
             //   LabelImageProduct.setBorder(new MatteBorder(1, 1, 1, 1, Color.YELLOW));
             return;
